@@ -24,7 +24,7 @@ col1, col2 = st.columns(2)
 # Left Column: Product Registrations
 with col1:
     st.header('Certifications 📝')
-    st.subheader('Energy Star ⚡')
+    
 
     # Create connection object and retrieve file contents.
     # Specify input format is a csv and to cache the result for 600 seconds.
@@ -77,7 +77,7 @@ with col1:
     # latest_records = filtered_df.head(3)['Model'].tolist()
     # st.metric("Latest 3 Products", ", ".join(latest_records))
 
-    st.subheader('WiFi Alliance 📶')
+    
     # Create connection object and retrieve file contents.
     # Specify input format is a csv and to cache the result for 600 seconds.
     conn = st.connection('s3', type=FilesConnection)
@@ -95,7 +95,7 @@ with col1:
     # Write the modified dataframe
     
 
-    st.subheader('EPEAT 🌎')
+    
     conn = st.connection('s3', type=FilesConnection)
     df3 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
 
@@ -159,8 +159,11 @@ with col1:
     # Display the result
     st.subheader('Summary Stats')
     st.write(newest_records)
+    st.subheader('Energy Star ⚡')
     st.write(filtered_df)
+    st.subheader('WiFi Alliance 📶')
     st.write(df2_modified)
+    st.subheader('EPEAT 🌎')
     st.write(df3_modified)
 # Right Column: Placements
 # Right Column: Placements
