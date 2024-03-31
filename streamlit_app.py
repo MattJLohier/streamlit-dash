@@ -31,16 +31,6 @@ columns_to_keep = ['brand_name', 'model_name', 'product_type', 'marking_technolo
                    'color_capability', 'date_available_on_market', 'date_qualified',
                    'markets', 'monochrome_product_speed_ipm_or_mppm']
 
-# Create connection object and retrieve file contents.
-# Specify input format is a csv and to cache the result for 600 seconds.
-conn = st.connection('s3', type=FilesConnection)
-df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
-
-# Specify the columns to keep
-columns_to_keep = ['brand_name', 'model_name', 'product_type', 'marking_technology',
-                   'color_capability', 'date_available_on_market', 'date_qualified',
-                   'markets', 'monochrome_product_speed_ipm_or_mppm']
-
 # Create a new DataFrame with only the specified columns
 new_df = df[columns_to_keep]
 
@@ -74,15 +64,19 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
                      (~new_df['Model'].str.contains('Model Printer|Label Printer', case=False))]
 
 # Print filtered results.
-
 st.write(filtered_df)
+
+# Function to sort by Date Available
+if st.button('Sort by Date Available (Newest to Oldest)'):
+    # Convert "Date Available" to datetime
+    filtered_df['Date Available'] = pd.to_datetime(filtered_df['Date Available'])
+    # Sort the DataFrame in-place
+    filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
+    # Clear the existing display and update it with the sorted DataFrame
+    st.write(filtered_df)
 
 # Add metric to show latest 3 records based on product name
 latest_records = filtered_df.nlargest(3, 'Date Available')['Model'].tolist()
 st.metric("Latest 3 Products", ", ".join(latest_records))
 
 st.subheader('Placements 💡')
-
-# Load data
-#df = pd.read_csv('data/movies_genres_summary.csv')
-#df.year = df.year.astype('int')
