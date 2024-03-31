@@ -346,7 +346,7 @@ with col2:
     st.subheader('Placement Changelog')
     
     df4_sorted = df4.sort_values(by='Date Detected', ascending=False)
-    st.dataframe(df4_sorted, width=1200)
+    st.dataframe(df4_sorted, width=1200, height=600)
 
 
     #st.write(df4_sorted)
