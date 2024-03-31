@@ -65,6 +65,10 @@ brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera"
 # Specify the product types to filter
 product_types_to_show = ['Printers', 'Multifunction Devices (MFD)']
 
+# Cut off the "Date Available" and "Date Qualified" columns to remove anything after the first 10 digits
+new_df['Date Available'] = new_df['Date Available'].str[:10]
+new_df['Date Qualified'] = new_df['Date Qualified'].str[:10]
+
 # Filter the new DataFrame to only include specified brands, product types, and hide entries with "Label Printer" in the Model column
 filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) & 
                      (new_df['Product Type'].isin(product_types_to_show)) & 
