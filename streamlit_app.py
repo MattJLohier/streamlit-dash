@@ -18,6 +18,7 @@ st.markdown('**What can this app do?**')
 st.info('This app shows the use of Pandas for data wrangling, Altair for chart creation and editable dataframe for data interaction.')
 st.markdown('**How to use the app?**')
 st.warning('To engage with the app, 1. Select genres of your interest in the drop-down selection box and then 2. Select the year duration from the slider widget. As a result, this should generate an updated editable DataFrame and line plot.')
+st.divider()
 st.subheader('Certifications 📝')
 
 # Create connection object and retrieve file contents.
@@ -82,6 +83,9 @@ if st.button('Sort by Date Available (Newest to Oldest)'):
     filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
     # Clear the existing display and update it with the sorted DataFrame
     st.write(filtered_df)
+
+st.metric(filtered_df.model, value, delta=None, delta_color="normal", help=None, label_visibility="visible")
+
 
 st.subheader('Placements 💡')
 
