@@ -224,17 +224,9 @@ with col1:
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {source}</span>
                                     </p>"""
 
-        #with container:
-        #    st.markdown(lnk + htmlstr, unsafe_allow_html=True)
-        with st.container():
-            with st.columns([2, 3]):  # Two columns, adjust the widths as needed
-                st.write("")  # Empty column for spacing
-                st.write(f"### {source} Certification Spotted {emoji}")
-                st.write(f"**Brand:** {brand}")
-                st.write(f"**Product Name:** {product_name}")
-                st.write(f"**Product Type:** {product_type}")
-                st.write(f"**Certification Date:** {certification_date}")
-                st.write(f"**Source:** {source}")
+        with container:
+            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+
 
 
 
