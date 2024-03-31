@@ -63,17 +63,12 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
                      (new_df['Product Type'].isin(product_types_to_show)) & 
                      (~new_df['Model'].str.contains('Model Printer|Label Printer', case=False))]
 
+# Sort the filtered DataFrame by Date Available (Newest to Oldest)
+filtered_df['Date Available'] = pd.to_datetime(filtered_df['Date Available'])
+filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
+
 # Print filtered results.
 st.write(filtered_df)
-
-# Function to sort by Date Available
-if st.button('Sort by Date Available (Newest to Oldest)'):
-    # Convert "Date Available" to datetime
-    filtered_df['Date Available'] = pd.to_datetime(filtered_df['Date Available'])
-    # Sort the DataFrame in-place
-    filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
-    # Clear the existing display and update it with the sorted DataFrame
-    st.write(filtered_df)
 
 # Add metric to show latest 3 records based on product name
 latest_records = filtered_df.head(3)['Model'].tolist()
