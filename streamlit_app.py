@@ -62,11 +62,14 @@ brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera"
 # Specify the product types to filter
 product_types_to_show = ['Printers', 'Multifunction Devices (MFD)']
 
-# Filter the new DataFrame to only include specified brands and product types
-filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) & (new_df['Product Type'].isin(product_types_to_show))]
+# Filter the new DataFrame to only include specified brands, product types, and hide entries with "Label Printer" in the Model column
+filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) & 
+                     (new_df['Product Type'].isin(product_types_to_show)) & 
+                     (~new_df['Model'].str.contains('Label Printer', case=False))]
 
 # Print filtered results.
 st.write(filtered_df)
+
 
 # Load data
 #df = pd.read_csv('data/movies_genres_summary.csv')
