@@ -55,10 +55,6 @@ new_df = new_df.rename(columns={
     'monochrome_product_speed_ipm_or_mppm': 'Print Speed'
 })
 
-# Truncate Date Available and Date Qualified columns after the 10th digit
-new_df['Date Available'] = new_df['Date Available'].str.slice(0, 10)
-new_df['Date Qualified'] = new_df['Date Qualified'].str.slice(0, 10)
-
 # Specify the brands to filter
 brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera", 
                   "Lexmark", "Ricoh", "Sharp", "Toshiba", "Xerox", "Pantum", "Fujifilm"]
@@ -66,13 +62,13 @@ brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera"
 # Specify the product types to filter
 product_types_to_show = ['Printers', 'Multifunction Devices (MFD)']
 
-# Filter the new DataFrame to only include specified brands and product types
+# Filter the new DataFrame to only include specified brands, product types, and hide entries with "Label Printer" in the Model column
 filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) & 
                      (new_df['Product Type'].isin(product_types_to_show)) & 
                      (~new_df['Model'].str.contains('Model Printer|Label Printer', case=False))]
 
-# Sort the DataFrame by Date Available
-filtered_df = filtered_df.sort_values(by='Date Available')
+# Print filtered results.
+st.write(filtered_df)
 
 
 # Load data
