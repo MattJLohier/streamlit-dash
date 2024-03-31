@@ -128,16 +128,16 @@ with col2:
 
     # Define colors for each brand
     brand_colors = {
-        'Brand1': '#FF5733',  # Reddish
-        'Brand2': '#33FF57',  # Greenish
-        'Brand3': '#337CFF',  # Bluish
-        'Brand4': '#FF337C',  # Pinkish
-        'Brand5': '#FFFF33',  # Yellowish
-        'Brand6': '#33FFFF',  # Cyan
-        'Brand7': '#FF6F33',  # Orange
-        'Brand8': '#FF33E9',  # Purple
-        'Brand9': '#33FFC1',  # Turquoise
-        'Brand10': '#8E33FF',  # Violet
+        'Canon': '#FF5733',  # Reddish
+        'Fujifilm': '#33FF57',  # Greenish
+        'HP': '#337CFF',  # Bluish
+        'Kyocera': '#FF337C',  # Pinkish
+        'Konica Minolta': '#FFFF33',  # Yellowish
+        'Sharp': '#33FFFF',  # Cyan
+        'Toshiba': '#FF6F33',  # Orange
+        'Lexmark': '#FF33E9',  # Purple
+        'Xerox': '#33FFC1',  # Turquoise
+        'Ricoh': '#8E33FF',  # Violet
     }
 
     # Create a list of colors corresponding to each brand in the DataFrame
