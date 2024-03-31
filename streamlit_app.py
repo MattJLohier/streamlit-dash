@@ -219,9 +219,9 @@ with col1:
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Type:</b> {product_type}</span>
                                     <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b>Certification Date:</b> {certification_date}</span>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >Certification Date:</b> {certification_date}</span>
                                     <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Source:</b> {source}</span>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {source}</span>
                                     </p>"""
 
         with container:
