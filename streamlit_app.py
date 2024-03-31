@@ -131,7 +131,7 @@ with col1:
     combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
 
     # Show only the newest 5 records
-    newest_records = combined_df.head(5)
+    newest_records = combined_df.head(10)
 
     # Display the result
     st.write(newest_records)
