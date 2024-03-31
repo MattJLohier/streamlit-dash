@@ -313,7 +313,7 @@ with col2:
                                 padding-bottom: 18px;
                                 font-style: italic; 
                                 >
-                                <i class='{iconname} fa-xs'></i> <i>{metric_delta}</i>
+                                <i class='{iconname} fa-xs'></i>
                                 <span style='font-size: 20px; padding-left: 10px;
                                     margin-top: 10px;'><b> {title} {emoji} </b></span>
                                     <br>
@@ -323,7 +323,7 @@ with col2:
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Type:</b> {metric_value}</span>
                                     <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >Certification Date:</b> {metric_delta}</span>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >New Brand Totals:</b> {metric_delta}</span>
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {date_detected}</span>
                                     </p>"""
