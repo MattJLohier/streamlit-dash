@@ -112,10 +112,10 @@ with col1:
     # Sort the dataframe by "Date of Last Certification", from newest to oldest
     df3_modified.sort_values(by="Registered On", ascending=False, inplace=True)
     df3_modified.reset_index(drop=True, inplace=True)
+    df3_modified.drop_duplicates(inplace=True)
+
     # Write the modified dataframe
     
-
-
 
     # Rename and remove columns for filtered_df
     filtered_df = filtered_df.rename(columns={'Model': 'Product Name', 'Date Available': 'Certification Date'})
