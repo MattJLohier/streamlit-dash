@@ -277,6 +277,15 @@ with col2:
         metric_value = row['Product Name']
         metric_delta = str(count)
         date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
+        
+        # Determine the title based on metric_label
+        if metric_label == 'Added':
+            title = "New Product Added"
+        elif metric_label == 'Removed':
+            title = "Product Removed"
+        else:
+            title = "Certification Spotted"
+
         # Change color based on action
         delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
 
@@ -304,7 +313,7 @@ with col2:
                                 >
                                 <i class='{iconname} fa-xs'></i> <i>{metric_delta}</i>
                                 <span style='font-size: 20px; padding-left: 10px;
-                                    margin-top: 10px;'><b> {source} Certification Spotted {emoji} </b></span>
+                                    margin-top: 10px;'><b> {title} {emoji} </b></span>
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
                                     <br>
