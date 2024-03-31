@@ -78,12 +78,11 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
 st.write(filtered_df)
 
 # Function to sort by Date Available
-def sort_by_date(df):
-    return df.sort_values(by='Date Available', ascending=False)
-
-st.button('Hit me')
-if st.button('Sort by Date Available'):
-    st.write(sort_by_date(filtered_df))
+if st.button('Sort by Date Available (Newest to Oldest)'):
+    # Sort the DataFrame in-place
+    filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
+    # Update the displayed DataFrame
+    df_display.data = filtered_df
 
 # Load data
 #df = pd.read_csv('data/movies_genres_summary.csv')
