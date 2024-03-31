@@ -288,14 +288,17 @@ with col2:
         else:
             title = "Certification Spotted"
 
-        # Set background color and border color based on conditions
-        if metric_value == 'nan':
-            bg_color = '#D3D3D3'  # Grey background for 'nan' product names
-            border_color = '#D3D3D3'  # Grey border color for 'nan' product names
-        else:
-            bg_color = '#FFCCCC' if metric_label == 'Removed' else '#CCFFCC' if metric_label == 'Added' else '#F5F5F5'
-            # Assuming bg_color is set based on metric_label for non-'nan' product names
-            border_color = 'grey'  # Grey border color for non-'nan' product names
+        # Change color based on action
+        delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
+
+        # Set background color based on action
+
+        # Extracting RGB color values from bg_color
+        rgb_values = bg_color[5:-1].split(",")[:-1]  # Extracting RGB values and removing the opacity value
+        bg_color = '#FFCCCC' if metric_label == 'Removed' else '#CCFFCC' if metric_label == 'Added' else '#F5F5F5' if metric_value != 'nan' else '#D3D3D3'
+
+        # Creating border color string with RGB values
+        border_color = f'rgb({", ".join(rgb_values)})'
 
         htmlstr = f"""<p style='background-color: {bg_color}; 
                                 color: rgba({wch_colour_font[0]}, 
