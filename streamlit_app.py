@@ -115,11 +115,7 @@ with col1:
 # Right Column: Placements
 with col2:
     st.header('Placements 💡')
-    # Add your placements data here
-    conn = st.connection('s3', type=FilesConnection)
-    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    df4.drop_duplicates(subset="Product Name", inplace=True)
-    st.write(df4)
+    st.subheader('Current Placement Count By Brand')
 
     conn = st.connection('s3', type=FilesConnection)
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
@@ -127,3 +123,11 @@ with col2:
     df5 = df5.sort_values(by='Brand').reset_index(drop=True)
     st.write(df5)
     st.bar_chart(df5.set_index('Brand')['Count'],width=200, height=500, color='#FFA500')
+
+    # Add your placements data here
+    conn = st.connection('s3', type=FilesConnection)
+    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    df4.drop_duplicates(subset="Product Name", inplace=True)
+    st.write(df4)
+
+    
