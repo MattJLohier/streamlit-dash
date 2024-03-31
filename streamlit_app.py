@@ -219,11 +219,8 @@ with col1:
                                 <br><span style='font-size: 16px; color: #555;'><b>Product Type:</b> {product_type}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Source:</b> {source}</span>
                                 </p>"""
-
-        with container:
-            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
-
-
+    with container:
+        st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
 
     st.subheader('Energy Star ⚡')
