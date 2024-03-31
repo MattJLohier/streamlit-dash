@@ -119,7 +119,12 @@ with col1:
 with col2:
     st.header('Placements 💡')
     st.subheader('Changelog 🔄')
-
+     # Add your placements data here
+    conn = st.connection('s3', type=FilesConnection)
+    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    df4.drop_duplicates(subset="Product Name", inplace=True)
+    latest_df4 = df4.tail(5)  # Get the latest 5 records
+    st.write(df4)
     st.write(
     """
     <style>
@@ -150,12 +155,7 @@ with col2:
     st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#FFA500')
     st.write(df5)
     
-    # Add your placements data here
-    conn = st.connection('s3', type=FilesConnection)
-    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    df4.drop_duplicates(subset="Product Name", inplace=True)
-    latest_df4 = df4.tail(5)  # Get the latest 5 records
-    st.write(df4)
+   
     
     # Create metrics for the latest 5 records
 
