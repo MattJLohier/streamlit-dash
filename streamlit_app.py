@@ -205,6 +205,7 @@ with col1:
                                     font-size: {fontsize}px;
                                     padding: 10px; 
                                     line-height: 23px;
+                                    font-weight: 800;
                                     border-radius: 7px; 
                                     border: 3.5px solid {border_color}; /* Adding 2px border with gold color */
                                     font-style: italic; 
