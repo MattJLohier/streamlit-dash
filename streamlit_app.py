@@ -71,7 +71,7 @@ with col1:
     filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
 
     # Print filtered results.
-    st.write(filtered_df)
+ 
 
     # Add metric to show latest 3 records based on product name
     # latest_records = filtered_df.head(3)['Model'].tolist()
@@ -157,6 +157,7 @@ with col1:
     newest_records = combined_df.head(10)
 
     # Display the result
+    st.subheader('Summary Stats')
     st.write(newest_records)
     st.write(filtered_df)
     st.write(df2_modified)
