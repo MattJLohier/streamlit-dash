@@ -271,62 +271,60 @@ with col2:
     container = st.container()
 
     for index, row in latest_df4.iterrows():
-        brand = row['Brand']
-        count = df5[df5['Brand'] == brand]['Count'].values[0]
-        metric_label = row['Action']
-        metric_value = row['Product Name']
-        metric_delta = str(count)
-        date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
-        
-        # Determine the title based on metric_label
-        if metric_label == 'Added':
-            title = "New Product Added"
-            emoji = "🆕"
-        elif metric_label == 'Removed':
-            title = "Product Removed"
-            emoji = "❌"
-        else:
-            title = "Certification Spotted"
+    brand = row['Brand']
+    count = df5[df5['Brand'] == brand]['Count'].values[0]
+    metric_label = row['Action']
+    metric_value = row['Product Name']
+    metric_delta = str(count)
+    date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
 
-        # Change color based on action
-        delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
+    # Determine the title based on metric_label
+    if metric_label == 'Added':
+        title = "New Product Added"
+        emoji = "🆕"
+    elif metric_label == 'Removed':
+        title = "Product Removed"
+        emoji = "❌"
+    else:
+        title = "Certification Spotted"
 
-        # Set background color based on action
-        # Extracting RGB color values from bg_color
-        rgb_values = bg_color[5:-1].split(",")[:-1]  # Extracting RGB values and removing the opacity value
-        bg_color = '#FFCCCC' if metric_label == 'Removed' else '#CCFFCC' if metric_label == 'Added' else '#F5F5F5' if metric_value != 'nan' else '#D3D3D3'
+    # Set background color based on action
+    bg_color = '#FFCCCC' if metric_label == 'Removed' else '#CCFFCC' if metric_label == 'Added' else '#F5F5F5' if metric_value != 'nan' else '#D3D3D3'
 
-        # Creating border color string with RGB values
-        border_color = f'rgb({", ".join(rgb_values)})'
+    # Extracting RGB color values from bg_color
+    rgb_values = bg_color[5:-1].split(",")[:-1]  # Extracting RGB values and removing the opacity value
 
-        htmlstr = f"""<p style='background-color: {bg_color}; 
-                                color: rgba({wch_colour_font[0]}, 
-                                        {wch_colour_font[1]}, 
-                                        {wch_colour_font[2]}, 0.75); 
-                                font-size: 10px;
-                                padding: 10px; 
-                                border-radius: 7px; 
-                                border: 3.5px solid {border_color};
-                                line-height: 23px;
-                                border-radius: 7px;
-                                margin-right: 3em; 
-                                >
-                                <span style='font-size: 20px; padding-left: 12px;
-                                    margin-top: 10px;'><b style='font-size: 20px; padding-left:10px' font-size: 20px;> {title} {emoji} </b></span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Change:</b> {metric_label}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Name:</b> {metric_value}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >New Brand Totals:</b> {metric_delta}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {date_detected}</span>
-                                    </p>"""
+    # Creating border color string with RGB values
+    border_color = f'rgb({", ".join(rgb_values)})'
 
-        with container:
-            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+    htmlstr = f"""<p style='background-color: {bg_color}; 
+                            color: rgba({wch_colour_font[0]}, 
+                                    {wch_colour_font[1]}, 
+                                    {wch_colour_font[2]}, 0.75); 
+                            font-size: 10px;
+                            padding: 10px; 
+                            border-radius: 7px; 
+                            border: 3.5px solid {border_color};
+                            line-height: 23px;
+                            border-radius: 7px;
+                            margin-right: 3em; 
+                            >
+                            <span style='font-size: 20px; padding-left: 12px;
+                                margin-top: 10px;'><b style='font-size: 20px; padding-left:10px' font-size: 20px;> {title} {emoji} </b></span>
+                                <br>
+                                <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
+                                <br>
+                                <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Change:</b> {metric_label}</span>
+                                <br>
+                                <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Name:</b> {metric_value}</span>
+                                <br>
+                                <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >New Brand Totals:</b> {metric_delta}</span>
+                                <br>
+                                <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {date_detected}</span>
+                                </p>"""
+
+    with container:
+        st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
     st.subheader('Current Placement Count By Brand')
     st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=475, color='#24AABE')
