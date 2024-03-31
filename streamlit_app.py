@@ -167,13 +167,13 @@ with col1:
 
 
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
-wch_colour_font = (0, 0, 0)
-fontsize = 20
-valign = "left"
-iconname = "fas fa-xmark"
-sline = "Observations"
+    wch_colour_font = (0, 0, 0)
+    fontsize = 20
+    valign = "left"
+    iconname = "fas fa-xmark"
+    sline = "Observations"
 
-container = st.container()
+    container = st.container()
 
     for index, row in newest_records.iterrows():
         product_name = row['Product Name']
