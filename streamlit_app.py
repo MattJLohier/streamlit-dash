@@ -133,15 +133,27 @@ with col1:
     df2_modified['Source'] = 'WiFi Alliance'
     df3_modified['Source'] = 'EPEAT Registry'
 
+    import pandas as pd
+    # Your dataframes and transformations here...
+
     # Concatenate the dataframes
     combined_df = pd.concat([filtered_df, df2_modified, df3_modified], ignore_index=True)
+
+    # Extract first 10 characters of "Certification Date" column
     combined_df['Certification Date'] = combined_df['Certification Date'].astype(str).str[:10]
 
-
+    # Convert "Certification Date" to datetime format
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')
 
     # Sort the combined dataframe by "Certification Date" in descending order
-    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')  # Convert to datetime format
     combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
+
+    # Show only the newest 5 records
+    newest_records = combined_df.head(10)
+
+    # Display the result
+    st.write(newest_records)
+
 
     # Show only the newest 5 records
     newest_records = combined_df.head(10)
