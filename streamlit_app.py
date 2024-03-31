@@ -23,12 +23,23 @@ st.subheader('Which Movie Genre performs ($) best at the box office?')
 conn = st.connection('s3', type=FilesConnection)
 df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
 
+# Specify the columns to keep
+columns_to_keep = ['brand_name', 'model_name', 'product_type', 'marking_technology',
+                   'color_capability', 'date_available_on_market', 'date_qualified',
+                   'markets', 'monochrome_product_speed_ipm_or_mppm']
+
+# Create a new DataFrame with only the specified columns
+new_df = df[columns_to_keep]
+
 # Specify the brands to filter
 brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera", 
                   "Lexmark", "Ricoh", "Sharp", "Toshiba", "Xerox", "Pantum", "Fujifilm"]
 
-# Filter DataFrame to only include specified brands
-filtered_df = df[df['brand_name'].isin(brands_to_show)]
+# Specify the product types to filter
+product_types_to_show = ['Printers', 'Multifunction Devices (MFD)']
+
+# Filter the new DataFrame to only include specified brands and product types
+filtered_df = new_df[(new_df['brand_name'].isin(brands_to_show)) & (new_df['product_type'].isin(product_types_to_show))]
 
 # Print filtered results.
 st.write(filtered_df)
