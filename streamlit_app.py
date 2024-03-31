@@ -77,6 +77,10 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
 # Print filtered results.
 st.write(filtered_df)
 
+# Function to sort by Date Available
+def sort_by_date(df):
+    return df.sort_values(by='Date Available')
+
 st.button('Hit me')
 if st.button('Sort by Date Available'):
     st.write(sort_by_date(filtered_df))
