@@ -125,26 +125,5 @@ with col2:
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
     df5 = df5[-10:]
     df5 = df5.sort_values(by='Brand').reset_index(drop=True)
-
-    # Define colors for each brand
-    brand_colors = {
-        'Canon': '#FF5733',  # Reddish
-        'Fujifilm': '#33FF57',  # Greenish
-        'HP': '#337CFF',  # Bluish
-        'Kyocera': '#FF337C',  # Pinkish
-        'Konica Minolta': '#FFFF33',  # Yellowish
-        'Sharp': '#33FFFF',  # Cyan
-        'Toshiba': '#FF6F33',  # Orange
-        'Lexmark': '#FF33E9',  # Purple
-        'Xerox': '#33FFC1',  # Turquoise
-        'Ricoh': '#8E33FF',  # Violet
-    }
-
-    # Create a list of colors corresponding to each brand in the DataFrame
-    colors = [brand_colors.get(brand, '#808080') for brand in df5['Brand']]  # Using gray as default color
-
-    # Create a bar chart with dimensions 200 by 200 pixels and custom colors for each brand
-    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=200, color=colors)
-
     st.write(df5)
-    st.bar_chart(df5.set_index('Brand')['Count'],width=200, height=500, color='#FFA500')
+    st.bar_chart(df5.set_index('Brand')['Count'],width=200, height=500, color='$FFA500')
