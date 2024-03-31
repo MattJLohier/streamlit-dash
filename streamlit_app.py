@@ -333,6 +333,7 @@ with col2:
     st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#24AABE')
     st.subheader('Placement Changelog')
     st.write(df4)
+    st.subheader('Brand Totals Changelog')
     st.write(df5)
 
 
