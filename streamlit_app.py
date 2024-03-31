@@ -311,9 +311,8 @@ with col2:
         with container:
             st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
-    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#24AABE')
-
     st.subheader('Current Placement Count By Brand')
+    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#24AABE')
 
     st.write(df5)
     st.write(df4)
