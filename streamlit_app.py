@@ -79,8 +79,12 @@ st.metric("Latest 3 Products", ", ".join(latest_records))
 # Specify input format is a csv and to cache the result for 600 seconds.
 conn = st.connection('s3', type=FilesConnection)
 df2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+
 # Keep only the desired columns
-df2_modified = df2[["CID", "Date of Last Certification", "Brand", "Product", "Model Number"]]
+df2_modified = df2[["CID", "Date of Last Certification", "Brand", "Products", "Model Number"]]
+
+# Filter by specified brands
+df2_modified = df2_modified[df2_modified["Brand"].isin(brands_to_show)]
 
 # Sort the dataframe by "Date of Last Certification", from newest to oldest
 df2_modified.sort_values(by="Date of Last Certification", ascending=False, inplace=True)
