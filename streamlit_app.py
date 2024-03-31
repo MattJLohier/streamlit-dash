@@ -171,7 +171,7 @@ with col1:
     fontsize = 20
     valign = "left"
     iconname = "fas fa-xmark"
-    sline = "Observations"
+    sline = "New Certifications Detected"
 
     container = st.container()
 
