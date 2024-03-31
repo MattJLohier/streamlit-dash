@@ -137,6 +137,8 @@ with col2:
         metric_label = row['Action']
         metric_value = row['Product Name']
         metric_delta = str(count)
-        st.metric(label=metric_label, value=metric_value, delta=metric_delta)
+        # Change color based on action
+        delta_color = 'green' if metric_label == 'added' else 'red' if metric_label == 'removed' else None
+        st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
 
     
