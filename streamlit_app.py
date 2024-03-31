@@ -121,9 +121,9 @@ with col2:
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
     df5 = df5[-10:]
     df5 = df5.sort_values(by='Brand').reset_index(drop=True)
-    st.write(df5)
     st.bar_chart(df5.set_index('Brand')['Count'],width=200, height=500, color='#FFA500')
-
+    st.write(df5)
+    
     # Add your placements data here
     conn = st.connection('s3', type=FilesConnection)
     df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
