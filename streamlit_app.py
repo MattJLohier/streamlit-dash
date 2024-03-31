@@ -237,24 +237,29 @@ with col2:
         delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
 
     # Set background color based on action
-        bg_color = 'rgb(0, 204, 102)' if metric_label == 'Added' else 'rgb(255, 0, 0)' if metric_label == 'Removed' else ''
+    # Set border color based on action
+    border_color = 'rgb(0, 204, 102)' if metric_label == 'Added' else 'rgb(255, 0, 0)' if metric_label == 'Removed' else ''
 
-        htmlstr = f"""<p style='background-color: {bg_color}; 
-                                color: rgba({wch_colour_font[0]}, 
-                                        {wch_colour_font[1]}, 
-                                        {wch_colour_font[2]}, 0.75); 
-                                font-size: {fontsize}px; 
-                                border-radius: 7px; 
-                                padding-left: 12px; 
-                                padding-top: 18px; 
-                                padding-bottom: 18px; 
-                                line-height:25px;'>
-                                <i class='{iconname} fa-xs'></i> {metric_delta}
-                                <span style='font-size: 24px; 
-                                margin-top: 0;'>{metric_value}</span></p>"""
+    # Set outline style based on action
+    outline_style = 'solid' if metric_label in ['Added', 'Removed'] else 'none'
 
-        with container:
-            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+    htmlstr = f"""<p style='background-color: white; 
+                            color: rgba({wch_colour_font[0]}, 
+                                    {wch_colour_font[1]}, 
+                                    {wch_colour_font[2]}, 0.75); 
+                            font-size: {fontsize}px; 
+                            border: 2px {outline_style} {border_color}; 
+                            border-radius: 7px; 
+                            padding-left: 12px; 
+                            padding-top: 18px; 
+                            padding-bottom: 18px; 
+                            line-height:25px;'>
+                            <i class='{iconname} fa-xs'></i> {metric_delta}
+                            <span style='font-size: 24px; 
+                            margin-top: 0;'>{metric_value}</span></p>"""
+
+    with container:
+        st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
 
     st.subheader('Current Placement Count By Brand')
