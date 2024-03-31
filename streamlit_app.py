@@ -99,7 +99,7 @@ df3 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
 df3_modified = df3[["Id", "Registered On", "Product Type", "Product Name", "Manufacturer"]]
 
 # Filter by specified brands
-df3_modified = df3_modified[df3_modified["Brand"].isin(brands_to_show)]
+df3_modified = df3_modified[df3_modified["Manufacturer"].isin(brands_to_show)]
 
 # Sort the dataframe by "Date of Last Certification", from newest to oldest
 df3_modified.sort_values(by="Registered On", ascending=False, inplace=True)
