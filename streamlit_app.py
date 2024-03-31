@@ -159,7 +159,7 @@ with col1:
     df3_modified.drop_duplicates(inplace=True)
 
     # Show only the newest 5 records
-    newest_records = combined_df.head(15)
+    newest_records = combined_df.head(5)
 
     # Display the result
     st.subheader('Recent Certifications')
