@@ -14,13 +14,13 @@ st.set_page_config(
 alt.themes.enable("dark")
 
 st.title('Scooper Dashboard 🖨️')
-st.header('Scooper Dashboard 🖨️')
 st.markdown('**What can this app do?**')
 st.info('This app shows the use of Pandas for data wrangling, Altair for chart creation and editable dataframe for data interaction.')
 st.markdown('**How to use the app?**')
 st.warning('To engage with the app, 1. Select genres of your interest in the drop-down selection box and then 2. Select the year duration from the slider widget. As a result, this should generate an updated editable DataFrame and line plot.')
 st.divider()
-st.subheader('Certifications 📝')
+st.header('Certifications 📝')
+st.header('Energy Star ⚡')
 
 # Create connection object and retrieve file contents.
 # Specify input format is a csv and to cache the result for 600 seconds.
@@ -75,7 +75,7 @@ st.write(filtered_df)
 #latest_records = filtered_df.head(3)['Model'].tolist()
 #st.metric("Latest 3 Products", ", ".join(latest_records))
 
-
+st.header('WiFi Alliance 📶')
 # Create connection object and retrieve file contents.
 # Specify input format is a csv and to cache the result for 600 seconds.
 conn = st.connection('s3', type=FilesConnection)
@@ -93,6 +93,8 @@ df2_modified.sort_values(by="Date of Last Certification", ascending=False, inpla
 # Write the modified dataframe
 st.write(df2_modified)
 
+
+st.header('EPEAT 🌎')
 conn = st.connection('s3', type=FilesConnection)
 df3 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
 
@@ -108,4 +110,5 @@ df3_modified.sort_values(by="Registered On", ascending=False, inplace=True)
 # Write the modified dataframe
 st.write(df3_modified)
 
-st.subheader('Placements 💡')
+st.divider()
+st.header('Placements 💡')
