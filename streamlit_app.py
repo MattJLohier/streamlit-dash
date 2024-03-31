@@ -161,7 +161,7 @@ with col1:
     newest_records = combined_df.head(15)
 
     # Display the result
-    st.subheader('Summary Stats')
+    st.subheader('Recent Certifications')
     st.write(newest_records)
     st.subheader('Energy Star ⚡')
     st.write(estardf)
