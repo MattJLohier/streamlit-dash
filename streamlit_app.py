@@ -213,7 +213,7 @@ with col1:
                                     line-height:25px;'>
                                     <i class='{iconname} fa-xs'></i>
                                     <span style='font-size: 24px; padding-left: 10px;
-                                    margin-top: 0;'><b> New {source} Certification Spotted {emoji} </b></span>
+                                    margin-top: 0;'><b> {source} Certification Spotted {emoji} </b></span>
                                     <br><span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px;'><b>Certification Date:</b> {certification_date}</span>
                                     <br><span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Brand:</b> {brand}</span>
                                     <br><span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Product Name:</b> {product_name}</span>
