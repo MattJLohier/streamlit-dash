@@ -296,13 +296,7 @@ with col2:
 
         # Extracting RGB color values from bg_color
         rgb_values = bg_color[5:-1].split(",")[:-1]  # Extracting RGB values and removing the opacity value
-        bg_color = '#FFCCCC' if metric_label == 'Removed' else '#CCFFCC' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
-
-        # Set border color to gray if product_name is nan
-        if pd.isna(metric_value):
-            border_color = 'rgb(192, 192, 192)'  # Gray color
-        else:
-            border_color = f'rgb({", ".join(rgb_values)})'
+        bg_color = '#FFCCCC' if metric_label == 'Removed' else '#CCFFCC' if metric_label == 'Added' else '#F5F5F5' if not pd.isna(metric_value) else '#D3D3D3'
 
         # Creating border color string with RGB values
         border_color = f'rgb({", ".join(rgb_values)})'
