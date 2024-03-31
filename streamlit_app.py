@@ -123,4 +123,5 @@ with col2:
 
     conn = st.connection('s3', type=FilesConnection)
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+    df5 = df5[-10:]
     st.write(df5)
