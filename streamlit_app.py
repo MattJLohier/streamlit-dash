@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-st.image("http://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512.png", use_column_width=True)
+st.image("https://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512", use_column_width=True)
 
 alt.themes.enable("dark")
 
