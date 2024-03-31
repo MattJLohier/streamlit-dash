@@ -69,6 +69,7 @@ with col1:
 
     # Sort the filtered DataFrame by Date Available (Newest to Oldest)
     filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
+    filtered_df.reset_index(drop=True, inplace=True)
 
     # Print filtered results.
  
@@ -91,6 +92,7 @@ with col1:
 
     # Sort the dataframe by "Date of Last Certification", from newest to oldest
     df2_modified.sort_values(by="Date of Last Certification", ascending=False, inplace=True)
+    df2_modified.reset_index(drop=True, inplace=True)
 
     # Write the modified dataframe
     
@@ -107,7 +109,7 @@ with col1:
 
     # Sort the dataframe by "Date of Last Certification", from newest to oldest
     df3_modified.sort_values(by="Registered On", ascending=False, inplace=True)
-
+    df3_modified.reset_index(drop=True, inplace=True)
     # Write the modified dataframe
     
 
