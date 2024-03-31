@@ -126,4 +126,4 @@ with col2:
     df5 = df5[-10:]
     df5 = df5.sort_values(by='Brand').reset_index(drop=True)
     st.write(df5)
-    st.bar_chart(df5.set_index('Brand')['Count'],width=200, height=500, color='$FFA500')
+    st.bar_chart(df5.set_index('Brand')['Count'],width=200, height=500, color='#FFA500')
