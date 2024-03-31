@@ -81,7 +81,7 @@ conn = st.connection('s3', type=FilesConnection)
 df2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
 
 # Keep only the desired columns
-df2_modified = df2[["CID", "Date of Last Certification", "Brand", "Products", "Model Number"]]
+df2_modified = df2[["CID", "Date of Last Certification", "Brand", "Product", "Model Number"]]
 
 # Filter by specified brands
 df2_modified = df2_modified[df2_modified["Brand"].isin(brands_to_show)]
