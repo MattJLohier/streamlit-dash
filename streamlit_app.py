@@ -11,6 +11,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+st.image("https://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512.jpg", use_column_width=True)
+
 alt.themes.enable("dark")
 
 st.title('Scooper Dashboard 🖨️')
