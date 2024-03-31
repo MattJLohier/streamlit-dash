@@ -315,7 +315,7 @@ with col2:
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >New Brand Totals:</b> {metric_delta}</span>
                                     <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {date_detected}</span>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Date Detected:</b> {date_detected}</span>
                                     </p>"""
 
         with container:
