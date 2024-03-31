@@ -20,7 +20,7 @@ st.markdown('**How to use the app?**')
 st.warning('To engage with the app, 1. Select genres of your interest in the drop-down selection box and then 2. Select the year duration from the slider widget. As a result, this should generate an updated editable DataFrame and line plot.')
 st.divider()
 st.header('Certifications 📝')
-st.header('Energy Star ⚡')
+st.subheader('Energy Star ⚡')
 
 # Create connection object and retrieve file contents.
 # Specify input format is a csv and to cache the result for 600 seconds.
