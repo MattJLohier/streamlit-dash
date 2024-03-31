@@ -14,7 +14,7 @@ st.set_page_config(
 alt.themes.enable("dark")
 
 st.header('Scooper Dashboard 🖨️')
-st.subheader('Scooper Dashboard 🖨️')
+st.subheader('Certifications 📝')
 
 with st.text('About this app'):
   st.markdown('**What can this app do?**')
@@ -75,6 +75,7 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
                      (~new_df['Model'].str.contains('Model Printer|Label Printer', case=False))]
 
 # Print filtered results.
+st.subheader('Placements 📝')
 st.write(filtered_df)
 
 # Function to sort by Date Available
