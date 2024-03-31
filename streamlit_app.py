@@ -163,7 +163,7 @@ with col1:
 
     # Display the result
     st.subheader('Recent Certifications')
-    st.write(newest_records)
+    #st.write(newest_records)
 
 
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
