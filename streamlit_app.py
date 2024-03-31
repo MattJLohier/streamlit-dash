@@ -130,7 +130,7 @@ with col2:
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
     df5 = df5[-10:]
     df5 = df5.sort_values(by='Brand').reset_index(drop=True)
-    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#FFA500')
+    
 
 
     # Create metrics for the latest 5 records
@@ -161,7 +161,7 @@ with col2:
             st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
 
 
-
+    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#FFA500')
 
 
 
