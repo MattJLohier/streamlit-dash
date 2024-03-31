@@ -167,7 +167,9 @@ with col1:
     st.write(estardf)
     st.subheader('WiFi Alliance 📶')
     st.write(df2_modified)
+    cdf2_modified.sort_values(by='Certification Date', ascending=False, inplace=True)
     st.subheader('EPEAT 🌎')
+    
     st.write(df3_modified)
 # Right Column: Placements
 # Right Column: Placements
