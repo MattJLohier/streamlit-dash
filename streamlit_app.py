@@ -6,8 +6,8 @@ import streamlit as st
 from st_files_connection import FilesConnection
 
 # Page title
-st.set_page_config(page_title='Interactive Data Explorer', page_icon='📊')
-st.title('📊 Interactive Data Explorer')
+st.set_page_config(page_title='Test Dash', page_icon='📊')
+st.title('📊 Test Dash')
 
 with st.expander('About this app'):
   st.markdown('**What can this app do?**')
