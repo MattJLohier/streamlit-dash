@@ -267,7 +267,7 @@ with col2:
     fontsize = 20
     valign = "left"
     iconname = "fas fa-xmark"
-
+    
     container = st.container()
 
     for index, row in latest_df4.iterrows():
@@ -292,7 +292,7 @@ with col2:
         delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
 
         # Set background color based on action
-        bg_color = 'rgba(0, 204, 102, 0.5)' if metric_label == 'Added' else 'rgba(255, 0, 0, 0.5)' if metric_label == 'Removed' else ''
+        bg_color = '#F5F5F5'  # Light gray
 
         # Extracting RGB color values from bg_color
         rgb_values = bg_color[5:-1].split(",")[:-1]  # Extracting RGB values and removing the opacity value
