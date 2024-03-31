@@ -183,13 +183,10 @@ with col1:
         source = row['Source']
 
         # Set background color
-        bg_color = 'rgba(0, 204, 102, 0.5)'  # You can customize this based on your preference
+        bg_color = '#f2f2f2'  # Light gray
 
-        # Extracting RGB color values from bg_color
-        rgb_values = bg_color[5:-1].split(",")[:-1]  # Extracting RGB values and removing the opacity value
-
-        # Creating border color string with RGB values
-        border_color = f'rgb({", ".join(rgb_values)})'
+        # Set border color
+        border_color = '#FFD700'  # Gold
 
         htmlstr = f"""<p style='background-color: {bg_color}; 
                                 color: rgba({wch_colour_font[0]}, 
@@ -197,7 +194,7 @@ with col1:
                                         {wch_colour_font[2]}, 0.75); 
                                 font-size: {fontsize}px; 
                                 border-radius: 7px; 
-                                border: 2px solid {border_color}; /* Adding 2px border with the same color as background */
+                                border: 2px solid {border_color}; /* Adding 2px border with gold color */
                                 padding-left: 12px; 
                                 padding-top: 18px; 
                                 padding-bottom: 18px;
