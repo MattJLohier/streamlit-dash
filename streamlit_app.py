@@ -93,7 +93,7 @@ with col1:
     df2_modified.sort_values(by="Date of Last Certification", ascending=False, inplace=True)
 
     # Write the modified dataframe
-    st.write(df2_modified)
+    
 
     st.subheader('EPEAT 🌎')
     conn = st.connection('s3', type=FilesConnection)
@@ -109,7 +109,7 @@ with col1:
     df3_modified.sort_values(by="Registered On", ascending=False, inplace=True)
 
     # Write the modified dataframe
-    st.write(df3_modified)
+    
 
 
 
@@ -158,7 +158,9 @@ with col1:
 
     # Display the result
     st.write(newest_records)
-
+    st.write(filtered_df)
+    st.write(df2_modified)
+    st.write(df3_modified)
 # Right Column: Placements
 # Right Column: Placements
 # Right Column: Placements
