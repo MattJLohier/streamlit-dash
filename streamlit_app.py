@@ -163,7 +163,7 @@ with col1:
     st.subheader('Summary Stats')
     st.write(newest_records)
     st.subheader('Energy Star ⚡')
-    st.write(festardf)
+    st.write(estardf)
     st.subheader('WiFi Alliance 📶')
     st.write(df2_modified)
     st.subheader('EPEAT 🌎')
