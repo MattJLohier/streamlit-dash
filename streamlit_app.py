@@ -137,7 +137,6 @@ with col1:
     combined_df = pd.concat([filtered_df, df2_modified, df3_modified], ignore_index=True)
     # Assuming "Certification Date" is already in string format
     # If not, convert it to string before truncating
-    combined_df['Certification Date'] = combined_df['Certification Date'].astype(str)
 
     # Truncate the date to keep only the first 10 characters
     combined_df['Certification Date'] = combined_df['Certification Date'].str[:10]
