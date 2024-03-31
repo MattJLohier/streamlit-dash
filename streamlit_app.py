@@ -303,10 +303,19 @@ with col2:
                                 font-style: italic; 
                                 line-height: 5px;'>
                                 <i class='{iconname} fa-xs'></i> <i>{metric_delta}</i>
-                                <span style='font-size: 24px; 
-                                margin-top: 0;'><b>{metric_value}</b></span>
-                                <br><span style='font-size: 12px; color: #555;'>Date Detected: {date_detected}</span>
-                                </p>"""
+                                <span style='font-size: 20px; padding-left: 10px;
+                                    margin-top: 10px;'><b> {source} Certification Spotted {emoji} </b></span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Name:</b> {metric_label}</span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Type:</b> {metric_value}</span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >Certification Date:</b> {metric_delta}</span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {date_detected}</span>
+                                    </p>"""
 
         with container:
             st.markdown(lnk + htmlstr, unsafe_allow_html=True)
