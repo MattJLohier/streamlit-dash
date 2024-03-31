@@ -198,15 +198,11 @@ with col1:
         # Determine emoji based on source
         emoji = emoji_dict.get(source, "📝")  # Default to pencil emoji if source not found in dictionary
 
-        htmlstr = f"""<p style='background-color: {bg_color}; 
-                                    color: rgba({wch_colour_font[0]}, 
-                                            {wch_colour_font[1]}, 
-                                            {wch_colour_font[2]}, 0.75); 
+        htmlstr = f"""<p style=' 
                                     font-size: 10px;
                                     padding: 10px; 
                                     line-height: 23px;
                                     border-radius: 7px; 
-                                    border: 3.5px solid {border_color}; /* Adding 2px border with gold color */
                                     font-style: italic; 
                                     >
                                     <i class='{iconname} fa-xs'></i>
