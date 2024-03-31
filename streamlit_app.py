@@ -216,7 +216,7 @@ with col1:
                                     <br>
                                     <span style='font-size: 16px; color: #555; line-height: 15px; padding-left: 10px;'><b>Brand:</b> {brand}</span>
                                     <br>
-                                    <span style='font-size: 16px; color: #555; line-height: 10px; padding-left: 10px;'><b>Product Name:</b> {product_name}</span>
+                                    <span style='font-size: 16px; color: #555; line-height: 15px; padding-left: 10px;'><b>Product Name:</b> {product_name}</span>
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Product Type:</b> {product_type}</span>
                                     <br>
