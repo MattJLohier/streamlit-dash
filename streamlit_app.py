@@ -142,7 +142,7 @@ with col2:
         metric_value = row['Product Name']
         metric_delta = str(count)
         # Change color based on action
-        delta_color = 'inverse' if metric_label == 'added' else 'normal' if metric_label == 'removed' else 'normal'
+        delta_color = 'inverse' if metric_label == 'Added' else 'normal' if metric_label == 'Removed' else 'normal'
         st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
 
 
