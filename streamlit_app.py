@@ -183,7 +183,7 @@ with col1:
         source = row['Source']
 
         # Set background color
-        bg_color = '#f2f2f2'  # Light gray
+        bg_color = '#E5E4E2'  # Light gray
 
         # Set border color
         border_color = '#FFD700'  # Gold
