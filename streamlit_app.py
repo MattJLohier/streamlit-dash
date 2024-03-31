@@ -326,6 +326,23 @@ with col2:
 
     st.subheader('Current Placement Count By Brand')
     st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=475, color='#24AABE')
+
+
+    # Assuming df5 is your DataFrame containing data
+    chart_data = df5.set_index('Brand')['Count']
+
+    # Creating the Altair chart
+    chart = alt.Chart(chart_data.reset_index()).mark_bar(color='#24AABE').encode(
+        x=alt.X('Brand', title='Brand'),
+        y=alt.Y('Count', title='Count')
+    ).properties(
+        width=200,
+        height=475
+    )
+
+    # Displaying the chart using st.write()
+    st.write(chart)
+
     st.subheader('Placement Changelog')
     st.write(df4)
     st.subheader('Brand Totals Changelog')
