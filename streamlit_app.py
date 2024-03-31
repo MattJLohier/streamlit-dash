@@ -75,7 +75,7 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
                      (~new_df['Model'].str.contains('Model Printer|Label Printer', case=False))]
 
 # Print filtered results.
-st.subheader('Placements 📝')
+st.subheader('Placements 💡')
 st.write(filtered_df)
 
 # Function to sort by Date Available
