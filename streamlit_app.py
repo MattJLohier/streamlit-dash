@@ -15,7 +15,7 @@ alt.themes.enable("dark")
 
 st.title('Scooper Dashboard 🖨️')
 st.markdown('**Welcome to Scooper Dashboard**')
-st.info('This is the official dashboard for the Scooper Tool. Scooper is a python tool hosted on AWS (Lambda/S3/EC2) that uses the Python selenium and pandas libraries to scrape for new product certifications and placements on official manufacturer websites.')
+st.info('This is the official dashboard for the Scooper Tool. Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape for new product certifications and placements on official manufacturer websites.')
 st.divider()
 
 # Define columns
