@@ -310,7 +310,6 @@ with col2:
                                 border: 2px solid {border_color};
                                 padding-left: 12px; 
                                 padding-top: 18px; 
-                                padding-bottom: 18px;
                                 >
                                 <span style='font-size: 20px; padding-left: 12px;
                                     margin-top: 10px;'><b> {title} {emoji} </b></span>
