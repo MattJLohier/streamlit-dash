@@ -123,7 +123,7 @@ with col2:
     df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
     df4.drop_duplicates(subset="Product Name", inplace=True)
     latest_df4 = df4.tail(5)  # Get the latest 5 records
-    st.write(df4)
+    
     
     
     conn = st.connection('s3', type=FilesConnection)
@@ -164,7 +164,7 @@ with col2:
     st.subheader('Current Placement Count By Brand')
 
     st.write(df5)
-    
+    st.write(df4)
 
 
 
