@@ -141,9 +141,10 @@ with col2:
         metric_label = row['Action']
         metric_value = row['Product Name']
         metric_delta = str(count)
-        # Change direction based on action
-        delta_direction = 'down' if metric_label == 'added' else 'up' if metric_label == 'removed' else 'up'
-        st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_direction=delta_direction)
+        # Change color based on action
+        delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
+        delta_direction = 'down' if delta_color == 'inverse' else 'up'
+        st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
 
 
 
