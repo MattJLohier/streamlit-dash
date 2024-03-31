@@ -190,6 +190,46 @@ with col2:
 
     st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
+
+    lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
+wch_colour_box = (0, 204, 102)
+wch_colour_font = (0, 0, 0)
+fontsize = 18
+valign = "left"
+iconname = "fas fa-asterisk"
+sline = "Observations"
+
+container = st.container()
+
+for index, row in latest_df4.iterrows():
+    brand = row['Brand']
+    count = df5[df5['Brand'] == brand]['Count'].values[0]
+    metric_label = row['Action']
+    metric_value = row['Product Name']
+    metric_delta = str(count)
+    # Change color based on action
+    delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
+
+    htmlstr = f"""<p style='background-color: rgba({wch_colour_box[0]}, 
+                                                {wch_colour_box[1]}, 
+                                                {wch_colour_box[2]}, 0.75); 
+                            color: rgba({wch_colour_font[0]}, 
+                                    {wch_colour_font[1]}, 
+                                    {wch_colour_font[2]}, 0.75); 
+                            font-size: {fontsize}px; 
+                            border-radius: 7px; 
+                            padding-left: 12px; 
+                            padding-top: 18px; 
+                            padding-bottom: 18px; 
+                            line-height:25px;'>
+                            <i class='{iconname} fa-xs'></i> {metric_delta}
+                            <BR><span style='font-size: 14px; 
+                            margin-top: 0;'>{sline}</span></p>"""
+
+    with container:
+        st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+
+
     st.subheader('Current Placement Count By Brand')
 
     st.write(df5)
