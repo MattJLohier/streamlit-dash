@@ -24,7 +24,7 @@ conn = st.connection('s3', type=FilesConnection)
 df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
 
 # Print results.
-print(df)
+st.write(df)
 
 # Load data
 #df = pd.read_csv('data/movies_genres_summary.csv')
