@@ -209,7 +209,7 @@ with col1:
                                     padding-top: 5px; 
                                     padding-bottom: 10px;
                                     font-style: italic; 
-                                    line-height: 10px;'>
+                                    line-height: 20px;'>
                                     <i class='{iconname} fa-xs'></i>
                                     <span style='font-size: 24px; padding-left: 10px;
                                     margin-top: 0;'><b> {source} Certification Spotted {emoji} </b></span>
