@@ -311,7 +311,6 @@ with col2:
                                 padding-left: 12px; 
                                 padding-top: 18px; 
                                 padding-bottom: 18px;
-                                font-style: italic; 
                                 >
                                 <span style='font-size: 20px; padding-left: 10px;
                                     margin-top: 10px;'><b> {title} {emoji} </b></span>
