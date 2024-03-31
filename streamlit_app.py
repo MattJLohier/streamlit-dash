@@ -113,15 +113,25 @@ with col1:
 
 
 
+    # Rename and remove columns for filtered_df
+    filtered_df = filtered_df.rename(columns={'Model': 'Product Name', 'Date Available': 'Certification Date'})
+    filtered_df = filtered_df.drop(columns=['Color/Mono', 'Date Qualified', 'Target Markets', 'Print Speed'])
+    filtered_df = filtered_df[['Product Name', 'Brand', 'Certification Date', 'Product Type']]
+
+    # Rename and remove columns for df2_modified
+    df2_modified = df2_modified.rename(columns={'Manufacturer': 'Brand', 'Product': 'Product Name', 'Date of Last Certification': 'Certification Date'})
+    df2_modified = df2_modified.drop(columns=['CID', 'Model Number'])
+    df2_modified = df2_modified[['Product Name', 'Brand', 'Certification Date']]
+
+    # Rename and remove columns for df3_modified
+    df3_modified = df3_modified.rename(columns={'Registered On': 'Certification Date', 'Manufacturer': 'Brand'})
+    df3_modified = df3_modified.drop(columns=['Id'])
+    df3_modified = df3_modified[['Product Name', 'Brand', 'Certification Date', 'Product Type']]
+
     # Add a "Source" column to each dataframe
     filtered_df['Source'] = 'Energy Star'
     df2_modified['Source'] = 'WiFi Alliance'
     df3_modified['Source'] = 'EPEAT Registry'
-
-    # Rename the columns to match for concatenation
-    filtered_df = filtered_df.rename(columns={'Date Available': 'Certification Date'})
-    df2_modified = df2_modified.rename(columns={'Date of Last Certification': 'Certification Date'})
-    df3_modified = df3_modified.rename(columns={'Registered On': 'Certification Date'})
 
     # Concatenate the dataframes
     combined_df = pd.concat([filtered_df, df2_modified, df3_modified], ignore_index=True)
