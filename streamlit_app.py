@@ -256,7 +256,7 @@ with col2:
     df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
     df4.drop_duplicates(subset="Product Name", inplace=True)
     df4 = df4.sort_values(by='Date Detected', ascending=True)
-    df4 = df4.iloc[::-1]
+    #df4 = df4.iloc[::-1]
     latest_df4 = df4.tail(5)  # Get the latest 5 records
     
     conn = st.connection('s3', type=FilesConnection)
