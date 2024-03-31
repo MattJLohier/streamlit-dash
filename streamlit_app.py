@@ -220,7 +220,7 @@ with col2:
 
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
     wch_colour_font = (0, 0, 0)
-    fontsize = 24
+    fontsize = 20
     valign = "left"
     iconname = "fas fa-xmark"
     sline = "Observations"
@@ -258,7 +258,7 @@ with col2:
                                 line-height:25px;'>
                                 <i class='{iconname} fa-xs'></i> {metric_delta}
                                 <span style='font-size: 24px; 
-                                margin-top: 0; <b>'>{metric_value} </b> </span></p>"""
+                                margin-top: 0; <b>'>{metric_value}</b></span></p>"""
 
         with container:
             st.markdown(lnk + htmlstr, unsafe_allow_html=True)
