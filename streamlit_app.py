@@ -337,7 +337,7 @@ with col2:
         y=alt.Y('Count', title='Count')
     ).properties(
         width=700,
-        height=500
+        height=475
     )
 
     # Displaying the chart using st.write()
