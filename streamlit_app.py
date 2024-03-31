@@ -290,7 +290,7 @@ with col2:
 
         # Set background color and border color based on action
         bg_color = '#FFCCCC' if metric_label == 'Removed' else '#CCFFCC' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
-        border_color = '#FF0000' if metric_label == 'Removed' else '#00FF00' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
+        border_color = '#FF0000' if metric_label == 'Removed' else '#1fd100' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
 
         htmlstr = f"""<p style='background-color: {bg_color}; 
                                 color: rgba({wch_colour_font[0]}, 
