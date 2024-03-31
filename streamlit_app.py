@@ -74,4 +74,11 @@ st.write(filtered_df)
 latest_records = filtered_df.head(3)['Model'].tolist()
 st.metric("Latest 3 Products", ", ".join(latest_records))
 
+
+# Create connection object and retrieve file contents.
+# Specify input format is a csv and to cache the result for 600 seconds.
+conn = st.connection('s3', type=FilesConnection)
+df2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+st.write(df2)
+
 st.subheader('Placements 💡')
