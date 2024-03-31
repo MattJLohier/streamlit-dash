@@ -123,13 +123,10 @@ with col2:
     df4.drop_duplicates(subset="Product Name", inplace=True)
     latest_df4 = df4.tail(5)  # Get the latest 5 records
     
-    
-    
     conn = st.connection('s3', type=FilesConnection)
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
     df5 = df5[-10:]
     df5 = df5.sort_values(by='Brand').reset_index(drop=True)
-    
 
 
     # Create metrics for the latest 5 records
@@ -164,7 +161,6 @@ with col2:
 
 
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
-    wch_colour_box = (0, 204, 102)
     wch_colour_font = (0, 0, 0)
     fontsize = 18
     valign = "left"
@@ -182,9 +178,10 @@ with col2:
         # Change color based on action
         delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
 
-        htmlstr = f"""<p style='background-color: rgba({wch_colour_box[0]}, 
-                                                    {wch_colour_box[1]}, 
-                                                    {wch_colour_box[2]}, 0.75); 
+        # Set background color based on action
+        bg_color = 'rgb(0, 204, 102)' if metric_label == 'Added' else 'rgb(255, 0, 0)' if metric_label == 'Removed' else ''
+
+        htmlstr = f"""<p style='background-color: {bg_color}; 
                                 color: rgba({wch_colour_font[0]}, 
                                         {wch_colour_font[1]}, 
                                         {wch_colour_font[2]}, 0.75); 
