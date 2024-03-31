@@ -191,7 +191,7 @@ with col1:
         # Define emojis based on source
         emoji_dict = {
             "Energy Star": "⚡",
-            "wifi alliance": "📶",
+            "WiFi Alliance": "📶",
             "EPEAT": "🌎"
         }
 
