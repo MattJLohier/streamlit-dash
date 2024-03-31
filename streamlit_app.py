@@ -28,8 +28,31 @@ columns_to_keep = ['brand_name', 'model_name', 'product_type', 'marking_technolo
                    'color_capability', 'date_available_on_market', 'date_qualified',
                    'markets', 'monochrome_product_speed_ipm_or_mppm']
 
+# Create connection object and retrieve file contents.
+# Specify input format is a csv and to cache the result for 600 seconds.
+conn = st.connection('s3', type=FilesConnection)
+df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
+
+# Specify the columns to keep
+columns_to_keep = ['brand_name', 'model_name', 'product_type', 'marking_technology',
+                   'color_capability', 'date_available_on_market', 'date_qualified',
+                   'markets', 'monochrome_product_speed_ipm_or_mppm']
+
 # Create a new DataFrame with only the specified columns
 new_df = df[columns_to_keep]
+
+# Rename the columns
+new_df = new_df.rename(columns={
+    'brand_name': 'Brand',
+    'model_name': 'Model',
+    'product_type': 'Product Type',
+    'marking_technology': 'Technology',
+    'color_capability': 'Color/Mono',
+    'date_available_on_market': 'Date Available',
+    'date_qualified': 'Date Qualified',
+    'markets': 'Target Markets',
+    'monochrome_product_speed_ipm_or_mppm': 'Print Speed'
+})
 
 # Specify the brands to filter
 brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera", 
@@ -39,7 +62,7 @@ brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera"
 product_types_to_show = ['Printers', 'Multifunction Devices (MFD)']
 
 # Filter the new DataFrame to only include specified brands and product types
-filtered_df = new_df[(new_df['brand_name'].isin(brands_to_show)) & (new_df['product_type'].isin(product_types_to_show))]
+filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) & (new_df['Product Type'].isin(product_types_to_show))]
 
 # Print filtered results.
 st.write(filtered_df)
