@@ -78,7 +78,8 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
 st.write(filtered_df)
 
 st.button('Hit me')
-
+if st.button('Sort by Date Available'):
+    st.write(sort_by_date(filtered_df))
 
 # Load data
 #df = pd.read_csv('data/movies_genres_summary.csv')
