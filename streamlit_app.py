@@ -267,7 +267,6 @@ with col2:
     fontsize = 20
     valign = "left"
     iconname = "fas fa-xmark"
-    sline = "Observations"
 
     container = st.container()
 
@@ -298,7 +297,7 @@ with col2:
                                 border-radius: 7px; 
                                 border: 2px solid {border_color}; /* Adding 2px border with the same color as background */
                                 padding-left: 12px;
-                                line-height: 20px;' 
+                                line-height: 10px;' 
                                 padding-top: 18px; 
                                 padding-bottom: 18px;
                                 font-style: italic; 
