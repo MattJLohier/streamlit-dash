@@ -307,7 +307,7 @@ with col2:
                                 font-size: {fontsize}px;
                                 line-height: 23px; 
                                 border-radius: 7px; 
-                                border: 2px solid {border_color};
+                                border: 3.5px solid {border_color};
                                 padding-left: 12px; 
                                 padding-top: 18px; 
                                 >
