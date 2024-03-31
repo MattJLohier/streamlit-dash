@@ -75,7 +75,7 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
                      (~new_df['Model'].str.contains('Model Printer|Label Printer', case=False))]
 
 # Print filtered results.
-st.subheader('Placements 💡')
+
 st.write(filtered_df)
 
 # Function to sort by Date Available
@@ -84,6 +84,8 @@ if st.button('Sort by Date Available (Newest to Oldest)'):
     filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
     # Clear the existing display and update it with the sorted DataFrame
     st.write(filtered_df)
+
+st.subheader('Placements 💡')
 
 # Load data
 #df = pd.read_csv('data/movies_genres_summary.csv')
