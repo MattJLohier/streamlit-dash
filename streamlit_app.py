@@ -204,7 +204,7 @@ with col1:
                                             {wch_colour_font[2]}, 0.75); 
                                     font-size: {fontsize}px; 
                                     border-radius: 7px; 
-                                    border: 2px solid {border_color}; /* Adding 2px border with gold color */
+                                    border: 4px solid {border_color}; /* Adding 2px border with gold color */
                                     padding-left: 12px; 
                                     padding-top: 10px; 
                                     padding-bottom: 18px;
