@@ -115,6 +115,7 @@ with col1:
 # Right Column: Placements
 # Right Column: Placements
 # Right Column: Placements
+# Right Column: Placements
 with col2:
     st.header('Placements 💡')
     st.subheader('Current Placement Count By Brand')
@@ -140,8 +141,9 @@ with col2:
         metric_value = row['Product Name']
         metric_delta = str(count)
         # Change color based on action
-        delta_color = 'inverse' if metric_label == 'added' else 'red' if metric_label == 'removed' else 'normal'
+        delta_color = 'inverse' if metric_label == 'added' else 'normal' if metric_label == 'removed' else 'normal'
         st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
+
 
 
 
