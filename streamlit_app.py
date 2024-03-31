@@ -63,7 +63,6 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
                      (~new_df['Model'].str.contains('Model Printer|Label Printer', case=False))]
 
 # Sort the filtered DataFrame by Date Available (Newest to Oldest)
-filtered_df['Date Available'] = pd.to_datetime(filtered_df['Date Available'])
 filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
 
 # Print filtered results.
