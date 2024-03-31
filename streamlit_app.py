@@ -313,7 +313,6 @@ with col2:
                                 padding-bottom: 18px;
                                 font-style: italic; 
                                 >
-                                <i class='{iconname} fa-xs'></i>
                                 <span style='font-size: 20px; padding-left: 10px;
                                     margin-top: 10px;'><b> {title} {emoji} </b></span>
                                     <br>
