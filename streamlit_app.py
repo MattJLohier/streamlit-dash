@@ -138,6 +138,7 @@ with col1:
     combined_df['Certification Date'] = combined_df['Certification Date'].astype(str).str[:10]
 
 
+
     # Sort the combined dataframe by "Certification Date" in descending order
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')  # Convert to datetime format
     combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
