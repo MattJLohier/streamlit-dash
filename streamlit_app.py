@@ -229,7 +229,7 @@ with col1:
 
 
 
-
+    st.header('Raw Certification Data 📝')
     st.subheader('Energy Star ⚡')
     st.write(estardf)
     st.subheader('WiFi Alliance 📶')
