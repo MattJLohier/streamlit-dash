@@ -81,8 +81,8 @@ st.write(filtered_df)
 if st.button('Sort by Date Available (Newest to Oldest)'):
     # Sort the DataFrame in-place
     filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
-    # Update the displayed DataFrame
-    df_display.data = filtered_df
+    # Clear the existing display and update it with the sorted DataFrame
+    st.write(filtered_df)
 
 # Load data
 #df = pd.read_csv('data/movies_genres_summary.csv')
