@@ -200,6 +200,9 @@ with col1:
                                 padding-bottom: 18px;
                                 font-style: italic; 
                                 line-height:25px;'>
+                                <i class='{iconname} fa-xs'></i>
+                                <span style='font-size: 24px; 
+                                margin-top: 0;'><b> New {source} Certification Spotted 📝 </b></span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Certification Date:</b> {certification_date}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Brand:</b> {brand}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Product Name:</b> {product_name}</span>
