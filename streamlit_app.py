@@ -236,6 +236,7 @@ with col2:
         metric_label = row['Action']
         metric_value = row['Product Name']
         metric_delta = str(count)
+        date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
         # Change color based on action
         delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
 
@@ -243,7 +244,7 @@ with col2:
         bg_color = 'rgba(0, 204, 102, 0.5)' if metric_label == 'Added' else 'rgba(255, 0, 0, 0.5)' if metric_label == 'Removed' else ''
 
         # Extracting RGB color values from bg_color
-        rgb_values = bg_color[5:-1].split(",")[:-1] # Extracting RGB values and removing the opacity value
+        rgb_values = bg_color[5:-1].split(",")[:-1]  # Extracting RGB values and removing the opacity value
 
         # Creating border color string with RGB values
         border_color = f'rgb({", ".join(rgb_values)})'
@@ -262,7 +263,9 @@ with col2:
                                 line-height:25px;'>
                                 <i class='{iconname} fa-xs'></i> <i>{metric_delta}</i>
                                 <span style='font-size: 24px; 
-                                margin-top: 0; <b>'>{metric_value}</b></span></p>"""
+                                margin-top: 0;'><b>{metric_value}</b></span>
+                                <br><span style='font-size: 12px; color: #555;'>Date Detected: {date_detected}</span>
+                                </p>"""
 
         with container:
             st.markdown(lnk + htmlstr, unsafe_allow_html=True)
