@@ -16,7 +16,7 @@ alt.themes.enable("dark")
 st.header('Scooper Dashboard 🖨️')
 st.subheader('Scooper Dashboard 🖨️')
 
-with st.expander('About this app'):
+with st.text('About this app'):
   st.markdown('**What can this app do?**')
   st.info('This app shows the use of Pandas for data wrangling, Altair for chart creation and editable dataframe for data interaction.')
   st.markdown('**How to use the app?**')
