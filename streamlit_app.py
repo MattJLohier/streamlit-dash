@@ -209,15 +209,16 @@ with col1:
                                     padding-top: 18px; 
                                     padding-bottom: 18px;
                                     font-style: italic; 
+                                    padding-left: 10px;
                                     line-height:25px;'>
                                     <i class='{iconname} fa-xs'></i>
                                     <span style='font-size: 24px; 
                                     margin-top: 0;'><b> New {source} Certification Spotted {emoji} </b></span>
                                     <br><span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Certification Date:</b> {certification_date}</span>
-                                    <br><span style='font-size: 16px; color: #555;'><b>Brand:</b> {brand}</span>
-                                    <br><span style='font-size: 16px; color: #555;'><b>Product Name:</b> {product_name}</span>
-                                    <br><span style='font-size: 16px; color: #555;'><b>Product Type:</b> {product_type}</span>
-                                    <br><span style='font-size: 16px; color: #555;'><b>Source:</b> {source}</span>
+                                    <br><span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Brand:</b> {brand}</span>
+                                    <br><span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Product Name:</b> {product_name}</span>
+                                    <br><span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Product Type:</b> {product_type}</span>
+                                    <br><span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Source:</b> {source}</span>
                                     </p>"""
 
         with container:
