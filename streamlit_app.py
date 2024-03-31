@@ -336,7 +336,6 @@ with col2:
         x=alt.X('Brand', title='Brand'),
         y=alt.Y('Count', title='Count')
     ).properties(
-        width=700,
         height=475
     )
 
