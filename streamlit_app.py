@@ -144,7 +144,7 @@ with col2:
         # Change color based on action
         delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
         delta_direction = 'down' if delta_color == 'inverse' else 'up'
-        st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
+        st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color, delta_direction=delta_direction)
 
 
 
