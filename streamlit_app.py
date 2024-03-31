@@ -170,33 +170,33 @@ with col2:
     container = st.container()
 
     for index, row in latest_df4.iterrows():
-        brand = row['Brand']
-        count = df5[df5['Brand'] == brand]['Count'].values[0]
-        metric_label = row['Action']
-        metric_value = row['Product Name']
-        metric_delta = str(count)
-        # Change color based on action
-        delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
+    brand = row['Brand']
+    count = df5[df5['Brand'] == brand]['Count'].values[0]
+    metric_label = row['Action']
+    metric_value = row['Product Name']
+    metric_delta = str(count)
+    # Change color based on action
+    delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
 
-        # Set background color based on action
-        bg_color = 'rgb(0, 204, 102)' if metric_label == 'Added' else 'rgb(255, 0, 0)' if metric_label == 'Removed' else ''
+    # Set background color based on action
+    bg_color = 'rgb(0, 204, 102)' if metric_label == 'Added' else 'rgb(255, 0, 0)' if metric_label == 'Removed' else ''
 
-        htmlstr = f"""<p style='background-color: {bg_color}; 
-                                color: rgba({wch_colour_font[0]}, 
-                                        {wch_colour_font[1]}, 
-                                        {wch_colour_font[2]}, 0.75); 
-                                font-size: {fontsize}px; 
-                                border-radius: 7px; 
-                                padding-left: 12px; 
-                                padding-top: 18px; 
-                                padding-bottom: 18px; 
-                                line-height:25px;'>
-                                <i class='{iconname} fa-xs'></i> {metric_delta}
-                                <BR><span style='font-size: 14px; 
-                                margin-top: 0;'>{sline}</span></p>"""
+    htmlstr = f"""<p style='background-color: {bg_color}; 
+                            color: rgba({wch_colour_font[0]}, 
+                                    {wch_colour_font[1]}, 
+                                    {wch_colour_font[2]}, 0.75); 
+                            font-size: {fontsize}px; 
+                            border-radius: 7px; 
+                            padding-left: 12px; 
+                            padding-top: 18px; 
+                            padding-bottom: 18px; 
+                            line-height:25px;'>
+                            <i class='{iconname} fa-xs'></i> {metric_delta}
+                            <BR><span style='font-size: 14px; 
+                            margin-top: 0;'>{metric_value}</span></p>"""
 
-        with container:
-            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+    with container:
+        st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
 
     st.subheader('Current Placement Count By Brand')
