@@ -215,14 +215,14 @@ with col2:
             st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
 
 
-    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#FFA500')
+    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#24AABE')
 
 
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
     wch_colour_font = (0, 0, 0)
     fontsize = 18
     valign = "left"
-    iconname = "fas fa-asterisk"
+    iconname = "fa-solid fa-circle-xmark"
     sline = "Observations"
 
     container = st.container()
