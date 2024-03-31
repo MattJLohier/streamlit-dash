@@ -294,7 +294,7 @@ with col2:
                                         {wch_colour_font[1]}, 
                                         {wch_colour_font[2]}, 0.75); 
                                 font-size: {fontsize}px;
-                                line-height: 5px; 
+                                line-height: 23px; 
                                 border-radius: 7px; 
                                 border: 2px solid {border_color};
                                 padding-left: 12px; 
