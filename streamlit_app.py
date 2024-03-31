@@ -349,9 +349,9 @@ with col2:
     st.dataframe(df4_sorted, width=1200)
 
 
-    st.write(df4_sorted)
+    #st.write(df4_sorted)
     st.subheader('Brand Totals Changelog')
-    st.write(df5)
+    st.dataframe(df5, width=1200)
 
 
 
