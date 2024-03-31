@@ -131,6 +131,7 @@ with col1:
     df3_modified = df3_modified.rename(columns={'Registered On': 'Certification Date', 'Manufacturer': 'Brand'})
     df3_modified = df3_modified.drop(columns=['Id'])
     df3_modified = df3_modified[['Product Name', 'Brand', 'Certification Date', 'Product Type']]
+    df3_modified = df3_modified[df3_modified['Product Type'].isin(['Printer', 'Multifunction Device'])]
 
     # Add a "Source" column to each dataframe
     filtered_df['Source'] = 'Energy Star'
@@ -168,7 +169,6 @@ with col1:
     st.subheader('WiFi Alliance 📶')
     st.write(df2_modified)
     df2_modified.sort_values(by='Certification Date', ascending=False, inplace=True)
-    df2_modified = df2_modified[df2_modified['Product Type'].isin(['Printer', 'Multifunction Device'])]
     st.subheader('EPEAT 🌎')
     
     st.write(df3_modified)
