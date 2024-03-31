@@ -70,6 +70,7 @@ with col1:
     # Sort the filtered DataFrame by Date Available (Newest to Oldest)
     filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
     filtered_df.reset_index(drop=True, inplace=True)
+    estardf = filtered_df
 
     # Print filtered results.
  
@@ -162,7 +163,7 @@ with col1:
     st.subheader('Summary Stats')
     st.write(newest_records)
     st.subheader('Energy Star ⚡')
-    st.write(filtered_df)
+    st.write(festardf)
     st.subheader('WiFi Alliance 📶')
     st.write(df2_modified)
     st.subheader('EPEAT 🌎')
