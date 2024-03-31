@@ -254,7 +254,8 @@ with col2:
                                 border: 2px solid {border_color}; /* Adding 2px border with the same color as background */
                                 padding-left: 12px; 
                                 padding-top: 18px; 
-                                padding-bottom: 18px; 
+                                padding-bottom: 18px;
+                                font-style: italic; 
                                 line-height:25px;'>
                                 <i class='{iconname} fa-xs'></i> {metric_delta}
                                 <span style='font-size: 24px; 
