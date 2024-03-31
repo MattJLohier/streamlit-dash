@@ -146,6 +146,8 @@ with col2:
     unsafe_allow_html=True,
 )
     
+    container = st.container()
+
     for index, row in latest_df4.iterrows():
         brand = row['Brand']
         count = df5[df5['Brand'] == brand]['Count'].values[0]
@@ -154,7 +156,9 @@ with col2:
         metric_delta = str(count)
         # Change color based on action
         delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
-        st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
+        
+        with container:
+            st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
 
 
 
