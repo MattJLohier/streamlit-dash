@@ -71,8 +71,8 @@ filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
 st.write(filtered_df)
 
 # Add metric to show latest 3 records based on product name
-latest_records = filtered_df.head(3)['Model'].tolist()
-st.metric("Latest 3 Products", ", ".join(latest_records))
+#latest_records = filtered_df.head(3)['Model'].tolist()
+#st.metric("Latest 3 Products", ", ".join(latest_records))
 
 
 # Create connection object and retrieve file contents.
@@ -91,5 +91,20 @@ df2_modified.sort_values(by="Date of Last Certification", ascending=False, inpla
 
 # Write the modified dataframe
 st.write(df2_modified)
+
+conn = st.connection('s3', type=FilesConnection)
+df3 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+
+# Keep only the desired columns
+df3_modified = df3[["Id", "Registered On", "Product Type", "Product Name", "Manufacturer"]]
+
+# Filter by specified brands
+df3_modified = df3_modified[df3_modified["Brand"].isin(brands_to_show)]
+
+# Sort the dataframe by "Date of Last Certification", from newest to oldest
+df3_modified.sort_values(by="Registered On", ascending=False, inplace=True)
+
+# Write the modified dataframe
+st.write(df3_modified)
 
 st.subheader('Placements 💡')
