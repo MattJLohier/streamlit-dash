@@ -213,7 +213,7 @@ with col1:
                                     >
                                     <i class='{iconname} fa-xs'></i>
                                     <span style='font-size: 24px; padding-left: 10px;
-                                    margin-top: 0;'><b> {source} Certification Spotted {emoji} </b></span>
+                                    margin-top: 10px;'><b> {source} Certification Spotted {emoji} </b></span>
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Brand:</b> {brand}</span>
                                     <br>
