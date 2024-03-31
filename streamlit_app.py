@@ -222,7 +222,7 @@ with col2:
     wch_colour_font = (0, 0, 0)
     fontsize = 18
     valign = "left"
-    iconname = "fa-solid fa-circle-xmark"
+    iconname = "fas fa-circle-xmark"
     sline = "Observations"
 
     container = st.container()
