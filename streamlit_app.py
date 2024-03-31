@@ -234,22 +234,24 @@ with col2:
         metric_value = row['Product Name']
         metric_delta = str(count)
     # Change color based on action
-        delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
+    delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
 
     # Set background color based on action
-    # Set border color based on action
-    border_color = 'rgb(0, 204, 102)' if metric_label == 'Added' else 'rgb(255, 0, 0)' if metric_label == 'Removed' else ''
+    bg_color = 'rgba(0, 204, 102, 0.5)' if metric_label == 'Added' else 'rgba(255, 0, 0, 0.5)' if metric_label == 'Removed' else ''
 
-    # Set outline style based on action
-    outline_style = 'solid' if metric_label in ['Added', 'Removed'] else 'none'
+    # Extracting RGB color values from bg_color
+    rgb_values = bg_color[5:-1].split(",")[:-1] # Extracting RGB values and removing the opacity value
 
-    htmlstr = f"""<p style='background-color: white; 
+    # Creating border color string with RGB values
+    border_color = f'rgb({", ".join(rgb_values)})'
+
+    htmlstr = f"""<p style='background-color: {bg_color}; 
                             color: rgba({wch_colour_font[0]}, 
                                     {wch_colour_font[1]}, 
                                     {wch_colour_font[2]}, 0.75); 
                             font-size: {fontsize}px; 
-                            border: 2px {outline_style} {border_color}; 
                             border-radius: 7px; 
+                            border: 2px solid {border_color}; /* Adding 2px border with the same color as background */
                             padding-left: 12px; 
                             padding-top: 18px; 
                             padding-bottom: 18px; 
