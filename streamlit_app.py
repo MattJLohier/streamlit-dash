@@ -245,6 +245,8 @@ with col1:
 # Right Column: Placements
 with col2:
     st.header('Placements 💡')
+    st.subheader('Recent Placements')
+
     # Add your placements data here
     conn = st.connection('s3', type=FilesConnection)
     df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
