@@ -344,7 +344,10 @@ with col2:
     st.write(chart)
 
     st.subheader('Placement Changelog')
-    st.write(df4)
+    df4_sorted = df4.sort_values(by='Date Detected', ascending=False)
+
+
+    st.write(df4_sorted)
     st.subheader('Brand Totals Changelog')
     st.write(df5)
 
