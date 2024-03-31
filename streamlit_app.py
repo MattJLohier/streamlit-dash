@@ -204,9 +204,9 @@ with col1:
                                 <span style='font-size: 24px; 
                                 margin-top: 0;'><b>{product_name}</b></span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Certification Date:</b> {certification_date}</span>
-                                <br><span style='font-size: 16px; color: #555;'>Brand: {brand}</span>
-                                <br><span style='font-size: 16px; color: #555;'>Product Type: {product_type}</span>
-                                <br><span style='font-size: 16px; color: #555;'>Source: {source}</span>
+                                <br><span style='font-size: 16px; color: #555;'><b>Brand:</b> {brand}</span>
+                                <br><span style='font-size: 16px; color: #555;'><b>Product Type:</b> {product_type}</span>
+                                <br><span style='font-size: 16px; color: #555;'><b>Source:</b> {source}</span>
                                 </p>"""
 
         with container:
