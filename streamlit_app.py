@@ -167,13 +167,13 @@ with col1:
 
 
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
-    wch_colour_font = (0, 0, 0)
-    fontsize = 20
-    valign = "left"
-    iconname = "fas fa-xmark"
-    sline = "Observations"
+wch_colour_font = (0, 0, 0)
+fontsize = 20
+valign = "left"
+iconname = "fas fa-xmark"
+sline = "Observations"
 
-    container = st.container()
+container = st.container()
 
     for index, row in newest_records.iterrows():
         product_name = row['Product Name']
@@ -182,13 +182,22 @@ with col1:
         product_type = row['Product Type']
         source = row['Source']
 
-        htmlstr = f"""<p style='background-color: transparent; 
+        # Set background color
+        bg_color = 'rgba(0, 204, 102, 0.5)'  # You can customize this based on your preference
+
+        # Extracting RGB color values from bg_color
+        rgb_values = bg_color[5:-1].split(",")[:-1]  # Extracting RGB values and removing the opacity value
+
+        # Creating border color string with RGB values
+        border_color = f'rgb({", ".join(rgb_values)})'
+
+        htmlstr = f"""<p style='background-color: {bg_color}; 
                                 color: rgba({wch_colour_font[0]}, 
                                         {wch_colour_font[1]}, 
                                         {wch_colour_font[2]}, 0.75); 
                                 font-size: {fontsize}px; 
                                 border-radius: 7px; 
-                                border: 2px solid transparent; /* No border for this version */
+                                border: 2px solid {border_color}; /* Adding 2px border with the same color as background */
                                 padding-left: 12px; 
                                 padding-top: 18px; 
                                 padding-bottom: 18px;
