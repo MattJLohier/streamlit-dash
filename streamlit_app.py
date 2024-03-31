@@ -141,6 +141,10 @@ with col1:
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')  # Convert to datetime format
     combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
 
+
+    combined_df.reset_index(drop=True, inplace=True)
+    combined_df['Certification Date'] = combined_df['Certification Date'].str[:10]
+
     # Show only the newest 5 records
     newest_records = combined_df.head(10)
 
