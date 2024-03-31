@@ -205,6 +205,7 @@ with col1:
                                 margin-top: 0;'><b>{product_name}</b></span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Certification Date:</b> {certification_date}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Brand:</b> {brand}</span>
+                                <br><span style='font-size: 16px; color: #555;'><b>Product Name:</b> {product_name}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Product Type:</b> {product_type}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Source:</b> {source}</span>
                                 </p>"""
