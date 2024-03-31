@@ -325,7 +325,7 @@ with col2:
             st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
     st.subheader('Current Placement Count By Brand')
-    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=475, color='#24AABE')
+    #st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=475, color='#24AABE')
 
 
     # Assuming df5 is your DataFrame containing data
