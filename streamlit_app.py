@@ -293,11 +293,11 @@ with col2:
                                 color: rgba({wch_colour_font[0]}, 
                                         {wch_colour_font[1]}, 
                                         {wch_colour_font[2]}, 0.75); 
-                                font-size: {fontsize}px; 
+                                font-size: {fontsize}px;
+                                line-height: 5px; 
                                 border-radius: 7px; 
-                                border: 2px solid {border_color}; /* Adding 2px border with the same color as background */
-                                padding-left: 12px;
-                                line-height: 10px;' 
+                                border: 2px solid {border_color};
+                                padding-left: 12px; 
                                 padding-top: 18px; 
                                 padding-bottom: 18px;
                                 font-style: italic; 
