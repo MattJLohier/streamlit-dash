@@ -32,7 +32,7 @@ with col1:
     df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
 
     # Specify the columns to keep
-    columns_to_keep = ['brand_name', 'model_name', 'product_type', 'marking_technology',
+    columns_to_keep = ['brand_name', 'model_name', 'product_type',
                        'color_capability', 'date_available_on_market', 'date_qualified',
                        'markets', 'monochrome_product_speed_ipm_or_mppm']
 
@@ -44,7 +44,6 @@ with col1:
         'brand_name': 'Brand',
         'model_name': 'Model',
         'product_type': 'Product Type',
-        'marking_technology': 'Technology',
         'color_capability': 'Color/Mono',
         'date_available_on_market': 'Date Available',
         'date_qualified': 'Date Qualified',
