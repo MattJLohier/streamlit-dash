@@ -205,7 +205,7 @@ with col1:
                                     font-size: {fontsize}px; 
                                     border-radius: 7px; 
                                     border: 3.5px solid {border_color}; /* Adding 2px border with gold color */
-                                    padding-left: 12px; 
+                                    padding-left: 10px; 
                                     padding-top: 10px; 
                                     padding-bottom: 18px;
                                     font-style: italic; 
