@@ -65,7 +65,7 @@ product_types_to_show = ['Printers', 'Multifunction Devices (MFD)']
 # Filter the new DataFrame to only include specified brands, product types, and hide entries with "Label Printer" in the Model column
 filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) & 
                      (new_df['Product Type'].isin(product_types_to_show)) & 
-                     (~new_df['Model'].str.contains('Label Printer', case=False))]
+                     (~new_df['Model'].str.contains('Model Printer|Label Printer', case=False))]
 
 # Print filtered results.
 st.write(filtered_df)
