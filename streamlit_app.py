@@ -79,6 +79,13 @@ st.metric("Latest 3 Products", ", ".join(latest_records))
 # Specify input format is a csv and to cache the result for 600 seconds.
 conn = st.connection('s3', type=FilesConnection)
 df2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-st.write(df2)
+# Keep only the desired columns
+df2_modified = df2[["CID", "Date of Last Certification", "Brand", "Products", "Model Number"]]
+
+# Sort the dataframe by "Date of Last Certification", from newest to oldest
+df2_modified.sort_values(by="Date of Last Certification", ascending=False, inplace=True)
+
+# Write the modified dataframe
+st.write(df2_modified)
 
 st.subheader('Placements 💡')
