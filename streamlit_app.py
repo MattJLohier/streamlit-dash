@@ -145,5 +145,8 @@ with col2:
     # Assign colors based on the brand
     colors = [brand_colors.get(brand, '#FFA500') for brand in df5['Brand']]
 
+    # Debugging: Print out colors to check assignments
+    print("Assigned Colors:", colors)
+
     # Plot the bar chart with custom colors
     st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color=colors)
