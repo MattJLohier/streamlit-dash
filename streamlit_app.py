@@ -233,35 +233,35 @@ with col2:
         metric_label = row['Action']
         metric_value = row['Product Name']
         metric_delta = str(count)
-    # Change color based on action
-    delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
+        # Change color based on action
+        delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
 
-    # Set background color based on action
-    bg_color = 'rgba(0, 204, 102, 0.5)' if metric_label == 'Added' else 'rgba(255, 0, 0, 0.5)' if metric_label == 'Removed' else ''
+        # Set background color based on action
+        bg_color = 'rgba(0, 204, 102, 0.5)' if metric_label == 'Added' else 'rgba(255, 0, 0, 0.5)' if metric_label == 'Removed' else ''
 
-    # Extracting RGB color values from bg_color
-    rgb_values = bg_color[5:-1].split(",")[:-1] # Extracting RGB values and removing the opacity value
+        # Extracting RGB color values from bg_color
+        rgb_values = bg_color[5:-1].split(",")[:-1] # Extracting RGB values and removing the opacity value
 
-    # Creating border color string with RGB values
-    border_color = f'rgb({", ".join(rgb_values)})'
+        # Creating border color string with RGB values
+        border_color = f'rgb({", ".join(rgb_values)})'
 
-    htmlstr = f"""<p style='background-color: {bg_color}; 
-                            color: rgba({wch_colour_font[0]}, 
-                                    {wch_colour_font[1]}, 
-                                    {wch_colour_font[2]}, 0.75); 
-                            font-size: {fontsize}px; 
-                            border-radius: 7px; 
-                            border: 2px solid {border_color}; /* Adding 2px border with the same color as background */
-                            padding-left: 12px; 
-                            padding-top: 18px; 
-                            padding-bottom: 18px; 
-                            line-height:25px;'>
-                            <i class='{iconname} fa-xs'></i> {metric_delta}
-                            <span style='font-size: 24px; 
-                            margin-top: 0;'>{metric_value}</span></p>"""
+        htmlstr = f"""<p style='background-color: {bg_color}; 
+                                color: rgba({wch_colour_font[0]}, 
+                                        {wch_colour_font[1]}, 
+                                        {wch_colour_font[2]}, 0.75); 
+                                font-size: {fontsize}px; 
+                                border-radius: 7px; 
+                                border: 2px solid {border_color}; /* Adding 2px border with the same color as background */
+                                padding-left: 12px; 
+                                padding-top: 18px; 
+                                padding-bottom: 18px; 
+                                line-height:25px;'>
+                                <i class='{iconname} fa-xs'></i> {metric_delta}
+                                <span style='font-size: 24px; 
+                                margin-top: 0;'>{metric_value}</span></p>"""
 
-    with container:
-        st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+        with container:
+            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
 
     st.subheader('Current Placement Count By Brand')
