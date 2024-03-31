@@ -84,8 +84,9 @@ if st.button('Sort by Date Available (Newest to Oldest)'):
     # Clear the existing display and update it with the sorted DataFrame
     st.write(filtered_df)
 
-st.metric(filtered_df.model, value, delta=None, delta_color="normal", help=None, label_visibility="visible")
-
+# Add metric to show latest 3 records based on product name
+latest_records = filtered_df.nlargest(3, 'Date Available')['Model'].tolist()
+st.metric("Latest 3 Products", ", ".join(latest_records))
 
 st.subheader('Placements 💡')
 
