@@ -135,6 +135,18 @@ with col2:
     st.write(df4)
     
     # Create metrics for the latest 5 records
+
+    st.write(
+    """
+    <style>
+    [data-testid="stMetricDelta"] svg {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+    
     for index, row in latest_df4.iterrows():
         brand = row['Brand']
         count = df5[df5['Brand'] == brand]['Count'].values[0]
