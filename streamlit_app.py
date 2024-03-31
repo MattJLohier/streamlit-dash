@@ -327,7 +327,7 @@ with col2:
                                 padding-top: 18px; 
                                 padding-bottom: 18px;
                                 font-style: italic; 
-                                line-height:25px;'>
+                                line-height: 25px;'>
                                 <i class='{iconname} fa-xs'></i> <i>{metric_delta}</i>
                                 <span style='font-size: 24px; 
                                 margin-top: 0;'><b>{metric_value}</b></span>
