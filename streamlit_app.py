@@ -23,8 +23,15 @@ st.subheader('Which Movie Genre performs ($) best at the box office?')
 conn = st.connection('s3', type=FilesConnection)
 df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
 
-# Print results.
-st.write(df)
+# Specify the brands to filter
+brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera", 
+                  "Lexmark", "Ricoh", "Sharp", "Toshiba", "Xerox", "Pantum", "Fujifilm"]
+
+# Filter DataFrame to only include specified brands
+filtered_df = df[df['brand_name'].isin(brands_to_show)]
+
+# Print filtered results.
+st.write(filtered_df)
 
 # Load data
 #df = pd.read_csv('data/movies_genres_summary.csv')
