@@ -5,9 +5,19 @@ import altair as alt
 import streamlit as st
 from st_files_connection import FilesConnection
 
+st.set_page_config(
+    page_title="US Population Dashboard",
+    page_icon="🏂",
+    layout="wide",
+    initial_sidebar_state="expanded")
+
+alt.themes.enable("dark")
+
+
 # Page title
 st.set_page_config(page_title='Test Dash', page_icon='📊')
 st.title('📊 Test Dash 1')
+
 
 
 with st.expander('About this app'):
