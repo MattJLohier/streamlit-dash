@@ -150,7 +150,7 @@ with col1:
     # Reset index
     combined_df.reset_index(drop=True, inplace=True)
     combined_df.drop_duplicates(inplace=True)
-
+    combined_df['Certification Date'] = combined_df['Certification Date'].str[:10]
 
     # Show only the newest 5 records
     newest_records = combined_df.head(10)
