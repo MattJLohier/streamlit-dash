@@ -304,12 +304,13 @@ with col2:
                                 color: rgba({wch_colour_font[0]}, 
                                         {wch_colour_font[1]}, 
                                         {wch_colour_font[2]}, 0.75); 
-                                font-size: {fontsize}px;
-                                line-height: 23px; 
+                                font-size: 10px;
+                                padding: 10px; 
                                 border-radius: 7px; 
                                 border: 3.5px solid {border_color};
-                                padding-left: 12px; 
-                                padding-top: 18px; 
+                                line-height: 23px;
+                                border-radius: 7px;
+                                margin-right: 3em; 
                                 >
                                 <span style='font-size: 20px; padding-left: 12px;
                                     margin-top: 10px;'><b style='padding-left:10px'> {title} {emoji} </b></span>
