@@ -113,7 +113,7 @@ with col1:
     st.write(df3_modified)
 
 # Right Column: Placements
-ith col2:
+with col2:
     st.header('Placements 💡')
     st.subheader('Current Placement Count By Brand')
 
