@@ -241,7 +241,7 @@ with col1:
     st.write(df2_modified)
     df2_modified.sort_values(by='Certification Date', ascending=False, inplace=True)
     st.subheader('EPEAT 🌎')
-    df3.modified.reset_index(drop=True, inplace=True)
+    df3_modified.reset_index(drop=True, inplace=True)
     st.write(df3_modified)
 # Right Column: Placements
 # Right Column: Placements
