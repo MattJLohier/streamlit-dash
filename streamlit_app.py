@@ -79,7 +79,7 @@ st.write(filtered_df)
 
 # Function to sort by Date Available
 def sort_by_date(df):
-    return df.sort_values(by='Date Available')
+    return df.sort_values(by='Date Available', ascending=False)
 
 st.button('Hit me')
 if st.button('Sort by Date Available'):
