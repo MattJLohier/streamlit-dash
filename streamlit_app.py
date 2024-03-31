@@ -258,7 +258,7 @@ with col2:
                                 line-height:25px;'>
                                 <i class='{iconname} fa-xs'></i> {metric_delta}
                                 <span style='font-size: 24px; 
-                                margin-top: 0; font-style: italic;'>{metric_value}</span></p>"""
+                                margin-top: 0; font-style: bold;'>{metric_value}</span></p>"""
 
         with container:
             st.markdown(lnk + htmlstr, unsafe_allow_html=True)
