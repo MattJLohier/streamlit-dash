@@ -213,10 +213,11 @@ with col1:
                                     <i class='{iconname} fa-xs'></i>
                                     <span style='font-size: 24px; padding-left: 10px;
                                     margin-top: 0;'><b> {source} Certification Spotted {emoji} </b></span>
-                                    <br><span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b>Certification Date:</b> {certification_date}</span>
+                                    <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Brand:</b> {brand}</span>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Product Name:</b> {product_name}</span>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Product Type:</b> {product_type}</span>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b>Certification Date:</b> {certification_date}</span>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b>Source:</b> {source}</span>
                                     </p>"""
 
