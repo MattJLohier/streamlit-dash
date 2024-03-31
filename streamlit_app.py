@@ -297,11 +297,12 @@ with col2:
                                 font-size: {fontsize}px; 
                                 border-radius: 7px; 
                                 border: 2px solid {border_color}; /* Adding 2px border with the same color as background */
-                                padding-left: 12px; 
+                                padding-left: 12px;
+                                line-height: 20px;' 
                                 padding-top: 18px; 
                                 padding-bottom: 18px;
                                 font-style: italic; 
-                                line-height: 5px;'>
+                                >
                                 <i class='{iconname} fa-xs'></i> <i>{metric_delta}</i>
                                 <span style='font-size: 20px; padding-left: 10px;
                                     margin-top: 10px;'><b> {source} Certification Spotted {emoji} </b></span>
