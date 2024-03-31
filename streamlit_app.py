@@ -94,6 +94,7 @@ with col1:
     # Sort the dataframe by "Date of Last Certification", from newest to oldest
     df2_modified.sort_values(by="Date of Last Certification", ascending=False, inplace=True)
     df2_modified.reset_index(drop=True, inplace=True)
+    df2_modified.drop_duplicates(inplace=True)
 
     # Write the modified dataframe
     
