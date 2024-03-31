@@ -168,7 +168,7 @@ with col1:
     st.subheader('WiFi Alliance 📶')
     st.write(df2_modified)
     df2_modified.sort_values(by='Certification Date', ascending=False, inplace=True)
-    filtered_df = df[df['Product Type'].isin(['Printer', 'Multifunction Device'])]
+    df2_modified = df2_modified[df2_modified['Product Type'].isin(['Printer', 'Multifunction Device'])]
     st.subheader('EPEAT 🌎')
     
     st.write(df3_modified)
