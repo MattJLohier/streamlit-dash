@@ -188,17 +188,7 @@ with col1:
         # Set border color
         border_color = '#FFD700'  # Gold
 
-        # Define emojis based on source
-    emoji_dict = {
-        "Energy Star": "⚡",
-        "wifi alliance": "📶",
-        "EPEAT": "🌎"
-    }
-
-    # Determine emoji based on source
-    emoji = emoji_dict.get(source, "📝")  # Default to pencil emoji if source not found in dictionary
-
-    htmlstr = f"""<p style='background-color: {bg_color}; 
+        htmlstr = f"""<p style='background-color: {bg_color}; 
                                 color: rgba({wch_colour_font[0]}, 
                                         {wch_colour_font[1]}, 
                                         {wch_colour_font[2]}, 0.75); 
@@ -212,15 +202,18 @@ with col1:
                                 line-height:25px;'>
                                 <i class='{iconname} fa-xs'></i>
                                 <span style='font-size: 24px; 
-                                margin-top: 0;'><b> New {source} Certification Spotted {emoji} </b></span>
+                                margin-top: 0;'><b> New {source} Certification Spotted 📝 </b></span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Certification Date:</b> {certification_date}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Brand:</b> {brand}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Product Name:</b> {product_name}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Product Type:</b> {product_type}</span>
                                 <br><span style='font-size: 16px; color: #555;'><b>Source:</b> {source}</span>
                                 </p>"""
+
         with container:
             st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+
+
 
 
     st.subheader('Energy Star ⚡')
