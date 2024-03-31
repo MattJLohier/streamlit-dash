@@ -117,9 +117,9 @@ with col2:
     st.header('Placements 💡')
     # Add your placements data here
     conn = st.connection('s3', type=FilesConnection)
-    df4 = conn.read("scoops-finder/tracking.xlsx", input_format="xlsx", ttl=600)
+    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
     st.write(df4)
 
     conn = st.connection('s3', type=FilesConnection)
-    df5 = conn.read("scoops-finder/brand_counts.xlsx", input_format="xlsx", ttl=600)
+    df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
     st.write(df5)
