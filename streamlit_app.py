@@ -203,13 +203,14 @@ with col1:
                                             {wch_colour_font[1]}, 
                                             {wch_colour_font[2]}, 0.75); 
                                     font-size: {fontsize}px; 
+                                    line-height: 20px;
                                     border-radius: 7px; 
                                     border: 3.5px solid {border_color}; /* Adding 2px border with gold color */
                                     padding-left: 10px; 
                                     padding-top: 5px; 
                                     padding-bottom: 10px;
                                     font-style: italic; 
-                                    line-height: 5px;'>
+                                    >
                                     <i class='{iconname} fa-xs'></i>
                                     <span style='font-size: 24px; padding-left: 10px;
                                     margin-top: 0;'><b> {source} Certification Spotted {emoji} </b></span>
