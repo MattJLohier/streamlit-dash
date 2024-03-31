@@ -250,7 +250,7 @@ with col2:
                                 padding-bottom: 18px; 
                                 line-height:25px;'>
                                 <i class='{iconname} fa-xs'></i> {metric_delta}
-                                <BR><span style='font-size: 14px; 
+                                <span style='font-size: 14px; 
                                 margin-top: 0;'>{metric_value}</span></p>"""
 
         with container:
