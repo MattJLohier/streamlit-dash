@@ -344,9 +344,9 @@ with col2:
     st.write(chart)
 
     st.subheader('Placement Changelog')
-    # Set option to display all columns without truncation
-    pd.set_option('display.max_columns', None)
+    
     df4_sorted = df4.sort_values(by='Date Detected', ascending=False)
+    st.dataframe(df4_sorted, width=1200)
 
 
     st.write(df4_sorted)
