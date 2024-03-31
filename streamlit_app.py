@@ -126,27 +126,4 @@ with col2:
     df5 = df5[-10:]
     df5 = df5.sort_values(by='Brand').reset_index(drop=True)
     st.write(df5)
-
-    # Define colors for each brand
-    brand_colors = {
-        'Canon': '#FFA500',
-        'Fujifilm': '#00FF00',
-        'HP': '#0000FF',
-        'Konica Minolta': '#FFC0CB',
-        'Kyocera': '#FFD700',
-        'Lexmark': '#800080',
-        'Ricoh': '#008000',
-        'Sharp': '#FF4500',
-        'Toshiba': '#4682B4',
-        'Xerox': '#FF69B4',
-        # Add more brands and colors as needed
-    }
-
-    # Assign colors based on the brand
-    colors = [brand_colors.get(brand, '#FFA500') for brand in df5['Brand']]
-
-    # Debugging: Print out colors to check assignments
-    print("Assigned Colors:", colors)
-
-    # Plot the bar chart with custom colors
-    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color=colors)
+    st.bar_chart(df5.set_index('Brand')['Count'],width=200, height=500, color='#FFA500')
