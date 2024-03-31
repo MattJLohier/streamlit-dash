@@ -149,6 +149,8 @@ with col1:
 
     # Reset index
     combined_df.reset_index(drop=True, inplace=True)
+    combined_df.drop_duplicates(inplace=True)
+
 
     # Show only the newest 5 records
     newest_records = combined_df.head(10)
