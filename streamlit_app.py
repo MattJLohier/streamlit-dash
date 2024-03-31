@@ -7,7 +7,7 @@ from st_files_connection import FilesConnection
 
 # Page title
 st.set_page_config(page_title='Test Dash', page_icon='📊')
-st.title('📊 Test Dash')
+st.title('📊 Test Dash 1')
 
 with st.expander('About this app'):
   st.markdown('**What can this app do?**')
@@ -24,8 +24,7 @@ conn = st.connection('s3', type=FilesConnection)
 df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
 
 # Print results.
-for row in df:
-    print(row)
+print(df)
 
 # Load data
 #df = pd.read_csv('data/movies_genres_summary.csv')
