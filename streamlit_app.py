@@ -209,7 +209,6 @@ with col1:
                                     padding-top: 10px; 
                                     padding-bottom: 18px;
                                     font-style: italic; 
-                                    padding-left: 10px;
                                     line-height:25px;'>
                                     <i class='{iconname} fa-xs'></i>
                                     <span style='font-size: 24px; padding-left: 10px;
