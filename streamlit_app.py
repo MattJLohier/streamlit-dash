@@ -259,35 +259,6 @@ with col2:
 
     # Create metrics for the latest 5 records
 
-    st.write(
-    """
-    <style>
-    [data-testid="stMetricDelta"] svg {
-        display: none;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-    
-    container = st.container()
-
-    for index, row in latest_df4.iterrows():
-        brand = row['Brand']
-        count = df5[df5['Brand'] == brand]['Count'].values[0]
-        metric_label = row['Action']
-        metric_value = row['Product Name']
-        metric_delta = str(count)
-        # Change color based on action
-        delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
-        
-        with container:
-            st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
-
-
-    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#24AABE')
-
-
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
     wch_colour_font = (0, 0, 0)
     fontsize = 20
@@ -337,6 +308,7 @@ with col2:
         with container:
             st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
+    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#24AABE')
 
     st.subheader('Current Placement Count By Brand')
 
