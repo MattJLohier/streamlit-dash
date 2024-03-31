@@ -77,6 +77,8 @@ filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
 # Print filtered results.
 st.write(filtered_df)
 
+st.button('Hit me')
+
 
 # Load data
 #df = pd.read_csv('data/movies_genres_summary.csv')
