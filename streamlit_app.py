@@ -118,23 +118,7 @@ with col1:
 # Right Column: Placements
 with col2:
     st.header('Placements 💡')
-    st.subheader('Current Placement Count By Brand')
-
-    conn = st.connection('s3', type=FilesConnection)
-    df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
-    df5 = df5[-10:]
-    df5 = df5.sort_values(by='Brand').reset_index(drop=True)
-    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#FFA500')
-    st.write(df5)
-    
-    # Add your placements data here
-    conn = st.connection('s3', type=FilesConnection)
-    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    df4.drop_duplicates(subset="Product Name", inplace=True)
-    latest_df4 = df4.tail(5)  # Get the latest 5 records
-    st.write(df4)
-    
-    # Create metrics for the latest 5 records
+    st.subheader('Changelog 🔄')
 
     st.write(
     """
@@ -156,6 +140,26 @@ with col2:
         # Change color based on action
         delta_color = 'normal' if metric_label == 'Added' else 'inverse' if metric_label == 'Removed' else 'normal'
         st.metric(label=metric_label, value=metric_value, delta=metric_delta, delta_color=delta_color)
+    
+    st.subheader('Current Placement Count By Brand')
+
+    conn = st.connection('s3', type=FilesConnection)
+    df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+    df5 = df5[-10:]
+    df5 = df5.sort_values(by='Brand').reset_index(drop=True)
+    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#FFA500')
+    st.write(df5)
+    
+    # Add your placements data here
+    conn = st.connection('s3', type=FilesConnection)
+    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    df4.drop_duplicates(subset="Product Name", inplace=True)
+    latest_df4 = df4.tail(5)  # Get the latest 5 records
+    st.write(df4)
+    
+    # Create metrics for the latest 5 records
+
+    
 
 
 
