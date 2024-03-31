@@ -49,7 +49,7 @@ new_df = new_df.rename(columns={
 
 # Specify the brands to filter
 brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera", 
-                  "Lexmark", "Ricoh", "Sharp", "Toshiba", "Xerox", "Pantum", "Fujifilm"]
+                  "Lexmark", "Ricoh", "Sharp", "Toshiba", "Xerox", "Pantum", "Fujifilm", "HP Inc."]
 
 # Specify the product types to filter
 product_types_to_show = ['Printers', 'Multifunction Devices (MFD)']
