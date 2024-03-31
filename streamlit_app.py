@@ -118,6 +118,7 @@ with col2:
     # Add your placements data here
     conn = st.connection('s3', type=FilesConnection)
     df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    df4.drop_duplicates(subset="Product Name", inplace=True)
     st.write(df4)
 
     conn = st.connection('s3', type=FilesConnection)
