@@ -75,7 +75,7 @@ st.write(filtered_df)
 #latest_records = filtered_df.head(3)['Model'].tolist()
 #st.metric("Latest 3 Products", ", ".join(latest_records))
 
-st.header('WiFi Alliance 📶')
+st.subheader('WiFi Alliance 📶')
 # Create connection object and retrieve file contents.
 # Specify input format is a csv and to cache the result for 600 seconds.
 conn = st.connection('s3', type=FilesConnection)
@@ -94,7 +94,7 @@ df2_modified.sort_values(by="Date of Last Certification", ascending=False, inpla
 st.write(df2_modified)
 
 
-st.header('EPEAT 🌎')
+st.subheader('EPEAT 🌎')
 conn = st.connection('s3', type=FilesConnection)
 df3 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
 
