@@ -14,7 +14,7 @@ st.set_page_config(
 alt.themes.enable("dark")
 
 st.title('Scooper Dashboard 🖨️')
-st.markdown('**What can this app do?**')
+st.markdown('**Welcome to Scooper Dashboard**')
 st.info('This app shows the use of Pandas for data wrangling, Altair for chart creation and editable dataframe for data interaction.')
 st.divider()
 
