@@ -202,7 +202,7 @@ with col1:
                                     color: rgba({wch_colour_font[0]}, 
                                             {wch_colour_font[1]}, 
                                             {wch_colour_font[2]}, 0.75); 
-                                    font-size: {fontsize}px;
+                                    font-size: 10px;
                                     padding: 10px; 
                                     line-height: 23px;
                                     border-radius: 7px; 
