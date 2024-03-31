@@ -125,6 +125,14 @@ with col2:
     latest_df4 = df4.tail(5)  # Get the latest 5 records
     st.write(df4)
     
+    
+    conn = st.connection('s3', type=FilesConnection)
+    df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+    df5 = df5[-10:]
+    df5 = df5.sort_values(by='Brand').reset_index(drop=True)
+    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#FFA500')
+
+
     # Create metrics for the latest 5 records
 
     st.write(
@@ -155,11 +163,6 @@ with col2:
 
     st.subheader('Current Placement Count By Brand')
 
-    conn = st.connection('s3', type=FilesConnection)
-    df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
-    df5 = df5[-10:]
-    df5 = df5.sort_values(by='Brand').reset_index(drop=True)
-    st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=500, color='#FFA500')
     st.write(df5)
     
 
