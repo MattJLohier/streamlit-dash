@@ -111,6 +111,31 @@ with col1:
     # Write the modified dataframe
     st.write(df3_modified)
 
+
+
+    # Add a "Source" column to each dataframe
+    filtered_df['Source'] = 'Energy Star'
+    df2_modified['Source'] = 'WiFi Alliance'
+    df3_modified['Source'] = 'EPEAT Registry'
+
+    # Rename the columns to match for concatenation
+    filtered_df = filtered_df.rename(columns={'Date Available': 'Certification Date'})
+    df2_modified = df2_modified.rename(columns={'Date of Last Certification': 'Certification Date'})
+    df3_modified = df3_modified.rename(columns={'Registered On': 'Certification Date'})
+
+    # Concatenate the dataframes
+    combined_df = pd.concat([filtered_df, df2_modified, df3_modified], ignore_index=True)
+
+    # Sort the combined dataframe by "Certification Date" in descending order
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')  # Convert to datetime format
+    combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
+
+    # Show only the newest 5 records
+    newest_records = combined_df.head(5)
+
+    # Display the result
+    st.write(newest_records)
+
 # Right Column: Placements
 # Right Column: Placements
 # Right Column: Placements
