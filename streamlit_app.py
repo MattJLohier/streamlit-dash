@@ -281,8 +281,10 @@ with col2:
         # Determine the title based on metric_label
         if metric_label == 'Added':
             title = "New Product Added"
+            emoji = "🆕"
         elif metric_label == 'Removed':
             title = "Product Removed"
+            emoji = "❌"
         else:
             title = "Certification Spotted"
 
