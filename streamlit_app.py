@@ -154,7 +154,7 @@ with col1:
 
 
     # Show only the newest 5 records
-    newest_records = combined_df.head(10)
+    newest_records = combined_df.head(15)
 
     # Display the result
     st.subheader('Summary Stats')
