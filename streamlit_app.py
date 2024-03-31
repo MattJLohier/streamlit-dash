@@ -207,7 +207,7 @@ with col1:
                                     border: 3.5px solid {border_color}; /* Adding 2px border with gold color */
                                     padding-left: 10px; 
                                     padding-top: 10px; 
-                                    padding-bottom: 18px;
+                                    padding-bottom: 10px;
                                     font-style: italic; 
                                     line-height:25px;'>
                                     <i class='{iconname} fa-xs'></i>
