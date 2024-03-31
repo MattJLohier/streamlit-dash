@@ -164,6 +164,51 @@ with col1:
     # Display the result
     st.subheader('Recent Certifications')
     st.write(newest_records)
+
+
+    lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
+    wch_colour_font = (0, 0, 0)
+    fontsize = 20
+    valign = "left"
+    iconname = "fas fa-xmark"
+    sline = "Observations"
+
+    container = st.container()
+
+    for index, row in newest_records.iterrows():
+        product_name = row['Product Name']
+        certification_date = row['Certification Date']
+        brand = row['Brand']
+        product_type = row['Product Type']
+        source = row['Source']
+
+        htmlstr = f"""<p style='background-color: transparent; 
+                                color: rgba({wch_colour_font[0]}, 
+                                        {wch_colour_font[1]}, 
+                                        {wch_colour_font[2]}, 0.75); 
+                                font-size: {fontsize}px; 
+                                border-radius: 7px; 
+                                border: 2px solid transparent; /* No border for this version */
+                                padding-left: 12px; 
+                                padding-top: 18px; 
+                                padding-bottom: 18px;
+                                font-style: italic; 
+                                line-height:25px;'>
+                                <i class='{iconname} fa-xs'></i>
+                                <span style='font-size: 24px; 
+                                margin-top: 0;'><b>{product_name}</b></span>
+                                <br><span style='font-size: 16px; color: #555;'>Certification Date: {certification_date}</span>
+                                <br><span style='font-size: 16px; color: #555;'>Brand: {brand}</span>
+                                <br><span style='font-size: 16px; color: #555;'>Product Type: {product_type}</span>
+                                <br><span style='font-size: 16px; color: #555;'>Source: {source}</span>
+                                </p>"""
+
+        with container:
+            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+
+
+
+
     st.subheader('Energy Star ⚡')
     st.write(estardf)
     st.subheader('WiFi Alliance 📶')
