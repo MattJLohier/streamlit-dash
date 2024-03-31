@@ -220,7 +220,7 @@ with col2:
 
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
     wch_colour_font = (0, 0, 0)
-    fontsize = 18
+    fontsize = 24
     valign = "left"
     iconname = "fas fa-xmark"
     sline = "Observations"
