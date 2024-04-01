@@ -379,7 +379,7 @@ with col2:
 
 
     # Rename columns using the rename() method
-    df_new.columns = ['Brand (Latest)', 'Count (Latest)', 'Date (Latest)', 
+    df7_new.columns = ['Brand (Latest)', 'Count (Latest)', 'Date (Latest)', 
                   'Brand (Yesterday)', 'Count (Yesterday)', 'Date (Yesterday)']
 
     # Print the DataFrame to verify changes
