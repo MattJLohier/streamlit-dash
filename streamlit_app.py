@@ -377,6 +377,20 @@ with col2:
     # Reset index
     df7_new.reset_index(drop=True, inplace=True)
 
+    column_mapping2 = {
+    "Brand": "Brand (Latest)",
+    "Count": "Count (Latest)",
+    "Date": "Date (Latest)",
+    "Brand_new": "Brand (Yesterday)",
+    "Count_new": "Count (Yesterday)",
+    "Date_new": "Date (Yesterday)"
+}
+
+    # Rename columns using the rename() method
+    df_new = df_new.rename(columns=column_mapping2)
+
+    # Print the DataFrame to verify changes
+
     # Rename the columns back to the original names
 
     st.dataframe(df7_new, width=1200)
