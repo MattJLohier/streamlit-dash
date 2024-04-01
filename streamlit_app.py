@@ -384,7 +384,7 @@ with col2:
     "Brand_new": "Brand (Yesterday)",
     "Count_new": "Count (Yesterday)",
     "Date_new": "Date (Yesterday)"
-}
+    }
 
     # Rename columns using the rename() method
     df_new = df_new.rename(columns=column_mapping2)
