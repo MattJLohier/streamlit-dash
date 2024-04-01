@@ -361,7 +361,26 @@ with col2:
     #df7 = df7[-10:]
     df7.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
     df7 = df7.sort_values(by='Date', ascending=False).reset_index(drop=True)
-    st.dataframe(df7, width=1200)
+
+    # Extract the last 10 rows
+    last_10_rows = df7.iloc[-10:]
+
+    # Rename the columns to avoid duplicates
+    last_10_rows.columns = [f"{col}_new" for col in last_10_rows.columns]
+
+    # Concatenate the original DataFrame with the extracted last 10 rows
+    df7_new = pd.concat([df7, last_10_rows.reset_index(drop=True)], axis=1)
+
+    # Drop the rows corresponding to the last 10 rows
+    df7_new.drop(df7_new.index[-10:], inplace=True)
+
+    # Reset index
+    df7_new.reset_index(drop=True, inplace=True)
+
+    # Rename the columns back to the original names
+    df7_new.columns = [col[:-4] if col.endswith("_new") else col for col in df7_new.columns]
+
+    st.dataframe(df7_new, width=1200)
 
 
 
