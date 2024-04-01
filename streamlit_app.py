@@ -358,7 +358,7 @@ with col2:
     #st.write(df4_sorted)
     st.subheader('Brand Totals Changelog')
     
-    df7 = df7[-10:]
+    #df7 = df7[-10:]
     df7 = df7.sort_values(by='Brand').reset_index(drop=True)
     st.dataframe(df7, width=1200)
 
