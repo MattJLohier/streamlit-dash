@@ -262,6 +262,7 @@ with col2:
     
     conn = st.connection('s3', type=FilesConnection)
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+    df7 = df5
     df5 = df5[-10:]
     df5 = df5.sort_values(by='Brand').reset_index(drop=True)
 
@@ -356,9 +357,10 @@ with col2:
 
     #st.write(df4_sorted)
     st.subheader('Brand Totals Changelog')
-    st.dataframe(df5, width=1200)
-
-
+    
+    df7 = df7[-10:]
+    df7 = df7.sort_values(by='Brand').reset_index(drop=True)
+    st.dataframe(df7, width=1200)
 
 
 
