@@ -357,7 +357,7 @@ with col2:
 
     #st.write(df4_sorted)
     st.subheader('Brand Totals Changelog')
-    
+
     #df7 = df7[-10:]
     df7.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
     df7 = df7.sort_values(by='Date', ascending=False).reset_index(drop=True)
@@ -377,13 +377,12 @@ with col2:
     # Reset index
     df7_new.reset_index(drop=True, inplace=True)
 
-
     # Rename columns using the rename() method
     df7_new.columns = ['Brand (Latest)', 'Count (Latest)', 'Date (Latest)', 
                   'Brand (Yesterday)', 'Count (Yesterday)', 'Date (Yesterday)']
 
     # Print the DataFrame to verify changes
-
+    #etst
     # Rename the columns back to the original names
 
     st.dataframe(df7_new, width=1200)
