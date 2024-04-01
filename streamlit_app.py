@@ -359,8 +359,8 @@ with col2:
     st.subheader('Brand Totals Changelog')
     st.subheader('Brand Totals Changelog 2')
     #df7 = df7[-10:]
-    df7.drop_duplicates()
-    df7 = df7.sort_values(by='Date').reset_index(drop=True)
+    df7.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
+    df7 = df7.sort_values(by='Date', ascending=False).reset_index(drop=True)
     st.dataframe(df7, width=1200)
 
 
