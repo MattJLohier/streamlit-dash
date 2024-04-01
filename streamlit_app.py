@@ -384,7 +384,7 @@ with col2:
     # Print the DataFrame to verify changes
     #etst
     # Rename the columns back to the original names
-    df7_new = df7_new.sort_values(by='Brand (Today)')
+    df7_new = df7_new.sort_values(by='Brand (Latest)')
     st.dataframe(df7_new, width=1200)
 
 
