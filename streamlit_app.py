@@ -378,7 +378,6 @@ with col2:
     df7_new.reset_index(drop=True, inplace=True)
 
     # Rename the columns back to the original names
-    df7_new.columns = [col[:-4] if col.endswith("_new") else col for col in df7_new.columns]
 
     st.dataframe(df7_new, width=1200)
 
