@@ -385,7 +385,23 @@ with col2:
     #etst
     # Rename the columns back to the original names
     #df7_new = df7_new.sort_values(by='Brand (Latest)')
-    st.dataframe(df7_new, width=1200)
+
+
+
+    df7.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
+    df7 = df7.sort_values(by='Date').reset_index(drop=True)
+
+    # Pivot the DataFrame to have Brands as columns and Date as index
+    df7_pivot = df7.pivot(index='Date', columns='Brand', values='Count')
+
+    # Reset index to make Date a column again
+    df7_pivot.reset_index(inplace=True)
+
+    # Print the DataFrame to verify changes
+    print(df7_pivot)
+
+
+    st.dataframe(df7_pivot, width=1200)
 
 
 
