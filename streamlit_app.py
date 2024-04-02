@@ -388,6 +388,8 @@ with col2:
 
 
 
+    
+    # Drop duplicates and sort by Date
     df7.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
     df7 = df7.sort_values(by='Date').reset_index(drop=True)
 
@@ -397,10 +399,8 @@ with col2:
     # Reset index to make Date a column again
     df7_pivot.reset_index(inplace=True)
 
-    # Print the DataFrame to verify changes
-    print(df7_pivot)
-
-
+    # Sort by Date with the newest date first
+    df7_pivot = df7_pivot.sort_values(by='Date', ascending=False)
     st.dataframe(df7_pivot, width=1200)
 
 
