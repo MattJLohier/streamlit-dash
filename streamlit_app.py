@@ -404,16 +404,6 @@ with col2:
     st.dataframe(df7_pivot, width=1200) 
 
 
-    def highlight_changes(val):
-        color = 'background-color: yellow'
-        return color if val != 0 else ''
-
-    # Apply style to highlight changes
-    styled_df = df7_pivot.style.applymap(highlight_changes, subset=pd.IndexSlice[:, df7_pivot.columns != 'Date'])
-
-    # Display the styled DataFrame
-    st.dataframe(styled_df, width=1200)
-
 
 
     
