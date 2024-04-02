@@ -405,8 +405,8 @@ with col2:
 
 
     def highlight_changes(val):
-    color = 'background-color: yellow'
-    return color if val != 0 else ''
+        color = 'background-color: yellow'
+        return color if val != 0 else ''
 
     # Apply style to highlight changes
     styled_df = df7_pivot.style.applymap(highlight_changes, subset=pd.IndexSlice[:, df7_pivot.columns != 'Date'])
