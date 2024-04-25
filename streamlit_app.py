@@ -4,6 +4,7 @@ import pandas as pd
 import altair as alt
 from st_files_connection import FilesConnection
 import hashlib
+import time
 
 st.set_page_config(
     page_title="Scooper Dashboard",
