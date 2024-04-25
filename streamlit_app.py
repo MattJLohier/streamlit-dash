@@ -13,7 +13,23 @@ st.set_page_config(
 )
 
 def display_dashboard():
-    
+    st.image("https://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512", width=150)
+
+    alt.themes.enable("dark")
+
+    st.title('Scooper Dashboard 🖨️')
+    st.markdown('**Welcome to Scooper Dashboard**')
+    st.info('Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape new product certifications and placements from official manufacturer websites.') 
+    st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
+    st.caption('Created By Matt Lohier')
+    st.caption("""
+        <div align=left><small>
+        Page views: <img src="https://www.cutercounter.com/hits.php?id=hexpnknp&nd=6&style=1" border="0" alt="hit counter"><br>
+        Unique visitors: <img src="https://www.cutercounter.com/hits.php?id=hvxpnknq&nd=6&style=1" border="0" alt="website counter"><br>
+        </small></div>
+        """, unsafe_allow_html=True)
+
+    st.divider()
 
     # Define columns
     col1, col2 = st.columns(2)
@@ -410,25 +426,6 @@ def display_dashboard():
 
 ##AUTH
 
-    st.image("https://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512", width=150)
-
-    alt.themes.enable("dark")
-
-    st.title('Scooper Dashboard 🖨️')
-    st.markdown('**Welcome to Scooper Dashboard**')
-    st.info('Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape new product certifications and placements from official manufacturer websites.') 
-    st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
-    st.caption('Created By Matt Lohier')
-    st.caption("""
-        <div align=left><small>
-        Page views: <img src="https://www.cutercounter.com/hits.php?id=hexpnknp&nd=6&style=1" border="0" alt="hit counter"><br>
-        Unique visitors: <img src="https://www.cutercounter.com/hits.php?id=hvxpnknq&nd=6&style=1" border="0" alt="website counter"><br>
-        </small></div>
-        """, unsafe_allow_html=True)
-
-    st.divider()
-
-
 def login(username, password):
     hashed_password = st.secrets["hashed_password"]
     # Check if the username and hashed password match
@@ -452,14 +449,13 @@ def display_login_form():
             st.error("Invalid username or password")
 
 def main():
-    st.title("Login Form")
-
     if 'logged_in' not in st.session_state:
         st.session_state['logged_in'] = False
 
     if st.session_state['logged_in']:
         display_dashboard()
     else:
+        st.title("Login Form")
         display_login_form()
 
 if __name__ == "__main__":
