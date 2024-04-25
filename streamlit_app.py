@@ -28,15 +28,6 @@ def display_dashboard():
         page2()
     elif st.sidebar.button("Placements"):
         page3()
-    # Define columns
-    col1, col2 = st.columns(2)
-
-    # Left Column: Product Registrations
-    with col1:
-        
-
-
-##AUTH
 
 def login(username, password):
     hashed_password = st.secrets["hashed_password"]
