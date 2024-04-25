@@ -22,9 +22,9 @@ def display_dashboard():
     st.divider()
     page = st.sidebar.selectbox("Go to", ("Page 1", "Page 2"))
     if page == "Page 1":
-    page1()
+        page1()
     elif page == "Page 2":
-    page2()
+        page2()
     # Define columns
     col1, col2 = st.columns(2)
 
