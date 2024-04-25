@@ -25,8 +25,6 @@ def display_dashboard():
 def sidebar():
     st.sidebar.image("https://i.postimg.cc/6Q70YmkT/scooper.png", use_column_width=True)  # Adjust the image path as needed
     st.sidebar.markdown("---")
-    st.sidebar.subheader("Go to")
-
     # Set up a container for the buttons
     button_container = st.sidebar.container()
     
