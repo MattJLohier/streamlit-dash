@@ -466,14 +466,35 @@ def main():
 def page1():
     st.title("Page 1")
     st.write("Welcome to Page 1")
+    st.sidebar.subheader("Go to")
+    if st.sidebar.button("Home"):
+        page1()
+    elif st.sidebar.button("Certifications"):
+        page2()
+    elif st.sidebar.button("Placements"):
+        page3()
 
 def page2():
     st.title("Page 2")
     st.write("Welcome to Page 2")
+    st.sidebar.subheader("Go to")
+    if st.sidebar.button("Home"):
+        page1()
+    elif st.sidebar.button("Certifications"):
+        page2()
+    elif st.sidebar.button("Placements"):
+        page3()
 
 def page3():
     st.title("Page 2")
     st.write("Welcome to Page 2")
+    st.sidebar.subheader("Go to")
+    if st.sidebar.button("Home"):
+        page1()
+    elif st.sidebar.button("Certifications"):
+        page2()
+    elif st.sidebar.button("Placements"):
+        page3()
 
 # Sidebar navigation
 # Render selected page
