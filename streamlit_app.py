@@ -20,6 +20,14 @@ st.markdown('**Welcome to Scooper Dashboard**')
 st.info('Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape new product certifications and placements from official manufacturer websites.') 
 st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
 st.caption('Created By Matt Lohier')
+
+st.markdown("""
+    <div align=right><small>
+    Page views: <img src="https://www.cutercounter.com/hits.php?id=hexpnknp&nd=6&style=44" border="0" alt="hit counter"><br>
+    Unique visitors: <img src="https://www.cutercounter.com/hits.php?id=hvxpnknq&nd=6&style=44" border="0" alt="website counter"><br>
+    </small></div>
+    """, unsafe_allow_html=True)
+
 st.divider()
 
 # Define columns
