@@ -22,8 +22,8 @@ st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Allia
 st.caption('Created By Matt Lohier')
 st.caption("""
     <div align=left><small>
-    Page views: <img src="https://www.cutercounter.com/hits.php?id=hexpnknp&nd=6&style=3" border="0" alt="hit counter"><br>
-    Unique visitors: <img src="https://www.cutercounter.com/hits.php?id=hvxpnknq&nd=6&style=3" border="0" alt="website counter"><br>
+    Page views: <img src="https://www.cutercounter.com/hits.php?id=hexpnknp&nd=6&style=1" border="0" alt="hit counter"><br>
+    Unique visitors: <img src="https://www.cutercounter.com/hits.php?id=hvxpnknq&nd=6&style=1" border="0" alt="website counter"><br>
     </small></div>
     """, unsafe_allow_html=True)
 
