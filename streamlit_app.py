@@ -27,6 +27,16 @@ def sidebar():
     st.sidebar.image("https://dummyimage.com/300", use_column_width=True)  # Adjust the image path as needed
     st.sidebar.markdown("---")
     st.sidebar.subheader("Go to")
+
+    st.sidebar.markdown("""
+    <style>
+    .css-1cpxqw2 {
+        width: 100%;  /* Set the width to 100% of the container */
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
     if st.sidebar.button("Home", key="home_button"):
         st.session_state['page'] = 'home'
     if st.sidebar.button("Certifications", key="certifications_button"):
