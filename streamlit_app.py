@@ -24,7 +24,7 @@ def display_dashboard():
 
 def sidebar():
     st.sidebar.markdown("<h1 style='text-align: left;'><span style='color: #317bd4;'>Scooper</span> Dashboard 🎯</h1>", unsafe_allow_html=True)
-    #st.sidebar.image("https://i.postimg.cc/6Q70YmkT/scooper.png", use_column_width=True)  # Adjust the image path as needed
+    st.sidebar.image("https://i.postimg.cc/6Q70YmkT/scooper.png", use_column_width=True)  # Adjust the image path as needed
     st.sidebar.markdown("---")
     st.sidebar.subheader("Go to")
 
