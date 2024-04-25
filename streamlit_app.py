@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
 ##AUTH
 
-def_display_dashboard():
+def display_dashboard():
     st.image("https://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512", width=150)
 
     alt.themes.enable("dark")
