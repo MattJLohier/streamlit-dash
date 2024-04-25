@@ -442,9 +442,6 @@ def display_login_form():
                 if login(username, password):  # Assume login is a function defined to check credentials
                     st.session_state['logged_in'] = True  # Update session state
                     st.experimental_rerun()
-                    with 
-                        st.spinner("Loading dashboard..."):  # Show spinner animation
-                        time.sleep(2)  # Simulate some processing time
                 else:
                     st.error("Invalid username or password")
 
@@ -454,7 +451,9 @@ def main():
         st.session_state['logged_in'] = False
 
     if st.session_state['logged_in']:
-        display_dashboard()
+        with st.spinner("Loading dashboard..."):  # Show spinner animation
+                time.sleep(2)  # Simulate some processing time
+                display_dashboard()
     else:
         display_login_form()
 
