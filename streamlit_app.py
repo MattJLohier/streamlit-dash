@@ -20,11 +20,12 @@ def display_dashboard():
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
     st.caption('Created By Matt Lohier')
     st.divider()
-    page = st.sidebar.selectbox("Go to", ("Page 1", "Page 2"))
-    if page == "Page 1":
+    if st.sidebar.button("Home"):
         page1()
-    elif page == "Page 2":
+    elif st.sidebar.button("Certifications"):
         page2()
+    elif st.sidebar.button("Placements"):
+        page3()
     # Define columns
     col1, col2 = st.columns(2)
 
