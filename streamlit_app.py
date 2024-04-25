@@ -438,7 +438,7 @@ def login(username, password):
 
 def display_login_form():
     # Create three columns
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2 = st.columns([1, 2])
     
     with col1:  # Middle column for the form
         with st.form(key='login_form'):
