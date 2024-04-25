@@ -21,7 +21,10 @@ def display_dashboard():
     st.caption('Created By Matt Lohier')
     st.divider()
     page = st.sidebar.selectbox("Go to", ("Page 1", "Page 2"))
-
+    if page == "Page 1":
+    page1()
+    elif page == "Page 2":
+    page2()
     # Define columns
     col1, col2 = st.columns(2)
 
@@ -467,10 +470,7 @@ def page2():
 
 # Sidebar navigation
 # Render selected page
-if page == "Page 1":
-    page1()
-elif page == "Page 2":
-    page2()
+
 
 if __name__ == "__main__":
     main()
