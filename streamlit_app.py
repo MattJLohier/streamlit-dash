@@ -446,6 +446,7 @@ def display_login_form():
         if login_button:
             if login(username, password):
                 st.session_state['logged_in'] = True  # Update session state
+                st.experimental_rerun()
             else:
                 st.error("Invalid username or password")
 
