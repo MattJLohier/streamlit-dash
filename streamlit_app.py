@@ -455,6 +455,24 @@ def main():
     else:
         display_login_form()
 
+
+def page1():
+    st.title("Page 1")
+    st.write("Welcome to Page 1")
+
+def page2():
+    st.title("Page 2")
+    st.write("Welcome to Page 2")
+
+# Sidebar navigation
+page = st.sidebar.selectbox("Go to", ("Page 1", "Page 2"))
+
+# Render selected page
+if page == "Page 1":
+    page1()
+elif page == "Page 2":
+    page2()
+
 if __name__ == "__main__":
     main()
 
