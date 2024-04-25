@@ -23,9 +23,6 @@ def login(username, password):
     else:
         return False
 
-# Hardcoded hashed password for demonstration
-hashed_password = "c0cfb8fb3c47577b62a8a7f76141e4421a3e2b5b9b50b8a1d3b7ef8e9dfdb41f"
-
 def main():
     st.title("Login Form")
 
