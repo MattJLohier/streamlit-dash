@@ -175,7 +175,10 @@ with col1:
 
     conn = st.connection('s3', type=FilesConnection)
     df8 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
-
+    conn = st.connection('s3', type=FilesConnection)
+    df9 = conn.read("scoops-finder/changelog-wifi.csv", input_format="csv", ttl=600)
+    conn = st.connection('s3', type=FilesConnection)
+    df10 = conn.read("scoops-finder/changelog-epeat.csv", input_format="csv", ttl=600)
 
     # Display the result
     st.subheader('Recent Certifications')
@@ -256,6 +259,8 @@ with col1:
     df3_modified.reset_index(drop=True, inplace=True)
     st.write(df3_modified)
     st.write(df8)
+    st.write(df9)
+    st.write(df10)
 # Right Column: Placements
 # Right Column: Placements
 # Right Column: Placements
