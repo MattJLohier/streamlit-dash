@@ -28,13 +28,26 @@ def sidebar():
     st.sidebar.markdown("---")
     st.sidebar.subheader("Go to")
 
+    # Set up a container for the buttons
+    button_container = st.sidebar.container()
+    
+    # Inject CSS to make container's children (buttons) 100% width
     st.sidebar.markdown("""
     <style>
-    .css-1cpxqw2 {
-        width: 100%;  /* Set the width to 100% of the container */
+    div.stButton > button:first-child {
+        width: 100%;
     }
     </style>
     """, unsafe_allow_html=True)
+    
+    # Define buttons in the custom container
+    with button_container:
+        if st.button("Home", key="home_button"):
+            st.session_state['page'] = 'home'
+        if st.button("Certifications", key="certifications_button"):
+            st.session_state['page'] = 'certifications'
+        if st.button("Placements", key="placements_button"):
+            st.session_state['page'] = 'placements'
 
 
     if st.sidebar.button("Home", key="home_button"):
