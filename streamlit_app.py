@@ -78,160 +78,156 @@ def page2():
     st.title("Page 2")
     st.write("Welcome to Page 2")
 
-            st.header('Placements 💡')
-        st.subheader('Recent Placements')
+    st.header('Placements 💡')
+    st.subheader('Recent Placements')
 
-        # Add your placements data here
-        conn = st.connection('s3', type=FilesConnection)
-        df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-        df4.drop_duplicates(subset="Product Name", inplace=True)
-        df4 = df4.sort_values(by='Date Detected', ascending=True)
+    # Add your placements data here
+    conn = st.connection('s3', type=FilesConnection)
+    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    df4.drop_duplicates(subset="Product Name", inplace=True)
+    df4 = df4.sort_values(by='Date Detected', ascending=True)
         
-        latest_df4 = df4.tail(5)  # Get the latest 5 records
-        latest_df4 = latest_df4.iloc[::-1]
+    latest_df4 = df4.tail(5)  # Get the latest 5 records
+    latest_df4 = latest_df4.iloc[::-1]
         
-        conn = st.connection('s3', type=FilesConnection)
-        df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
-        df7 = df5
-        df5 = df5[-10:]
-        df5 = df5.sort_values(by='Brand').reset_index(drop=True)
+    conn = st.connection('s3', type=FilesConnection)
+    df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+    df7 = df5
+    df5 = df5[-10:]
+    df5 = df5.sort_values(by='Brand').reset_index(drop=True)
 
 
-        # Create metrics for the latest 5 records
+    # Create metrics for the latest 5 records
 
-        lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
-        wch_colour_font = (0, 0, 0)
-        fontsize = 20
-        valign = "left"
-        iconname = "fas fa-xmark"
+    lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
+    wch_colour_font = (0, 0, 0)
+    fontsize = 20
+    valign = "left"
+    iconname = "fas fa-xmark"
         
-        container = st.container()
+    container = st.container()
 
-        for index, row in latest_df4.iterrows():
-            brand = row['Brand']
-            count = df5[df5['Brand'] == brand]['Count'].values[0]
-            metric_label = row['Action']
-            metric_value = row['Product Name']
-            metric_delta = str(count)
-            date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
+    for index, row in latest_df4.iterrows():
+        brand = row['Brand']
+        count = df5[df5['Brand'] == brand]['Count'].values[0]
+        metric_label = row['Action']
+        metric_value = row['Product Name']
+        metric_delta = str(count)
+        date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
             
-            # Determine the title based on metric_label
-            if metric_label == 'Added':
-                title = "New Product Added"
-                emoji = "🆕"
-            elif metric_label == 'Removed':
-                title = "Product Removed"
-                emoji = "❌"
-            else:
-                title = "Certification Spotted"
+        # Determine the title based on metric_label
+        if metric_label == 'Added':
+            title = "New Product Added"
+            emoji = "🆕"
+        elif metric_label == 'Removed':
+            title = "Product Removed"
+            emoji = "❌"
+        else:
+            title = "Certification Spotted"
 
-            # Set background color and border color based on action
-            bg_color = '#ffdbdb' if metric_label == 'Removed' else '#dbffdb' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
-            border_color = '#FF0000' if metric_label == 'Removed' else '#1fd100' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
+        # Set background color and border color based on action
+        bg_color = '#ffdbdb' if metric_label == 'Removed' else '#dbffdb' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
+        border_color = '#FF0000' if metric_label == 'Removed' else '#1fd100' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
 
-            htmlstr = f"""<p style='background-color: {bg_color}; 
-                                    color: rgba({wch_colour_font[0]}, 
-                                            {wch_colour_font[1]}, 
-                                            {wch_colour_font[2]}, 0.75); 
-                                    font-size: 10px;
-                                    padding: 10px; 
-                                    border-radius: 7px; 
-                                    border: 3.5px solid {border_color};
-                                    line-height: 23px;
-                                    border-radius: 7px;
-                                    margin-right: 3em; 
-                                    >
-                                    <span style='font-size: 20px; padding-left: 12px;
-                                        margin-top: 10px;'><b style='font-size: 20px; padding-left:10px' font-size: 20px;> {title} {emoji} </b></span>
-                                        <br>
-                                        <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
-                                        <br>
-                                        <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Change:</b> {metric_label}</span>
-                                        <br>
-                                        <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Name:</b> {metric_value}</span>
-                                        <br>
-                                        <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >New Brand Totals:</b> {metric_delta}</span>
-                                        <br>
-                                        <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Date Detected:</b> {date_detected}</span>
-                                        </p>"""
+        htmlstr = f"""<p style='background-color: {bg_color}; 
+                                color: rgba({wch_colour_font[0]}, 
+                                        {wch_colour_font[1]}, 
+                                        {wch_colour_font[2]}, 0.75); 
+                                font-size: 10px;
+                                padding: 10px; 
+                                border-radius: 7px; 
+                                border: 3.5px solid {border_color};
+                                line-height: 23px;
+                                border-radius: 7px;
+                                margin-right: 3em; 
+                                >
+                                <span style='font-size: 20px; padding-left: 12px;
+                                    margin-top: 10px;'><b style='font-size: 20px; padding-left:10px' font-size: 20px;> {title} {emoji} </b></span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Change:</b> {metric_label}</span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Name:</b> {metric_value}</span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >New Brand Totals:</b> {metric_delta}</span>
+                                    <br>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Date Detected:</b> {date_detected}</span>
+                                    </p>"""
+        with container:
+            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
 
-            with container:
-                st.markdown(lnk + htmlstr, unsafe_allow_html=True)
-
-        st.subheader('Current Placement Count By Brand')
-        #st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=475, color='#24AABE')
+    st.subheader('Current Placement Count By Brand')
+    #st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=475, color='#24AABE')
 
 
-        # Assuming df5 is your DataFrame containing data
-        chart_data = df5.set_index('Brand')['Count']
+    # Assuming df5 is your DataFrame containing data
+    chart_data = df5.set_index('Brand')['Count']
 
-        # Creating the Altair chart
-        chart = alt.Chart(chart_data.reset_index()).mark_bar(color='#24AABE').encode(
-            x=alt.X('Brand', title='Brand'),
-            y=alt.Y('Count', title='Count')
-        ).properties(
-            width=500,
-            height=475
-        )
+    # Creating the Altair chart
+    chart = alt.Chart(chart_data.reset_index()).mark_bar(color='#24AABE').encode(
+        x=alt.X('Brand', title='Brand'),
+        y=alt.Y('Count', title='Count')
+    ).properties(
+        width=500,
+        height=475
+    )
 
-        # Displaying the chart using st.write()
-        st.write(chart)
+    # Displaying the chart using st.write()
+    st.write(chart)
 
-        st.subheader('Placement Changelog')
+    st.subheader('Placement Changelog')
         
-        df4_sorted = df4.sort_values(by='Date Detected', ascending=False)
-        df4_sorted = df4_sorted.drop(columns=['Date'])
-        df4_sorted.reset_index(drop=True, inplace=True)
-        st.dataframe(df4_sorted, width=1200, height=400)
+    df4_sorted = df4.sort_values(by='Date Detected', ascending=False)
+    df4_sorted = df4_sorted.drop(columns=['Date'])
+    df4_sorted.reset_index(drop=True, inplace=True)
+    st.dataframe(df4_sorted, width=1200, height=400)
 
 
         #st.write(df4_sorted)
-        st.subheader('Brand Totals Changelog')
+    st.subheader('Brand Totals Changelog')
 
-        #df7 = df7[-10:]
-        df7.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
-        df7 = df7.sort_values(by='Date', ascending=False).reset_index(drop=True)
+    #df7 = df7[-10:]
+    df7.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
+    df7 = df7.sort_values(by='Date', ascending=False).reset_index(drop=True)
 
-        # Extract the last 10 rows
-        last_10_rows = df7.iloc[-10:]
+    # Extract the last 10 rows
+    last_10_rows = df7.iloc[-10:]
 
-        # Rename the columns to avoid duplicates
-        last_10_rows.columns = [f"{col}_new" for col in last_10_rows.columns]
+    # Rename the columns to avoid duplicates
+    last_10_rows.columns = [f"{col}_new" for col in last_10_rows.columns]
 
-        # Concatenate the original DataFrame with the extracted last 10 rows
-        df7_new = pd.concat([df7, last_10_rows.reset_index(drop=True)], axis=1)
+    # Concatenate the original DataFrame with the extracted last 10 rows
+    df7_new = pd.concat([df7, last_10_rows.reset_index(drop=True)], axis=1)
 
-        # Drop the rows corresponding to the last 10 rows
-        df7_new.drop(df7_new.index[-10:], inplace=True)
+    # Drop the rows corresponding to the last 10 rows
+    df7_new.drop(df7_new.index[-10:], inplace=True)
 
-        # Reset index
-        df7_new.reset_index(drop=True, inplace=True)
+    # Reset index
+    df7_new.reset_index(drop=True, inplace=True)
 
-        # Rename columns using the rename() method
-        df7_new.columns = ['Brand (Latest)', 'Count (Latest)', 'Date (Latest)', 
-                    'Brand (Yesterday)', 'Count (Yesterday)', 'Date (Yesterday)']
+    # Rename columns using the rename() method
+    df7_new.columns = ['Brand (Latest)', 'Count (Latest)', 'Date (Latest)', 
+                'Brand (Yesterday)', 'Count (Yesterday)', 'Date (Yesterday)']
 
-        # Print the DataFrame to verify changes
-        #etst
-        # Rename the columns back to the original names
-        #df7_new = df7_new.sort_values(by='Brand (Latest)')
+    # Print the DataFrame to verify changes
+    #etst
+    # Rename the columns back to the original names
+    #df7_new = df7_new.sort_values(by='Brand (Latest)')
+    
+    # Drop duplicates and sort by Date
+    df7.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
+    df7 = df7.sort_values(by='Date').reset_index(drop=True)
 
+    # Pivot the DataFrame to have Brands as columns and Date as index
+    df7_pivot = df7.pivot(index='Date', columns='Brand', values='Count')
 
+    # Reset index to make Date a column again
+    df7_pivot.reset_index(inplace=True)
 
-        
-        # Drop duplicates and sort by Date
-        df7.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
-        df7 = df7.sort_values(by='Date').reset_index(drop=True)
-
-        # Pivot the DataFrame to have Brands as columns and Date as index
-        df7_pivot = df7.pivot(index='Date', columns='Brand', values='Count')
-
-        # Reset index to make Date a column again
-        df7_pivot.reset_index(inplace=True)
-
-        # Sort by Date with the newest date first
-        df7_pivot = df7_pivot.sort_values(by='Date', ascending=False)
-        st.dataframe(df7_pivot, width=1200)
+    # Sort by Date with the newest date first
+    df7_pivot = df7_pivot.sort_values(by='Date', ascending=False)
+    st.dataframe(df7_pivot, width=1200)
 
 def page3():
     st.title("Page 2")
