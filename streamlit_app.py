@@ -83,11 +83,8 @@ def page1():
     st.title("Page 1")
     st.write("Welcome to Page 1")
     sidebar()
-    
 
 def page2():
-    st.title("Page 2")
-    st.write("Welcome to Page 2")
     st.header('Placements 💡')
     st.subheader('Recent Placements')
 
@@ -240,8 +237,6 @@ def page2():
     st.dataframe(df7_pivot, width=1200)
 
 def page3():
-    st.title("Page 3")
-    st.write("Welcome to Page 3")
     st.header('Certifications 📝')
     
         # Create connection object and retrieve file contents.
