@@ -22,6 +22,15 @@ def display_dashboard():
     st.divider()
     sidebar()
 
+    # Check the current page and display the corresponding content
+    current_page = st.session_state.get("current_page", "Home")
+    if current_page == "Home":
+        page1()
+    elif current_page == "Certifications":
+        page2()
+    elif current_page == "Placements":
+        page3()
+
 def sidebar():
     st.sidebar.markdown("---")
     st.sidebar.subheader("Go to")
