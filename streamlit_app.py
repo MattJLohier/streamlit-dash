@@ -20,6 +20,8 @@ def display_dashboard():
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
     st.caption('Created By Matt Lohier')
     st.divider()
+
+def sidebar():
     st.sidebar.markdown("---")
     st.sidebar.subheader("Go to")
     if st.sidebar.button("Home"):
@@ -28,6 +30,7 @@ def display_dashboard():
         page2()
     elif st.sidebar.button("Placements"):
         page3()
+
 
 def login(username, password):
     hashed_password = st.secrets["hashed_password"]
@@ -72,12 +75,13 @@ def main():
 def page1():
     st.title("Page 1")
     st.write("Welcome to Page 1")
+    sidebar()
     
 
 def page2():
     st.title("Page 2")
     st.write("Welcome to Page 2")
-
+    sidebar()
     st.header('Placements 💡')
     st.subheader('Recent Placements')
 
@@ -232,7 +236,7 @@ def page2():
 def page3():
     st.title("Page 2")
     st.write("Welcome to Page 2")
-
+    sidebar()
     st.header('Certifications 📝')
     
         # Create connection object and retrieve file contents.
@@ -424,7 +428,7 @@ def page3():
     st.write(df8)
     st.write(df9)
     st.write(df10)
-    
+
 # Sidebar navigation
 # Render selected page
 
