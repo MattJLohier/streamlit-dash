@@ -15,6 +15,7 @@ st.set_page_config(
 ##AUTH
 
 def login(username, password):
+    hashed_password = st.secrets["hashed_password"]
     # Check if the username and hashed password match
     # You would typically retrieve this information from a database
     # Here, we'll hardcode a username and password for demonstration
