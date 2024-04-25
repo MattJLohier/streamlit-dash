@@ -50,14 +50,6 @@ def sidebar():
             st.session_state['page'] = 'placements'
 
 
-    if st.sidebar.button("Home", key="home_button"):
-        st.session_state['page'] = 'home'
-    if st.sidebar.button("Certifications", key="certifications_button"):
-        st.session_state['page'] = 'certifications'
-    if st.sidebar.button("Placements", key="placements_button"):
-        st.session_state['page'] = 'placements'
-
-
 def login(username, password):
     hashed_password = st.secrets["hashed_password"]
     # Check if the username and hashed password match
