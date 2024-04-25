@@ -165,6 +165,11 @@ with col1:
     # Show only the newest 5 records
     newest_records = combined_df.head(5)
 
+
+    conn = st.connection('s3', type=FilesConnection)
+    df8 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
+
+
     # Display the result
     st.subheader('Recent Certifications')
     #st.write(newest_records)
@@ -243,6 +248,7 @@ with col1:
     st.subheader('EPEAT 🌎')
     df3_modified.reset_index(drop=True, inplace=True)
     st.write(df3_modified)
+    st.write(df8)
 # Right Column: Placements
 # Right Column: Placements
 # Right Column: Placements
