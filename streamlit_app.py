@@ -16,8 +16,7 @@ def display_dashboard():
     st.image("https://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512", width=150)
 
     alt.themes.enable("dark")
-
-    st.title('Scooper Dashboard 🖨️')
+    st.markdown("<h1 style='text-align: center;'><span style='color: #317bd4;'>Scooper</span> Dashboard 🎯</h1>", unsafe_allow_html=True)
     st.markdown('**Welcome to Scooper Dashboard**')
     st.info('Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape new product certifications and placements from official manufacturer websites.') 
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
