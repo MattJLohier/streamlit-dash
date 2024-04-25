@@ -242,7 +242,6 @@ def page2():
 def page3():
     st.title("Page 3")
     st.write("Welcome to Page 3")
-    sidebar()
     st.header('Certifications 📝')
     
         # Create connection object and retrieve file contents.
