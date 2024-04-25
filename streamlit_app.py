@@ -469,6 +469,10 @@ def page2():
     st.title("Page 2")
     st.write("Welcome to Page 2")
 
+def page3():
+    st.title("Page 2")
+    st.write("Welcome to Page 2")
+
 # Sidebar navigation
 # Render selected page
 
