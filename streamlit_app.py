@@ -433,8 +433,6 @@ def display_login_form():
             st.error("Invalid username or password")
 
 def main():
-    st.image("https://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512", width=150)
-
     alt.themes.enable("dark")
 
     st.title('Scooper Dashboard 🖨️')
