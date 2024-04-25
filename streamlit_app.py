@@ -439,20 +439,20 @@ def login(username, password):
 def main():
     st.title("Login Form")
 
-    # Input fields for username and password
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    # Create an empty container
+    login_container = st.empty()
 
-    # Check if the login button is clicked
-    if st.button("Login"):
-        # Check if the username and password are correct
-        if login(username, password):
-            st.success("Login successful!")
-            # Here you would redirect the user to the dashboard
-            st.empty()
-            display_dashboard()
-        else:
-            st.error("Invalid username or password")
+    # Display login form inside the container
+    with login_container.container():
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+
+        if st.button("Login"):
+            if login(username, password):  # Assuming login is a function that checks credentials
+                login_container.empty()  # Clear the login form
+                display_dashboard()  # Function to display the dashboard
+            else:
+                st.error("Invalid username or password")
 
 if __name__ == "__main__":
     main()
