@@ -11,6 +11,44 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+##AUTH
+
+def login(username, password):
+    # Check if the username and hashed password match
+    # You would typically retrieve this information from a database
+    # Here, we'll hardcode a username and password for demonstration
+    if username == "admin" and hashlib.sha256(password.encode()).hexdigest() == hashed_password:
+        return True
+    else:
+        return False
+
+# Hardcoded hashed password for demonstration
+hashed_password = "c0cfb8fb3c47577b62a8a7f76141e4421a3e2b5b9b50b8a1d3b7ef8e9dfdb41f"
+
+def main():
+    st.title("Login Form")
+
+    # Input fields for username and password
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    # Check if the login button is clicked
+    if st.button("Login"):
+        # Check if the username and password are correct
+        if login(username, password):
+            st.success("Login successful!")
+            # Here you would redirect the user to the dashboard
+        else:
+            st.error("Invalid username or password")
+
+if __name__ == "__main__":
+    main()
+
+
+
+##AUTH
+
+
 st.image("https://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512", width=150)
 
 alt.themes.enable("dark")
