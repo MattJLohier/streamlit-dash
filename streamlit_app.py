@@ -440,7 +440,7 @@ def display_login_form():
     # Create three columns
     col1, col2, col3 = st.columns([1, 2, 1])
     
-    with col2:  # Middle column for the form
+    with col1:  # Middle column for the form
         with st.form(key='login_form'):
             # Input fields for username and password
             username = st.text_input("Username")
