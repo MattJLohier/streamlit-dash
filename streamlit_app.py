@@ -437,16 +437,17 @@ def login(username, password):
         return False
 
 def display_login_form():
-    # Input fields for username and password
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    with st.form(key='login_form'):
+        # Input fields for username and password
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        login_button = st.form_submit_button("Login")
 
-    # Login button
-    if st.button("Login"):
-        if login(username, password):
-            st.session_state['logged_in'] = True  # Update session state
-        else:
-            st.error("Invalid username or password")
+        if login_button:
+            if login(username, password):
+                st.session_state['logged_in'] = True  # Update session state
+            else:
+                st.error("Invalid username or password")
 
 def main():
     
