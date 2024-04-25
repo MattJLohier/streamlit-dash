@@ -441,7 +441,7 @@ def display_login_form():
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:  # Middle column for the form
-        st.markdown("<h1 style='text-align: center;'><span style='#66b2b2: teal;'>Scooper</span> Dashboard 🖨️</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center;'><span style='color: #66b2b2;'>Scooper</span> Dashboard 🖨️</h1>", unsafe_allow_html=True)
         with st.form(key='login_form'):
             # Input fields for username and password
             username = st.text_input("Username")
