@@ -20,6 +20,8 @@ def display_dashboard():
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
     st.caption('Created By Matt Lohier')
     st.divider()
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("Go to")
     if st.sidebar.button("Home"):
         page1()
     elif st.sidebar.button("Certifications"):
