@@ -7,7 +7,7 @@ import hashlib
 
 st.set_page_config(
     page_title="Scooper Dashboard",
-    page_icon="🖨️",
+    page_icon="🎯",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -20,6 +20,7 @@ def display_dashboard():
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
     st.caption('Created By Matt Lohier')
     st.divider()
+    page = st.sidebar.selectbox("Go to", ("Page 1", "Page 2"))
 
     # Define columns
     col1, col2 = st.columns(2)
@@ -465,8 +466,6 @@ def page2():
     st.write("Welcome to Page 2")
 
 # Sidebar navigation
-page = st.sidebar.selectbox("Go to", ("Page 1", "Page 2"))
-
 # Render selected page
 if page == "Page 1":
     page1()
