@@ -25,11 +25,11 @@ def display_dashboard():
 def sidebar():
     st.sidebar.markdown("---")
     st.sidebar.subheader("Go to")
-    if st.sidebar.button("Home"):
+    if st.sidebar.button("Home", key="home_button"):
         st.session_state['page'] = 'home'
-    if st.sidebar.button("Certifications"):
+    if st.sidebar.button("Certifications", key="certifications_button"):
         st.session_state['page'] = 'certifications'
-    if st.sidebar.button("Placements"):
+    if st.sidebar.button("Placements", key="placements_button"):
         st.session_state['page'] = 'placements'
 
 
