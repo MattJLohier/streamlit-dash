@@ -436,23 +436,28 @@ def login(username, password):
     else:
         return False
 
+def display_login_form():
+    # Input fields for username and password
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    # Login button
+    if st.button("Login"):
+        if login(username, password):
+            st.session_state['logged_in'] = True  # Update session state
+        else:
+            st.error("Invalid username or password")
+
 def main():
     st.title("Login Form")
 
-    # Create an empty container
-    login_container = st.empty()
+    if 'logged_in' not in st.session_state:
+        st.session_state['logged_in'] = False
 
-    # Display login form inside the container
-    with login_container.container():
-        username = st.text_input("Username")
-        password = st.text_input("Password", type="password")
-
-        if st.button("Login"):
-            if login(username, password):  # Assuming login is a function that checks credentials
-                login_container.empty()  # Clear the login form
-                display_dashboard()  # Function to display the dashboard
-            else:
-                st.error("Invalid username or password")
+    if st.session_state['logged_in']:
+        display_dashboard()
+    else:
+        display_login_form()
 
 if __name__ == "__main__":
     main()
