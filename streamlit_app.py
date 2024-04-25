@@ -3,8 +3,6 @@ import numpy as np
 import pandas as pd
 import altair as alt
 from st_files_connection import FilesConnection
-import streamlit_authenticator as stauth
-
 
 st.set_page_config(
     page_title="Scooper Dashboard",
