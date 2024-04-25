@@ -21,25 +21,17 @@ def display_dashboard():
     st.caption('Created By Matt Lohier')
     st.divider()
     sidebar()
-
-    # Check the current page and display the corresponding content
-    current_page = st.session_state.get("current_page", "Home")
-    if current_page == "Home":
-        page1()
-    elif current_page == "Certifications":
-        page2()
-    elif current_page == "Placements":
-        page3()
+    
 
 def sidebar():
     st.sidebar.markdown("---")
     st.sidebar.subheader("Go to")
     if st.sidebar.button("Home"):
-        page1()
-    elif st.sidebar.button("Certifications"):
-        page2()
-    elif st.sidebar.button("Placements"):
-        page3()
+        st.session_state['page'] = 'home'
+    if st.sidebar.button("Certifications"):
+        st.session_state['page'] = 'certifications'
+    if st.sidebar.button("Placements"):
+        st.session_state['page'] = 'placements'
 
 
 def login(username, password):
@@ -72,12 +64,18 @@ def display_login_form():
                     st.error("Invalid username or password")
 
 def main():
-    
     if 'logged_in' not in st.session_state:
         st.session_state['logged_in'] = False
-
     if st.session_state['logged_in']:
-        display_dashboard()
+        if 'page' not in st.session_state:
+            st.session_state['page'] = 'home'
+        sidebar()
+        if st.session_state['page'] == 'home':
+            display_dashboard()
+        elif st.session_state['page'] == 'certifications':
+            page2()
+        elif st.session_state['page'] == 'placements':
+            page3()
     else:
         display_login_form()
 
