@@ -13,8 +13,6 @@ st.set_page_config(
 )
 
 def display_dashboard():
-    st.image("https://ca.slack-edge.com/T025EV1A7-U05SCJBA99A-c4a8a12425b8-512", width=150)
-
     alt.themes.enable("dark")
     st.markdown("<h1 style='text-align: left;'><span style='color: #317bd4;'>Scooper</span> Dashboard 🎯</h1>", unsafe_allow_html=True)
     st.markdown('**Welcome to Scooper Dashboard**')
