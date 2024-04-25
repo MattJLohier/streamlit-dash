@@ -23,7 +23,7 @@ def display_dashboard():
     
 
 def sidebar():
-    st.sidebar.markdown("# ScoopDash")
+    st.sidebar.markdown("<h1 style='text-align: left;'><span style='color: #317bd4;'>Scooper</span> Dashboard 🎯</h1>", unsafe_allow_html=True)
     st.sidebar.subheader("Go to")
     if st.sidebar.button("Home", key="home_button"):
         st.session_state['page'] = 'home'
