@@ -438,9 +438,9 @@ def login(username, password):
 
 def display_login_form():
     # Create three columns
-    col1, col2 = st.columns([1, 2])
+    col1, col2, col3 = st.columns([1, 2, 1])
     
-    with col1:  # Middle column for the form
+    with col2:  # Middle column for the form
         st.title('Scooper Dashboard 🖨️')
         st.markdown('**Welcome to Scooper Dashboard**')
         with st.form(key='login_form'):
