@@ -441,6 +441,8 @@ def display_login_form():
     col1, col2 = st.columns([1, 2])
     
     with col1:  # Middle column for the form
+        st.title('Scooper Dashboard 🖨️')
+        st.markdown('**Welcome to Scooper Dashboard**')
         with st.form(key='login_form'):
             # Input fields for username and password
             username = st.text_input("Username")
@@ -462,8 +464,6 @@ def main():
     if st.session_state['logged_in']:
         display_dashboard()
     else:
-        st.title('Scooper Dashboard 🖨️')
-        st.markdown('**Welcome to Scooper Dashboard**')
         display_login_form()
 
 if __name__ == "__main__":
