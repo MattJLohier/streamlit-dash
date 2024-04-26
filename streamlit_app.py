@@ -698,15 +698,8 @@ def show_raw_data_cert():
     st.subheader('Raw Certification Data')
     st.subheader('Energy Star ⚡')
     conn = st.connection('s3', type=FilesConnection)
-    df_raw_certs = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
-    st.write(df_raw_certs)
-
-    conn = st.connection('s3', type=FilesConnection)
     df_raw_certs2 = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
-    st.write(df_raw_certs2)
     df_sorted = df_raw_certs2.sort_values(by="date_available_on_market", ascending=False)
-    st.write(df_sorted)
-
 
     def extract_unique_countries(market_col):
         unique_countries = set()
