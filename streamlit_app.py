@@ -169,7 +169,7 @@ def page2():
 def show_recent():
     # Code to display recent data
     st.subheader('Recent Certifications')
-       conn = st.connection('s3', type=FilesConnection)
+    conn = st.connection('s3', type=FilesConnection)
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
     df7 = df5
     df5 = df5[-10:]
