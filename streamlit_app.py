@@ -408,25 +408,25 @@ def show_recent_cert():
     <style>
     .grid-container {
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Creates a 3-column grid */
+        grid-template-columns: repeat(3, 1fr); /* Maintains 3 columns */
         grid-gap: 10px; /* Space between cards */
         padding: 10px;
-        width: 320px;
+        width: auto; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
     }
 
     .card {
-    height: auto;
-    min-height: 120px;
-    position: relative;
-    width: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px;
-    border-radius: 24px;
-    overflow: hidden;
-    line-height: 1.6;
-    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+        height: auto;
+        min-height: 120px;
+        position: relative;
+        width: 100%; /* This makes each card responsive within its grid column */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        border-radius: 24px;
+        overflow: hidden;
+        line-height: 1.6;
+        transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .content {
