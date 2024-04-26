@@ -711,10 +711,10 @@ def show_raw_data_cert():
     col1, col2 = st.columns(2)
     with col1:
         # Filter by product category
-        categories = ['any'] + list(df_sorted['product_category'].unique())
+        categories = ['any'] + list(df_sorted['product_type'].unique())
         selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
         if selected_category != 'any':
-            df_sorted = df_sorted[df_sorted['product_category'] == selected_category]
+            df_sorted = df_sorted[df_sorted['product_type'] == selected_category]
 
         # Filter by brand
         brands = ['any'] + list(df_sorted['brand_name'].unique())
