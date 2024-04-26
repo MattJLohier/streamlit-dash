@@ -256,7 +256,7 @@ def show_recent():
     }
 
     .content .heading {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 20px;
     line-height: 1;
     z-index: 1;
@@ -267,7 +267,7 @@ def show_recent():
     z-index: 1;
     opacity: 0.8;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
     transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
