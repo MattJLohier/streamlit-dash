@@ -698,9 +698,12 @@ def show_raw_data_cert():
     st.subheader('Raw Certification Data')
     st.subheader('Energy Star ⚡')
     conn = st.connection('s3', type=FilesConnection)
-    df_raw_certs = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    df_raw_certs = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
     st.write(df_raw_certs)
 
+    conn = st.connection('s3', type=FilesConnection)
+    df_raw_certs = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
+    st.write(df_raw_certs)
 
     st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
