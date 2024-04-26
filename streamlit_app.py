@@ -145,21 +145,14 @@ def page2():
     col1, col2, col3, col4 = st.columns(4)
 
     # Define interactive tiles that update the session state upon clicking
-    if col1.container().button('Recent', key='1'):
+    if col1.button('Recent', key='1'):
         st.session_state['current_page'] = 'Recent'
-    col1.markdown("**Recent**")  # Add descriptions or images within the tile
-
-    if col2.container().button('Raw Data', key='2'):
+    if col2.button('Raw Data', key='2'):
         st.session_state['current_page'] = 'Raw Data'
-    col2.markdown("**Raw Data**")  # Add descriptions or images within the tile
-
-    if col3.container().button('Changelog', key='3'):
+    if col3.button('Changelog', key='3'):
         st.session_state['current_page'] = 'Changelog'
-    col3.markdown("**Changelog**")  # Add descriptions or images within the tile
-
-    if col4.container().button('Insights', key='4'):
+    if col4.button('Insights', key='4'):
         st.session_state['current_page'] = 'Insights'
-    col4.markdown("**Insights**")  # Add descriptions or images within the tile
 
     # Conditional rendering based on selected page
     if st.session_state['current_page'] == 'Recent':
@@ -170,6 +163,7 @@ def page2():
         show_changelog()
     elif st.session_state['current_page'] == 'Insights':
         show_insights()
+
 
 def show_recent():
     # Code to display recent data
