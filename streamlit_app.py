@@ -362,6 +362,7 @@ def show_recent():
         for col in row:
             if row_index < len(latest_df4):
                 with col:
+                    row_data = latest_df4.iloc[row_index]
                     brand = row['Brand']
                     count = df5[df5['Brand'] == brand]['Count'].values[0]
                     metric_label = row['Action']
