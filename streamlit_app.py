@@ -778,11 +778,11 @@ def show_raw_data_cert():
         if selected_brand != 'any':
             df_sorted = df_sorted[df_sorted['Manufacturer'] == selected_brand1]
 
-        remanufactured_options = ['any', 'Yes', 'No']
+        remanufactured_options = ['any', 'Active', 'NA']
         selected_remanufactured1 = st.selectbox('Status', remanufactured_options, index=0)
-        if selected_remanufactured1 == 'Yes':
+        if selected_remanufactured1 == 'Active':
             df_sorted = df_sorted[df_raw_certs4['Status'] == True]
-        elif selected_remanufactured1 == 'No':
+        elif selected_remanufactured1 == 'NA':
             df_sorted = df_sorted[df_raw_certs4['Status'] == False]
 
     with col2:
