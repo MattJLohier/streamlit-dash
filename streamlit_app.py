@@ -42,17 +42,26 @@ def sidebar():
         color: #3775cb;                  /* Text color on hover */
         background-color: white;         /* Background color on hover */
     }
+    .button-active {
+        font-weight: 900;                /* Increase font weight for active tab */
+        border: 2px solid white;         /* Optional: add a border to active tab */
+    }
     </style>
     """, unsafe_allow_html=True)
-    
+
     # Define buttons in the custom container
     with button_container:
-        if st.button("Home", key="home_button"):
-            st.session_state['page'] = 'home'
-        if st.button("Certifications", key="certifications_button"):
-            st.session_state['page'] = 'certifications'
-        if st.button("Placements", key="placements_button"):
-            st.session_state['page'] = 'placements'
+        # Dynamically set active class styles
+        home_button_style = "button-active" if st.session_state.get('page') == 'home' else ""
+        certifications_button_style = "button-active" if st.session_state.get('page') == 'certifications' else ""
+        placements_button_style = "button-active" if st.session_state.get('page') == 'placements' else ""
+
+        if st.button("Home", key="home_button", on_click=lambda: st.session_state.update({'page': 'home'}), args=()):
+            pass
+        if st.button("Certifications", key="certifications_button", on_click=lambda: st.session_state.update({'page': 'certifications'}), args=()):
+            pass
+        if st.button("Placements", key="placements_button", on_click=lambda: st.session_state.update({'page': 'placements'}), args=()):
+            pass
 
 
 def login(username, password):
