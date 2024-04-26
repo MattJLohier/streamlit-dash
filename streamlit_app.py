@@ -831,9 +831,9 @@ def show_raw_data_cert():
         sort_options = ['Newest', 'Oldest']
         selected_sort = st.selectbox('Sort by Registration Date', sort_options, index=0)  # Default to Newest
         if selected_sort == 'Newest':
-            df_raw_certs5 = df_raw_certs5.sort_values(by='Date Of Last Certification', ascending=False)
+            df_raw_certs5 = df_raw_certs5.sort_values(by='Date of Last Certification', ascending=False)
         elif selected_sort == 'Oldest':
-            df_raw_certs5 = df_raw_certs5.sort_values(by='Date Of Last Certification', ascending=True)
+            df_raw_certs5 = df_raw_certs5.sort_values(by='Date of Last Certification', ascending=True)
 
     st.write(df_raw_certs5)
 
