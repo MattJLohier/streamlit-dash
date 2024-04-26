@@ -406,12 +406,20 @@ def show_recent_cert():
 
     st.markdown('''
     <style>
+
+    .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));  // This creates a responsive grid with each item having a minimum width of 320px and maximum of 1 fraction of available space
+    gap: 20px;  // This adds space between the cards
+    padding: 10px;
+    }
+
     .card {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 320px;
+    width: 100%;  
     padding: 2px;
     border-radius: 24px;
     overflow: hidden;
@@ -498,6 +506,10 @@ def show_recent_cert():
             "EPEAT": "🌎"
         }
 
+    st.markdown('''
+    <div class="grid-container">
+    ''', unsafe_allow_html=True)
+
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     for index, row in newest_records.iterrows():
         product_name = row['Product Name']
@@ -523,6 +535,10 @@ def show_recent_cert():
         """
         st.markdown(html_content, unsafe_allow_html=True)    
 
+
+    st.markdown('''
+    </div>
+    ''', unsafe_allow_html=True)
 
 def show_raw_data_cert():
     st.header('Raw Certification Data 📝')
