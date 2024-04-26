@@ -9,7 +9,7 @@ from PIL import Image
 import requests
 
 # URL of the image you want to use as the page icon
-icon_url = "https://dummyimage.com/300"
+icon_url = "https://i.postimg.cc/Y0XLcpg7/scooper-s.png"
 
 # Download the image
 response = requests.get(icon_url)
