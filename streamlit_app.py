@@ -648,8 +648,7 @@ def show_recent_cert():
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     
     if st._is_running_with_streamlit:
-    page_width = st._get_report_ctx().get("theme").get("containerWidth")
-
+        page_width = st._get_report_ctx().get("theme").get("containerWidth")
         if page_width > 1000:  # Adjust this value based on your preference
             num_columns = 3
         else:
