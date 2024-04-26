@@ -393,7 +393,7 @@ def show_recent():
                                 Brand: {brand}<br>
                                 Product Type: {metric_value}<br>
                                 Certification Date: {date_detected}<br>
-                                Source: {source} {emoji}
+                                Source: {title} {emoji}
                             </p>
                         </div>
                     </div>
