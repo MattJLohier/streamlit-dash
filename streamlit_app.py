@@ -43,40 +43,41 @@ def display_dashboard():
         """, unsafe_allow_html=True)
 
 def sidebar():
-    st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)  # Adjust the image path as needed
+    st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)
     st.sidebar.markdown("---")
-    # Set up a container for the buttons
-    button_container = st.sidebar.container()
     
-    # Inject CSS to make container's children (buttons) 100% width
+    # Inject CSS to make container's children (buttons) 100% width with unique identifier
     st.sidebar.markdown("""
     <style>
-    .sidebar-container div.stButton > button:first-child {
+    .custom-sidebar div.stButton > button {
         width: 100%;
         font-weight: bold;               /* Make text bold */
         color: white;                    /* Set text color to white */
         background-color: #3775cb;       /* Set normal state background color */
         transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
     }
-    sidebar-container div.stButton > button:first-child:hover {
+    .custom-sidebar div.stButton > button:hover {
         color: #3775cb;                  /* Text color on hover */
         background-color: white;         /* Background color on hover */
     }
-    .sidebar-container div.stButton > button:first-child:active {
+    .custom-sidebar div.stButton > button:active {
         background-color: #0056b3;       /* Set active state background color to blue */
         color: white;                    /* Set text color in active state */
     }
     </style>
+    <div class='custom-sidebar'>
     """, unsafe_allow_html=True)
     
-    with button_container:
-        button_container.add_class("sidebar-container")
-        if st.button("Home", key="home_button"):
-            st.session_state['page'] = 'home'
-        if st.button("Certifications", key="certifications_button"):
-            st.session_state['page'] = 'certifications'
-        if st.button("Placements", key="placements_button"):
-            st.session_state['page'] = 'placements'
+    # Create buttons within the custom-styled div
+    if st.sidebar.button("Home", key="home_button"):
+        st.session_state['page'] = 'home'
+    if st.sidebar.button("Certifications", key="certifications_button"):
+        st.session_state['page'] = 'certifications'
+    if st.sidebar.button("Placements", key="placements_button"):
+        st.session_state['page'] = 'placements'
+
+    # Close the custom div
+    st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
 
 def login(username, password):
