@@ -705,8 +705,8 @@ def show_raw_data_cert():
     df_raw_certs2 = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
     st.write(df_raw_certs2)
     df_sorted = df_raw_certs2.sort_values(by="date_available_on_market", ascending=False)
-    selected_category = st.selectbox('Select a product category', df_sorted['product_category'].unique())
-    filtered_df = df_sorted[df_sorted['product_category'] == selected_category]
+    selected_category = st.selectbox('Select a product category', df_sorted['product_type'].unique())
+    filtered_df = df_sorted[df_sorted['product_type'] == selected_category]
 
     # Display the filtered dataframe
     st.write(filtered_df)
