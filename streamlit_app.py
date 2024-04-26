@@ -708,10 +708,10 @@ def show_raw_data_cert():
     st.write(df_sorted)
 
     # Filter by product category
-    categories = ['any'] + list(df_sorted['product_type'].unique())
+    categories = ['any'] + list(df_sorted['product_category'].unique())
     selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
     if selected_category != 'any':
-        filtered_df = df_sorted[df_sorted['product_type'] == selected_category]
+        filtered_df = df_sorted[df_sorted['product_category'] == selected_category]
     else:
         filtered_df = df_sorted
 
