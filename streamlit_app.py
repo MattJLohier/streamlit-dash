@@ -38,7 +38,7 @@ def display_dashboard():
             <img src='https://cdn-icons-png.flaticon.com/512/174/174857.png' style='width:32px; height:32px;'>
         </a><!--
         --><a href="{personal_website_url}" target="_blank" style='display: inline-block;'>
-            <img src='https://i.postimg.cc/jSnw9YjV/portfolio.png' style='width:32px; height:32px;'>
+            <img src='https://i.postimg.cc/9MbrTWL9/portfolio.png' style='width:32px; height:32px;'>
         </a>
         """, unsafe_allow_html=True)
 
