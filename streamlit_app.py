@@ -57,19 +57,15 @@ def sidebar():
         color: white;                    /* Set text color to white */
         background-color: #3775cb;       /* Set normal state background color */
         transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
-        outline: none;
     }
     [data-testid="stSidebarUserContent"] .stButton button:hover {
         color: #3775cb;                  /* Text color on hover */
         background-color: white;         /* Background color on hover */
-        outline: 2px solid green;        /* Green outline on hover */
-        outline-style: solid;            /* Ensure outline style is applied */
+
     }
     [data-testid="stSidebarUserContent"] .stButton button:active {
         background-color: #0056b3;       /* Set active state background color */
         color: white;                    /* Set text color in active state */
-        outline: 2px solid green;          /* Red outline when active */
-        outline-style: solid;            /* Ensure outline style is applied */
     }
     </style>
     """, unsafe_allow_html=True)
