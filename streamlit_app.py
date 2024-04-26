@@ -133,20 +133,43 @@ def page1():
     st.write("Welcome to Page 1")
     sidebar()
 
+
+
 def page2():
     st.header('Placements 💡')
-    st.subheader('Recent Placements')
+    # Define buttons for navigation
+    if 'current_page' not in st.session_state:
+        st.session_state['current_page'] = 'Recent'
 
-    # Add your placements data here
-    conn = st.connection('s3', type=FilesConnection)
-    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    df4.drop_duplicates(subset="Product Name", inplace=True)
-    df4 = df4.sort_values(by='Date Detected', ascending=True)
-        
-    latest_df4 = df4.tail(5)  # Get the latest 5 records
-    latest_df4 = latest_df4.iloc[::-1]
-        
-    conn = st.connection('s3', type=FilesConnection)
+    btn_recent = st.button('Recent', key='1')
+    btn_raw_data = st.button('Raw Data', key='2')
+    btn_changelog = st.button('Changelog', key='3')
+    btn_insights = st.button('Insights', key='4')
+
+    # Update current page based on button click
+    if btn_recent:
+        st.session_state['current_page'] = 'Recent'
+    elif btn_raw_data:
+        st.session_state['current_page'] = 'Raw Data'
+    elif btn_changelog:
+        st.session_state['current_page'] = 'Changelog'
+    elif btn_insights:
+        st.session_state['current_page'] = 'Insights'
+
+    # Conditional rendering based on selected page
+    if st.session_state['current_page'] == 'Recent':
+        show_recent()
+    elif st.session_state['current_page'] == 'Raw Data':
+        show_raw_data()
+    elif st.session_state['current_page'] == 'Changelog':
+        show_changelog()
+    elif st.session_state['current_page'] == 'Insights':
+        show_insights()
+
+def show_recent():
+    # Code to display recent data
+    st.subheader('Recent Certifications')
+       conn = st.connection('s3', type=FilesConnection)
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
     df7 = df5
     df5 = df5[-10:]
@@ -208,6 +231,21 @@ def page2():
                                     </p>"""
         with container:
             st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+    # Example: st.write(data_recent)
+
+def show_raw_data():
+    # Code to display raw data
+    st.subheader('Raw Certification Data')
+        # Add your placements data here
+    conn = st.connection('s3', type=FilesConnection)
+    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    df4.drop_duplicates(subset="Product Name", inplace=True)
+    df4 = df4.sort_values(by='Date Detected', ascending=True)
+        
+    latest_df4 = df4.tail(5)  # Get the latest 5 records
+    latest_df4 = latest_df4.iloc[::-1]
+        
+ 
 
     st.subheader('Current Placement Count By Brand')
     #st.bar_chart(df5.set_index('Brand')['Count'], width=200, height=475, color='#24AABE')
@@ -280,6 +318,18 @@ def page2():
     # Sort by Date with the newest date first
     df7_pivot = df7_pivot.sort_values(by='Date', ascending=False)
     st.dataframe(df7_pivot, width=1200)
+    # Example: st.write(data_raw)
+
+def show_changelog():
+    # Code to display changelog
+    st.subheader('Changelog')
+    # Example: st.write(data_changelog)
+
+def show_insights():
+    # Code to display insights
+    st.subheader('Insights')
+    # Example: st.write(data_insights)
+
 
 def page3():
     st.header('Certifications 📝')
