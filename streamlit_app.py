@@ -265,7 +265,7 @@ def show_recent():
     background: #3775cb;
     background: linear-gradient(to right, #3775cb, #3775cb);
     transform-origin: center;
-    animation: moving 9.8s linear infinite paused;
+    animation: moving 13.8s linear infinite paused;
     transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
