@@ -30,7 +30,7 @@ def display_dashboard():
     st.info('Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape new product certifications and placements from official manufacturer websites.') 
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
     with st.container():
-        st.write("")  # Optional: Use st.empty() if you prefer no filler text at all
+        st.caption('Created By Matt Lohier')
         linkedin_url = "https://www.linkedin.com"  # Change this URL to your specific LinkedIn profile or page
         personal_website_url = "https://example.com"  # Change this to your personal website URL
         st.markdown(f"""
