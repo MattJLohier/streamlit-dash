@@ -412,6 +412,7 @@ def show_recent_cert():
         grid-gap: 10px; /* Space between cards */
         padding: 10px;
         width: auto; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
+        margin-right: 25px;
     }
 
     .card {
@@ -424,7 +425,6 @@ def show_recent_cert():
         justify-content: center;
         padding: 2px;
         border-radius: 24px;
-        margin-right: 20px;
         overflow: hidden;
         line-height: 1.6;
         transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
