@@ -715,6 +715,7 @@ def show_raw_data_cert():
         selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
         if selected_category != 'any':
             df_sorted = df_sorted[df_sorted['product_type'] == selected_category]
+            
 
         # Filter by brand
         brands = ['any'] + list(df_sorted['brand_name'].unique())
@@ -724,10 +725,10 @@ def show_raw_data_cert():
 
     with col2:
         # Filter by Markets
-        markets = ['any'] + list(df_sorted['markets'].unique())
-        selected_market = st.selectbox('Select a market', markets, index=0 if 'any' in markets else 1)
-        if selected_market != 'any':
-            df_sorted = df_sorted[df_sorted['markets'] == selected_market]
+        # Split 'markets' into individual countries and create a unique list of countries
+        unique_countries = set()
+        df_sorted['markets'].str.split(',').apply(unique_countries.update)
+        unique_countries = ['any'] + sorted(unique_countries)
 
         # Filter by Color/Mono
         color_capabilities = ['any'] + list(df_sorted['color_capability'].unique())
