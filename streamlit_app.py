@@ -708,7 +708,15 @@ def show_raw_data_cert():
     st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
 
+    conn = st.connection('s3', type=FilesConnection)
+    df_raw_certs3 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    st.write(df_raw_certs3)
+
     st.subheader('EPEAT 🌎')
+
+    conn = st.connection('s3', type=FilesConnection)
+    df_raw_cert4 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+    st.write(df_raw_certs4)
 
 def show_changelog_cert():
     # Code to display changelog
