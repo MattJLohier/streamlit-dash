@@ -582,7 +582,7 @@ def show_recent_cert():
     .card:hover::before {
     animation-play-state: running;
     z-index: -1;
-    width: 20%;
+    width: 40%;
     }
 
     .card:hover .content .heading,
