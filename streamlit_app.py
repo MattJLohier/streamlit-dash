@@ -414,8 +414,7 @@ def show_recent_cert():
     }
 
     .card {
-    position: relative;
-    display: flex;
+
     align-items: center;
     justify-content: center;
     width: 320px;  
