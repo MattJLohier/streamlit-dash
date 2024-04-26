@@ -365,10 +365,10 @@ def show_recent():
                     row_data = latest_df4.iloc[row_index]
                     brand = row_data['Brand']
                     count = df5[df5['Brand'] == brand]['Count'].values[0]
-                    metric_label = row['Action']
-                    metric_value = row['Product Name']
+                    metric_label = row_data['Action']
+                    metric_value = row_data['Product Name']
                     metric_delta = str(count)
-                    date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
+                    date_detected = row_data['Date Detected']  # Assuming 'Date Detected' is the column name in df4
 
 
                     if metric_label == 'Added':
