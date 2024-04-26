@@ -386,7 +386,7 @@ def show_recent():
 
                     # Embed data into HTML
                     html_content = f"""
-                    <div class="card" style="background: {bg_color};>
+                    <div class="card" >
                         <div class="content">
                             <p class="heading">{metric_value}</p>
                             <p class="para">
