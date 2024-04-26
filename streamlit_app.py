@@ -73,7 +73,7 @@ def sidebar():
         width: 100%;
         font-weight: bold;               /* Make text bold */
         color: white;                    /* Set text color to white */
-        background-color: white;       /* Set normal state background color */
+        background-color: #3775cb;       /* Set normal state background color */
         transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
     }
     [data-testid="stSidebarUserContent"] .stButton button:hover {
