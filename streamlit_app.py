@@ -414,6 +414,8 @@ def show_recent_cert():
     }
 
     .card {
+    height: auto;
+    min-height: 120px;
     position: relative;
     display: flex;
     align-items: center;
@@ -529,7 +531,7 @@ def show_recent_cert():
 
                     # Embed data into HTML
                     html_content = f"""
-                    <div class="card" style="height: 120px;">
+                    <div class="card">
                         <div class="content">
                             <p class="heading">{product_name}</p>
                             <p class="para">
