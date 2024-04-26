@@ -30,6 +30,14 @@ def display_dashboard():
     st.info('Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape new product certifications and placements from official manufacturer websites.') 
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
     st.caption('Created By Matt Lohier')
+    linkedin_url = "https://www.linkedin.com"  # Change this URL to your specific LinkedIn profile or page
+    st.markdown(f"""
+    <div style='position: absolute; bottom: 10px; left: 10px;'>
+        <a href="{linkedin_url}" target="_blank">
+            <img src='https://cdn-icons-png.flaticon.com/512/174/174857.png' style='width:32px; height:32px;'>
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
 
 def sidebar():
     st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)  # Adjust the image path as needed
