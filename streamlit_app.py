@@ -320,7 +320,10 @@ def show_recent():
 
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     # Define the number of columns
-    if st.get_page_config().get('layout') == 'wide' and st.get_window_width() > 500:
+    # Provide a layout option for the user to switch
+    layout_option = st.radio("Choose layout:", ['Default', 'Wide'])
+
+    if layout_option == 'Wide':
         num_columns = 3
     else:
         num_columns = 2
