@@ -182,65 +182,6 @@ def show_recent():
     iconname = "fas fa-xmark"
         
     container = st.container()
-
-    # Add your placements data here
-    conn = st.connection('s3', type=FilesConnection)
-    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    df4.drop_duplicates(subset="Product Name", inplace=True)
-    df4 = df4.sort_values(by='Date Detected', ascending=True)
-    latest_df4 = df4.tail(5)  # Get the latest 5 records
-    latest_df4 = latest_df4.iloc[::-1]
-
-    for index, row in latest_df4.iterrows():
-        brand = row['Brand']
-        count = df5[df5['Brand'] == brand]['Count'].values[0]
-        metric_label = row['Action']
-        metric_value = row['Product Name']
-        metric_delta = str(count)
-        date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
-            
-        # Determine the title based on metric_label
-        if metric_label == 'Added':
-            title = "New Product Added"
-            emoji = "🆕"
-        elif metric_label == 'Removed':
-            title = "Product Removed"
-            emoji = "❌"
-        else:
-            title = "Certification Spotted"
-
-        # Set background color and border color based on action
-        bg_color = '#ffdbdb' if metric_label == 'Removed' else '#bfe5ff' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
-        border_color = '#FF0000' if metric_label == 'Removed' else '#3775cb' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
-
-        htmlstr = f"""<p style='background-color: {bg_color}; 
-                                color: rgba({wch_colour_font[0]}, 
-                                        {wch_colour_font[1]}, 
-                                        {wch_colour_font[2]}, 0.75); 
-                                font-size: 10px;
-                                padding: 10px; 
-                                border-radius: 7px; 
-                                border: 3.5px solid {border_color};
-                                line-height: 23px;
-                                border-radius: 7px;
-                                margin-right: 3em; 
-                                >
-                                <span style='font-size: 20px; padding-left: 12px;
-                                    margin-top: 10px;'><b style='font-size: 20px; padding-left:10px' font-size: 20px;> {title} {emoji} </b></span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Name:</b> {metric_value}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Date Detected:</b> {date_detected}</span>
-                                    </p>"""
-        with container:
-            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
-    
-    
-    
-    
-    
     
     st.markdown('''
     <style>
