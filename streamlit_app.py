@@ -709,10 +709,10 @@ def show_raw_data_cert():
 
 
     def extract_unique_countries(market_col):
-    unique_countries = set()
-    # Split each row's market string by comma and strip spaces
-    market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
-    return ['any'] + sorted(unique_countries)
+        unique_countries = set()
+        # Split each row's market string by comma and strip spaces
+        market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
+        return ['any'] + sorted(unique_countries)
 
     unique_countries = extract_unique_countries(df_sorted['markets'])
 
