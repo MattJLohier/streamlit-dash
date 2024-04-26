@@ -500,16 +500,27 @@ def show_recent_cert():
 
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     for index, row in newest_records.iterrows():
-    # Using Streamlit columns to lay out cards side by side
-    cols = container.columns(3)  # Adjust the number of columns as per your layout preference
-    with cols[index % 3]:  # This will distribute cards across the columns
-        st.card(body=f'''
-            <b>{row["Product Name"]}</b><br>
-            Brand: {row["Brand"]}<br>
-            Product Type: {row["Product Type"]}<br>
-            Certification Date: {row["Certification Date"]}<br>
-            Source: {row["Source"]} {emoji_dict.get(row["Source"], "📝")}
-            ''', label=row['Product Name'], key=f'card_{index}')
+        product_name = row['Product Name']
+        certification_date = row['Certification Date']
+        brand = row['Brand']
+        product_type = row['Product Type']
+        source = row['Source']
+        emoji = emoji_dict.get(source, "📝")
+
+        # Embed data into HTML
+        html_content = f"""
+        <div class="card">
+            <div class="content">
+                <p class="heading">{product_name}</p>
+                <p class="para">
+                    Brand: {brand}<br>
+                    Product Type: {product_type}<br>
+                    Certification Date: {certification_date}<br>
+                    Source: {source} {emoji}
+                </p>
+            </div>
+        </div>
+        """
         st.markdown(html_content, unsafe_allow_html=True)    
 
 
