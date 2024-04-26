@@ -296,7 +296,7 @@ def show_recent():
 
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     # Define the number of columns
-    num_columns = 3
+    num_columns = 2
     rows = [st.columns(num_columns) for _ in range((len(latest_df4) + num_columns - 1) // num_columns)]
 
     # Initialize a counter for DataFrame row indices
