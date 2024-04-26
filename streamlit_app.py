@@ -544,7 +544,7 @@ def show_recent_cert():
     align-items: flex-start;
     gap: 24px;
     padding: 20px;
-    border-radius: 22px;
+    border-radius: 15px;
     color: #ffffff;
     overflow: hidden;
     background: #ffffff;
