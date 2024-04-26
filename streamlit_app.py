@@ -406,7 +406,6 @@ def show_recent_cert():
 
     st.markdown('''
     <style>
-
     .grid-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Creates a 3-column grid */
@@ -415,6 +414,8 @@ def show_recent_cert():
     }
 
     .card {
+    position: relative;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 320px;  
