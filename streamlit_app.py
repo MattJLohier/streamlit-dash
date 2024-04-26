@@ -51,19 +51,19 @@ def sidebar():
     # Inject CSS to make container's children (buttons) 100% width
     st.sidebar.markdown("""
     <style>
-    div.stButton > button:first-child {
+    .stSidebar .stButton > button {
         width: 100%;
         font-weight: bold;               /* Make text bold */
         color: white;                    /* Set text color to white */
         background-color: #3775cb;       /* Set normal state background color */
         transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
     }
-    div.stButton > button:first-child:hover {
+    .stSidebar .stButton > button:hover {
         color: #3775cb;                  /* Text color on hover */
         background-color: white;         /* Background color on hover */
     }
-    div.stButton > button:first-child:active {
-        background-color: #0056b3;       /* Set active state background color to blue */
+    .stSidebar .stButton > button:active {
+        background-color: #0056b3;       /* Set active state background color */
         color: white;                    /* Set text color in active state */
     }
     </style>
