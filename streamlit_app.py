@@ -759,10 +759,45 @@ def show_raw_data_cert():
     st.write(df_sorted)
 
     st.subheader('EPEAT 🌎')
-
     conn = st.connection('s3', type=FilesConnection)
     df_raw_certs4 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
     st.write(df_raw_certs4)
+
+    # Organizing filters into a 2x2 grid
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories = ['any'] + list(df_raw_certs4['Product Type'].unique())
+        selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
+        if selected_category != 'any':
+            df_sorted = df_sorted[df_sorted['Product Type'] == selected_category]
+            
+
+        # Filter by brand
+        brands = ['any'] + list(df_raw_certs4['Manufacturer'].unique())
+        selected_brand = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand != 'any':
+            df_sorted = df_sorted[df_sorted['Manufacturer'] == selected_brand]
+
+        remanufactured_options = ['any', 'Yes', 'No']
+        selected_remanufactured = st.selectbox('Status', remanufactured_options, index=0)
+        if selected_remanufactured == 'Yes':
+            df_sorted = df_sorted[df_raw_certs4['Status'] == True]
+        elif selected_remanufactured == 'No':
+            df_sorted = df_sorted[df_raw_certs4['Status'] == False]
+
+    with col2:
+        # Filter by Markets
+        selected_country = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
+        if selected_country != 'any':
+            df_sorted = df_sorted[df_raw_certs4['Registered In'].apply(lambda x: selected_country in map(str.strip, x.split(',')))]
+
+        # Filter by Color/Mono
+        color_capabilities = ['any'] + list(df_raw_certs4['EPEAT Tier'].unique())
+        selected_color_capability = st.selectbox('Select an EPEAT Tier', color_capabilities, index=0 if 'any' in color_capabilities else 1)
+        if selected_color_capability != 'any':
+            df_sorted = df_sorted[df_raw_certs4['EPEAT Tier'] == selected_color_capability]
+
 
 def show_changelog_cert():
     # Code to display changelog
