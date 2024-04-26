@@ -404,54 +404,76 @@ def show_recent_cert():
     sline = "New Certifications Detected"
     container = st.container()
 
+    st.markdown('''
+    <style>
+    .card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 320px;
+    padding: 2px;
+    border-radius: 24px;
+    overflow: hidden;
+    line-height: 1.6;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    background: linear-gradient(to right, #0a3cff, #0a3cff);
+    }
+
+    .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 34px;
+    border-radius: 22px;
+    color: #ffffff;
+    overflow: hidden;
+    background: #ffffff;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .content .heading {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.3;
+    z-index: 1;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .content .para {
+    z-index: 1;
+    opacity: 0.8;
+    font-size: 18px;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    </style>
+    ''', unsafe_allow_html=True)
+
+    # Sample data iteration - replace 'newest_records' with your actual DataFrame
     for index, row in newest_records.iterrows():
         product_name = row['Product Name']
         certification_date = row['Certification Date']
         brand = row['Brand']
         product_type = row['Product Type']
         source = row['Source']
-            # Set background color
-        bg_color = '#F5F5F5'  # Light gray
+        emoji = emoji_dict.get(source, "📝")
 
-            # Set border color
-        border_color = '#3775cb'  # Gold
-
-        # Define emojis based on source
-        emoji_dict = {
-            "Energy Star": "⚡",
-            "WiFi Alliance": "📶",
-            "EPEAT": "🌎"
-        }
-
-        # Determine emoji based on source
-        emoji = emoji_dict.get(source, "📝")  # Default to pencil emoji if source not found in dictionary
-
-        htmlstr = f"""<p style='background-color: {bg_color}; 
-                                    color: rgba({wch_colour_font[0]}, 
-                                            {wch_colour_font[1]}, 
-                                            {wch_colour_font[2]}, 0.75); 
-                                    font-size: 10px;
-                                    padding: 10px; 
-                                    line-height: 20px;
-                                    border-radius: 7px;
-                                    margin-right: 3em; 
-                                    border: 3.5px solid {border_color}; /* Adding 2px border with gold color */
-                                    font-style: italic; 
-                                    >
-                                    <i class='{iconname} fa-xs'></i>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {source} {emoji} </span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Name:</b> {product_name}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Type:</b> {product_type}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >Certification Date:</b> {certification_date}</span>
-                                    </p>"""
-
-        with container:
-            st.markdown(lnk + htmlstr, unsafe_allow_html=True)    
+        # Embed data into HTML
+        html_content = f"""
+        <div class="card">
+            <div class="content">
+                <p class="heading">{product_name}</p>
+                <p class="para">
+                    Brand: {brand}<br>
+                    Product Type: {product_type}<br>
+                    Certification Date: {certification_date}<br>
+                    Source: {source} {emoji}
+                </p>
+            </div>
+        </div>
+        """
+        st.markdown(html_content, unsafe_allow_html=True)    
 
 
 def show_raw_data_cert():
