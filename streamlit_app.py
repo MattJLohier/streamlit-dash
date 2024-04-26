@@ -29,13 +29,16 @@ def display_dashboard():
     st.markdown('**Welcome to Scooper Dashboard**')
     st.info('Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape new product certifications and placements from official manufacturer websites.') 
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
-    st.caption('Created By Matt Lohier')
     with st.container():
-        st.caption('Created By Matt Lohier')
+        st.write("")  # Optional: Use st.empty() if you prefer no filler text at all
         linkedin_url = "https://www.linkedin.com"  # Change this URL to your specific LinkedIn profile or page
+        personal_website_url = "https://example.com"  # Change this to your personal website URL
         st.markdown(f"""
         <a href="{linkedin_url}" target="_blank">
-            <img src='https://cdn-icons-png.flaticon.com/512/174/174857.png' style='width:32px; height:32px; margin-top: 10px;'>
+            <img src='https://cdn-icons-png.flaticon.com/512/174/174857.png' style='width:32px; height:32px; margin-right: 10px;'>
+        </a>
+        <a href="{personal_website_url}" target="_blank">
+            <img src='https://cdn-icons-png.flaticon.com/512/2490/2490334.png' style='width:32px; height:32px;'>
         </a>
         """, unsafe_allow_html=True)
 
