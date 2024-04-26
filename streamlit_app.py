@@ -732,6 +732,13 @@ def show_raw_data_cert():
         if selected_brand != 'any':
             df_sorted = df_sorted[df_sorted['brand_name'] == selected_brand]
 
+        remanufactured_options = ['any', 'Yes', 'No']
+        selected_remanufactured = st.selectbox('Remanufactured Product', remanufactured_options, index=0)
+        if selected_remanufactured == 'Yes':
+            df_sorted = df_sorted[df_sorted['remanufactured_product'] == True]
+        elif selected_remanufactured == 'No':
+            df_sorted = df_sorted[df_sorted['remanufactured_product'] == False]
+
     with col2:
         # Filter by Markets
         selected_country = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
@@ -743,6 +750,10 @@ def show_raw_data_cert():
         selected_color_capability = st.selectbox('Select a color capability', color_capabilities, index=0 if 'any' in color_capabilities else 1)
         if selected_color_capability != 'any':
             df_sorted = df_sorted[df_sorted['color_capability'] == selected_color_capability]
+
+        sort_options = {'date_qualified': 'Date Qualified', 'date_available_on_market': 'Date Available on Market'}
+        selected_sort = st.selectbox('Sort by', options=list(sort_options.keys()), format_func=lambda x: sort_options[x], index=1)
+        df_sorted = df_sorted.sort_values(by=selected_sort, ascending=False)
 
     # Display the filtered dataframe
     st.write(df_sorted)
