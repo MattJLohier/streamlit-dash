@@ -460,8 +460,8 @@ def show_recent_cert():
     .card::before {
     content: "";
     position: absolute;
-    height: 100%;
-    width: 100%;
+    height: 160%;
+    width: 160%;
     border-radius: inherit;
     background: #0a3cff;
     background: linear-gradient(to right, #0a3cff, #0a3cff);
