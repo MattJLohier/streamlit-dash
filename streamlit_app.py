@@ -409,10 +409,9 @@ def show_recent_cert():
     .grid-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Maintains 3 columns */
-        grid-gap: 10px; /* Space between cards */
+        grid-gap: 40px; /* Space between cards */
         padding: 10px;
         width: auto; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
-        margin-right: 25px;
     }
 
     .card {
