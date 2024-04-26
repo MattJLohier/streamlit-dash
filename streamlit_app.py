@@ -441,7 +441,7 @@ def page3():
                                             {wch_colour_font[2]}, 0.75); 
                                     font-size: 10px;
                                     padding: 10px; 
-                                    line-height: 23px;
+                                    line-height: 16px;
                                     border-radius: 7px;
                                     margin-right: 3em; 
                                     border: 3.5px solid {border_color}; /* Adding 2px border with gold color */
