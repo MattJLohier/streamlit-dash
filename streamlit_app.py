@@ -532,7 +532,7 @@ def show_recent_cert():
         padding: 2px;
         border-radius: 24px;
         overflow: hidden;
-        line-height: 1.6;
+        line-height: 1.1;
         transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
         margin: 15px; /* Added margin */
     }
