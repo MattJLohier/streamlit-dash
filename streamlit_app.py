@@ -430,6 +430,7 @@ def show_recent_cert():
     }
 
     .content {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
