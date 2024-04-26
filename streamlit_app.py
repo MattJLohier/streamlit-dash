@@ -468,7 +468,7 @@ def show_recent_cert():
     background: #0a3cff;
     background: linear-gradient(to right, #0a3cff, #0a3cff);
     transform-origin: center;
-    animation: moving 4.8s linear infinite paused;
+    animation: moving 9.8s linear infinite paused;
     transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
