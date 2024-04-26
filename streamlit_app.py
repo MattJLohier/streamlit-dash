@@ -43,26 +43,26 @@ def display_dashboard():
         """, unsafe_allow_html=True)
 
 def sidebar():
-    st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)
+    st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)  # Adjust the image path as needed
     st.sidebar.markdown("---")
-    # Set up a container for the buttons with a specific class 'sidebar-buttons'
+    # Set up a container for the buttons
     button_container = st.sidebar.container()
-
-    # Inject CSS to target only buttons inside elements with the 'sidebar-buttons' class
+    
+    # Inject CSS to make container's children (buttons) 100% width
     st.sidebar.markdown("""
     <style>
-    .sidebar-buttons div.stButton > button:first-child {
+    div.stButton > button:first-child {
         width: 100%;
         font-weight: bold;               /* Make text bold */
         color: white;                    /* Set text color to white */
         background-color: #3775cb;       /* Set normal state background color */
         transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
     }
-    .sidebar-buttons div.stButton > button:first-child:hover {
+    div.stButton > button:first-child:hover {
         color: #3775cb;                  /* Text color on hover */
         background-color: white;         /* Background color on hover */
     }
-    .sidebar-buttons div.stButton > button:first-child:active {
+    div.stButton > button:first-child:active {
         background-color: #0056b3;       /* Set active state background color to blue */
         color: white;                    /* Set text color in active state */
     }
@@ -70,14 +70,12 @@ def sidebar():
     """, unsafe_allow_html=True)
     
     with button_container:
-        st.markdown('<div class="sidebar-buttons">', unsafe_allow_html=True)
         if st.button("Home", key="home_button"):
             st.session_state['page'] = 'home'
         if st.button("Certifications", key="certifications_button"):
             st.session_state['page'] = 'certifications'
         if st.button("Placements", key="placements_button"):
             st.session_state['page'] = 'placements'
-        st.markdown('</div>', unsafe_allow_html=True)
 
 
 def login(username, password):
