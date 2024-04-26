@@ -796,7 +796,7 @@ def show_raw_data_cert():
         selected_color_capability1 = st.selectbox('Select an EPEAT Tier', color_capabilities1, index=0 if 'any' in color_capabilities1 else 1)
         if selected_color_capability1 != 'any':
             df_sorted = df_sorted[df_raw_certs4['EPEAT Tier'] == selected_color_capability1]
-    st.write(df_raw_certs4)
+    st.write(df_sorted)
 
 
 def show_changelog_cert():
