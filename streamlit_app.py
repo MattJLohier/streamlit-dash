@@ -70,6 +70,7 @@ def sidebar():
     """, unsafe_allow_html=True)
     
     with button_container:
+        button_container.add_class("sidebar-container")
         if st.button("Home", key="home_button"):
             st.session_state['page'] = 'home'
         if st.button("Certifications", key="certifications_button"):
