@@ -34,7 +34,7 @@ def display_dashboard():
         linkedin_url = "https://www.linkedin.com"  # Change this URL to your specific LinkedIn profile or page
         personal_website_url = "https://example.com"  # Change this to your personal website URL
         st.markdown(f"""
-        <a href="{linkedin_url}" target="_blank" style='display: inline-block;'>
+        <a href="{linkedin_url}" target="_blank" style='display: inline-block; padding-right: 10px;'>
             <img src='https://cdn-icons-png.flaticon.com/512/174/174857.png' style='width:32px; height:32px;'>
         </a><!--
         --><a href="{personal_website_url}" target="_blank" style='display: inline-block;'>
