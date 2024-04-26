@@ -334,9 +334,36 @@ def show_insights():
 
 def page3():
     st.header('Certifications 📝')
-    
-        # Create connection object and retrieve file contents.
-        # Specify input format is a csv and to cache the result for 600 seconds.
+
+    # Define buttons for navigation
+    if 'current_page' not in st.session_state:
+        st.session_state['current_page'] = 'Recent'
+
+    # Create four columns for the interactive tiles
+    col1, col2, col3, col4 = st.columns(4)
+
+    # Define interactive tiles that update the session state upon clicking
+    if col1.button('Recent 🆕', key='1', use_container_width=True):
+        st.session_state['current_page'] = 'Recent'
+    if col2.button('Raw Data 📝', key='2', use_container_width=True):
+        st.session_state['current_page'] = 'Raw Data'
+    if col3.button('Changelog 🔄', key='3', use_container_width=True):
+        st.session_state['current_page'] = 'Changelog'
+    if col4.button('Insights 🔍', key='4', use_container_width=True):
+        st.session_state['current_page'] = 'Insights'
+
+    # Conditional rendering based on selected page
+    if st.session_state['current_page'] == 'Recent':
+        show_recent_cert()
+    elif st.session_state['current_page'] == 'Raw Data':
+        show_raw_data_cert()
+    elif st.session_state['current_page'] == 'Changelog':
+        show_changelog_cert()
+    elif st.session_state['current_page'] == 'Insights':
+        show_insights_cert()    
+
+
+def show_recent_cert():
     conn = st.connection('s3', type=FilesConnection)
     df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
 
@@ -507,8 +534,10 @@ def page3():
                                     </p>"""
 
         with container:
-            st.markdown(lnk + htmlstr, unsafe_allow_html=True)
+            st.markdown(lnk + htmlstr, unsafe_allow_html=True)    
 
+
+def show_raw_data_cert():
     st.header('Raw Certification Data 📝')
     st.subheader('Energy Star ⚡')
     st.write(estardf)
@@ -522,13 +551,18 @@ def page3():
     st.write(df9)
     st.write(df10)
 
-# Sidebar navigation
-# Render selected page
+def show_changelog_cert():
+    # Code to display changelog
+    st.subheader('Changelog')
+    # Example: st.write(data_changelog)
+
+def show_insights_cert():
+    # Code to display insights
+    st.subheader('Insights')
+    # Example: st.write(data_insights)
 
 
 if __name__ == "__main__":
     main()
-
-##AUTH
 
     
