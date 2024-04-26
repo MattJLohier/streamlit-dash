@@ -52,8 +52,8 @@ def sidebar():
     st.sidebar.markdown("""
     <style>
 
-    .stButton button:hover{
-        outline: none !important;
+    .stButton button:active{
+        outline: green !important;
 
     }
 
