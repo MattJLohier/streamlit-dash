@@ -522,7 +522,7 @@ def show_recent_cert():
     }
 
     .card {
-        min-height: 500px;
+        min-height: 300px;
         position: relative;
         width: 100%; /* This makes each card responsive within its grid column */
         display: flex;
