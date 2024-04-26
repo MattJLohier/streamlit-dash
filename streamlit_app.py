@@ -702,8 +702,8 @@ def show_raw_data_cert():
     st.write(df_raw_certs)
 
     conn = st.connection('s3', type=FilesConnection)
-    df_raw_certs = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
-    st.write(df_raw_certs)
+    df_raw_certs2 = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
+    st.write(df_raw_certs2)
 
     st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
