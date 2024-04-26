@@ -362,7 +362,7 @@ def show_recent():
         for col in row:
             if row_index < len(latest_df4):
                 with col:
-                    row_data = latest_df4.iterrows.iloc[row_index]
+                    row_data = latest_df4.iloc[row_index]
                     product_name = row_data['Product Name']
                     certification_date = row_data['Certification Date']
                     brand = row_data['Brand']
