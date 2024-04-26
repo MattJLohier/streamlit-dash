@@ -5,6 +5,7 @@ import altair as alt
 from st_files_connection import FilesConnection
 import hashlib
 from io import BytesIO
+from PIL import Image
 import requests
 
 # URL of the image you want to use as the page icon
