@@ -417,6 +417,7 @@ def show_recent_cert():
     height: auto;
     min-height: 120px;
     position: relative;
+    width: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
