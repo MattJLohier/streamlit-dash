@@ -423,7 +423,7 @@ def page3():
         bg_color = '#F5F5F5'  # Light gray
 
             # Set border color
-        border_color = '#FFD700'  # Gold
+        border_color = '#3775cb'  # Gold
 
         # Define emojis based on source
         emoji_dict = {
