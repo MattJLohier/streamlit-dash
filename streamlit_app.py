@@ -31,14 +31,14 @@ def display_dashboard():
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
     with st.container():
         st.write("")  # Optional: Use st.empty() if you prefer no filler text at all
-        linkedin_url = "https://www.linkedin.com"  # Change this URL to your specific LinkedIn profile or page
-        personal_website_url = "https://example.com"  # Change this to your personal website URL
+        linkedin_url = "https://www.linkedin.com/in/matt-lohier/"  # Change this URL to your specific LinkedIn profile or page
+        personal_website_url = "https://matt-lohier.com/"  # Change this to your personal website URL
         st.markdown(f"""
         <a href="{linkedin_url}" target="_blank" style='display: inline-block; padding-right: 10px;'>
             <img src='https://cdn-icons-png.flaticon.com/512/174/174857.png' style='width:32px; height:32px;'>
         </a><!--
         --><a href="{personal_website_url}" target="_blank" style='display: inline-block;'>
-            <img src='https://cdn-icons-png.flaticon.com/512/2490/2490334.png' style='width:32px; height:32px;'>
+            <img src='https://i.postimg.cc/jSnw9YjV/portfolio.png' style='width:32px; height:32px;'>
         </a>
         """, unsafe_allow_html=True)
 
