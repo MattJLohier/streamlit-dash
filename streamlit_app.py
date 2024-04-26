@@ -707,34 +707,36 @@ def show_raw_data_cert():
     df_sorted = df_raw_certs2.sort_values(by="date_available_on_market", ascending=False)
     st.write(df_sorted)
 
-    # Filter by product category
-    categories = ['any'] + list(df_sorted['product_type'].unique())
-    selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
-    if selected_category != 'any':
-        filtered_df = df_sorted[df_sorted['product_type'] == selected_category]
-    else:
-        filtered_df = df_sorted
+    # Organizing filters into a 2x2 grid
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories = ['any'] + list(df_sorted['product_category'].unique())
+        selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
+        if selected_category != 'any':
+            df_sorted = df_sorted[df_sorted['product_category'] == selected_category]
 
-    # Filter by brand
-    brands = ['any'] + list(df_sorted['brand_name'].unique())
-    selected_brand = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
-    if selected_brand != 'any':
-        filtered_df = filtered_df[filtered_df['brand_name'] == selected_brand]
+        # Filter by brand
+        brands = ['any'] + list(df_sorted['brand_name'].unique())
+        selected_brand = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand != 'any':
+            df_sorted = df_sorted[df_sorted['brand_name'] == selected_brand]
 
-    # Filter by Markets
-    markets = ['any'] + list(df_sorted['markets'].unique())
-    selected_market = st.selectbox('Select a market', markets, index=0 if 'any' in markets else 1)
-    if selected_market != 'any':
-        filtered_df = filtered_df[filtered_df['markets'] == selected_market]
+    with col2:
+        # Filter by Markets
+        markets = ['any'] + list(df_sorted['markets'].unique())
+        selected_market = st.selectbox('Select a market', markets, index=0 if 'any' in markets else 1)
+        if selected_market != 'any':
+            df_sorted = df_sorted[df_sorted['markets'] == selected_market]
 
-    # Filter by Color/Mono
-    color_capabilities = ['any'] + list(df_sorted['color_capability'].unique())
-    selected_color_capability = st.selectbox('Select a color capability', color_capabilities, index=0 if 'any' in color_capabilities else 1)
-    if selected_color_capability != 'any':
-        filtered_df = filtered_df[filtered_df['color_capability'] == selected_color_capability]
+        # Filter by Color/Mono
+        color_capabilities = ['any'] + list(df_sorted['color_capability'].unique())
+        selected_color_capability = st.selectbox('Select a color capability', color_capabilities, index=0 if 'any' in color_capabilities else 1)
+        if selected_color_capability != 'any':
+            df_sorted = df_sorted[df_sorted['color_capability'] == selected_color_capability]
 
     # Display the filtered dataframe
-    st.write(filtered_df)
+    st.write(df_sorted)
 
     st.subheader('EPEAT 🌎')
 
