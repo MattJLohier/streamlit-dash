@@ -54,7 +54,7 @@ def sidebar():
 
     .stButton button:hover{
         border-color: green !important;
-        color: green;
+        color: #41b1fc;
 
     }
 
