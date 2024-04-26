@@ -362,13 +362,12 @@ def show_recent():
         for col in row:
             if row_index < len(latest_df4):
                 with col:
-                    row_data = latest_df4.iloc[row_index]
-                    product_name = row_data['Product Name']
-                    certification_date = row_data['Certification Date']
-                    brand = row_data['Brand']
-                    product_type = row_data['Product Type']
-                    source = row_data['Source']
-                    emoji = emoji_dict.get(source, "📝")
+                    brand = row['Brand']
+                    count = df5[df5['Brand'] == brand]['Count'].values[0]
+                    metric_label = row['Action']
+                    metric_value = row['Product Name']
+                    metric_delta = str(count)
+                    date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
 
 
                     if metric_label == 'Added':
@@ -692,12 +691,13 @@ def show_recent_cert():
         for col in row:
             if row_index < len(newest_records):
                 with col:
-                    brand = row['Brand']
-                    count = df5[df5['Brand'] == brand]['Count'].values[0]
-                    metric_label = row['Action']
-                    metric_value = row['Product Name']
-                    metric_delta = str(count)
-                    date_detected = row['Date Detected']  # Assuming 'Date Detected' is the column name in df4
+                    row_data = newest_records.iloc[row_index]
+                    product_name = row_data['Product Name']
+                    certification_date = row_data['Certification Date']
+                    brand = row_data['Brand']
+                    product_type = row_data['Product Type']
+                    source = row_data['Source']
+                    emoji = emoji_dict.get(source, "📝")
 
                     # Embed data into HTML
                     html_content = f"""
