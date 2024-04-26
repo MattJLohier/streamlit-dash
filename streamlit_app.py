@@ -44,32 +44,15 @@ def sidebar():
     }
     </style>
     """, unsafe_allow_html=True)
-
+    
     # Define buttons in the custom container
     with button_container:
-        # Apply styles conditionally based on the active tab
-        active_style = "font-weight: 900; color: red; border: 2px solid red;"
-        default_style = "font-weight: bold; color: white; background-color: #3775cb;"
-
-        home_active = st.session_state.get('page') == 'home'
-        certifications_active = st.session_state.get('page') == 'certifications'
-        placements_active = st.session_state.get('page') == 'placements'
-
-        if st.button("Home", key="home_button", 
-                     on_click=lambda: st.session_state.update({'page': 'home'}), 
-                     args=(),
-                     **{'style': active_style if home_active else default_style}):
-            pass
-        if st.button("Certifications", key="certifications_button", 
-                     on_click=lambda: st.session_state.update({'page': 'certifications'}), 
-                     args=(),
-                     **{'style': active_style if certifications_active else default_style}):
-            pass
-        if st.button("Placements", key="placements_button", 
-                     on_click=lambda: st.session_state.update({'page': 'placements'}), 
-                     args=(),
-                     **{'style': active_style if placements_active else default_style}):
-            pass
+        if st.button("Home", key="home_button"):
+            st.session_state['page'] = 'home'
+        if st.button("Certifications", key="certifications_button"):
+            st.session_state['page'] = 'certifications'
+        if st.button("Placements", key="placements_button"):
+            st.session_state['page'] = 'placements'
 
 
 def login(username, password):
