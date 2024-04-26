@@ -447,8 +447,6 @@ def page3():
                                     border: 3.5px solid {border_color}; /* Adding 2px border with gold color */
                                     font-style: italic; 
                                     >
-                                    <i class='{iconname} fa-xs'></i>
-                                    <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Name:</b> {product_name}</span>
