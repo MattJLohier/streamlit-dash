@@ -61,6 +61,7 @@ def sidebar():
         border-color: #3775cb !important;
         color: #3775cb;
         background-color: white;
+        font-weight: 500;
     }
 
     .st-emotion-cache-32r2nf:focus:not(:active){
