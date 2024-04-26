@@ -37,31 +37,21 @@ def sidebar():
         color: white;                    /* Set text color to white */
         background-color: #3775cb;       /* Set background color */
         transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
-        border: 2px solid transparent;   /* No border unless active */
     }
     div.stButton > button:first-child:hover {
         color: #3775cb;                  /* Text color on hover */
         background-color: white;         /* Background color on hover */
     }
-    .active-button {
-        border-color: #3775cb;           /* Blue border for active button */
-    }
     </style>
     """, unsafe_allow_html=True)
-
+    
     # Define buttons in the custom container
     with button_container:
-        # Dynamically add 'active-button' class if the page is active
-        home_active = "active-button" if st.session_state.get('page') == 'home' else ""
-        if st.button("Home", key="home_button", args={"class": home_active}):
+        if st.button("Home", key="home_button"):
             st.session_state['page'] = 'home'
-
-        certs_active = "active-button" if st.session_state.get('page') == 'certifications' else ""
-        if st.button("Certifications", key="certifications_button", args={"class": certs_active}):
+        if st.button("Certifications", key="certifications_button"):
             st.session_state['page'] = 'certifications'
-
-        place_active = "active-button" if st.session_state.get('page') == 'placements' else ""
-        if st.button("Placements", key="placements_button", args={"class": place_active}):
+        if st.button("Placements", key="placements_button"):
             st.session_state['page'] = 'placements'
 
 
