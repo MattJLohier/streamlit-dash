@@ -769,21 +769,21 @@ def show_raw_data_cert():
         categories = ['any'] + list(df_raw_certs4['Product Type'].unique())
         selected_category1 = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
         if selected_category != 'any':
-            df_sorted = df_sorted[df_sorted['Product Type'] == selected_category1]
+            df_raw_certs4 = df_raw_certs4[df_raw_certs4['Product Type'] == selected_category1]
             
 
         # Filter by brand
         brands = ['any'] + list(df_raw_certs4['Manufacturer'].unique())
         selected_brand1 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
         if selected_brand != 'any':
-            df_sorted = df_sorted[df_sorted['Manufacturer'] == selected_brand1]
+            df_raw_certs4 = df_raw_certs4[df_sorted['Manufacturer'] == selected_brand1]
 
         remanufactured_options = ['any', 'Active', 'NA']
         selected_remanufactured1 = st.selectbox('Status', remanufactured_options, index=0)
         if selected_remanufactured1 == 'Active':
-            df_sorted = df_sorted[df_raw_certs4['Status'] == True]
+            df_raw_certs4 = df_raw_certs4[df_raw_certs4['Status'] == True]
         elif selected_remanufactured1 == 'NA':
-            df_sorted = df_sorted[df_raw_certs4['Status'] == False]
+            df_raw_certs4 = df_raw_certs4[df_raw_certs4['Status'] == False]
 
     with col2:
         # Filter by Markets
@@ -795,8 +795,8 @@ def show_raw_data_cert():
         color_capabilities1 = ['any'] + list(df_raw_certs4['EPEAT Tier'].unique())
         selected_color_capability1 = st.selectbox('Select an EPEAT Tier', color_capabilities1, index=0 if 'any' in color_capabilities1 else 1)
         if selected_color_capability1 != 'any':
-            df_sorted = df_sorted[df_raw_certs4['EPEAT Tier'] == selected_color_capability1]
-    st.write(df_sorted)
+            df_raw_certs4 = df_raw_certs4e[df_raw_certs4['EPEAT Tier'] == selected_color_capability1]
+    st.write(df_raw_certs4)
 
 
 def show_changelog_cert():
