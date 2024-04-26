@@ -786,10 +786,14 @@ def show_raw_data_cert():
             df_raw_certs4 = df_raw_certs4[df_raw_certs4['Status'] == False]
 
     with col2:
-        # Filter by Markets
-        #selected_country1 = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
-        #if selected_country1 != 'any':
-            #df_sorted = df_sorted[df_raw_certs4['Registered In'].apply(lambda x: selected_country1 in map(str.strip, x.split(',')))]
+        # Filter by Market
+        markets = ['any'] + list(df_raw_certs4['Registered In'].unique())
+        # Defaulting to 'United States' if it exists in the options
+        default_market_index = markets.index('United States') if 'United States' in markets else 0
+        selected_market = st.selectbox('Select a market', markets, index=default_market_index)
+        if selected_market != 'any':
+            df_raw_certs4 = df_raw_certs4[df_raw_certs4['Registered In'] == selected_market]
+
 
         # Filter by Color/Mono
         color_capabilities1 = ['any'] + list(df_raw_certs4['EPEAT Tier'].unique())
