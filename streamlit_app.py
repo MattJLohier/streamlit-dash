@@ -467,7 +467,7 @@ def show_recent_cert():
     width: 300%;
     border-radius: inherit;
     background: #3775cb;
-    background: linear-gradient(to right, #0a3cff, #0a3cff);
+    background: linear-gradient(to right, #3775cb, #3775cb);
     transform-origin: center;
     animation: moving 9.8s linear infinite paused;
     transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
