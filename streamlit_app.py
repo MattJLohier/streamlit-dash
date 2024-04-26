@@ -647,18 +647,29 @@ def show_recent_cert():
 
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     
-    # Define the number of columns
-    # Get the page width
-    page_width = st.beta_get_query_params()['w'][0] if 'w' in st.beta_get_query_params() else None
+    if 'page_width' not in st.session_state:
+        st.session_state.page_width = None
+
+    if st._is_running_with_streamlit:
+        st.markdown(
+            """
+            <style>
+                .reportview-container .main .block-container {
+                    max-width: 1000px;
+                }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
 
     # Define the number of columns based on the page width
-    if page_width and int(page_width) > 1000:  # Adjust this value based on your preference
+    if st.session_state.page_width and st.session_state.page_width > 1000:  # Adjust this value based on your preference
         num_columns = 3
     else:
         num_columns = 2
 
     # Create rows with the appropriate number of columns
-    rows = [st.beta_columns(num_columns) for _ in range((len(newest_records) + num_columns - 1) // num_columns)]
+    rows = [st.columns(num_columns) for _ in range((len(newest_records) + num_columns - 1) // num_columns)]
 
     # Initialize a counter for DataFrame row indices
     row_index = 0
