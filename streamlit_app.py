@@ -781,7 +781,7 @@ def show_raw_data_cert():
         remanufactured_options = ['any', 'Active', 'NA']
         selected_remanufactured1 = st.selectbox('Status', remanufactured_options, index=0)
         if selected_remanufactured1 == 'Active':
-            df_raw_certs4 = df_raw_certs4[df_raw_certs4['Status'] == True]
+            df_raw_certs4 = df_raw_certs4[df_raw_certs4['Status'] == "Active"]
         elif selected_remanufactured1 == 'NA':
             df_raw_certs4 = df_raw_certs4[df_raw_certs4['Status'] == False]
 
