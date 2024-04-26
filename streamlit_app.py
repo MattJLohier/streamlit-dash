@@ -168,6 +168,13 @@ def page2():
 def show_recent():
     # Code to display recent data
     st.subheader('Recent Certifications')
+    conn = st.connection('s3', type=FilesConnection)
+    df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+    df5 = df5[-10:]
+    df5 = df5.sort_values(by='Brand').reset_index(drop=True)
+
+    # Create metrics for the latest 5 records
+
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
     wch_colour_font = (0, 0, 0)
     fontsize = 20
@@ -232,7 +239,8 @@ def show_recent():
     # Example: st.write(data_recent)
 
 def show_raw_data():
-    st.subheader('Raw Data')
+    # Code to display raw data
+    st.subheader('Raw Certification Data')
 
 def show_changelog():
     # Code to display changelog
@@ -243,6 +251,7 @@ def show_insights():
     # Code to display insights
     st.subheader('Insights')
     # Example: st.write(data_insights)
+
 
 def page3():
     st.header('Certifications 📝')
