@@ -55,7 +55,11 @@ def sidebar():
     .stButton button:hover{
         border-color: #3775cb !important;
         color: #3775cb;
+    }
 
+    .stButton button:active{
+        border-color: #3775cb !important;
+        color: #3775cb;
     }
 
     [data-testid="stSidebarUserContent"] .stButton button {
