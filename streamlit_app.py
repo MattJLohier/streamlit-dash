@@ -704,31 +704,34 @@ def show_raw_data_cert():
     conn = st.connection('s3', type=FilesConnection)
     df_raw_certs2 = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
     st.write(df_raw_certs2)
-    df_sorted = df_raw_certs2.sort_values(by="date_available_on_market", ascending=False)
-    selected_category = st.selectbox('Select a product category', df_sorted['product_type'].unique())
-    filtered_df = df_sorted[df_sorted['product_type'] == selected_category]
+    # Filter by product category
+    categories = ['any'] + list(df_sorted['product_category'].unique())
+    selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
+    if selected_category != 'any':
+        filtered_df = df_sorted[df_sorted['product_category'] == selected_category]
+    else:
+        filtered_df = df_sorted
 
     # Filter by brand
-    selected_brand = st.selectbox('Select a brand', df_sorted['brand_name'].unique())
-    filtered_df = filtered_df[filtered_df['brand_name'] == selected_brand]
+    brands = ['any'] + list(df_sorted['brand_name'].unique())
+    selected_brand = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+    if selected_brand != 'any':
+        filtered_df = filtered_df[filtered_df['brand_name'] == selected_brand]
 
     # Filter by Markets
-    selected_market = st.selectbox('Select a market', df_sorted['markets'].unique())
-    filtered_df = filtered_df[filtered_df['markets'] == selected_market]
+    markets = ['any'] + list(df_sorted['markets'].unique())
+    selected_market = st.selectbox('Select a market', markets, index=0 if 'any' in markets else 1)
+    if selected_market != 'any':
+        filtered_df = filtered_df[filtered_df['markets'] == selected_market]
 
     # Filter by Color/Mono
-    selected_color_capability = st.selectbox('Select a color capability', df_sorted['color_capability'].unique())
-    filtered_df = filtered_df[filtered_df['color_capability'] == selected_color_capability]
+    color_capabilities = ['any'] + list(df_sorted['color_capability'].unique())
+    selected_color_capability = st.selectbox('Select a color capability', color_capabilities, index=0 if 'any' in color_capabilities else 1)
+    if selected_color_capability != 'any':
+        filtered_df = filtered_df[filtered_df['color_capability'] == selected_color_capability]
 
     # Display the filtered dataframe
     st.write(filtered_df)
-
-    st.subheader('WiFi Alliance 📶')
-    conn = st.connection('s3', type=FilesConnection)
-
-    conn = st.connection('s3', type=FilesConnection)
-    df_raw_certs3 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    st.write(df_raw_certs3)
 
     st.subheader('EPEAT 🌎')
 
