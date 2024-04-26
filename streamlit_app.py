@@ -67,6 +67,7 @@ def sidebar():
         border-color: #3775cb !important;
         color: #3775cb;
         background-color: white;
+        font-weight: 500;
     }
 
     [data-testid="stSidebarUserContent"] .stButton button {
