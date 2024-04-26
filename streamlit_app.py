@@ -417,11 +417,10 @@ def show_recent_cert():
     height: auto;
     min-height: 120px;
     position: relative;
-    width: 100%;
+    width: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80%;  
     padding: 2px;
     border-radius: 24px;
     overflow: hidden;
