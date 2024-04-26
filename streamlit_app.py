@@ -650,10 +650,10 @@ def show_recent_cert():
     if st._is_running_with_streamlit:
     page_width = st._get_report_ctx().get("theme").get("containerWidth")
 
-    if page_width > 1000:  # Adjust this value based on your preference
-        num_columns = 3
-    else:
-        num_columns = 2
+        if page_width > 1000:  # Adjust this value based on your preference
+            num_columns = 3
+        else:
+            num_columns = 2
 
     rows = [st.columns(num_columns) for _ in range((len(newest_records) + num_columns - 1) // num_columns)]
 
