@@ -121,9 +121,9 @@ def main():
         if st.session_state['page'] == 'home':
             display_dashboard()
         elif st.session_state['page'] == 'certifications':
-            page2()
-        elif st.session_state['page'] == 'placements':
             page3()
+        elif st.session_state['page'] == 'placements':
+            page2()
     else:
         display_login_form()
 
