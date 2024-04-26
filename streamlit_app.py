@@ -186,6 +186,15 @@ def show_recent():
         
     container = st.container()
 
+    # Add your placements data here
+    conn = st.connection('s3', type=FilesConnection)
+    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    df4.drop_duplicates(subset="Product Name", inplace=True)
+    df4 = df4.sort_values(by='Date Detected', ascending=True)
+        
+    latest_df4 = df4.tail(5)  # Get the latest 5 records
+    latest_df4 = latest_df4.iloc[::-1]
+
     for index, row in latest_df4.iterrows():
         brand = row['Brand']
         count = df5[df5['Brand'] == brand]['Count'].values[0]
@@ -236,14 +245,7 @@ def show_recent():
 def show_raw_data():
     # Code to display raw data
     st.subheader('Raw Certification Data')
-        # Add your placements data here
-    conn = st.connection('s3', type=FilesConnection)
-    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    df4.drop_duplicates(subset="Product Name", inplace=True)
-    df4 = df4.sort_values(by='Date Detected', ascending=True)
-        
-    latest_df4 = df4.tail(5)  # Get the latest 5 records
-    latest_df4 = latest_df4.iloc[::-1]
+
         
  
 
