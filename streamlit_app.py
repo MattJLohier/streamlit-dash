@@ -768,35 +768,35 @@ def show_raw_data_cert():
     with col1:
         # Filter by product category
         categories = ['any'] + list(df_raw_certs4['Product Type'].unique())
-        selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
+        selected_category1 = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
         if selected_category != 'any':
-            df_sorted = df_sorted[df_sorted['Product Type'] == selected_category]
+            df_sorted = df_sorted[df_sorted['Product Type'] == selected_category1]
             
 
         # Filter by brand
         brands = ['any'] + list(df_raw_certs4['Manufacturer'].unique())
-        selected_brand = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        selected_brand1 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
         if selected_brand != 'any':
-            df_sorted = df_sorted[df_sorted['Manufacturer'] == selected_brand]
+            df_sorted = df_sorted[df_sorted['Manufacturer'] == selected_brand1]
 
         remanufactured_options = ['any', 'Yes', 'No']
-        selected_remanufactured = st.selectbox('Status', remanufactured_options, index=0)
-        if selected_remanufactured == 'Yes':
+        selected_remanufactured1 = st.selectbox('Status', remanufactured_options, index=0)
+        if selected_remanufactured1 == 'Yes':
             df_sorted = df_sorted[df_raw_certs4['Status'] == True]
-        elif selected_remanufactured == 'No':
+        elif selected_remanufactured1 == 'No':
             df_sorted = df_sorted[df_raw_certs4['Status'] == False]
 
     with col2:
         # Filter by Markets
-        selected_country = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
-        if selected_country != 'any':
-            df_sorted = df_sorted[df_raw_certs4['Registered In'].apply(lambda x: selected_country in map(str.strip, x.split(',')))]
+        selected_country1 = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
+        if selected_country1 != 'any':
+            df_sorted = df_sorted[df_raw_certs4['Registered In'].apply(lambda x: selected_country1 in map(str.strip, x.split(',')))]
 
         # Filter by Color/Mono
-        color_capabilities = ['any'] + list(df_raw_certs4['EPEAT Tier'].unique())
-        selected_color_capability = st.selectbox('Select an EPEAT Tier', color_capabilities, index=0 if 'any' in color_capabilities else 1)
-        if selected_color_capability != 'any':
-            df_sorted = df_sorted[df_raw_certs4['EPEAT Tier'] == selected_color_capability]
+        color_capabilities1 = ['any'] + list(df_raw_certs4['EPEAT Tier'].unique())
+        selected_color_capability1 = st.selectbox('Select an EPEAT Tier', color_capabilities1, index=0 if 'any' in color_capabilities1 else 1)
+        if selected_color_capability1 != 'any':
+            df_sorted = df_sorted[df_raw_certs4['EPEAT Tier'] == selected_color_capability1]
 
 
 def show_changelog_cert():
