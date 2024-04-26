@@ -61,21 +61,19 @@ def sidebar():
         border-color: #3775cb !important;
         color: #3775cb;
         background-color: white;
-        font-weight: 500;
     }
 
     .st-emotion-cache-32r2nf:focus:not(:active){
         border-color: #3775cb !important;
         color: #3775cb;
         background-color: white;
-        font-weight: 500;
     }
 
     [data-testid="stSidebarUserContent"] .stButton button {
         width: 100%;
         font-weight: bold;               /* Make text bold */
         color: white;                    /* Set text color to white */
-        background-color: #3775cb;       /* Set normal state background color */
+        background-color: white;       /* Set normal state background color */
         transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
     }
     [data-testid="stSidebarUserContent"] .stButton button:hover {
