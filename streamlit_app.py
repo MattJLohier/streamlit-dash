@@ -31,7 +31,7 @@ def display_dashboard():
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
     st.caption('Created By Matt Lohier')
     with st.container():
-        st.write("")  # You can use st.empty() if you do not want to insert any text
+        st.caption('Created By Matt Lohier')
         linkedin_url = "https://www.linkedin.com"  # Change this URL to your specific LinkedIn profile or page
         st.markdown(f"""
         <a href="{linkedin_url}" target="_blank">
