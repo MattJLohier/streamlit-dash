@@ -408,15 +408,13 @@ def show_recent_cert():
     <style>
 
     .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));  // This creates a responsive grid with each item having a minimum width of 320px and maximum of 1 fraction of available space
-    gap: 20px;  // This adds space between the cards
-    padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Creates a 3-column grid */
+        grid-gap: 10px; /* Space between cards */
+        padding: 10px;
     }
 
     .card {
-    position: relative;
-    display: flex;
     align-items: center;
     justify-content: center;
     width: 320px;  
@@ -506,9 +504,8 @@ def show_recent_cert():
             "EPEAT": "🌎"
         }
 
-    st.markdown('''
-    <div class="grid-container">
-    ''', unsafe_allow_html=True)
+    # Initialize the HTML for the grid container
+    grid_html = '<div class="grid-container">'
 
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     for index, row in newest_records.iterrows():
@@ -519,8 +516,8 @@ def show_recent_cert():
         source = row['Source']
         emoji = emoji_dict.get(source, "📝")
 
-        # Embed data into HTML
-        html_content = f"""
+        # Append each card's HTML to the grid container
+        grid_html += f"""
         <div class="card">
             <div class="content">
                 <p class="heading">{product_name}</p>
@@ -533,12 +530,13 @@ def show_recent_cert():
             </div>
         </div>
         """
-        st.markdown(html_content, unsafe_allow_html=True)    
 
+    # Close the grid container
+    grid_html += '</div>'
 
-    st.markdown('''
-    </div>
-    ''', unsafe_allow_html=True)
+    # Display the grid
+    st.markdown(grid_html, unsafe_allow_html=True)
+
 
 def show_raw_data_cert():
     st.header('Raw Certification Data 📝')
