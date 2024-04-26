@@ -822,7 +822,7 @@ def show_raw_data_cert():
         # Filter by brand
         brands = ['any'] + list(df_raw_certs5['Brand'].unique())
         selected_brand2 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
-        if selected_brand2 != 'Brand':
+        if selected_brand2 != 'any':
             df_raw_certs5 = df_raw_certs5[df_raw_certs5['Brand'] == selected_brand2]
 
     with col2:
