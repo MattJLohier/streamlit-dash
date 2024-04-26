@@ -141,25 +141,17 @@ def page2():
     if 'current_page' not in st.session_state:
         st.session_state['current_page'] = 'Recent'
 
+    btn_recent = st.button('Recent', key='1')
+    btn_raw_data = st.button('Raw Data', key='2')
+    btn_changelog = st.button('Changelog', key='3')
+    btn_insights = st.button('Insights', key='4')
+
     row1 = st.columns(4)
+    for col in row1:
+        tile = col.container(height=120)
+        tile.title(":balloon:")    
 
-    # Define the button labels and keys
-    button_details = [
-        ('Recent', '1'),
-        ('Raw Data', '2'),
-        ('Changelog', '3'),
-        ('Insights', '4')
-    ]
-
-    # Iterate over each column and button detail pair
-    for col, (label, key) in zip(row1, button_details):
-        with col:
-            tile = col.container(height=120)
-            tile.title(":balloon:")
-            # Create a button in the current column with the specified label and key
-            st.button(label, key=key)
-
-        # Update current page based on button click
+    # Update current page based on button click
     if btn_recent:
         st.session_state['current_page'] = 'Recent'
     elif btn_raw_data:
