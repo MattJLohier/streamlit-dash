@@ -754,7 +754,6 @@ def show_raw_data_cert():
     st.subheader('EPEAT 🌎')
     conn = st.connection('s3', type=FilesConnection)
     df_raw_certs4 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
-    st.write(df_raw_certs4)
     # Organizing filters into a 2x2 grid
     col1, col2 = st.columns(2)
     with col1:
