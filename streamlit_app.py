@@ -137,22 +137,10 @@ def page1():
 
 def page2():
     st.header('Placements 💡')
-    
-    # Inject CSS to make the buttons appear inline
-    st.markdown("""
-        <style>
-            div.row-widget.stButton > button {
-                display: inline-block;  /* Display buttons inline */
-                margin-right: 5px;      /* Add space between the buttons */
-            }
-        </style>
-    """, unsafe_allow_html=True)
-
     # Define buttons for navigation
     if 'current_page' not in st.session_state:
         st.session_state['current_page'] = 'Recent'
 
-    # Creating buttons in the same container
     btn_recent = st.button('Recent', key='1')
     btn_raw_data = st.button('Raw Data', key='2')
     btn_changelog = st.button('Changelog', key='3')
