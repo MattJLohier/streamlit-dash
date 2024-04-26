@@ -410,8 +410,8 @@ def show_recent_cert():
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Maintains 3 columns */
         grid-gap: 10px; /* Space between cards */
-        padding: 10px;
-        width: 60%; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
+        padding: 30px;
+        width: auto; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
     }
 
     .card {
