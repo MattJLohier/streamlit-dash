@@ -234,7 +234,7 @@ def show_recent():
 
     .content .heading {
     font-weight: 700;
-    font-size: 36px;
+    font-size: 24px;
     line-height: 1.3;
     z-index: 1;
     transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
@@ -243,7 +243,7 @@ def show_recent():
     .content .para {
     z-index: 1;
     opacity: 0.8;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600;
     transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
     }
