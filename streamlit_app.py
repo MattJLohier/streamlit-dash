@@ -795,7 +795,7 @@ def show_raw_data_cert():
         color_capabilities1 = ['any'] + list(df_raw_certs4['EPEAT Tier'].unique())
         selected_color_capability1 = st.selectbox('Select an EPEAT Tier', color_capabilities1, index=0 if 'any' in color_capabilities1 else 1)
         if selected_color_capability1 != 'any':
-            df_raw_certs4 = df_raw_certs4e[df_raw_certs4['EPEAT Tier'] == selected_color_capability1]
+            df_raw_certs4 = df_raw_certs4[df_raw_certs4['EPEAT Tier'] == selected_color_capability1]
     st.write(df_raw_certs4)
 
 
