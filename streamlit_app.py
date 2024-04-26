@@ -60,6 +60,7 @@ def sidebar():
     .stButton button:focus{
         border-color: #3775cb !important;
         color: #3775cb;
+        background-color: white;
     }
 
     [data-testid="stSidebarUserContent"] .stButton button {
