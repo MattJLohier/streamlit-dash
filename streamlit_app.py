@@ -448,8 +448,6 @@ def page3():
                                     font-style: italic; 
                                     >
                                     <i class='{iconname} fa-xs'></i>
-                                    <span style='font-size: 20px; padding-left: 10px;
-                                    margin-top: 10px;'><b> {source} Certification Spotted {emoji} </b></span>
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
                                     <br>
@@ -459,7 +457,7 @@ def page3():
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >Certification Date:</b> {certification_date}</span>
                                     <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {source}</span>
+                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Source:</b> {source} {emoji} </span>
                                     </p>"""
 
         with container:
