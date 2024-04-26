@@ -53,7 +53,7 @@ def sidebar():
     <style>
 
     .stButton button:hover{
-        outline: 2px solid green !important;
+        outline: none !important;
 
     }
 
