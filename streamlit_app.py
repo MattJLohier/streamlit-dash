@@ -63,7 +63,7 @@ def sidebar():
         background-color: white;
     }
 
-    .stButton button:active{
+    .st-emotion-cache-32r2nf:focus:not(:active){
         border-color: #3775cb !important;
         color: #3775cb;
         background-color: white;
