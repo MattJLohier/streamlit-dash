@@ -533,7 +533,7 @@ def show_recent_cert():
                     # Embed data into HTML
                     html_content = f"""
                     <div class="card">
-                        <div class="content">
+                        <div class="content" style="width: 320px;">
                             <p class="heading">{product_name}</p>
                             <p class="para">
                                 Brand: {brand}<br>
