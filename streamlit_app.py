@@ -543,7 +543,7 @@ def show_recent_cert():
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
-    padding: 34px;
+    padding: 20px;
     border-radius: 22px;
     color: #ffffff;
     overflow: hidden;
