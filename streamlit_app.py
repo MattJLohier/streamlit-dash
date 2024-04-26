@@ -411,7 +411,8 @@ def show_recent_cert():
         grid-template-columns: repeat(3, 1fr); /* Creates a 3-column grid */
         grid-gap: 10px; /* Space between cards */
         padding: 10px;
-        width: 60%;
+        width: 50%;
+        margin: auto;
     }
 
     .card {
