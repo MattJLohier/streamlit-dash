@@ -812,6 +812,31 @@ def show_raw_data_cert():
     st.write(df_raw_certs5)
 
 
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories = ['any'] + list(df_raw_certs5['Category'].unique())
+        selected_category1 = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
+        if selected_category != 'any':
+            df_raw_certs5 = df_raw_certs5[df_raw_certs5['Category'] == selected_category1]
+
+        # Filter by brand
+        brands = ['any'] + list(df_raw_certs5['Brand'].unique())
+        selected_brand1 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand != 'Brand':
+            df_raw_certs5 = df_raw_certs5[df_sorted['Brand'] == selected_brand1]
+
+    with col2:
+        # Filter by Registration Date
+        sort_options = ['Newest', 'Oldest']
+        selected_sort = st.selectbox('Sort by Registration Date', sort_options, index=0)  # Default to Newest
+        if selected_sort == 'Newest':
+            df_raw_certs5 = df_raw_certs5.sort_values(by='Date Of Last Certification', ascending=False)
+        elif selected_sort == 'Oldest':
+            df_raw_certs5 = df_raw_certs5.sort_values(by='Date Of Last Certification', ascending=True)
+
+    st.write(df_raw_certs5)
+
 def show_changelog_cert():
     # Code to display changelog
     st.subheader('Changelog')
