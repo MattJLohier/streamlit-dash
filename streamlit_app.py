@@ -715,7 +715,7 @@ def show_raw_data_cert():
     st.subheader('EPEAT 🌎')
 
     conn = st.connection('s3', type=FilesConnection)
-    df_raw_cert4 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+    df_raw_certs4 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
     st.write(df_raw_certs4)
 
 def show_changelog_cert():
