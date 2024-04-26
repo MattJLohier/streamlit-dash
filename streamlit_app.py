@@ -82,11 +82,11 @@ def sidebar():
 
     }
     [data-testid="stSidebarUserContent"] .stButton button:active {
-        background-color: #0056b3;       /* Set active state background color */
+        background-color: red;       /* Set active state background color */
         color: white;                    /* Set text color in active state */
     }
     [data-testid="stSidebarUserContent"] .stButton button:focus {
-        background-color: #0056b3;       /* Set active state background color */
+        background-color: red;       /* Set active state background color */
         color: white;                    /* Set text color in active state */
     }
     </style>
