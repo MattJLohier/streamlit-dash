@@ -353,7 +353,7 @@ def show_recent():
     
     # Define the number of columns
     num_columns = 3
-    rows = [st.columns(num_columns) for _ in range((len(latest_df4.iterrows) + num_columns - 1) // num_columns)]
+    rows = [st.columns(num_columns) for _ in range((len(latest_df4) + num_columns - 1) // num_columns)]
 
     # Initialize a counter for DataFrame row indices
     row_index = 0
@@ -361,7 +361,7 @@ def show_recent():
     # Fill each cell in the grid with content
     for row in rows:
         for col in row:
-            if row_index < len(latest_df4.iterrows):
+            if row_index < len(latest_df4):
                 with col:
                     row_data = latest_df4.iterrows.iloc[row_index]
                     product_name = row_data['Product Name']
