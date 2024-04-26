@@ -841,7 +841,6 @@ def show_changelog_cert():
 def show_insights_cert():
     # Code to display insights
     st.subheader('Insights')
-    st.spinner(text="In progress...")
     # Example: st.write(data_insights)
 
 
