@@ -141,16 +141,10 @@ def page2():
     if 'current_page' not in st.session_state:
         st.session_state['current_page'] = 'Recent'
 
-    # Create a column layout for buttons
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        btn_recent = st.button('Recent', key='1')
-    with col2:
-        btn_raw_data = st.button('Raw Data', key='2')
-    with col3:
-        btn_changelog = st.button('Changelog', key='3')
-    with col4:
-        btn_insights = st.button('Insights', key='4')
+    btn_recent = st.button('Recent', key='1')
+    btn_raw_data = st.button('Raw Data', key='2')
+    btn_changelog = st.button('Changelog', key='3')
+    btn_insights = st.button('Insights', key='4')
 
     # Update current page based on button click
     if btn_recent:
