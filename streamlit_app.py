@@ -33,9 +33,14 @@ def sidebar():
     <style>
     div.stButton > button:first-child {
         width: 100%;
-        font-weight: bold;            /* Make text bold */
-        color: white;                 /* Set text color to white */
-        background-color: #3775cb;    /* Set background color */
+        font-weight: bold;               /* Make text bold */
+        color: white;                    /* Set text color to white */
+        background-color: #3775cb;       /* Set background color */
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+    }
+    div.stButton > button:first-child:hover {
+        color: #3775cb;                  /* Text color on hover */
+        background-color: white;         /* Background color on hover */
     }
     </style>
     """, unsafe_allow_html=True)
