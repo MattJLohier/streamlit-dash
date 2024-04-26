@@ -451,7 +451,7 @@ def show_recent_cert():
 
     # Specify the brands to filter
     brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera",
-                    "Lexmark", "Ricoh", "Sharp", "Toshiba", "Xerox", "Pantum", "Fujifilm", "HP Inc."]
+                    "Lexmark", "Ricoh", "Sharp", "Toshiba", "Xerox", "Pantum", "Fujifilm", "HP Inc.", "Zhuhai Pantum Electronics Co., Ltd."]
 
     # Specify the product types to filter
     product_types_to_show = ['Printers', 'Multifunction Devices (MFD)']
