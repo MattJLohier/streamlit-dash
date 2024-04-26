@@ -387,6 +387,14 @@ def show_changelog():
     # Code to display changelog
     st.subheader('Changelog')
     # Example: st.write(data_changelog)
+    conn = st.connection('s3', type=FilesConnection)
+    placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+    st.write(placement_changelog)
+
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    st.write(placement_tracking)
+
 
 def show_insights():
     # Code to display insights
