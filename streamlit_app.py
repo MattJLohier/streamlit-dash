@@ -63,7 +63,7 @@ def display_login_form():
     
     with col2:  # Middle column for the form
         st.markdown("<h1 style='text-align: center;'><span style='color: #317bd4;'>Scooper</span> Dashboard 🎯</h1>", unsafe_allow_html=True)
-        t.markdown("""
+        st.markdown("""
         <center>
             <img src='https://i.postimg.cc/XJdg0y7b/scooper-logo.png' width='300'>
         </center>
