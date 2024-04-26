@@ -811,19 +811,18 @@ def show_raw_data_cert():
 
     st.write(df_raw_certs5)
 
-
     col1, col2 = st.columns(2)
     with col1:
         # Filter by product category
         categories = ['any'] + list(df_raw_certs5['Category'].unique())
         selected_category2 = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
-        if selected_category != 'any':
+        if selected_category2 != 'any':
             df_raw_certs5 = df_raw_certs5[df_raw_certs5['Category'] == selected_category2]
 
         # Filter by brand
         brands = ['any'] + list(df_raw_certs5['Brand'].unique())
         selected_brand2 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
-        if selected_brand != 'Brand':
+        if selected_brand2 != 'Brand':
             df_raw_certs5 = df_raw_certs5[df_raw_certs5['Brand'] == selected_brand2]
 
     with col2:
