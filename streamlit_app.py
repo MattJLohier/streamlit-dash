@@ -795,11 +795,20 @@ def show_raw_data_cert():
             df_raw_certs4 = df_raw_certs4[df_raw_certs4['Registered In'] == selected_market]
 
 
-        # Filter by Color/Mono
+        # Filter by EPEAT Tier
         color_capabilities1 = ['any'] + list(df_raw_certs4['EPEAT Tier'].unique())
         selected_color_capability1 = st.selectbox('Select an EPEAT Tier', color_capabilities1, index=0 if 'any' in color_capabilities1 else 1)
         if selected_color_capability1 != 'any':
             df_raw_certs4 = df_raw_certs4[df_raw_certs4['EPEAT Tier'] == selected_color_capability1]
+
+        # Filter by Registration Date
+        sort_options = ['Newest', 'Oldest']
+        selected_sort = st.selectbox('Sort by Registration Date', sort_options, index=0)  # Default to Newest
+        if selected_sort == 'Newest':
+            df_raw_certs4 = df_raw_certs4.sort_values(by='Registered On', ascending=False)
+        elif selected_sort == 'Oldest':
+            df_raw_certs4 = df_raw_certs4.sort_values(by='Registered On', ascending=True)
+
     st.write(df_raw_certs4)
 
 
