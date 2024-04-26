@@ -380,13 +380,9 @@ def show_recent():
                     else:
                         title = "Certification Spotted"
 
-                    # Set background color and border color based on action
-                    bg_color = '#ffdbdb' if metric_label == 'Removed' else '#bfe5ff' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
-                    border_color = '#FF0000' if metric_label == 'Removed' else '#3775cb' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
-
                     # Embed data into HTML
                     html_content = f"""
-                    <div class="card" data-bgcolor="{bg_color}">
+                    <div class="card">
                         <div class="content">
                             <p class="heading">{metric_value}</p>
                             <p class="para">
@@ -733,21 +729,6 @@ def show_insights_cert():
     # Code to display insights
     st.subheader('Insights')
     # Example: st.write(data_insights)
-
-
-js_code = """
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var cards = document.querySelectorAll('.card');
-    cards.forEach(function(card) {
-        var bgColor = card.getAttribute('data-bgcolor');
-        var styleSheet = document.styleSheets[0];
-    styleSheet.insertRule(`.card[data-bgcolor="` + bgColor + `"]::before { background: linear-gradient(to right, ` + bgColor + `, ` + bgColor + `); }`, styleSheet.cssRules.length);
-    });
-});
-</script>
-"""
-st.markdown(js_code, unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
