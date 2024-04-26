@@ -54,6 +54,7 @@ def sidebar():
 
     .stButton button:active{
         outline: green !important;
+        color: green;
 
     }
 
