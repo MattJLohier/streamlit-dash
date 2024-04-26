@@ -4,10 +4,19 @@ import pandas as pd
 import altair as alt
 from st_files_connection import FilesConnection
 import hashlib
+from io import BytesIO
 
+# URL of the image you want to use as the page icon
+icon_url = "https://dummyimage.com/300"
+
+# Download the image
+response = requests.get(icon_url)
+image = Image.open(BytesIO(response.content))
+
+# Set the Streamlit page configuration with the custom icon
 st.set_page_config(
     page_title="Scooper Dashboard",
-    page_icon="🎯",
+    page_icon=image,
     layout="wide",
     initial_sidebar_state="expanded"
 )
