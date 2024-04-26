@@ -456,6 +456,7 @@ def show_recent_cert():
     z-index: 1;
     opacity: 0.8;
     font-size: 24px;
+    font-weight: 600;
     transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
