@@ -704,7 +704,6 @@ def show_raw_data_cert():
 
     st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
-     = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
 
     st.subheader('EPEAT 🌎')
 
