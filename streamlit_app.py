@@ -411,7 +411,6 @@ def show_recent_cert():
         grid-template-columns: repeat(3, 1fr); /* Maintains 3 columns */
         grid-gap: 10px; /* Space between cards */
         padding: 10px;
-        gap: 1rem;
         width: auto; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
     }
 
@@ -425,6 +424,7 @@ def show_recent_cert():
         justify-content: center;
         padding: 2px;
         border-radius: 24px;
+        margin-right: 20px;
         overflow: hidden;
         line-height: 1.6;
         transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
