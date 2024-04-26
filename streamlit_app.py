@@ -824,7 +824,7 @@ def show_raw_data_cert():
         brands = ['any'] + list(df_raw_certs5['Brand'].unique())
         selected_brand1 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
         if selected_brand != 'Brand':
-            df_raw_certs5 = df_raw_certs5[df_sorted['Brand'] == selected_brand1]
+            df_raw_certs5 = df_raw_certs5[df_raw_certs5['Brand'] == selected_brand1]
 
     with col2:
         # Filter by Registration Date
