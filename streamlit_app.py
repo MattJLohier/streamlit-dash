@@ -379,7 +379,7 @@ def show_recent():
                         title = "Product Removed"
                         emoji = "❌"
                     else:
-                title = "Certification Spotted"
+                        title = "Certification Spotted"
 
         # Set background color and border color based on action
         bg_color = '#ffdbdb' if metric_label == 'Removed' else '#bfe5ff' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
