@@ -849,8 +849,7 @@ def show_changelog_cert():
     # Example: st.write(data_changelog)
     conn = st.connection('s3', type=FilesConnection)
     placement_changelog1 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
-    df_clean = placement_changelog1
-    df_clean = df_clean.drop_duplicates
+    df_clean = placement_changelog1.drop_duplicates(subset=['pd_id'])  # Drop duplicates based on 'pd_id'
     st.write(df_clean)
 
     st.subheader('Changelog EPEAT')
