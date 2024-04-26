@@ -182,7 +182,7 @@ def page2():
             title = "Certification Spotted"
 
         # Set background color and border color based on action
-        bg_color = '#ffdbdb' if metric_label == 'Removed' else '#c4dbfa' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
+        bg_color = '#ffdbdb' if metric_label == 'Removed' else '#8bcffd' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
         border_color = '#FF0000' if metric_label == 'Removed' else '#3775cb' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
 
         htmlstr = f"""<p style='background-color: {bg_color}; 
