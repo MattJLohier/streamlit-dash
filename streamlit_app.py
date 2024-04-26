@@ -343,12 +343,6 @@ def show_recent():
     </style>
     ''', unsafe_allow_html=True)
 
-    emoji_dict = {
-            "Energy Star": "⚡",
-            "WiFi Alliance": "📶",
-            "EPEAT": "🌎"
-        }
-
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     # Define the number of columns
     num_columns = 3
