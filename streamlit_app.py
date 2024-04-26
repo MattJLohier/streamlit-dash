@@ -155,13 +155,13 @@ def page2():
         st.session_state['current_page'] = 'Insights'
 
     # Conditional rendering based on selected page
-    if st.session_state['current_page'] == 'Recent':
+    if st.session_state['current_page'] == 'Recent 🆕':
         show_recent()
-    elif st.session_state['current_page'] == 'Raw Data':
+    elif st.session_state['current_page'] == 'Raw Data 📝':
         show_raw_data()
-    elif st.session_state['current_page'] == 'Changelog':
+    elif st.session_state['current_page'] == 'Changelog 🔄':
         show_changelog()
-    elif st.session_state['current_page'] == 'Insights':
+    elif st.session_state['current_page'] == 'Insights 🔍':
         show_insights()
 
 
