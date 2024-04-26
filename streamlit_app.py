@@ -708,6 +708,18 @@ def show_raw_data_cert():
     selected_category = st.selectbox('Select a product category', df_sorted['product_type'].unique())
     filtered_df = df_sorted[df_sorted['product_type'] == selected_category]
 
+    # Filter by brand
+    selected_brand = st.selectbox('Select a brand', df_sorted['brand_name'].unique())
+    filtered_df = filtered_df[filtered_df['brand_name'] == selected_brand]
+
+    # Filter by Markets
+    selected_market = st.selectbox('Select a market', df_sorted['markets'].unique())
+    filtered_df = filtered_df[filtered_df['markets'] == selected_market]
+
+    # Filter by Color/Mono
+    selected_color_capability = st.selectbox('Select a color capability', df_sorted['color_capability'].unique())
+    filtered_df = filtered_df[filtered_df['color_capability'] == selected_color_capability]
+
     # Display the filtered dataframe
     st.write(filtered_df)
 
