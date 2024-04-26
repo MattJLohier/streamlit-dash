@@ -684,7 +684,7 @@ def show_recent_cert():
 
 
 def show_raw_data_cert():
-    st.subheader('Raw Certification Data 📝')
+    st.subheader('Raw Certification Data')
     st.subheader('Energy Star ⚡')
     st.subheader('WiFi Alliance 📶')
     st.subheader('EPEAT 🌎')
