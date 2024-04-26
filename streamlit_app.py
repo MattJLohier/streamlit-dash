@@ -61,10 +61,12 @@ def sidebar():
     [data-testid="stSidebarUserContent"] .stButton button:hover {
         color: #3775cb;                  /* Text color on hover */
         background-color: white;         /* Background color on hover */
+        outline: 2px solid green;        /* Green outline on hover */
     }
     [data-testid="stSidebarUserContent"] .stButton button:active {
         background-color: #0056b3;       /* Set active state background color */
         color: white;                    /* Set text color in active state */
+        outline: 2px solid green;          /* Red outline when active */
     }
     </style>
     """, unsafe_allow_html=True)
