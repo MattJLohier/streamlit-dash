@@ -320,7 +320,7 @@ def show_recent():
 
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     # Define the number of columns
-    if st.get_page_config().get('layout') == 'wide' and st.get_window_width() > 1200:
+    if st.get_page_config().get('layout') == 'wide' and st.get_window_width() > 500:
         num_columns = 3
     else:
         num_columns = 2
