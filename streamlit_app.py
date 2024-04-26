@@ -845,6 +845,21 @@ def show_changelog_cert():
     # Code to display changelog
     st.subheader('Changelog')
     # Example: st.write(data_changelog)
+    st.subheader('Changelog Energy Star')
+    # Example: st.write(data_changelog)
+    conn = st.connection('s3', type=FilesConnection)
+    placement_changelog1 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
+    st.write(placement_changelog1)
+    st.subheader('Changelog EPEAT')
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking2 = conn.read("scoops-finder/changelog-epeat.csv", input_format="csv", ttl=600)
+    st.write(placement_tracking2)
+    st.subheader('Changelog WiFi Alliance')
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking3 = conn.read("scoops-finder/changelog-wifi.csv", input_format="csv", ttl=600)
+    st.write(placement_tracking3)
+
+
 
 def show_insights_cert():
     # Code to display insights
