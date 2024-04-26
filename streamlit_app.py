@@ -402,19 +402,19 @@ def show_recent():
 
                     row_index += 1   
 
-                    js_code = """
-                    <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        var cards = document.querySelectorAll('.card');
-                        cards.forEach(function(card) {
-                            var bgColor = card.getAttribute('data-bgcolor');
-                            var styleSheet = document.styleSheets[0];
-                        styleSheet.insertRule(`.card[data-bgcolor="` + bgColor + `"]::before { background: linear-gradient(to right, ` + bgColor + `, ` + bgColor + `); }`, styleSheet.cssRules.length);
-                        });
+                js_code = """
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var cards = document.querySelectorAll('.card');
+                    cards.forEach(function(card) {
+                        var bgColor = card.getAttribute('data-bgcolor');
+                        var styleSheet = document.styleSheets[0];
+                    styleSheet.insertRule(`.card[data-bgcolor="` + bgColor + `"]::before { background: linear-gradient(to right, ` + bgColor + `, ` + bgColor + `); }`, styleSheet.cssRules.length);
                     });
-                    </script>
-                    """
-                    st.markdown(js_code, unsafe_allow_html=True)
+                });
+                </script>
+                """
+                st.markdown(js_code, unsafe_allow_html=True)
 
     
     # Example: st.write(data_recent)
