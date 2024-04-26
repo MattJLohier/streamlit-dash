@@ -374,6 +374,7 @@ def show_raw_data():
     # Code to display raw data
     st.subheader('Raw Placement Data')
 
+
 def show_changelog():
     # Code to display changelog
     st.subheader('Changelog')
