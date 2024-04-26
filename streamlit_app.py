@@ -561,7 +561,7 @@ def show_recent_cert():
     combined_df.drop_duplicates(inplace=True)
     combined_df['Certification Date'] = combined_df['Certification Date'].astype(str).str[:10]
     # Show only the newest 5 records
-    newest_records = combined_df
+    newest_records = combined_df.head(10)
     
     st.subheader('Recent Certifications')
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
