@@ -708,9 +708,13 @@ def show_raw_data_cert():
     st.write(df_sorted)
 
 
+    def extract_unique_countries(market_col):
     unique_countries = set()
-    df_sorted['markets'].str.split(',').apply(unique_countries.update)
-    unique_countries = ['any'] + sorted(unique_countries)
+    # Split each row's market string by comma and strip spaces
+    market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
+    return ['any'] + sorted(unique_countries)
+
+    unique_countries = extract_unique_countries(df_sorted['markets'])
 
     # Organizing filters into a 2x2 grid
     col1, col2 = st.columns(2)
@@ -730,10 +734,9 @@ def show_raw_data_cert():
 
     with col2:
         # Filter by Markets
-        markets = ['any'] + list(df_sorted['markets'].unique())
-        selected_market = st.selectbox('Select a market', markets, index=0 if 'any' in markets else 1)
-        if selected_market != 'any':
-            df_sorted = df_sorted[df_sorted['markets'] == selected_market]
+        selected_country = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
+        if selected_country != 'any':
+            df_sorted = df_sorted[df_sorted['markets'].apply(lambda x: selected_country in map(str.strip, x.split(',')))]
 
         # Filter by Color/Mono
         color_capabilities = ['any'] + list(df_sorted['color_capability'].unique())
