@@ -518,11 +518,12 @@ def show_recent_cert():
         grid-template-columns: repeat(3, 1fr); /* Maintains 3 columns */
         grid-gap: 20px; /* Space between cards */
         padding: 10px;
-        width: auto; 
+        width: auto; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
     }
 
     .card {
         height: auto;
+        min-height: 120px;
         position: relative;
         width: 100%; /* This makes each card responsive within its grid column */
         display: flex;
@@ -543,7 +544,7 @@ def show_recent_cert():
     align-items: flex-start;
     gap: 24px;
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 22px;
     color: #ffffff;
     overflow: hidden;
     background: #ffffff;
@@ -551,9 +552,9 @@ def show_recent_cert():
     }
 
     .content .heading {
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 1.3;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
     z-index: 1;
     transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
     }
@@ -561,8 +562,8 @@ def show_recent_cert():
     .content .para {
     z-index: 1;
     opacity: 0.8;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 600;
     transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
@@ -582,7 +583,7 @@ def show_recent_cert():
     .card:hover::before {
     animation-play-state: running;
     z-index: -1;
-    width: 40%;
+    width: 20%;
     }
 
     .card:hover .content .heading,
