@@ -381,9 +381,9 @@ def show_recent():
                     else:
                         title = "Certification Spotted"
 
-        # Set background color and border color based on action
-        bg_color = '#ffdbdb' if metric_label == 'Removed' else '#bfe5ff' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
-        border_color = '#FF0000' if metric_label == 'Removed' else '#3775cb' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
+                    # Set background color and border color based on action
+                    bg_color = '#ffdbdb' if metric_label == 'Removed' else '#bfe5ff' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
+                    border_color = '#FF0000' if metric_label == 'Removed' else '#3775cb' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
 
                     # Embed data into HTML
                     html_content = f"""
