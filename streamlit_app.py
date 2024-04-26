@@ -450,6 +450,12 @@ def show_recent_cert():
     </style>
     ''', unsafe_allow_html=True)
 
+    emoji_dict = {
+            "Energy Star": "⚡",
+            "WiFi Alliance": "📶",
+            "EPEAT": "🌎"
+        }
+
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     for index, row in newest_records.iterrows():
         product_name = row['Product Name']
