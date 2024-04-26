@@ -508,9 +508,8 @@ def show_recent_cert():
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     
     row1 = st.columns(3)
-    row2 = st.columns(3)
     
-    for col in row1 + row2:
+    for col in row1:
         with col:
             for index, row in newest_records.iterrows():
                 product_name = row['Product Name']
