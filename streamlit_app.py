@@ -759,8 +759,8 @@ def show_raw_data_cert():
     col1, col2 = st.columns(2)
     with col1:
         # Filter by product category
-        categories = ['any'] + list(df_raw_certs4['Product Type'].unique())
-        selected_category1 = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
+        categories3 = ['any'] + list(df_raw_certs4['Product Type'].unique())
+        selected_category1 = st.selectbox('Select a product category', categories3, index=0 if 'any' in categories3 else 1)
         if selected_category != 'any':
             df_raw_certs4 = df_raw_certs4[df_raw_certs4['Product Type'] == selected_category1]
             
