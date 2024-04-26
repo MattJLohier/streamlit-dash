@@ -63,6 +63,12 @@ def sidebar():
         background-color: white;
     }
 
+    .stButton button:active{
+        border-color: #3775cb !important;
+        color: #3775cb;
+        background-color: white;
+    }
+
     [data-testid="stSidebarUserContent"] .stButton button {
         width: 100%;
         font-weight: bold;               /* Make text bold */
