@@ -141,25 +141,25 @@ def page2():
     if 'current_page' not in st.session_state:
         st.session_state['current_page'] = 'Recent'
 
-    btn_recent = st.button('Recent', key='1')
-    btn_raw_data = st.button('Raw Data', key='2')
-    btn_changelog = st.button('Changelog', key='3')
-    btn_insights = st.button('Insights', key='4')
+    # Create four columns for the interactive tiles
+    col1, col2, col3, col4 = st.columns(4)
 
-    row1 = st.columns(4)
-    for col in row1:
-        tile = col.container(height=120)
-        tile.title(":balloon:")    
-
-    # Update current page based on button click
-    if btn_recent:
+    # Define interactive tiles that update the session state upon clicking
+    if col1.container().button('Recent', key='1'):
         st.session_state['current_page'] = 'Recent'
-    elif btn_raw_data:
+    col1.markdown("**Recent**")  # Add descriptions or images within the tile
+
+    if col2.container().button('Raw Data', key='2'):
         st.session_state['current_page'] = 'Raw Data'
-    elif btn_changelog:
+    col2.markdown("**Raw Data**")  # Add descriptions or images within the tile
+
+    if col3.container().button('Changelog', key='3'):
         st.session_state['current_page'] = 'Changelog'
-    elif btn_insights:
+    col3.markdown("**Changelog**")  # Add descriptions or images within the tile
+
+    if col4.container().button('Insights', key='4'):
         st.session_state['current_page'] = 'Insights'
+    col4.markdown("**Insights**")  # Add descriptions or images within the tile
 
     # Conditional rendering based on selected page
     if st.session_state['current_page'] == 'Recent':
