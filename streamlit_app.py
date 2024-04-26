@@ -248,6 +248,7 @@ def show_recent():
     align-items: flex-start;
     gap: 24px;
     padding: 20px;
+    padding-bottom: 0px;
     border-radius: 22px;
     color: #ffffff;
     overflow: hidden;
@@ -563,6 +564,7 @@ def show_recent_cert():
 
     .content {
     width: 100%;
+    padding-bottom: 0px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
