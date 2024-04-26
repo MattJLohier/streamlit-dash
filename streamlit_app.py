@@ -35,17 +35,20 @@ def sidebar():
         width: 100%;
         font-weight: bold;               /* Make text bold */
         color: white;                    /* Set text color to white */
-        background-color: #3775cb;       /* Set background color */
+        background-color: #3775cb;       /* Set normal state background color */
         transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
     }
     div.stButton > button:first-child:hover {
         color: #3775cb;                  /* Text color on hover */
         background-color: white;         /* Background color on hover */
     }
+    div.stButton > button:first-child:active {
+        background-color: #0056b3;       /* Set active state background color to blue */
+        color: white;                    /* Set text color in active state */
+    }
     </style>
     """, unsafe_allow_html=True)
     
-    # Define buttons in the custom container
     with button_container:
         if st.button("Home", key="home_button"):
             st.session_state['page'] = 'home'
