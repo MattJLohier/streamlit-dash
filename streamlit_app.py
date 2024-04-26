@@ -182,8 +182,8 @@ def page2():
             title = "Certification Spotted"
 
         # Set background color and border color based on action
-        bg_color = '#ffdbdb' if metric_label == 'Removed' else '#dbffdb' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
-        border_color = '#FF0000' if metric_label == 'Removed' else '#1fd100' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
+        bg_color = '#ffdbdb' if metric_label == 'Removed' else '#3775cb' if metric_label == 'Added' else '#F5F5F5'  # Light red for Removed, light green for Added, light gray otherwise
+        border_color = '#FF0000' if metric_label == 'Removed' else '#3775cb' if metric_label == 'Added' else '#808080'  # Red for Removed, Green for Added, Gray otherwise
 
         htmlstr = f"""<p style='background-color: {bg_color}; 
                                 color: rgba({wch_colour_font[0]}, 
@@ -202,11 +202,7 @@ def page2():
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Brand:</b> {brand}</span>
                                     <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Change:</b> {metric_label}</span>
-                                    <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Product Name:</b> {metric_value}</span>
-                                    <br>
-                                    <span style='font-size: 16px; color: #555; padding-left: 10px; padding-bottom: 0px; margin: 0px;'><b style='font-weight: 800;' >New Brand Totals:</b> {metric_delta}</span>
                                     <br>
                                     <span style='font-size: 16px; color: #555; padding-left: 10px;'><b style='font-weight: 800;' >Date Detected:</b> {date_detected}</span>
                                     </p>"""
