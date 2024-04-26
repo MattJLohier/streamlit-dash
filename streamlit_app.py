@@ -145,13 +145,13 @@ def page2():
     col1, col2, col3, col4 = st.columns(4)
 
     # Define interactive tiles that update the session state upon clicking
-    if col1.button('Recent', key='1'):
+    if col1.button('Recent', key='1', use_container_width=True):
         st.session_state['current_page'] = 'Recent'
-    if col2.button('Raw Data', key='2'):
+    if col2.button('Raw Data', key='2', use_container_width=True):
         st.session_state['current_page'] = 'Raw Data'
-    if col3.button('Changelog', key='3'):
+    if col3.button('Changelog', key='3', use_container_width=True):
         st.session_state['current_page'] = 'Changelog'
-    if col4.button('Insights', key='4'):
+    if col4.button('Insights', key='4', use_container_width=True):
         st.session_state['current_page'] = 'Insights'
 
     # Conditional rendering based on selected page
