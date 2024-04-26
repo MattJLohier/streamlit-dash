@@ -788,9 +788,9 @@ def show_raw_data_cert():
 
     with col2:
         # Filter by Markets
-        selected_country1 = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
-        if selected_country1 != 'any':
-            df_sorted = df_sorted[df_raw_certs4['Registered In'].apply(lambda x: selected_country1 in map(str.strip, x.split(',')))]
+        #selected_country1 = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
+        #if selected_country1 != 'any':
+            #df_sorted = df_sorted[df_raw_certs4['Registered In'].apply(lambda x: selected_country1 in map(str.strip, x.split(',')))]
 
         # Filter by Color/Mono
         color_capabilities1 = ['any'] + list(df_raw_certs4['EPEAT Tier'].unique())
