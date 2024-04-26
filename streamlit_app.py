@@ -449,14 +449,17 @@ def show_recent_cert():
     df3_modified = df3_modified.drop(columns=['Id'])
     df3_modified = df3_modified[['Product Name', 'Brand', 'Certification Date', 'Product Type']]
     df3_modified = df3_modified[df3_modified['Product Type'].isin(['Printer', 'Multifunction Device'])]
+    
     # Add a "Source" column to each dataframe
     filtered_df['Source'] = 'Energy Star'
     df2_modified['Source'] = 'WiFi Alliance'
     df3_modified['Source'] = 'EPEAT Registry'
+    
     # Concatenate the dataframes
     combined_df = pd.concat([filtered_df, df2_modified, df3_modified], ignore_index=True)
     # Assuming "Certification Date" is already in string format
     # If not, convert it to string before truncating
+    
     # Truncate the date to keep only the first 10 characters
     combined_df['Certification Date'] = combined_df['Certification Date'].str[:10]
     # Convert the truncated date to datetime format
@@ -464,21 +467,14 @@ def show_recent_cert():
     # Sort the combined dataframe by "Certification Date" in descending order
     combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
     # Reset index
+
     combined_df.reset_index(drop=True, inplace=True)
     combined_df.drop_duplicates(inplace=True)
     combined_df['Certification Date'] = combined_df['Certification Date'].astype(str).str[:10]
-    df3_modified.drop_duplicates(inplace=True)
     # Show only the newest 5 records
     newest_records = combined_df.head(5)
-    conn = st.connection('s3', type=FilesConnection)
-    df8 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
-    conn = st.connection('s3', type=FilesConnection)
-    df9 = conn.read("scoops-finder/changelog-wifi.csv", input_format="csv", ttl=600)
-    conn = st.connection('s3', type=FilesConnection)
-    df10 = conn.read("scoops-finder/changelog-epeat.csv", input_format="csv", ttl=600)
-    # Display the result
+    
     st.subheader('Recent Certifications')
-    #st.write(newest_records)
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
     wch_colour_font = (0, 0, 0)
     fontsize = 14
@@ -540,16 +536,8 @@ def show_recent_cert():
 def show_raw_data_cert():
     st.header('Raw Certification Data 📝')
     st.subheader('Energy Star ⚡')
-    st.write(estardf)
     st.subheader('WiFi Alliance 📶')
-    st.write(df2_modified)
-    df2_modified.sort_values(by='Certification Date', ascending=False, inplace=True)
     st.subheader('EPEAT 🌎')
-    df3_modified.reset_index(drop=True, inplace=True)
-    st.write(df3_modified)
-    st.write(df8)
-    st.write(df9)
-    st.write(df10)
 
 def show_changelog_cert():
     # Code to display changelog
