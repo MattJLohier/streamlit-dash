@@ -506,29 +506,31 @@ def show_recent_cert():
         }
 
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
-    for index, row in newest_records.iterrows():
-        product_name = row['Product Name']
-        certification_date = row['Certification Date']
-        brand = row['Brand']
-        product_type = row['Product Type']
-        source = row['Source']
-        emoji = emoji_dict.get(source, "📝")
+    for col in row1 + row2:
+        with col:
+            for index, row in newest_records.iterrows():
+                product_name = row['Product Name']
+                certification_date = row['Certification Date']
+                brand = row['Brand']
+                product_type = row['Product Type']
+                source = row['Source']
+                emoji = emoji_dict.get(source, "📝")
 
-        # Embed data into HTML
-        html_content = f"""
-        <div class="card">
-            <div class="content">
-                <p class="heading">{product_name}</p>
-                <p class="para">
-                    Brand: {brand}<br>
-                    Product Type: {product_type}<br>
-                    Certification Date: {certification_date}<br>
-                    Source: {source} {emoji}
-                </p>
-            </div>
-        </div>
-        """
-        st.markdown(html_content, unsafe_allow_html=True)    
+                # Embed data into HTML
+                html_content = f"""
+                <div class="card" style="height: 120px;">
+                    <div class="content">
+                        <p class="heading">{product_name}</p>
+                        <p class="para">
+                            Brand: {brand}<br>
+                            Product Type: {product_type}<br>
+                            Certification Date: {certification_date}<br>
+                            Source: {source} {emoji}
+                        </p>
+                    </div>
+                </div>
+                """
+                st.markdown(html_content, unsafe_allow_html=True)   
 
 
 def show_raw_data_cert():
