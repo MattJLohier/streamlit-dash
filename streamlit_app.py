@@ -355,6 +355,7 @@ def show_recent():
                             <p class="heading">{metric_value}</p>
                             <p class="para">
                                 {title} {emoji}
+                                <br>
                                 Brand: {brand}<br>
                                 Product Type: {metric_value}<br>
                                 Certification Date: {date_detected}<br>
