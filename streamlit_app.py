@@ -57,7 +57,7 @@ def sidebar():
         color: #3775cb;
     }
 
-    .stButton button:active{
+    .stButton button:focus{
         border-color: #3775cb !important;
         color: #3775cb;
     }
