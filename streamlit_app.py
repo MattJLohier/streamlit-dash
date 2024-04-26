@@ -146,6 +146,13 @@ def page2():
     btn_changelog = st.button('Changelog', key='3')
     btn_insights = st.button('Insights', key='4')
 
+    row1 = st.columns(3)
+    row2 = st.columns(3)
+
+    for col in row1 + row2:
+        tile = col.container(height=120)
+        tile.title(":balloon:")    
+
     # Update current page based on button click
     if btn_recent:
         st.session_state['current_page'] = 'Recent'
