@@ -507,33 +507,43 @@ def show_recent_cert():
 
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     
-    row1 = st.columns(3)
-    
-    for col in row1:
-        with col:
-            for index, row in newest_records.iterrows():
-                product_name = row['Product Name']
-                certification_date = row['Certification Date']
-                brand = row['Brand']
-                product_type = row['Product Type']
-                source = row['Source']
-                emoji = emoji_dict.get(source, "📝")
+    # Define the number of columns
+    num_columns = 3
+    rows = [st.columns(num_columns) for _ in range((len(newest_records) + num_columns - 1) // num_columns)]
 
-                # Embed data into HTML
-                html_content = f"""
-                <div class="card" style="height: 120px;">
-                    <div class="content">
-                        <p class="heading">{product_name}</p>
-                        <p class="para">
-                            Brand: {brand}<br>
-                            Product Type: {product_type}<br>
-                            Certification Date: {certification_date}<br>
-                            Source: {source} {emoji}
-                        </p>
+    # Initialize a counter for DataFrame row indices
+    row_index = 0
+
+    # Fill each cell in the grid with content
+    for row in rows:
+        for col in row:
+            if row_index < len(newest_records):
+                with col:
+                    row_data = newest_records.iloc[row_index]
+                    product_name = row_data['Product Name']
+                    certification_date = row_data['Certification Date']
+                    brand = row_data['Brand']
+                    product_type = row_data['Product Type']
+                    source = row_data['Source']
+                    emoji = emoji_dict.get(source, "📝")
+
+                    # Embed data into HTML
+                    html_content = f"""
+                    <div class="card" style="height: 120px;">
+                        <div class="content">
+                            <p class="heading">{product_name}</p>
+                            <p class="para">
+                                Brand: {brand}<br>
+                                Product Type: {product_type}<br>
+                                Certification Date: {certification_date}<br>
+                                Source: {source} {emoji}
+                            </p>
+                        </div>
                     </div>
-                </div>
-                """
-                st.markdown(html_content, unsafe_allow_html=True)   
+                    """
+                    st.markdown(html_content, unsafe_allow_html=True)
+
+                    row_index += 1   
 
 
 def show_raw_data_cert():
