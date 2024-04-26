@@ -419,7 +419,7 @@ def show_recent_cert():
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;  
+    width: 320px;  
     padding: 2px;
     border-radius: 24px;
     overflow: hidden;
