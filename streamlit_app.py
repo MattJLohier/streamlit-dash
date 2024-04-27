@@ -1139,23 +1139,25 @@ def show_insights_cert():
     st.altair_chart(line_chart_by_source, use_container_width=True)
 
 
-    # Streamlit application starts
     st.title('Certification Analysis Over Time')
 
     # Assuming combined_df is loaded correctly
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
     combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
-    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda x: f'Q{x.quarter} {x.year}')
+
+    # Sort quarters and create quarter strings
+    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values()
+    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'Q{q.quarter} {q.year}')
+    unique_quarters_str = [f'Q{q.quarter} {q.year}' for q in unique_quarters]  # Sorted and formatted quarter strings
 
     # Set up the slider for Quarter selection
-    unique_quarters = sorted(combined_df['Quarter String'].unique())
-    latest_quarter = unique_quarters[-1]  # Ensure to set to the latest quarter
-    earliest_quarter = unique_quarters[0]  # Ensure to set to the earliest quarter
+    latest_quarter = unique_quarters_str[-1]  # Ensure to set to the latest quarter
+    earliest_quarter = unique_quarters_str[0]  # Ensure to set to the earliest quarter
 
     # Set default value of slider to include the entire range of available quarters
     quarter_range = st.select_slider(
         'Select Quarter Range',
-        options=unique_quarters,
+        options=unique_quarters_str,
         value=(earliest_quarter, latest_quarter),
         key='quarter_range_selector2'
     )
