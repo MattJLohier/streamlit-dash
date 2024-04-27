@@ -384,6 +384,18 @@ def show_raw_data():
 
 def show_changelog():
     # Code to display changelog
+    st.subheader('Changelog')
+    # Example: st.write(data_changelog)
+    # Assuming 'st.connection' and 'FilesConnection' are valid in your environment
+    conn = st.connection('s3', type=FilesConnection)
+    placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+
+    # Reshape the DataFrame
+    pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
+    #pivoted_df = pivoted_df.sort_values('Date', ascending=False)
+    pivoted_df = pivoted_df.iloc[::-1]
+    # Display the transposed DataFrame
+
 
     # Streamlit UI for brand filtering
     st.title('Brand Counts Over Time')
@@ -418,17 +430,6 @@ def show_changelog():
             st.write("No data available for the latest date.")
 
     with col2:
-        st.subheader('Changelog')
-        # Example: st.write(data_changelog)
-        # Assuming 'st.connection' and 'FilesConnection' are valid in your environment
-        conn = st.connection('s3', type=FilesConnection)
-        placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
-
-        # Reshape the DataFrame
-        pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
-        #pivoted_df = pivoted_df.sort_values('Date', ascending=False)
-        pivoted_df = pivoted_df.iloc[::-1]
-        # Display the transposed DataFrame
         st.write(pivoted_df)
 
     conn = st.connection('s3', type=FilesConnection)
