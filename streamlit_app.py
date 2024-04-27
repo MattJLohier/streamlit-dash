@@ -1238,6 +1238,18 @@ def show_insights_cert():
     st.altair_chart(line_chart, use_container_width=True)
 
 
+    bar_chart2 = alt.Chart(grouped_data).mark_bar().encode(
+    x=alt.X('Quarter String:O', sort=unique_quarters_str, title='Quarter'),
+    y=alt.Y('Counts:Q', title='Number of Certifications'),
+    color='Source:N',
+    tooltip=['Source', 'Quarter String', 'Counts']
+    ).interactive()
+
+    st.altair_chart(bar_chart2, use_container_width=True)
+    
+
+
+
     st.title('Certification by Brand This Quarter')
 
     # Assuming combined_df is loaded correctly
