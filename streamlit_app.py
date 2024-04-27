@@ -1151,6 +1151,73 @@ def show_insights_cert():
 
     st.altair_chart(line_chart, use_container_width=True)
 
+    st.title('Certification Analysis By Brand Over Time')
+
+    # Assuming combined_df is loaded correctly
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
+    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
+    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'{q.year}-Q{q.quarter}')
+    unique_quarters_str = [f'{q.year}-Q{q.quarter}' for q in combined_df['Quarter'].drop_duplicates().sort_values()]
+
+    # Slider for selecting quarter range
+    latest_quarter = unique_quarters_str[-1]
+    earliest_quarter = unique_quarters_str[0]
+    quarter_range = st.select_slider(
+        'Select Quarter Range',
+        options=unique_quarters_str,
+        value=(earliest_quarter, latest_quarter),
+        key='quarter_range_selector8'
+    )
+
+    # Filters for the charts
+    selected_source = st.multiselect(
+        'Select Sources',
+        options=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
+        default=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
+        key='source_selector8'
+    )
+
+    selected_brand = st.multiselect(
+        'Select Brands',
+        options=combined_df['Brand'].unique(),
+        default=combined_df['Brand'].unique(),
+        key='brand_selector8'
+    )
+
+    # Apply filters
+    filtered_data = combined_df[
+        (combined_df['Source'].isin(selected_source)) &
+        (combined_df['Brand'].isin(selected_brand)) &
+        (combined_df['Quarter String'] >= quarter_range[0]) &
+        (combined_df['Quarter String'] <= quarter_range[1])
+    ]
+
+    # Group and prepare data for visualization
+    grouped_data = filtered_data.groupby(['Source', 'Brand', 'Quarter String']).size().reset_index(name='Counts')
+
+    # Define custom dash styles
+    dash_styles = {
+        "EPEAT Registry": [10, 5],
+        "Energy Star": [5, 1],
+        "WiFi Alliance": [1, 5]
+    }
+
+    # Chart with custom stroke dashes for each source
+    line_chart = alt.Chart(grouped_data).mark_line(point=True).encode(
+        x=alt.X('Quarter String:O', sort=unique_quarters_str, title='Quarter'),
+        y=alt.Y('Counts:Q', title='Number of Certifications'),
+        color='Brand:N',
+        detail='Source:N',
+        strokeDash=alt.StrokeDash(
+            'Source:N', 
+            scale=alt.Scale(domain=list(dash_styles.keys()), range=list(dash_styles.values())),
+            legend=None
+        ),
+        tooltip=['Source', 'Brand', 'Quarter String', 'Counts']
+    ).interactive()
+
+    st.altair_chart(line_chart, use_container_width=True)
+
     st.title('Certification Analysis By Source Over Time')
 
    # Assuming combined_df is loaded correctly
