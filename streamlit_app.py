@@ -1185,6 +1185,8 @@ def show_insights_cert():
         y=alt.Y('Counts:Q', title='Number of Certifications'),
         color=alt.Color('Source:N', legend=alt.Legend(title="Source")),
         tooltip=['Brand', 'Source', 'Counts']
+    ).properties(
+        height=500  # Set the height of the chart here
     ).interactive()
 
     st.altair_chart(bar_chart, use_container_width=True)
