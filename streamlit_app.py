@@ -912,7 +912,7 @@ def show_changelog_cert():
     df_wifi_changelog = df_wifi_changelog[columns_to_keep3]
     df_wifi_changelog['Date'] = df_wifi_changelog['Date'].str[:10]
     df_wifi_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
-    df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=True)
+    df_wifi_changelog = df_wifi_changelog.sort_values(by='Date Detected', ascending=True)
 
     st.write(df_wifi_changelog)
 
