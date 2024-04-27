@@ -467,8 +467,6 @@ def show_insights():
 
     # Display the bar chart
     st.bar_chart(filtered_data, height=500)
-
-    st.write(pivoted_df)
     st.dataframe(pivoted_df, use_container_width=True)
 
 
