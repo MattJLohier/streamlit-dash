@@ -850,6 +850,16 @@ def show_changelog_cert():
     conn = st.connection('s3', type=FilesConnection)
     placement_changelog1 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
     df_clean = placement_changelog1.drop_duplicates(subset=['pd_id'])  # Drop duplicates based on 'pd_id'
+    
+    columns_to_keep = [
+        'Date', 'model_name', 'brand_name', 'product_type', 'color_capability', 
+        'monochrome_product_speed_ipm_or_mppm', 'date_available_on_market', 
+        'date_qualified', 'markets'
+    ]   
+
+    # Select only the specified columns
+    df_clean = df_clean[columns_to_keep]
+    
     st.write(df_clean)
 
     st.subheader('Changelog EPEAT')
