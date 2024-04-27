@@ -7,7 +7,6 @@ import hashlib
 from io import BytesIO
 from PIL import Image
 import requests
-import matplotlib.pyplot as plt
 
 # URL of the image you want to use as the page icon
 icon_url = "https://i.postimg.cc/Y0XLcpg7/scooper-s.png"
@@ -414,14 +413,15 @@ def show_changelog():
     # Extract the latest date data
     latest_data = pivoted_df.iloc[0]
 
-    # Check if latest_data is not empty
+    # Ensure there is data to display
     if not latest_data.empty:
-        # Plotting the pie chart
+        # Create a pie chart
         fig, ax = plt.subplots()
         latest_data.plot(kind='pie', ax=ax, autopct='%1.1f%%', startangle=90)
         ax.set_ylabel('')  # Remove the y-label as it's not necessary for pie charts
         ax.set_title(f"Brand Distribution on {pivoted_df.index[0]}")
 
+        # Display the pie chart in Streamlit
         st.pyplot(fig)
     else:
         st.write("No data available for the latest date.")
