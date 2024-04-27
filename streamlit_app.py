@@ -1141,7 +1141,7 @@ def show_insights_cert():
     st.altair_chart(line_chart, use_container_width=True)
 
 
-st.title('Certification by Brand This Quarter')
+    st.title('Certification by Brand This Quarter')
 
     # Assuming combined_df is loaded correctly
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
