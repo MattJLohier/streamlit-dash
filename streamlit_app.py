@@ -1025,6 +1025,28 @@ def show_insights_cert():
     
 
 
+    st.title('Certification Analysis by Vendor Over Time')
+
+    # Convert Certification Date to datetime if not already
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
+
+    # Group by Brand and Date and count the occurrences
+    grouped_data = combined_df.groupby([combined_df['Brand'], combined_df['Certification Date'].dt.to_period("M")]).size().reset_index(name='Counts')
+
+    # Resample the counts monthly to fill gaps
+    grouped_data['Certification Date'] = grouped_data['Certification Date'].dt.to_timestamp()
+
+    # Create an interactive chart
+    chart = alt.Chart(grouped_data).mark_line(point=True).encode(
+        x='Certification Date:T',
+        y='Counts:Q',
+        color='Brand:N',
+        tooltip=['Brand', 'Certification Date', 'Counts']
+    ).interactive()
+
+    st.altair_chart(chart, use_container_width=True)
+
+
 if __name__ == "__main__":
     main()
 
