@@ -1165,14 +1165,14 @@ def show_insights_cert():
         'Select Sources',
         options=combined_df['Source'].unique(),
         default=combined_df['Source'].unique(),
-        key='source_selector'
+        key='source_selector2'
     )
 
     selected_brand = st.multiselect(
         'Select Brands',
         options=combined_df['Brand'].unique(),
         default=combined_df['Brand'].unique(),
-        key='brand_selector'
+        key='brand_selector2'
     )
 
     # Apply filters based on Source, Brand, and quarter range
