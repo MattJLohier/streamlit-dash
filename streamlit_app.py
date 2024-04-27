@@ -461,6 +461,18 @@ def show_insights():
     # Streamlit UI for the visualization
     st.title('Brand Distribution on Latest Date')
 
+
+    st.title('Brand Counts Over Time')
+    all_brands = list(pivoted_df.columns)
+    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands)
+
+    # Filter data based on selected brands
+    filtered_data = pivoted_df[selected_brands]
+
+    # Display the bar chart
+    st.bar_chart(filtered_data, height=500)
+
+
     # Creating two columns
     col1, col2 = st.columns(2)
 
