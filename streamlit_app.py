@@ -1090,7 +1090,7 @@ def show_insights_cert():
     combined_df['Brand'] = combined_df['Brand'].replace('HP Inc.', 'HP')
     # Sort the combined dataframe by "Certification Date" in descending order
     combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
-        
+
     st.title('Certification Analysis By Brand Over Time')
 
     # Assuming combined_df is loaded correctly
@@ -1150,6 +1150,33 @@ def show_insights_cert():
     ).interactive()
 
     st.altair_chart(line_chart, use_container_width=True)
+
+    # Calculation of metrics
+    # Extract current year and quarter information
+    current_year = pd.Timestamp.now().year
+    current_quarter = (pd.Timestamp.now().month - 1) // 3 + 1
+
+    # Compute certifications this quarter
+    this_quarter_str = f"{current_year}-Q{current_quarter}"
+    previous_quarter_str = f"{current_year if current_quarter > 1 else current_year - 1}-Q{(current_quarter - 1 if current_quarter > 1 else 4)}"
+    certifications_this_quarter = combined_df[combined_df['Quarter String'] == this_quarter_str]['Certification Date'].count()
+    certifications_last_quarter = combined_df[combined_df['Quarter String'] == previous_quarter_str]['Certification Date'].count()
+    delta_quarter = certifications_this_quarter - certifications_last_quarter
+
+    # Compute certifications year to date
+    start_of_year = f"{current_year}-01-01"
+    certifications_ytd = combined_df[(combined_df['Certification Date'] >= start_of_year) & (combined_df['Certification Date'] <= pd.Timestamp.now())]['Certification Date'].count()
+    previous_year_start = f"{current_year - 1}-01-01"
+    previous_year_end = f"{current_year - 1}-{pd.Timestamp.now().strftime('%m-%d')}"
+    certifications_last_year_ytd = combined_df[(combined_df['Certification Date'] >= previous_year_start) & (combined_df['Certification Date'] <= previous_year_end)]['Certification Date'].count()
+    delta_ytd = ((certifications_ytd - certifications_last_year_ytd) / certifications_last_year_ytd) * 100 if certifications_last_year_ytd > 0 else 0
+
+    # Displaying metrics using streamlit
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric(label="Certifications This Quarter", value=certifications_this_quarter, delta=f"{delta_quarter} (QoQ)")
+    with col2:
+        st.metric(label="Certifications Year to Date", value=certifications_ytd, delta=f"{delta_ytd:.2f}% (YoY)")
 
 
     st.title('Certification Analysis By Source Over Time')
