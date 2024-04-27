@@ -110,7 +110,7 @@ def sidebar():
     <style>
     /* CSS selector for the Streamlit progress bar */
     .stProgress > div > div > div > div {
-        background-color: #3775cb !important; /* Set to desired shade of blue */
+        background-color: #0078D7 !important; /* Set to desired shade of blue */
     }
     </style>
     """
@@ -312,13 +312,13 @@ def show_recent():
     .card::before {
     content: "";
     position: absolute;
-    height: 300%;
-    width: 300%;
+    height: 500%;
+    width: 500%;
     border-radius: inherit;
     background: #3775cb;
     background: linear-gradient(to right, #3775cb, #3775cb);
     transform-origin: center;
-    animation: moving 13.8s linear infinite paused;
+    animation: moving 9.8s linear infinite paused;
     transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
@@ -635,7 +635,7 @@ def show_recent_cert():
     container = st.container()
 
     st.markdown('''
-        <style>
+    <style>
     .grid-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Maintains 3 columns */
@@ -694,13 +694,13 @@ def show_recent_cert():
     .card::before {
     content: "";
     position: absolute;
-    height: 300%;
-    width: 300%;
+    height: 500%;
+    width: 500%;
     border-radius: inherit;
     background: #3775cb;
     background: linear-gradient(to right, #3775cb, #3775cb);
     transform-origin: center;
-    animation: moving 13.8s linear infinite paused;
+    animation: moving 9.8s linear infinite paused;
     transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
