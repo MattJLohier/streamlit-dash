@@ -393,12 +393,19 @@ def show_changelog():
     pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
     #pivoted_df = pivoted_df.sort_values('Date', ascending=False)
     pivoted_df = pivoted_df.iloc[::-1]
-
-
     # Display the transposed DataFrame
     st.write(pivoted_df)
 
+    # Streamlit UI for brand filtering
+    st.title('Brand Performance Over Time')
+    all_brands = list(pivoted_df.columns)
+    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands)
 
+    # Filter data based on selected brands
+    filtered_data = pivoted_df[selected_brands]
+
+    # Display the line chart
+    st.line_chart(filtered_data)
 
     conn = st.connection('s3', type=FilesConnection)
     placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
