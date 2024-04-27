@@ -430,6 +430,7 @@ def show_changelog():
             st.write("No data available for the latest date.")
 
     with col2:
+        st.write()
 
     conn = st.connection('s3', type=FilesConnection)
     placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
