@@ -770,11 +770,10 @@ def show_raw_data_cert():
             df_raw_certs4 = df_raw_certs4[df_raw_certs4['Product Type'] == selected_category1]
             
 
-        # Filter by brand
         brands = ['any'] + list(df_raw_certs4['Manufacturer'].unique())
         selected_brand1 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
-        if selected_brand != 'any':
-            df_raw_certs4 = df_raw_certs4[df_sorted['Manufacturer'] == selected_brand1]
+        if selected_brand1 != 'any':
+            df_raw_certs4 = df_raw_certs4[df_raw_certs4['Manufacturer'] == selected_brand1]
 
         remanufactured_options = ['any', 'Active', 'NA']
         selected_remanufactured1 = st.selectbox('Status', remanufactured_options, index=0)
