@@ -1070,6 +1070,10 @@ def show_insights_cert():
                                     (combined_df['Source'].isin(selected_source)) &
                                     (combined_df['Quarter String'] == quarter_range[1])]
 
+
+    st.write("Date Range in Data:", combined_df['Certification Date'].min(), combined_df['Certification Date'].max())
+    st.write("Quarter Range in Data:", combined_df['Quarter'].min(), combined_df['Quarter'].max())
+    
     # Group by Brand and count the occurrences for bar chart
     current_quarter_grouped = current_quarter_data.groupby(['Brand']).size().reset_index(name='Counts')
 
