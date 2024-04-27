@@ -1188,7 +1188,6 @@ def show_insights_cert():
     ).interactive()
 
     st.altair_chart(bar_chart, use_container_width=True)
-    st.write(combined_df)
 
 
 
