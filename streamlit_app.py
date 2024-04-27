@@ -1025,23 +1025,33 @@ def show_insights_cert():
     
 
 
+    # Streamlit application starts
     st.title('Certification Analysis by Vendor Over Time')
 
-    # Convert Certification Date to datetime if not already
+    # Convert Certification Date to datetime if not already and resample by quarter
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
+    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
 
-    # Group by Brand and Date and count the occurrences
-    grouped_data = combined_df.groupby([combined_df['Brand'], combined_df['Certification Date'].dt.to_period("M")]).size().reset_index(name='Counts')
+    # Sidebar for filters
+    selected_brand = st.sidebar.multiselect('Select Brands', options=combined_df['Brand'].unique(), default=combined_df['Brand'].unique())
+    selected_source = st.sidebar.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique())
+    selected_quarter = st.sidebar.multiselect('Select Quarters', options=combined_df['Quarter'].unique(), default=combined_df['Quarter'].unique())
 
-    # Resample the counts monthly to fill gaps
-    grouped_data['Certification Date'] = grouped_data['Certification Date'].dt.to_timestamp()
+    # Filter data based on selections
+    filtered_data = combined_df[(combined_df['Brand'].isin(selected_brand)) & 
+                                (combined_df['Source'].isin(selected_source)) & 
+                                (combined_df['Quarter'].isin(selected_quarter))]
+
+    # Group by Brand and Quarter and count the occurrences
+    grouped_data = filtered_data.groupby(['Brand', 'Quarter']).size().reset_index(name='Counts')
+    grouped_data['Quarter'] = grouped_data['Quarter'].dt.start_time  # Convert Quarter Period to Timestamp for plotting
 
     # Create an interactive chart
     chart = alt.Chart(grouped_data).mark_line(point=True).encode(
-        x='Certification Date:T',
+        x='Quarter:T',
         y='Counts:Q',
         color='Brand:N',
-        tooltip=['Brand', 'Certification Date', 'Counts']
+        tooltip=['Brand', 'Quarter', 'Counts']
     ).interactive()
 
     st.altair_chart(chart, use_container_width=True)
