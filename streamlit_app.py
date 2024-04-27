@@ -1032,10 +1032,10 @@ def show_insights_cert():
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
     combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
 
-    # Sidebar for filters
-    selected_brand = st.sidebar.multiselect('Select Brands', options=combined_df['Brand'].unique(), default=combined_df['Brand'].unique())
-    selected_source = st.sidebar.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique())
-    selected_quarter = st.sidebar.multiselect('Select Quarters', options=combined_df['Quarter'].unique(), default=combined_df['Quarter'].unique())
+    # Filters
+    selected_brand = st.multiselect('Select Brands', options=combined_df['Brand'].unique(), default=combined_df['Brand'].unique())
+    selected_source = st.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique())
+    selected_quarter = st.multiselect('Select Quarters', options=combined_df['Quarter'].unique(), default=combined_df['Quarter'].unique())
 
     # Filter data based on selections
     filtered_data = combined_df[(combined_df['Brand'].isin(selected_brand)) & 
