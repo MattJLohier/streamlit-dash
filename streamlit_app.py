@@ -51,29 +51,6 @@ def display_dashboard():
 def sidebar():
     st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)
     st.sidebar.markdown("---")
-
-    # Timezone setting for PST
-    timezone = pytz.timezone('Etc/UTC')
-    now = datetime.datetime.now(datetime.timezone.utc).astimezone(timezone)
-    
-    # Determine the next refresh time (9 AM PST)
-    next_refresh = now.replace(hour=9, minute=0, second=0, microsecond=0)
-    if now.hour >= 9 or (now.hour == 9 and now.minute > 0):  # Check past 9 AM PST
-        next_refresh += datetime.timedelta(days=1)
-    
-    # Calculate time left until next refresh
-    time_left = next_refresh - now
-    total_seconds = time_left.total_seconds()
-
-    # Calculate progress (based on how many seconds have elapsed in the current 24-hour period)
-    progress = (1 - (time_left.seconds / 86400)) * 100
-
-    # Display the progress bar and time left in rounded hours
-    hours_left = round(time_left.total_seconds() / 3600)
-    st.sidebar.progress(int(progress))
-    st.sidebar.markdown(f"**Refresh in: {hours_left} hours**")
-
-    
     button_container = st.sidebar.container()
     
     # Inject CSS to make container's children (buttons) 100% width
@@ -127,6 +104,27 @@ def sidebar():
             st.session_state['page'] = 'certifications'
         if st.button("Placements", key="placements_button"):
             st.session_state['page'] = 'placements'
+
+    # Timezone setting for PST
+    timezone = pytz.timezone('America/Los_Angeles')
+    now = datetime.datetime.now(datetime.timezone.utc).astimezone(timezone)
+    
+    # Determine the next refresh time (9 AM PST)
+    next_refresh = now.replace(hour=9, minute=0, second=0, microsecond=0)
+    if now.hour >= 9 or (now.hour == 9 and now.minute > 0):  # Check past 9 AM PST
+        next_refresh += datetime.timedelta(days=1)
+    
+    # Calculate time left until next refresh
+    time_left = next_refresh - now
+    total_seconds = time_left.total_seconds()
+
+    # Calculate progress (based on how many seconds have elapsed in the current 24-hour period)
+    progress = (1 - (time_left.seconds / 86400)) * 100
+
+    # Display the progress bar and time left in rounded hours
+    hours_left = round(time_left.total_seconds() / 3600)
+    st.sidebar.progress(int(progress))
+    st.sidebar.markdown(f"**Refresh in: {hours_left} hours**")
 
 
 def login(username, password):
