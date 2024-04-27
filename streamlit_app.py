@@ -919,7 +919,111 @@ def show_insights_cert():
     # Code to display insights
     st.subheader('Insights')
     # Example: st.write(data_insights)
+    conn = st.connection('s3', type=FilesConnection)
+    df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
+
+    # Specify the columns to keep
+    columns_to_keep = ['brand_name', 'model_name', 'product_type',
+                    'color_capability', 'date_available_on_market', 'date_qualified',
+                    'markets', 'monochrome_product_speed_ipm_or_mppm']
+
+    # Create a new DataFrame with only the specified columns
+    new_df = df[columns_to_keep]
+
+    # Rename the columns
+    new_df = new_df.rename(columns={
+        'brand_name': 'Brand',
+        'model_name': 'Model',
+        'product_type': 'Product Type',
+        'color_capability': 'Color/Mono',
+        'date_available_on_market': 'Date Available',
+        'date_qualified': 'Date Qualified',
+        'markets': 'Target Markets',
+        'monochrome_product_speed_ipm_or_mppm': 'Print Speed'
+    })
+
+    # Specify the brands to filter
+    brands_to_show = ["Canon", "Brother", "HP", "Epson", "Konica Minolta", "Kyocera",
+                    "Lexmark", "Ricoh", "Sharp", "Toshiba", "Xerox", "Pantum", "Fujifilm", "HP Inc.", "Zhuhai Pantum Electronics Co., Ltd."]
+
+    # Specify the product types to filter
+    product_types_to_show = ['Printers', 'Multifunction Devices (MFD)']
+
+    # Cut off the "Date Available" and "Date Qualified" columns to remove anything after the first 10 digits
+    new_df['Date Available'] = new_df['Date Available'].str[:10]
+    new_df['Date Qualified'] = new_df['Date Qualified'].str[:10]
+
+    # Filter the new DataFrame to only include specified brands, product types, and hide entries with "Label Printer" in the Model column
+    filtered_df = new_df[(new_df['Brand'].isin(brands_to_show)) &
+                        (new_df['Product Type'].isin(product_types_to_show)) &
+                        (~new_df['Model'].str.contains('Model Printer|Label Printer', case=False))]
+
+    # Sort the filtered DataFrame by Date Available (Newest to Oldest)
+    filtered_df.sort_values(by='Date Available', ascending=False, inplace=True)
+    filtered_df.reset_index(drop=True, inplace=True)
+    estardf = filtered_df
+
+    # Print filtered results.
+    # Add metric to show latest 3 records based on product name
+    # latest_records = filtered_df.head(3)['Model'].tolist()
+    # st.metric("Latest 3 Products", ", ".join(latest_records))
+    # Create connection object and retrieve file contents.
+    # Specify input format is a csv and to cache the result for 600 seconds.
+    conn = st.connection('s3', type=FilesConnection)
+    df2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    # Keep only the desired columns
+    df2_modified = df2[["CID", "Date of Last Certification", "Brand", "Product", "Model Number"]]
+    # Filter by specified brands
+    df2_modified = df2_modified[df2_modified["Brand"].isin(brands_to_show)]
+    # Sort the dataframe by "Date of Last Certification", from newest to oldest
+    df2_modified.sort_values(by="Date of Last Certification", ascending=False, inplace=True)
+    df2_modified.reset_index(drop=True, inplace=True)
+    df2_modified.drop_duplicates(inplace=True)
+    # Write the modified dataframe
+    conn = st.connection('s3', type=FilesConnection)
+    df3 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+    # Keep only the desired columns
+    df3_modified = df3[["Id", "Registered On", "Product Type", "Product Name", "Manufacturer"]]
+    # Filter by specified brands
+    df3_modified = df3_modified[df3_modified["Manufacturer"].isin(brands_to_show)]
+    # Sort the dataframe by "Date of Last Certification", from newest to oldest
+    df3_modified.sort_values(by="Registered On", ascending=False, inplace=True)
+    df3_modified.reset_index(drop=True, inplace=True)
+    df3_modified.drop_duplicates(inplace=True)
+    # Write the modified dataframe
+    # Rename and remove columns for filtered_df
+    filtered_df = filtered_df.rename(columns={'Model': 'Product Name', 'Date Available': 'Certification Date'})
+    filtered_df = filtered_df.drop(columns=['Color/Mono', 'Date Qualified', 'Target Markets', 'Print Speed'])
+    filtered_df = filtered_df[['Product Name', 'Brand', 'Certification Date', 'Product Type']]
+    # Rename and remove columns for df2_modified
+    df2_modified = df2_modified.rename(columns={'Manufacturer': 'Brand', 'Product': 'Product Name', 'Date of Last Certification': 'Certification Date'})
+    df2_modified = df2_modified.drop(columns=['CID', 'Model Number'])
+    df2_modified = df2_modified[['Product Name', 'Brand', 'Certification Date']]
+    # Rename and remove columns for df3_modified
+    df3_modified = df3_modified.rename(columns={'Registered On': 'Certification Date', 'Manufacturer': 'Brand'})
+    df3_modified = df3_modified.drop(columns=['Id'])
+    df3_modified = df3_modified[['Product Name', 'Brand', 'Certification Date', 'Product Type']]
+    df3_modified = df3_modified[df3_modified['Product Type'].isin(['Printer', 'Multifunction Device'])]
+    
+    # Add a "Source" column to each dataframe
+    filtered_df['Source'] = 'Energy Star'
+    df2_modified['Source'] = 'WiFi Alliance'
+    df3_modified['Source'] = 'EPEAT Registry'
+    
+    # Concatenate the dataframes
+    combined_df = pd.concat([filtered_df, df2_modified, df3_modified], ignore_index=True)
+    # Assuming "Certification Date" is already in string format
+    # If not, convert it to string before truncating
+    
+    # Truncate the date to keep only the first 10 characters
+    combined_df['Certification Date'] = combined_df['Certification Date'].str[:10]
+    # Convert the truncated date to datetime format
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')
+    # Sort the combined dataframe by "Certification Date" in descending order
+    combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
+
     st.write(combined_df)
+    
 
 
 if __name__ == "__main__":
