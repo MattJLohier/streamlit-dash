@@ -9,6 +9,8 @@ from io import BytesIO
 from PIL import Image
 import requests
 import matplotlib.pyplot as plt
+from streamlit_echarts import st_echarts
+
 
 # URL of the image you want to use as the page icon
 icon_url = "https://i.postimg.cc/Y0XLcpg7/scooper-s.png"
@@ -48,19 +50,69 @@ def sidebar():
     st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)  # Adjust the image path as needed
     st.sidebar.markdown("---")
 
-    # Timer display for refresh
     now = datetime.datetime.now()
     next_refresh = now.replace(hour=9, minute=0, second=0, microsecond=0)
     if now.hour >= 9:  # If it's past 9 AM, set for next day
         next_refresh += datetime.timedelta(days=1)
-    
-    time_left = next_refresh - now
-    time_left_formatted = f"{time_left.seconds // 3600}h {(time_left.seconds // 60) % 60}m {time_left.seconds % 60}s"
-    st.sidebar.markdown(f"**Refresh in: {time_left_formatted}**")
 
-    # Set up a container for the buttons
-    button_container = st.sidebar.container()
-    
+    total_seconds = 24 * 3600  # seconds in 24 hours
+    time_left = next_refresh - now
+    seconds_left = time_left.total_seconds()
+    percent_complete = 100 - (seconds_left / total_seconds * 100)
+
+    # Echarts circular progress bar
+    options = {
+        "series": [
+            {
+                "type": "gauge",
+                "startAngle": 90,
+                "endAngle": -270,
+                "pointer": {"show": False},
+                "progress": {
+                    "show": True,
+                    "overlap": False,
+                    "roundCap": True,
+                    "clip": False,
+                    "itemStyle": {
+                        "borderWidth": 1,
+                        "borderColor": "#464646"
+                    }
+                },
+                "axisLine": {
+                    "lineStyle": {
+                        "width": 20
+                    }
+                },
+                "splitLine": {
+                    "show": False,
+                    "distance": 0,
+                    "length": 10
+                },
+                "axisTick": {
+                    "show": False
+                },
+                "axisLabel": {
+                    "show": False,
+                    "distance": 50
+                },
+                "data": [{"value": percent_complete, "name": "Time till next refresh"}],
+                "title": {
+                    "fontSize": 14
+                },
+                "detail": {
+                    "width": 50,
+                    "height": 14,
+                    "fontSize": 14,
+                    "color": "auto",
+                    "borderColor": "auto",
+                    "borderWidth": 0,
+                    "formatter": '{value}%'
+                }
+            }
+        ]
+    }
+    st_echarts(options=options, height="200px", key="gauge_chart")
+
     # CSS Styling
     st.sidebar.markdown("""
     <style>
