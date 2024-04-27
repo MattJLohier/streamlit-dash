@@ -10,6 +10,7 @@ from PIL import Image
 import requests
 import matplotlib.pyplot as plt
 from streamlit_echarts import st_echarts
+import pytz
 
 
 # URL of the image you want to use as the page icon
@@ -51,23 +52,26 @@ def sidebar():
     st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)
     st.sidebar.markdown("---")
 
-    # Determine the next refresh time
-    now = datetime.datetime.now()
+    # Timezone setting for PST
+    timezone = pytz.timezone('America/Los_Angeles')
+    now = datetime.datetime.now(datetime.timezone.utc).astimezone(timezone)
+    
+    # Determine the next refresh time (9 AM PST)
     next_refresh = now.replace(hour=9, minute=0, second=0, microsecond=0)
-    if now.hour >= 9:  # If it's past 9 AM, set for next day
+    if now.hour >= 9 or (now.hour == 9 and now.minute > 0):  # Check past 9 AM PST
         next_refresh += datetime.timedelta(days=1)
     
     # Calculate time left until next refresh
     time_left = next_refresh - now
     total_seconds = time_left.total_seconds()
 
-    # Progress calculation
-    progress = (1 - (time_left.seconds / 86400)) * 100  # 86400 seconds in a day
+    # Calculate progress (based on how many seconds have elapsed in the current 24-hour period)
+    progress = (1 - (time_left.seconds / 86400)) * 100
 
-    # Display the progress bar and time left
+    # Display the progress bar and time left in rounded hours
+    hours_left = round(time_left.total_seconds() / 3600)
     st.sidebar.progress(int(progress))
-    time_left_formatted = f"{time_left.seconds // 3600}h {(time_left.seconds // 60) % 60}m {time_left.seconds % 60}s"
-    st.sidebar.markdown(f"**Refresh in: {time_left_formatted}**")
+    st.sidebar.markdown(f"**Refresh in: {hours_left} hours**")
 
     
     button_container = st.sidebar.container()
