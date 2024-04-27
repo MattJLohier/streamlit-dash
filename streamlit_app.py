@@ -880,7 +880,7 @@ def show_changelog_cert():
 
     df_clean['Date Available on Market'] = df_clean['Date Available on Market'].str[:10]
     df_clean['Date Qualified'] = df_clean['Date Qualified'].str[:10]
-    df_clean = df_clean.sort_values(by='Date Detected')
+    df_clean = df_clean.sort_values(by='Date Detected', ascending=False)
     st.write(df_clean)
 
     st.subheader('EPEAT')
