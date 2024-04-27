@@ -1073,6 +1073,7 @@ def show_insights_cert():
     # Group by Brand and count the occurrences for bar chart
     current_quarter_grouped = current_quarter_data.groupby(['Brand']).size().reset_index(name='Counts')
 
+    st.title('Certification Counts by Vendor This Quarter')
     # Create an interactive bar chart
     bar_chart = alt.Chart(current_quarter_grouped).mark_bar().encode(
         x='Brand:N',
