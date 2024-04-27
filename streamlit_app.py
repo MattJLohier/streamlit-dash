@@ -1,4 +1,5 @@
 import streamlit as st
+import datetime
 import numpy as np
 import pandas as pd
 import altair as alt
@@ -48,7 +49,7 @@ def sidebar():
     st.sidebar.markdown("---")
 
     # Timer display for refresh
-    now = datetime.now()
+    now = datetime.datetime.now()
     next_refresh = now.replace(hour=9, minute=0, second=0, microsecond=0)
     if now.hour >= 9:  # If it's past 9 AM, set for next day
         next_refresh += datetime.timedelta(days=1)
