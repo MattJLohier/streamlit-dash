@@ -464,7 +464,7 @@ def show_insights():
 
     st.title('Brand Counts Over Time')
     all_brands = list(pivoted_df.columns)
-    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands)
+    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands, key='quarter_range_selector6')
 
     # Filter data based on selected brands
     filtered_data = pivoted_df[selected_brands]
