@@ -389,16 +389,10 @@ def show_changelog():
     conn = st.connection('s3', type=FilesConnection)
     placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
 
-    # Ensure 'Date' is in datetime format and normalize to remove time
-    placement_changelog['Date'] = pd.to_datetime(placement_changelog['Date']).dt.normalize()
-
     # Reshape the DataFrame
     pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
 
-    # Sort by Date, newest first
-    pivoted_df = pivoted_df.sort_index(ascending=False)
-
-    # Display the transposed and sorted DataFrame
+    # Display the transposed DataFrame
     st.write(pivoted_df)
 
 
