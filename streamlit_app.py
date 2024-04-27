@@ -401,31 +401,6 @@ def show_changelog():
     placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
     st.write("Initial DataFrame:", placement_tracking)  # Display initial DataFrame
 
-    # Confirm columns exist
-    if set(["Brand", "Date", "Count"]).issubset(placement_tracking.columns):
-        # Remove duplicates and sort
-        placement_tracking.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
-        placement_tracking = placement_tracking.sort_values(by='Date', ascending=False).reset_index(drop=True)
-        st.write("DataFrame after dropping duplicates and sorting:", placement_tracking)  # Debug output
-
-        # Extract the last 10 rows
-        last_10_rows = placement_tracking.iloc[-10:]
-        last_10_rows.columns = [f"{col}_new" for col in last_10_rows.columns]
-        df7_new = pd.concat([placement_tracking, last_10_rows.reset_index(drop=True)], axis=1)
-        df7_new.drop(df7_new.index[-10:], inplace=True)
-        df7_new.reset_index(drop=True, inplace=True)
-        df7_new.columns = ['Brand (Latest)', 'Count (Latest)', 'Date (Latest)', 
-                        'Brand (Yesterday)', 'Count (Yesterday)', 'Date (Yesterday)']
-
-        # Reset and rename
-        placement_tracking.drop_duplicates(subset=["Brand", "Date", "Count"], inplace=True)
-        placement_tracking = placement_tracking.sort_values(by='Date').reset_index(drop=True)
-        df7_pivot = placement_tracking.pivot(index='Date', columns='Brand', values='Count')
-        df7_pivot.reset_index(inplace=True)
-        df7_pivot = df7_pivot.sort_values(by='Date', ascending=False)
-        st.dataframe(df7_pivot, width=1200)  # Display final DataFrame
-    else:
-        st.error("Dataframe does not contain required columns: 'Brand', 'Date', or 'Count'")
 
 
 def show_insights():
