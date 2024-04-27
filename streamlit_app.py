@@ -1166,7 +1166,7 @@ def show_insights_cert():
         'Select Quarter Range',
         options=unique_quarters_str,
         value=(earliest_quarter, latest_quarter),
-        key='quarter_range_selector6'
+        key='quarter_range_selector2'
     )
 
     # Filters for the charts
@@ -1174,14 +1174,14 @@ def show_insights_cert():
         'Select Sources',
         options=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
         default=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
-        key='source_selector6'
+        key='source_selector2'
     )
 
     selected_brand = st.multiselect(
         'Select Brands',
         options=combined_df['Brand'].unique(),
         default=combined_df['Brand'].unique(),
-        key='brand_selector6'
+        key='brand_selector2'
     )
 
     # Apply filters
@@ -1202,37 +1202,21 @@ def show_insights_cert():
         "WiFi Alliance": [1, 5]
     }
 
-    # Main chart with custom stroke dashes for each source
-    main_chart = alt.Chart(grouped_data).mark_line(point=True).encode(
+    # Chart with custom stroke dashes for each source
+    line_chart = alt.Chart(grouped_data).mark_line(point=True).encode(
         x=alt.X('Quarter String:O', sort=unique_quarters_str, title='Quarter'),
         y=alt.Y('Counts:Q', title='Number of Certifications'),
         color='Brand:N',
         detail='Source:N',
         strokeDash=alt.StrokeDash(
             'Source:N', 
-            scale=alt.Scale(domain=list(dash_styles.keys()), range=list(dash_styles.values()))
+            scale=alt.Scale(domain=list(dash_styles.keys()), range=list(dash_styles.values())),
+            legend=None
         ),
         tooltip=['Source', 'Brand', 'Quarter String', 'Counts']
     ).interactive()
 
-    # Create legend by using text marks
-    legend_entries = pd.DataFrame({
-        'Source': list(dash_styles.keys()),
-        'y': list(range(len(dash_styles))),
-        'dash_pattern': list(dash_styles.values())
-    })
-
-    legend_chart = alt.Chart(legend_entries).mark_text(size=15, align='left').encode(
-        y=alt.Y('y:O', axis=alt.Axis(orient='right', title='Source Dash Patterns')),
-        text='Source:N'
-    ).properties(
-        title="Legend"
-    )
-
-    # Combine the main chart with the legend
-    combined_chart = alt.hconcat(main_chart, legend_chart, spacing=30)
-
-    st.altair_chart(combined_chart, use_container_width=True)
+    st.altair_chart(line_chart, use_container_width=True)
 
     st.title('Certification Analysis By Source Over Time')
 
