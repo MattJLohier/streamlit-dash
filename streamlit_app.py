@@ -903,7 +903,14 @@ def show_changelog_cert():
     st.subheader('Changelog WiFi Alliance')
     conn = st.connection('s3', type=FilesConnection)
     placement_tracking3 = conn.read("scoops-finder/changelog-wifi.csv", input_format="csv", ttl=600)
-    st.write(placement_tracking3)
+
+    df_wifi_changelog = placement_tracking3
+
+    columns_to_keep3 = ["Date", "Product", "Brand", "Model Number", "Category"]
+
+    df_wifi_changelog = df_wifi_changelog[columns_to_keep3]
+
+    st.write(df_wifi_changelog)
 
 
 def show_insights_cert():
