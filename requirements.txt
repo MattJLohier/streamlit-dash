@@ -3,3 +3,4 @@ pandas
 s3fs
 st-files-connection
 matplotlib
+streamlit-echarts
