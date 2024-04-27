@@ -1018,6 +1018,7 @@ def show_insights_cert():
     # Truncate the date to keep only the first 10 characters
     # Convert the truncated date to datetime format
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')
+    combined_df['Brand'] = combined_df['Brand'].replace('HP Inc.', 'HP')
     # Sort the combined dataframe by "Certification Date" in descending order
     combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
         
