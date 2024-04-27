@@ -105,6 +105,17 @@ def sidebar():
         if st.button("Placements", key="placements_button"):
             st.session_state['page'] = 'placements'
 
+    # Custom CSS to change the progress bar color
+    progress_bar_color_style = """
+    <style>
+    /* CSS selector for the Streamlit progress bar */
+    .stProgress > div > div > div > div {
+        background-color: #0078D7 !important; /* Set to desired shade of blue */
+    }
+    </style>
+    """
+    st.sidebar.markdown(progress_bar_color_style, unsafe_allow_html=True)
+
     # Timezone setting for PST
     timezone = pytz.timezone('America/Los_Angeles')
     now = datetime.datetime.now(datetime.timezone.utc).astimezone(timezone)
