@@ -1021,7 +1021,7 @@ def show_insights_cert():
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')
     # Sort the combined dataframe by "Certification Date" in descending order
     combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
-
+    combined_df[Certification Date] = combined_df[Certification Date].str[:10] 
     st.write(combined_df)
     
 
