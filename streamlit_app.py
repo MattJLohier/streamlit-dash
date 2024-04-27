@@ -1025,36 +1025,42 @@ def show_insights_cert():
     
 
 
-    # Streamlit application starts
     st.title('Certification Analysis by Vendor Over Time')
 
-    # Convert Certification Date to datetime if not already and resample by quarter
-    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
+    # Load and prepare data (this should be configured according to your actual data loading)
+    # combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
     combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
+
+    # Convert Quarter periods to string for easier handling in Streamlit and Altair
+    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda x: f'Q{x.quarter} {x.year}')
+
+    # Set up the slider for Quarter selection
+    unique_quarters = sorted(combined_df['Quarter String'].unique())
+    quarter_range = st.select_slider(
+        'Select Quarter Range',
+        options=unique_quarters,
+        value=(unique_quarters[0], unique_quarters[-1])
+    )
 
     # Filters
     selected_brand = st.multiselect('Select Brands', options=combined_df['Brand'].unique(), default=combined_df['Brand'].unique())
     selected_source = st.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique())
-    selected_quarter = st.multiselect('Select Quarters', options=combined_df['Quarter'].astype(str).unique(), default=combined_df['Quarter'].astype(str).unique())
-
-    # Prepare filters, checking for empty selections
-    filter_brand = combined_df['Brand'].isin(selected_brand) if selected_brand else True
-    filter_source = combined_df['Source'].isin(selected_source) if selected_source else True
-    filter_quarter = combined_df['Quarter'].astype(str).isin(selected_quarter) if selected_quarter else True
 
     # Apply filters
-    filtered_data = combined_df[filter_brand & filter_source & filter_quarter]
+    filtered_data = combined_df[(combined_df['Brand'].isin(selected_brand)) &
+                                (combined_df['Source'].isin(selected_source)) &
+                                (combined_df['Quarter String'] >= quarter_range[0]) &
+                                (combined_df['Quarter String'] <= quarter_range[1])]
 
     # Group by Brand and Quarter and count the occurrences
-    grouped_data = filtered_data.groupby(['Brand', 'Quarter']).size().reset_index(name='Counts')
-    grouped_data['Quarter'] = grouped_data['Quarter'].dt.start_time  # Convert Quarter Period to Timestamp for plotting
+    grouped_data = filtered_data.groupby(['Brand', 'Quarter String']).size().reset_index(name='Counts')
 
     # Create an interactive chart
     chart = alt.Chart(grouped_data).mark_line(point=True).encode(
-        x='Quarter:T',
+        x='Quarter String:O',
         y='Counts:Q',
         color='Brand:N',
-        tooltip=['Brand', 'Quarter', 'Counts']
+        tooltip=['Brand', 'Quarter String', 'Counts']
     ).interactive()
 
     st.altair_chart(chart, use_container_width=True)
