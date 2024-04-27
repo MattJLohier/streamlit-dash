@@ -110,7 +110,7 @@ def sidebar():
     <style>
     /* CSS selector for the Streamlit progress bar */
     .stProgress > div > div > div > div {
-        background-color: #0078D7 !important; /* Set to desired shade of blue */
+        background-color: #3775cb !important; /* Set to desired shade of blue */
     }
     </style>
     """
