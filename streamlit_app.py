@@ -10,6 +10,7 @@ from PIL import Image
 import requests
 import matplotlib.pyplot as plt
 from streamlit_echarts import st_echarts
+import time
 
 
 # URL of the image you want to use as the page icon
