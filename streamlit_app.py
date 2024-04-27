@@ -1157,7 +1157,7 @@ def show_insights_cert():
         'Select Quarter Range',
         options=unique_quarters,
         value=(earliest_quarter, latest_quarter),
-        key='quarter_range_selector'
+        key='quarter_range_selector2'
     )
 
     # Filters for the charts
