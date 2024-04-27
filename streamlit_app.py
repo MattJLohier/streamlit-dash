@@ -392,7 +392,7 @@ def show_changelog():
     # Reshape the DataFrame
     pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
     #pivoted_df = pivoted_df.sort_values('Date', ascending=False)
-    pivoted_df = sorted_df.iloc[::-1].reset_index(drop=True)
+    pivoted_df = pivoted_df.iloc[::-1].reset_index(drop=True)
 
     # Display the transposed DataFrame
     st.write(pivoted_df)
