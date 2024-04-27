@@ -542,7 +542,7 @@ def show_recent_cert():
     # Show only the newest 5 records
     newest_records = combined_df.head(10)
     
-    st.subheader('Recent Certifications')
+    st.title('Recent Certifications')
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
     wch_colour_font = (0, 0, 0)
     fontsize = 14
