@@ -384,6 +384,23 @@ def show_raw_data():
 
 def show_changelog():
     # Code to display changelog
+
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    st.write(placement_tracking)
+
+
+    # Establishing connection and reading the data
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    st.write("Initial DataFrame:", placement_tracking)  # Display initial DataFrame
+
+
+
+def show_insights():
+    # Code to display insights
+    st.subheader('Insights')
+    # Example: st.write(data_insights)
     st.subheader('Changelog')
     # Example: st.write(data_changelog)
     # Assuming 'st.connection' and 'FilesConnection' are valid in your environment
@@ -431,23 +448,6 @@ def show_changelog():
 
     with col2:
         st.write(pivoted_df)
-
-    conn = st.connection('s3', type=FilesConnection)
-    placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    st.write(placement_tracking)
-
-
-    # Establishing connection and reading the data
-    conn = st.connection('s3', type=FilesConnection)
-    placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    st.write("Initial DataFrame:", placement_tracking)  # Display initial DataFrame
-
-
-
-def show_insights():
-    # Code to display insights
-    st.subheader('Insights')
-    # Example: st.write(data_insights)
 
 
 def page3():
