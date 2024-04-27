@@ -46,6 +46,7 @@ def display_dashboard():
         </a>
         """, unsafe_allow_html=True)
 
+
 def sidebar():
     st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)  # Adjust the image path as needed
     st.sidebar.markdown("---")
@@ -57,8 +58,24 @@ def sidebar():
         next_refresh += datetime.timedelta(days=1)
     
     time_left = next_refresh - now
+    total_seconds = time_left.total_seconds()
     time_left_formatted = f"{time_left.seconds // 3600}h {(time_left.seconds // 60) % 60}m {time_left.seconds % 60}s"
-    st.sidebar.markdown(f"**Refresh in: {time_left_formatted}**")
+    
+    # Progress bar setup
+    progress_container = st.sidebar.empty()
+    progress_bar = st.sidebar.progress(0)
+
+    # Updating progress bar dynamically
+    start_time = time.time()
+    while True:
+        elapsed_time = time.time() - start_time
+        progress = elapsed_time / total_seconds
+        if progress >= 1.0:
+            progress_bar.progress(100)
+            break
+        progress_bar.progress(int(progress * 100))
+        progress_container.markdown(f"**Refresh in: {time_left_formatted}**")
+        time.sleep(1)  # Update every second
 
     # Set up a container for the buttons
     button_container = st.sidebar.container()
