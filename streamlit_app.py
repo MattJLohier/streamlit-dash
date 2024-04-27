@@ -1089,57 +1089,7 @@ def show_insights_cert():
 
     st.altair_chart(bar_chart, use_container_width=True)
 
-
-    # Streamlit application starts
-    st.title('Certification Analysis by Source Over Time')
-
-    # Load and prepare data (ensure datetime conversion is set)
-    # combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
-    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
-    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda x: f'Q{x.quarter} {x.year}')
-
-    # Ensure all quarters are represented in the slider
-    unique_quarters = sorted(combined_df['Quarter String'].unique())
-    current_quarter = max(unique_quarters)  # Ensure to set to the latest quarter
-
-    # Set up the slider for Quarter selection
-    quarter_range = st.select_slider(
-        'Select Quarter Range',
-        options=unique_quarters,
-        value=(unique_quarters[0], current_quarter),  # Default to the full range
-        key='quarter_range_selector'
-    )
-
-    # Filters for the charts
-    selected_source = st.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique(), key='source_selector')
-
-    selected_brand = st.multiselect(
-        'Select Brands',
-        options=combined_df['Brand'].unique(),
-        default=combined_df['Brand'].unique(),
-        key='brand_selector'  # Unique key for this multiselect
-    )
-
-    # Apply filters based on Source and quarter range for line chart
-    filtered_data_by_source = combined_df[(combined_df['Source'].isin(selected_source)) & (combined_df['Brand'].isin(selected_brand)) &
-                                        (combined_df['Quarter String'] >= quarter_range[0]) &
-                                        (combined_df['Quarter String'] <= quarter_range[1])]
-
-    # Group by Source and Quarter and count the occurrences for line chart
-    grouped_data_by_source = filtered_data_by_source.groupby(['Source', 'Quarter String']).size().reset_index(name='Counts')
-
-    # Create an interactive line chart for Source
-    line_chart_by_source = alt.Chart(grouped_data_by_source).mark_line(point=True).encode(
-        x='Quarter String:O',
-        y='Counts:Q',
-        color='Source:N',
-        tooltip=['Source', 'Quarter String', 'Counts']
-    ).interactive()
-
-    st.altair_chart(line_chart_by_source, use_container_width=True)
-
-
-    st.title('Certification Analysis Over Time')
+    st.title('Certification Analysis By Brand Over Time')
 
     # Assuming combined_df is loaded correctly
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
