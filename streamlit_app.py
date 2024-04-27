@@ -416,13 +416,12 @@ def show_changelog():
 
     # Ensure there is data to display
     if not latest_data.empty:
-        # Create a pie chart
-        fig, ax = plt.subplots()
+        # Plotting the pie chart with a custom size
+        fig, ax = plt.subplots(figsize=(6, 6))  # You can adjust these values (width, height) to your preference
         latest_data.plot(kind='pie', ax=ax, autopct='%1.1f%%', startangle=90)
         ax.set_ylabel('')  # Remove the y-label as it's not necessary for pie charts
         ax.set_title(f"Brand Distribution on {pivoted_df.index[0]}")
 
-        # Display the pie chart in Streamlit
         st.pyplot(fig)
     else:
         st.write("No data available for the latest date.")
