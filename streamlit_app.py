@@ -1150,6 +1150,58 @@ def show_insights_cert():
     st.altair_chart(line_chart, use_container_width=True)
 
 
+    st.title('Certification Analysis By Source Over Time')
+
+    # Assuming combined_df is loaded correctly
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
+    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
+
+    # Sort quarters and create quarter strings
+    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values()
+    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'Q{q.quarter} {q.year}')
+    unique_quarters_str = [f'Q{q.quarter} {q.year}' for q in unique_quarters]  # Sorted and formatted quarter strings
+
+    # Set up the slider for Quarter selection
+    latest_quarter = unique_quarters_str[-1]  # Ensure to set to the latest quarter
+    earliest_quarter = unique_quarters_str[0]  # Ensure to set to the earliest quarter
+
+    # Set default value of slider to include the entire range of available quarters
+    quarter_range = st.select_slider(
+        'Select Quarter Range',
+        options=unique_quarters_str,
+        value=(earliest_quarter, latest_quarter),
+        key='quarter_range_selector'
+    )
+
+    # Filters for the charts
+    selected_source = st.multiselect(
+        'Select Sources',
+        options=combined_df['Source'].unique(),
+        default=combined_df['Source'].unique(),
+        key='source_selector'
+    )
+
+    # Apply filters based on Source and quarter range
+    filtered_data = combined_df[
+        (combined_df['Source'].isin(selected_source)) &
+        (combined_df['Quarter String'] >= quarter_range[0]) &
+        (combined_df['Quarter String'] <= quarter_range[1])
+    ]
+
+    # Group by Source and Quarter and count the occurrences
+    grouped_data = filtered_data.groupby(['Source', 'Quarter String']).size().reset_index(name='Counts')
+
+    # Interactive line chart
+    line_chart = alt.Chart(grouped_data).mark_line(point=True).encode(
+        x=alt.X('Quarter String:O', sort=unique_quarters_str, title='Quarter'),  # Ensuring the correct order
+        y=alt.Y('Counts:Q', title='Number of Certifications'),
+        color='Source:N',
+        tooltip=['Source', 'Quarter String', 'Counts']
+    ).interactive()
+
+    st.altair_chart(line_chart, use_container_width=True)
+
+
 
 if __name__ == "__main__":
     main()
