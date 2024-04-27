@@ -909,7 +909,9 @@ def show_changelog_cert():
     columns_to_keep3 = ["Date", "Product", "Brand", "Model Number", "Category"]
 
     df_wifi_changelog = df_wifi_changelog[columns_to_keep3]
-
+    df_wifi_changelog['Date'] = df_wifi_changelog['Date'].str[:10]
+    df_wifi_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
+    
     st.write(df_wifi_changelog)
 
 
