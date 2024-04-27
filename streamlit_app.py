@@ -130,7 +130,7 @@ def display_login_form():
             if login_button:
                 if login(username, password):  # Assume login is a function defined to check credentials
                     st.session_state['logged_in'] = True  # Update session state
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.error("Invalid username or password")
 
@@ -1035,12 +1035,15 @@ def show_insights_cert():
     # Filters
     selected_brand = st.multiselect('Select Brands', options=combined_df['Brand'].unique(), default=combined_df['Brand'].unique())
     selected_source = st.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique())
-    selected_quarter = st.multiselect('Select Quarters', options=combined_df['Quarter'].unique(), default=combined_df['Quarter'].unique())
+    selected_quarter = st.multiselect('Select Quarters', options=combined_df['Quarter'].astype(str).unique(), default=combined_df['Quarter'].astype(str).unique())
 
-    # Filter data based on selections
-    filtered_data = combined_df[(combined_df['Brand'].isin(selected_brand)) & 
-                                (combined_df['Source'].isin(selected_source)) & 
-                                (combined_df['Quarter'].isin(selected_quarter))]
+    # Prepare filters, checking for empty selections
+    filter_brand = combined_df['Brand'].isin(selected_brand) if selected_brand else True
+    filter_source = combined_df['Source'].isin(selected_source) if selected_source else True
+    filter_quarter = combined_df['Quarter'].astype(str).isin(selected_quarter) if selected_quarter else True
+
+    # Apply filters
+    filtered_data = combined_df[filter_brand & filter_source & filter_quarter]
 
     # Group by Brand and Quarter and count the occurrences
     grouped_data = filtered_data.groupby(['Brand', 'Quarter']).size().reset_index(name='Counts')
