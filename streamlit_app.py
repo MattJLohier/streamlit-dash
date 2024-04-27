@@ -1065,6 +1065,24 @@ def show_insights_cert():
 
     st.altair_chart(chart, use_container_width=True)
 
+    # Apply filters for bar chart
+    current_quarter_data = combined_df[(combined_df['Brand'].isin(selected_brand)) &
+                                    (combined_df['Source'].isin(selected_source)) &
+                                    (combined_df['Quarter String'] == quarter_range[1])]
+
+    # Group by Brand and count the occurrences for bar chart
+    current_quarter_grouped = current_quarter_data.groupby(['Brand']).size().reset_index(name='Counts')
+
+    # Create an interactive bar chart
+    bar_chart = alt.Chart(current_quarter_grouped).mark_bar().encode(
+        x='Brand:N',
+        y='Counts:Q',
+        color='Brand:N',
+        tooltip=['Brand', 'Counts']
+    ).interactive()
+
+    st.altair_chart(bar_chart, use_container_width=True)
+
 
 if __name__ == "__main__":
     main()
