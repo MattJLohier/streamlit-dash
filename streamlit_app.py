@@ -400,9 +400,6 @@ def show_changelog():
 def show_insights():
     # Code to display insights
     st.subheader('Insights')
-    # Example: st.write(data_insights)
-    st.subheader('Changelog')
-    # Example: st.write(data_changelog)
     # Assuming 'st.connection' and 'FilesConnection' are valid in your environment
     conn = st.connection('s3', type=FilesConnection)
     placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
