@@ -843,9 +843,9 @@ def show_raw_data_cert():
 
 def show_changelog_cert():
     # Code to display changelog
-    st.subheader('Changelog')
+    st.subheader('Changelogs')
     # Example: st.write(data_changelog)
-    st.subheader('Changelog Energy Star')
+    st.subheader('Changelog')
     # Example: st.write(data_changelog)
     conn = st.connection('s3', type=FilesConnection)
     placement_changelog1 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
