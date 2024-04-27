@@ -1174,7 +1174,7 @@ def show_insights_cert():
     # Displaying metrics using streamlit
     col1, col2 = st.columns(2)
     with col1:
-        st.metric(label="Certifications This Quarter", value=certifications_this_quarter, delta=f"{delta_quarter} (QoQ)")
+        st.metric(label=f"Certifications {this_quarter_str}", value=certifications_this_quarter, delta=f"{delta_quarter} (QoQ)")
     with col2:
         st.metric(label="Certifications Year to Date", value=certifications_ytd, delta=f"{delta_ytd:.2f}% (YoY)")
 
