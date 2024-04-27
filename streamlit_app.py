@@ -898,7 +898,7 @@ def show_changelog_cert():
 
     # Rename the "Date" column to "Date Detected"
     df_epeat_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
-    df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected')
+    df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
     st.write(df_epeat_changelog)
 
     st.subheader('Changelog WiFi Alliance')
@@ -912,7 +912,7 @@ def show_changelog_cert():
     df_wifi_changelog = df_wifi_changelog[columns_to_keep3]
     df_wifi_changelog['Date'] = df_wifi_changelog['Date'].str[:10]
     df_wifi_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
-    df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected')
+    df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
 
     st.write(df_wifi_changelog)
 
