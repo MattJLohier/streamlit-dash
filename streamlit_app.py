@@ -1149,7 +1149,7 @@ def show_insights_cert():
     combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
 
     # Sort quarters and create quarter strings
-    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values(ascending=False)
+    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values(ascending=True)  # Sort ascending
     combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'Q{q.quarter} {q.year}')
     unique_quarters_str = [f'Q{q.quarter} {q.year}' for q in unique_quarters]  # Sorted and formatted quarter strings
 
@@ -1172,7 +1172,7 @@ def show_insights_cert():
     selected_quarter = st.select_slider(
         'Select a Quarter',
         options=unique_quarters_str,
-        value=unique_quarters_str[0]  # Default to the latest quarter
+        value=unique_quarters_str[-1]  # Default to the latest quarter, which is now the last item in the sorted list
     )
 
     # Filter data for the selected quarter and by selected filters
