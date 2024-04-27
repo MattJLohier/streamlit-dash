@@ -469,6 +469,7 @@ def show_insights():
     st.bar_chart(filtered_data, height=500)
 
     st.write(pivoted_df)
+    st.dataframe(pivoted_df, use_container_width=True)
 
 
 def page3():
