@@ -1166,7 +1166,7 @@ def show_insights_cert():
         'Select Quarter Range',
         options=unique_quarters_str,
         value=(earliest_quarter, latest_quarter),
-        key='quarter_range_selector2'
+        key='quarter_range_selector6'
     )
 
     # Filters for the charts
@@ -1174,14 +1174,14 @@ def show_insights_cert():
         'Select Sources',
         options=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
         default=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
-        key='source_selector2'
+        key='source_selector6'
     )
 
     selected_brand = st.multiselect(
         'Select Brands',
         options=combined_df['Brand'].unique(),
         default=combined_df['Brand'].unique(),
-        key='brand_selector2'
+        key='brand_selector6'
     )
 
     # Apply filters
