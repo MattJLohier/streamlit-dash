@@ -1020,75 +1020,7 @@ def show_insights_cert():
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')
     # Sort the combined dataframe by "Certification Date" in descending order
     combined_df.sort_values(by='Certification Date', ascending=False, inplace=True)
-    
-    st.write(combined_df)
-    
-
-
-    st.title('Certification Analysis by Vendor Over Time')
-
-    # Load and prepare data (this should be configured according to your actual data loading)
-    # combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
-    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
-
-    # Convert Quarter periods to string for easier handling in Streamlit and Altair
-    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda x: f'Q{x.quarter} {x.year}')
-
-    # Set up the slider for Quarter selection
-    unique_quarters = sorted(combined_df['Quarter String'].unique())
-    quarter_range = st.select_slider(
-        'Select Quarter Range',
-        options=unique_quarters,
-        value=(unique_quarters[0], unique_quarters[-1])
-    )
-
-    # Filters
-    selected_brand = st.multiselect('Select Brands', options=combined_df['Brand'].unique(), default=combined_df['Brand'].unique())
-    selected_source = st.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique())
-
-    # Apply filters
-    filtered_data = combined_df[(combined_df['Brand'].isin(selected_brand)) &
-                                (combined_df['Source'].isin(selected_source)) &
-                                (combined_df['Quarter String'] >= quarter_range[0]) &
-                                (combined_df['Quarter String'] <= quarter_range[1])]
-
-    # Group by Brand and Quarter and count the occurrences
-    grouped_data = filtered_data.groupby(['Brand', 'Quarter String']).size().reset_index(name='Counts')
-
-    # Create an interactive chart
-    chart = alt.Chart(grouped_data).mark_line(point=True).encode(
-        x='Quarter String:O',
-        y='Counts:Q',
-        color='Brand:N',
-        tooltip=['Brand', 'Quarter String', 'Counts']
-    ).interactive()
-
-    st.altair_chart(chart, use_container_width=True)
-
-    # Apply filters for bar chart
-    current_quarter_data = combined_df[(combined_df['Brand'].isin(selected_brand)) &
-                                    (combined_df['Source'].isin(selected_source)) &
-                                    (combined_df['Quarter String'] == quarter_range[1])]
-
-
-    st.write("Date Range in Data:", combined_df['Certification Date'].min(), combined_df['Certification Date'].max())
-    st.write("Quarter Range in Data:", combined_df['Quarter'].min(), combined_df['Quarter'].max())
-
-    # Group by Brand and count the occurrences for bar chart
-    current_quarter_grouped = current_quarter_data.groupby(['Brand']).size().reset_index(name='Counts')
-
-
-    st.title('Certification Counts by Vendor This Quarter')
-    # Create an interactive bar chart
-    bar_chart = alt.Chart(current_quarter_grouped).mark_bar().encode(
-        x='Brand:N',
-        y='Counts:Q',
-        color='Brand:N',
-        tooltip=['Brand', 'Counts']
-    ).interactive()
-
-    st.altair_chart(bar_chart, use_container_width=True)
-
+        
     st.title('Certification Analysis By Brand Over Time')
 
     # Assuming combined_df is loaded correctly
