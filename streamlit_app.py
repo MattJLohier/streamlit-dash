@@ -848,7 +848,7 @@ def show_changelog_cert():
     # Code to display changelog
     st.subheader('Changelogs')
     # Example: st.write(data_changelog)
-    st.subheader('Energy Star')
+    st.subheader('Energy Star ⚡')
     # Example: st.write(data_changelog)
     conn = st.connection('s3', type=FilesConnection)
     placement_changelog1 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
@@ -886,7 +886,7 @@ def show_changelog_cert():
     df_clean = df_clean.sort_values(by='Date Detected', ascending=False)
     st.write(df_clean)
 
-    st.subheader('EPEAT')
+    st.subheader('EPEAT 🌎')
     conn = st.connection('s3', type=FilesConnection)
     placement_tracking2 = conn.read("scoops-finder/changelog-epeat.csv", input_format="csv", ttl=600)
     df_epeat_changelog = placement_tracking2
@@ -904,7 +904,7 @@ def show_changelog_cert():
     df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
     st.write(df_epeat_changelog)
 
-    st.subheader('Changelog WiFi Alliance')
+    st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
     placement_tracking3 = conn.read("scoops-finder/changelog-wifi.csv", input_format="csv", ttl=600)
 
