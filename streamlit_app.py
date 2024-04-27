@@ -321,12 +321,7 @@ def show_recent():
     # Sample data iteration - replace 'newest_records' with your actual DataFrame
     # Define the number of columns
     # Provide a layout option for the user to switch
-    layout_option = st.radio("Choose layout:", ['Default', 'Wide'])
-
-    if layout_option == 'Wide':
-        num_columns = 3
-    else:
-        num_columns = 2
+    num_columns = 2
 
     # Generate rows with the appropriate number of columns
     rows = [st.columns(num_columns) for _ in range((len(latest_df4) + num_columns - 1) // num_columns)]
