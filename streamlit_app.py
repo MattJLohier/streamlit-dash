@@ -1149,7 +1149,7 @@ def show_insights_cert():
     combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
 
     # Sort quarters and create quarter strings
-    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values()
+    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values(ascending=False)
     combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'Q{q.quarter} {q.year}')
     unique_quarters_str = [f'Q{q.quarter} {q.year}' for q in unique_quarters]  # Sorted and formatted quarter strings
 
@@ -1168,18 +1168,24 @@ def show_insights_cert():
         key='brand_selector4'
     )
 
-    # Filter data for the latest quarter only and by selected filters
-    latest_quarter = unique_quarters_str[-1]  # Ensure to use the latest quarter
+    # Slider for selecting a quarter
+    selected_quarter = st.select_slider(
+        'Select a Quarter',
+        options=unique_quarters_str,
+        value=unique_quarters_str[0]  # Default to the latest quarter
+    )
+
+    # Filter data for the selected quarter and by selected filters
     filtered_data = combined_df[
         (combined_df['Source'].isin(selected_source)) &
         (combined_df['Brand'].isin(selected_brand)) &
-        (combined_df['Quarter String'] == latest_quarter)
+        (combined_df['Quarter String'] == selected_quarter)
     ]
 
-    # Group by Brand and Source, and count the occurrences for the latest quarter
+    # Group by Brand and Source, and count the occurrences for the selected quarter
     grouped_data = filtered_data.groupby(['Brand', 'Source']).size().reset_index(name='Counts')
 
-    # Bar chart for latest quarter data by brand, colored by source
+    # Bar chart for selected quarter data by brand, colored by source
     bar_chart = alt.Chart(grouped_data).mark_bar().encode(
         x=alt.X('Brand:N', title='Brand'),
         y=alt.Y('Counts:Q', title='Number of Certifications'),
