@@ -388,8 +388,9 @@ def show_changelog():
     conn = st.connection('s3', type=FilesConnection)
     placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
     # Transpose the dataframe
-    placement_changelog_transposed = placement_changelog.T
-    st.write(placement_changelog_transposed)
+    st.write(placement_changelog)
+
+
 
     conn = st.connection('s3', type=FilesConnection)
     placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
