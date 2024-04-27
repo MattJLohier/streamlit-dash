@@ -1073,6 +1073,7 @@ def show_insights_cert():
     # Group by Brand and count the occurrences for bar chart
     current_quarter_grouped = current_quarter_data.groupby(['Brand']).size().reset_index(name='Counts')
 
+
     st.title('Certification Counts by Vendor This Quarter')
     # Create an interactive bar chart
     bar_chart = alt.Chart(current_quarter_grouped).mark_bar().encode(
@@ -1098,11 +1099,12 @@ def show_insights_cert():
     quarter_range = st.select_slider(
         'Select Quarter Range',
         options=unique_quarters,
-        value=(unique_quarters[0], unique_quarters[-1])
+        value=(unique_quarters[0], unique_quarters[-1]),
+        key='quarter_range_selector'
     )
 
     # Filters for the charts
-    selected_source = st.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique())
+    selected_source = st.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique(), key='source_selector')
 
     # Apply filters based on Source and quarter range for line chart
     filtered_data_by_source = combined_df[(combined_df['Source'].isin(selected_source)) &
