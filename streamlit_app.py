@@ -10,7 +10,6 @@ from PIL import Image
 import requests
 import matplotlib.pyplot as plt
 from streamlit_echarts import st_echarts
-import time
 
 
 # URL of the image you want to use as the page icon
@@ -51,68 +50,49 @@ def display_dashboard():
 def sidebar():
     st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)  # Adjust the image path as needed
     st.sidebar.markdown("---")
-
-    # Timer display for refresh
-    now = datetime.datetime.now()
-    next_refresh = now.replace(hour=9, minute=0, second=0, microsecond=0)
-    if now.hour >= 9:  # If it's past 9 AM, set for next day
-        next_refresh += datetime.timedelta(days=1)
-    
-    time_left = next_refresh - now
-    total_seconds = time_left.total_seconds()
-    time_left_formatted = f"{time_left.seconds // 3600}h {(time_left.seconds // 60) % 60}m {time_left.seconds % 60}s"
-    
-    # Progress bar setup
-    progress_container = st.sidebar.empty()
-    progress_bar = st.sidebar.progress(0)
-
-    # Updating progress bar dynamically
-    start_time = time.time()
-    while True:
-        elapsed_time = time.time() - start_time
-        progress = elapsed_time / total_seconds
-        if progress >= 1.0:
-            progress_bar.progress(100)
-            break
-        progress_bar.progress(int(progress * 100))
-        progress_container.markdown(f"**Refresh in: {time_left_formatted}**")
-        time.sleep(1)  # Update every second
-
     # Set up a container for the buttons
     button_container = st.sidebar.container()
     
-    # CSS Styling
+    # Inject CSS to make container's children (buttons) 100% width
     st.sidebar.markdown("""
     <style>
+
     .stButton button:hover{
         border-color: #3775cb !important;
         color: #3775cb;
     }
+
     .stButton button:focus{
         border-color: #3775cb !important;
         color: #3775cb;
         background-color: white;
     }
+
     .st-emotion-cache-32r2nf:focus:not(:active){
         border-color: #3775cb !important;
         color: #3775cb;
         background-color: white;
     }
+
     [data-testid="stSidebarUserContent"] .stButton button {
         width: 100%;
-        font-weight: bold;
-        color: white;
-        background-color: #3775cb;
-        transition: background-color 0.3s, color 0.3s;
+        font-weight: bold;               /* Make text bold */
+        color: white;                    /* Set text color to white */
+        background-color: #3775cb;       /* Set normal state background color */
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
     }
     [data-testid="stSidebarUserContent"] .stButton button:hover {
-        color: #3775cb;
-        background-color: white;
+        color: #3775cb;                  /* Text color on hover */
+        background-color: white;         /* Background color on hover */
+
     }
-    [data-testid="stSidebarUserContent"] .stButton button:active,
+    [data-testid="stSidebarUserContent"] .stButton button:active {
+        background-color: #1f4476;       /* Set active state background color */
+        color: white;                    /* Set text color in active state */
+    }
     [data-testid="stSidebarUserContent"] .stButton button:focus {
-        background-color: #1f4476;
-        color: white;
+        background-color: #1f4476;       /* Set active state background color */
+        color: white;                    /* Set text color in active state */
     }
     </style>
     """, unsafe_allow_html=True)
