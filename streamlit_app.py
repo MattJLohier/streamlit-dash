@@ -9,6 +9,7 @@ from io import BytesIO
 from PIL import Image
 import requests
 import matplotlib.pyplot as plt
+import time
 from streamlit_echarts import st_echarts
 
 
