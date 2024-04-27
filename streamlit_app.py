@@ -1106,6 +1106,13 @@ def show_insights_cert():
     # Filters for the charts
     selected_source = st.multiselect('Select Sources', options=combined_df['Source'].unique(), default=combined_df['Source'].unique(), key='source_selector')
 
+    selected_brand = st.multiselect(
+        'Select Brands',
+        options=combined_df['Brand'].unique(),
+        default=combined_df['Brand'].unique(),
+        key='brand_selector'  # Unique key for this multiselect
+    )
+
     # Apply filters based on Source and quarter range for line chart
     filtered_data_by_source = combined_df[(combined_df['Source'].isin(selected_source)) & (combined_df['Brand'].isin(selected_brand)) &
                                         (combined_df['Quarter String'] >= quarter_range[0]) &
