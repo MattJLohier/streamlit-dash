@@ -1190,8 +1190,8 @@ def show_insights_cert():
 
     # Interactive line chart
     line_chart = alt.Chart(grouped_data).mark_line(point=True).encode(
-        x='Quarter String:O',
-        y='Counts:Q',
+        x=alt.X('Quarter String:O', sort=unique_quarters_str, title='Quarter'),  # Ensuring the correct order
+        y=alt.Y('Counts:Q', title='Number of Certifications'),
         color='Brand:N',
         detail='Source:N',
         tooltip=['Source', 'Brand', 'Quarter String', 'Counts']
