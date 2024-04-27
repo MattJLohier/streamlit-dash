@@ -1094,12 +1094,15 @@ def show_insights_cert():
     combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
     combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda x: f'Q{x.quarter} {x.year}')
 
-    # Set up the slider for Quarter selection
+    # Ensure all quarters are represented in the slider
     unique_quarters = sorted(combined_df['Quarter String'].unique())
+    current_quarter = max(unique_quarters)  # Ensure to set to the latest quarter
+
+    # Set up the slider for Quarter selection
     quarter_range = st.select_slider(
         'Select Quarter Range',
         options=unique_quarters,
-        value=(unique_quarters[0], unique_quarters[-1]),
+        value=(unique_quarters[0], current_quarter),  # Default to the full range
         key='quarter_range_selector'
     )
 
