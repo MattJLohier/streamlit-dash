@@ -885,7 +885,15 @@ def show_changelog_cert():
     st.subheader('Changelog EPEAT')
     conn = st.connection('s3', type=FilesConnection)
     placement_tracking2 = conn.read("scoops-finder/changelog-epeat.csv", input_format="csv", ttl=600)
-    st.write(placement_tracking2)
+    df_epeat_changelog = placement_tracking2
+
+    columns_to_keep2 = ["Date", "Product Name", "Manufacturer", "Climate+", "Product Category", 
+                    "Product Type", "Status", "Registered In", "Total Score", "EPEAT Tier", "Registered On"]
+
+    # Modify the dataframe to keep only the specified columns
+    df_epeat_changelog = df_epeat_changelog[columns_to_keep2]
+    
+    st.write(df_epeat_changelog)
 
     st.subheader('Changelog WiFi Alliance')
     conn = st.connection('s3', type=FilesConnection)
