@@ -919,6 +919,7 @@ def show_insights_cert():
     # Code to display insights
     st.subheader('Insights')
     # Example: st.write(data_insights)
+    st.write(combined_df)
 
 
 if __name__ == "__main__":
