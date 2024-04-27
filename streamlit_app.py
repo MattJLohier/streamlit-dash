@@ -381,6 +381,9 @@ def show_recent():
 def show_raw_data():
     # Code to display raw data
     st.subheader('Raw Placement Data')
+    conn = st.connection('s3', type=FilesConnection)
+    raw_data_placements = conn.read("scoops-finder/combined_products.csv", input_format="csv", ttl=600)
+    st.write(raw_data_placements)
 
 
 def show_changelog():
