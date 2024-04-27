@@ -53,7 +53,7 @@ def sidebar():
     st.sidebar.markdown("---")
 
     # Timezone setting for PST
-    timezone = pytz.timezone('America/Los_Angeles')
+    timezone = pytz.timezone('Etc/UTC')
     now = datetime.datetime.now(datetime.timezone.utc).astimezone(timezone)
     
     # Determine the next refresh time (9 AM PST)
