@@ -851,14 +851,31 @@ def show_changelog_cert():
     placement_changelog1 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
     df_clean = placement_changelog1.drop_duplicates(subset=['pd_id'])  # Drop duplicates based on 'pd_id'
     
+    # Define the columns you want to keep
     columns_to_keep = [
         'Date', 'model_name', 'brand_name', 'product_type', 'color_capability', 
         'monochrome_product_speed_ipm_or_mppm', 'date_available_on_market', 
         'date_qualified', 'markets'
-    ]   
+    ]
 
     # Select only the specified columns
     df_clean = df_clean[columns_to_keep]
+
+    # Keep only the first 10 characters of the "Date" column
+    df_clean['Date'] = df_clean['Date'].str[:10]
+
+    # Rename the columns
+    df_clean.rename(columns={
+        'Date': 'Date Detected',
+        'model_name': 'Model Name',
+        'brand_name': 'Brand',
+        'product_type': 'Product Type',
+        'color_capability': 'Color/BW',
+        'monochrome_product_speed_ipm_or_mppm': 'Print Speed',
+        'date_available_on_market': 'Date Available on Market',
+        'date_qualified': 'Date Qualified',
+        'markets': 'Markets'
+    }, inplace=True)
     
     st.write(df_clean)
 
