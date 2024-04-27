@@ -406,7 +406,7 @@ def show_changelog():
     filtered_data = pivoted_df[selected_brands]
 
     # Display the line chart
-    st.line_chart(filtered_data)
+    st.line_chart(filtered_data, height=500)
 
     # Streamlit UI for the visualization
     st.title('Brand Distribution on Latest Date')
