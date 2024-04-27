@@ -9,7 +9,6 @@ from io import BytesIO
 from PIL import Image
 import requests
 import matplotlib.pyplot as plt
-import time
 from streamlit_echarts import st_echarts
 
 
@@ -53,32 +52,11 @@ def sidebar():
     st.sidebar.markdown("---")
     # Set up a container for the buttons
 
-    # Timer display for refresh
-    now = datetime.datetime.now()
-    next_refresh = now.replace(hour=9, minute=0, second=0, microsecond=0)
-    if now.hour >= 9:  # If it's past 9 AM, set for next day
-        next_refresh += datetime.timedelta(days=1)
-    
-    time_left = next_refresh - now
-    total_seconds = time_left.total_seconds()
-    time_left_formatted = f"{time_left.seconds // 3600}h {(time_left.seconds // 60) % 60}m {time_left.seconds % 60}s"
-    
-    # Progress bar setup
-    progress_container = st.sidebar.empty()
-    progress_bar = st.sidebar.progress(0)
 
-    # Updating progress bar dynamically
-    start_time = time.time()
-    while True:
-        elapsed_time = time.time() - start_time
-        progress = elapsed_time / total_seconds
-        if progress >= 1.0:
-            progress_bar.progress(100)
-            break
-        progress_bar.progress(int(progress * 100))
-        progress_container.markdown(f"**Refresh in: {time_left_formatted}**")
-        time.sleep(1)  # Update every second
 
+
+
+    
     button_container = st.sidebar.container()
     
     # Inject CSS to make container's children (buttons) 100% width
