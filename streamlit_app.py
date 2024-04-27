@@ -877,6 +877,9 @@ def show_changelog_cert():
         'markets': 'Markets'
     }, inplace=True)
     
+
+    df_clean['Date Available on Market'] = df_clean['Date Available on Market'].str[:10]
+    df_clean['Date Qualified'] = df_clean['Date Qualified'].str[:10]
     st.write(df_clean)
 
     st.subheader('Changelog EPEAT')
