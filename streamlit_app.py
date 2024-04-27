@@ -48,13 +48,26 @@ def display_dashboard():
 
 
 def sidebar():
-    st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)  # Adjust the image path as needed
+    st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)
     st.sidebar.markdown("---")
-    # Set up a container for the buttons
 
+    # Determine the next refresh time
+    now = datetime.datetime.now()
+    next_refresh = now.replace(hour=9, minute=0, second=0, microsecond=0)
+    if now.hour >= 9:  # If it's past 9 AM, set for next day
+        next_refresh += datetime.timedelta(days=1)
+    
+    # Calculate time left until next refresh
+    time_left = next_refresh - now
+    total_seconds = time_left.total_seconds()
 
+    # Progress calculation
+    progress = (1 - (time_left.seconds / 86400)) * 100  # 86400 seconds in a day
 
-
+    # Display the progress bar and time left
+    st.sidebar.progress(int(progress))
+    time_left_formatted = f"{time_left.seconds // 3600}h {(time_left.seconds // 60) % 60}m {time_left.seconds % 60}s"
+    st.sidebar.markdown(f"**Refresh in: {time_left_formatted}**")
 
     
     button_container = st.sidebar.container()
