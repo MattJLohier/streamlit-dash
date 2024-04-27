@@ -1141,6 +1141,64 @@ def show_insights_cert():
     st.altair_chart(line_chart, use_container_width=True)
 
 
+st.title('Certification by Brand This Quarter')
+
+    # Assuming combined_df is loaded correctly
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
+    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
+
+    # Sort quarters and create quarter strings
+    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values()
+    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'Q{q.quarter} {q.year}')
+    unique_quarters_str = [f'Q{q.quarter} {q.year}' for q in unique_quarters]  # Sorted and formatted quarter strings
+
+    # Set up the slider for Quarter selection
+    latest_quarter = unique_quarters_str[-1]  # Ensure to set to the latest quarter
+    earliest_quarter = unique_quarters_str[0]  # Ensure to set to the earliest quarter
+
+    # Set default value of slider to include the entire range of available quarters
+    quarter_range = st.select_slider(
+        'Select Quarter Range',
+        options=unique_quarters_str,
+        value=(earliest_quarter, latest_quarter),
+        key='quarter_range_selector'
+    )
+
+    # Filters for the charts
+    selected_source = st.multiselect(
+        'Select Sources',
+        options=combined_df['Source'].unique(),
+        default=combined_df['Source'].unique(),
+        key='source_selector'
+    )
+
+    selected_brand = st.multiselect(
+        'Select Brands',
+        options=combined_df['Brand'].unique(),
+        default=combined_df['Brand'].unique(),
+        key='brand_selector'
+    )
+
+    # Apply filters based on Source, Brand, and quarter range
+    filtered_data = combined_df[
+        (combined_df['Source'].isin(selected_source)) &
+        (combined_df['Brand'].isin(selected_brand)) &
+        (combined_df['Quarter String'] == latest_quarter)  # Filter for latest quarter only
+    ]
+
+    # Group by Brand and count the occurrences for the latest quarter
+    latest_quarter_data = filtered_data.groupby(['Brand']).size().reset_index(name='Counts')
+
+    # Bar chart for latest quarter data by brand
+    bar_chart = alt.Chart(latest_quarter_data).mark_bar().encode(
+        x=alt.X('Brand:N', sort='-y', title='Brand'),
+        y=alt.Y('Counts:Q', title='Number of Certifications'),
+        tooltip=['Brand', 'Counts']
+    ).interactive()
+
+    st.altair_chart(bar_chart, use_container_width=True)
+
+
 
 if __name__ == "__main__":
     main()
