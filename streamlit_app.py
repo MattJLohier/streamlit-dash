@@ -451,6 +451,29 @@ def show_changelog():
     placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
     st.write("Initial DataFrame:", placement_tracking)  # Display initial DataFrame
 
+        conn = st.connection('s3', type=FilesConnection)
+    placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+
+    # Reshape the DataFrame
+    pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
+    #pivoted_df = pivoted_df.sort_values('Date', ascending=False)
+    pivoted_df = pivoted_df.iloc[::-1]
+    # Display the transposed DataFrame
+
+
+    # Streamlit UI for brand filtering
+    st.title('Brand Counts Over Time')
+    all_brands = list(pivoted_df.columns)
+    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands)
+    # Filter data based on selected brands
+    filtered_data = pivoted_df[selected_brands]
+    all_brands = list(pivoted_df.columns)
+    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands, key='quarter_range_selector6')
+    # Filter data based on selected brands
+    filtered_data = pivoted_df[selected_brands]
+    # Display the bar chart
+    st.dataframe(pivoted_df, use_container_width=True)
+
 
 
 def show_insights():
@@ -487,8 +510,6 @@ def show_insights():
 
     # Display the bar chart
     st.bar_chart(filtered_data, height=500)
-    st.dataframe(pivoted_df, use_container_width=True)
-
 
 def page3():
     st.header('Certifications 📝')
