@@ -61,7 +61,7 @@ def sidebar():
 
     # Allow the user to select a product type
     selected_category = st.sidebar.selectbox("Select Your Product Type", list(product_categories.keys()))
-
+    st.session_state['selected_product_type'] = selected_category
     # Get buttons for the selected product category
     buttons = product_categories[selected_category]
 
@@ -186,19 +186,54 @@ def display_login_form():
                 else:
                     st.error("Invalid username or password")
 
+def display_certifications_page():
+    st.title("Certifications")
+    
+    # Check the selected product type
+    product_type = st.session_state['selected_product_type']
+
+    if product_type == 'Electronics':
+        display_certifications_electronics()
+    elif product_type == 'Fashion':
+        display_certifications_fashion()
+    elif product_type == 'Automotive':
+        display_certifications_automotive()
+    else:
+        st.write("No specific certifications are available for this category.")
+
+def display_certifications_electronics():
+    st.header("Electronics Certifications")
+    st.write("Detailed information on certifications required for electronics.")
+    # Add more specific content, such as images, tables, charts, etc.
+
+def display_certifications_fashion():
+    st.header("Fashion Certifications")
+    st.write("Explore certifications needed in the fashion industry.")
+    # Add industry-specific details or requirements.
+
+def display_certifications_automotive():
+    st.header("Automotive Certifications")
+    st.write("Critical certifications for automotive professionals.")
+    # Include relevant data or courses available.
+
+
 def main():
     if 'logged_in' not in st.session_state:
         st.session_state['logged_in'] = False
+
     if st.session_state['logged_in']:
         if 'page' not in st.session_state:
             st.session_state['page'] = 'home'
+        
         sidebar()
+
+        # Redirect based on the selected page
         if st.session_state['page'] == 'home':
             display_dashboard()
         elif st.session_state['page'] == 'certifications':
-            page3()
+            display_certifications_page()  # Renamed for clarity
         elif st.session_state['page'] == 'placements':
-            page2()
+            display_placements_page()  # Renamed for clarity
     else:
         display_login_form()
 
@@ -207,8 +242,6 @@ def page1():
     st.title("Page 1")
     st.write("Welcome to Page 1")
     sidebar()
-
-
 
 def page2():
     st.header('Placements 💡')
