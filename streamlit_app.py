@@ -1209,7 +1209,7 @@ def display_placements_imaging():
 
 def show_recent():
     # Code to display recent data
-    st.subheader('Recent Placements')
+    st.header('Recent Placements')
     conn = st.connection('s3', type=FilesConnection)
     df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
     df5 = df5[-10:]
@@ -1394,7 +1394,7 @@ def show_recent():
 
 def show_raw_data():
     # Code to display raw data
-    st.subheader('Raw Placement Data')
+    st.header('Raw Placement Data')
     conn2 = st.connection('s3', type=FilesConnection)
 
     # Read data from CSV
