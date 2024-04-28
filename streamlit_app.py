@@ -1270,7 +1270,6 @@ def show_recent_cert_computers():
                                 Brand: {brand}<br>
                                 Product Type: {product_type}<br>
                                 Certification Date: {certification_date}<br>
-                                Source: {source} {emoji}
                             </p>
                         </div>
                     </div>
