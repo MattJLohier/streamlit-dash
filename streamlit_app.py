@@ -201,6 +201,22 @@ def display_certifications_page():
     else:
         st.write("No specific certifications are available for this category.")
 
+
+def display_placements_page():
+    st.title("Placements")
+    
+    # Check the selected product type
+    product_type = st.session_state['selected_product_type']
+
+    if product_type == 'Electronics':
+        display_certifications_electronics()
+    elif product_type == 'Fashion':
+        display_certifications_fashion()
+    elif product_type == 'Automotive':
+        display_certifications_automotive()
+    else:
+        st.write("No specific certifications are available for this category.")
+
 def display_certifications_electronics():
     st.header("Electronics Certifications")
     st.write("Detailed information on certifications required for electronics.")
