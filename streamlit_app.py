@@ -187,8 +187,6 @@ def display_login_form():
                     st.error("Invalid username or password")
 
 def display_certifications_page():
-    st.title("Certifications")
-    
     # Check the selected product type
     product_type = st.session_state['selected_product_type']
 
@@ -1092,7 +1090,7 @@ def show_insights_cert():
     st.altair_chart(bar_chart, use_container_width=True)
 
 def display_certifications_computers():
-    st.header("Computers Certifications")
+    st.title("Computers Certifications 💻")
 
     # Define buttons for navigation
     if 'current_page' not in st.session_state:
