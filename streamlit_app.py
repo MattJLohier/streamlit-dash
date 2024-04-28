@@ -1102,11 +1102,6 @@ def display_certifications_televisions():
     # Include relevant data or courses available.
 
 
-def display_placements_imaging():
-    st.header("Automotive Certifications")
-    st.write("Critical certifications for automotive professionals.")
-    # Include relevant data or courses available.
-
 def display_placements_computers():
     st.header("Automotive Certifications")
     st.write("Critical certifications for automotive professionals.")
@@ -1145,7 +1140,7 @@ def page1():
     st.write("Welcome to Page 1")
     sidebar()
 
-def page2():
+def display_placements_imaging():
     st.header('Placements 💡')
     # Define buttons for navigation
     if 'current_page' not in st.session_state:
