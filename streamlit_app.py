@@ -1121,15 +1121,16 @@ def display_certifications_computers():
     elif st.session_state['current_page'] == 'Insights':
         show_insights_cert_computers()    
 
+def show_recent_cert_computers():
+    st.write("Coming Soon")
+    
+def show_raw_data_cert_computers():
+    st.write("Coming Soon")
     # Add industry-specific details or requirements.
     conn = st.connection('s3', type=FilesConnection)
     df = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
     st.write(df)
 
-def show_recent_cert_computers():
-    st.write("Coming Soon")
-def show_raw_data_cert_computers():
-    st.write("Coming Soon")
 def show_changelog_cert_computers():
     st.write("Coming Soon")
 def show_insights_cert_computers():
