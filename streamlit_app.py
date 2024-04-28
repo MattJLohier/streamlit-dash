@@ -1119,6 +1119,164 @@ def display_certifications_computers():
 
 def show_recent_cert_computers():
     st.write("Coming Soon")
+    lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
+    wch_colour_font = (0, 0, 0)
+    fontsize = 14
+    valign = "left"
+    iconname = "fas fa-xmark"
+    sline = "New Certifications Detected"
+    container = st.container()
+
+    st.markdown('''
+    <style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Maintains 3 columns */
+        grid-gap: 20px; /* Space between cards */
+        padding: 10px;
+        width: auto; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
+    }
+
+    .card {
+        height: auto;
+        min-height: 120px;
+        position: relative;
+        width: 100%; /* This makes each card responsive within its grid column */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        border-radius: 24px;
+        overflow: hidden;
+        line-height: 1.6;
+        transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+        margin: 15px; /* Added margin */
+    }
+
+    .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 20px;
+    padding-bottom: 0px;
+    border-radius: 22px;
+    color: #ffffff;
+    overflow: hidden;
+    background: #ffffff;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .content .heading {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1;
+    z-index: 1;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .content .para {
+    z-index: 1;
+    opacity: 0.8;
+    font-size: 16px;
+    font-weight: 400;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card::before {
+    content: "";
+    position: absolute;
+    height: 500%;
+    width: 500%;
+    border-radius: inherit;
+    background: #3775cb;
+    background: linear-gradient(to right, #3775cb, #3775cb);
+    transform-origin: center;
+    animation: moving 9.8s linear infinite paused;
+    transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card:hover::before {
+    animation-play-state: running;
+    z-index: -1;
+    width: 20%;
+    }
+
+    .card:hover .content .heading,
+    .card:hover .content .para {
+    color: #000000;
+    }
+
+    .card:hover {
+    box-shadow: 0rem 6px 13px rgba(10, 60, 255, 0.1),
+        0rem 24px 24px rgba(10, 60, 255, 0.09),
+        0rem 55px 33px rgba(10, 60, 255, 0.05),
+        0rem 97px 39px rgba(10, 60, 255, 0.01), 0rem 152px 43px rgba(10, 60, 255, 0);
+    scale: 1.00;
+    color: #000000;
+    }
+
+    @keyframes moving {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+    }
+    </style>
+    ''', unsafe_allow_html=True)
+
+    emoji_dict = {
+            "Energy Star": "⚡",
+            "WiFi Alliance": "📶",
+            "EPEAT": "🌎"
+        }
+
+    # Sample data iteration - replace 'newest_records' with your actual DataFrame
+    
+    # Define the number of columns
+    num_columns = 2
+    conn = st.connection('s3', type=FilesConnection)
+    newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
+    newest_records = newest_records.head(10)
+    st.write(newest_records)
+
+    rows = [st.columns(num_columns) for _ in range((len(newest_records) + num_columns - 1) // num_columns)]
+
+    # Initialize a counter for DataFrame row indices
+    row_index = 0
+
+    # Fill each cell in the grid with content
+    for row in rows:
+        for col in row:
+            if row_index < len(newest_records):
+                with col:
+                    row_data = newest_records.iloc[row_index]
+                    product_name = row_data['model_name']
+                    certification_date = row_data['date_available_on_market']
+                    brand = row_data['brand_name']
+                    product_type = row_data['type']
+
+                    # Embed data into HTML
+                    html_content = f"""
+                    <div class="card">
+                        <div class="content">
+                            <p class="heading">{product_name}</p>
+                            <p class="para">
+                                Brand: {brand}<br>
+                                Product Type: {product_type}<br>
+                                Certification Date: {certification_date}<br>
+                                Source: {source} {emoji}
+                            </p>
+                        </div>
+                    </div>
+                    """
+                    st.markdown(html_content, unsafe_allow_html=True)
+
+                    row_index += 1
     
 def show_raw_data_cert_computers():
     st.write("Coming Soon")
