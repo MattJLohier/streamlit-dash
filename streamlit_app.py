@@ -450,7 +450,7 @@ def show_raw_data():
     unique_brands = ['All Brands'] + sorted(raw_data_placements['Brand'].unique().tolist())
 
     # Sidebar to select brand
-    selected_brand = st.sidebar.selectbox('Select a brand to display', unique_brands)
+    selected_brand = st.selectbox('Select a brand to display', unique_brands)
 
     # Filter data based on selected brand, unless 'All Brands' is selected
     if selected_brand != 'All Brands':
