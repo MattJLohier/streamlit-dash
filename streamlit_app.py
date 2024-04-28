@@ -1092,9 +1092,11 @@ def show_insights_cert():
     st.altair_chart(bar_chart, use_container_width=True)
 
 def display_certifications_computers():
-    st.header("Fashion Certifications")
-    st.write("Explore certifications needed in the fashion industry.")
+    st.header("Computers Certifications")
     # Add industry-specific details or requirements.
+    conn = st.connection('s3', type=FilesConnection)
+    df = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
+    st.write(df)
 
 def display_certifications_televisions():
     st.header("Automotive Certifications")
