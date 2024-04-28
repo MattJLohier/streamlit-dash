@@ -437,6 +437,29 @@ def show_raw_data():
             st.write(group)
 
 
+    conn2 = st.connection('s3', type=FilesConnection)
+
+    # Read data from CSV
+    raw_data_placements = conn2.read("scoops-finder/combined_products.csv", input_format="csv", ttl=600)
+
+    # Convert 'Date Detected' to datetime and sort descending
+    raw_data_placements['Date Detected'] = pd.to_datetime(raw_data_placements['Date Detected'])
+    raw_data_placements.sort_values('Date Detected', ascending=False, inplace=True)
+
+    # Create a list of unique brands for the selectbox, with an 'All Brands' option
+    unique_brands = ['All Brands'] + sorted(raw_data_placements['Brand'].unique().tolist())
+
+    # Sidebar to select brand
+    selected_brand = st.sidebar.selectbox('Select a brand to display', unique_brands)
+
+    # Filter data based on selected brand, unless 'All Brands' is selected
+    if selected_brand != 'All Brands':
+        filtered_data = raw_data_placements[raw_data_placements['Brand'] == selected_brand]
+    else:
+        filtered_data = raw_data_placements
+
+    # Display the filtered data
+    st.write(filtered_data)
 
 
 def show_changelog():
