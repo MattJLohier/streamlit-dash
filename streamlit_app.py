@@ -156,12 +156,8 @@ def sidebar():
 def login(username, password):
     try:
         # Debugging: check available keys in secrets (be careful with actual secret values)
-        st.write("Available keys in secrets:", st.secrets.keys())
-
         user_passwords = st.secrets["credentials"]
-
         input_hashed_password = hashlib.sha256(password.encode()).hexdigest()
-        
         if user_passwords.get(username) == input_hashed_password:
             return True
     except KeyError as e:
@@ -169,7 +165,6 @@ def login(username, password):
         return False
     return False
     
-
 def display_login_form():
     # Create three columns
     col1, col2, col3 = st.columns([1, 2, 1])
