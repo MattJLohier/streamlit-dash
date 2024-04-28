@@ -1089,7 +1089,7 @@ def show_insights_cert():
 
 def display_certifications_computers():
     st.title("Computers Certifications 💻")
-
+    st.markdown("---")
     # Define buttons for navigation
     if 'current_page' not in st.session_state:
         st.session_state['current_page'] = 'Recent'
