@@ -430,9 +430,9 @@ def show_raw_data():
 
     # Filter data based on selected brand, unless 'All Brands' is selected
     if selected_brand != 'All Brands':
-        filtered_data = raw_data_placements[raw_data_placements['Brand'] == selected_brand]
+        filtered_data = raw_data_placements[raw_data_placements['Brand'] == selected_brand].reset_index(drop=True)
     else:
-        filtered_data = raw_data_placements
+        filtered_data = raw_data_placements.reset_index(drop=True)
 
     # Display the filtered data
     st.write(filtered_data)
