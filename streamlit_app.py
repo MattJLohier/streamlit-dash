@@ -155,13 +155,13 @@ def sidebar():
 
 def login(username, password):
     try:
-        # Access the dictionary of usernames and hashed passwords directly
+        # Debugging: check available keys in secrets (be careful with actual secret values)
+        st.write("Available keys in secrets:", st.secrets.keys())
+
         user_passwords = st.secrets["credentials"]
-        
-        # Convert the input password to its hashed version
+
         input_hashed_password = hashlib.sha256(password.encode()).hexdigest()
         
-        # Check if the username exists and if the hashed password matches
         if user_passwords.get(username) == input_hashed_password:
             return True
     except KeyError as e:
