@@ -192,12 +192,12 @@ def display_certifications_page():
     # Check the selected product type
     product_type = st.session_state['selected_product_type']
 
-    if product_type == 'Electronics':
-        display_certifications_electronics()
-    elif product_type == 'Fashion':
-        display_certifications_fashion()
-    elif product_type == 'Automotive':
-        display_certifications_automotive()
+    if product_type == 'Imaging Equipment':
+        display_certifications_imaging()
+    elif product_type == 'Computers':
+        display_certifications_computers()
+    elif product_type == 'Televisions':
+        display_certifications_televisions()
     else:
         st.write("No specific certifications are available for this category.")
 
@@ -208,364 +208,16 @@ def display_placements_page():
     # Check the selected product type
     product_type = st.session_state['selected_product_type']
 
-    if product_type == 'Electronics':
-        display_certifications_electronics()
-    elif product_type == 'Fashion':
-        display_certifications_fashion()
-    elif product_type == 'Automotive':
-        display_certifications_automotive()
+    if product_type == 'Imaging Equipment':
+        display_placements_imaging()
+    elif product_type == 'Computers':
+        display_placements_computers()
+    elif product_type == 'Televisions':
+        display_placements_televisions()
     else:
         st.write("No specific certifications are available for this category.")
 
-def display_certifications_electronics():
-    st.header("Electronics Certifications")
-    st.write("Detailed information on certifications required for electronics.")
-    # Add more specific content, such as images, tables, charts, etc.
-
-def display_certifications_fashion():
-    st.header("Fashion Certifications")
-    st.write("Explore certifications needed in the fashion industry.")
-    # Add industry-specific details or requirements.
-
-def display_certifications_automotive():
-    st.header("Automotive Certifications")
-    st.write("Critical certifications for automotive professionals.")
-    # Include relevant data or courses available.
-
-
-def main():
-    if 'logged_in' not in st.session_state:
-        st.session_state['logged_in'] = False
-
-    if st.session_state['logged_in']:
-        if 'page' not in st.session_state:
-            st.session_state['page'] = 'home'
-        
-        sidebar()
-
-        # Redirect based on the selected page
-        if st.session_state['page'] == 'home':
-            display_dashboard()
-        elif st.session_state['page'] == 'certifications':
-            display_certifications_page()  # Renamed for clarity
-        elif st.session_state['page'] == 'placements':
-            display_placements_page()  # Renamed for clarity
-    else:
-        display_login_form()
-
-
-def page1():
-    st.title("Page 1")
-    st.write("Welcome to Page 1")
-    sidebar()
-
-def page2():
-    st.header('Placements 💡')
-    # Define buttons for navigation
-    if 'current_page' not in st.session_state:
-        st.session_state['current_page'] = 'Recent'
-
-    # Create four columns for the interactive tiles
-    col1, col2, col3, col4 = st.columns(4)
-
-    # Define interactive tiles that update the session state upon clicking
-    if col1.button('Recent 🆕', key='1', use_container_width=True):
-        st.session_state['current_page'] = 'Recent'
-    if col2.button('Raw Data 📝', key='2', use_container_width=True):
-        st.session_state['current_page'] = 'Raw Data'
-    if col3.button('Changelog 🔄', key='3', use_container_width=True):
-        st.session_state['current_page'] = 'Changelog'
-    if col4.button('Insights 🔍', key='4', use_container_width=True):
-        st.session_state['current_page'] = 'Insights'
-
-    # Conditional rendering based on selected page
-    if st.session_state['current_page'] == 'Recent':
-        show_recent()
-    elif st.session_state['current_page'] == 'Raw Data':
-        show_raw_data()
-    elif st.session_state['current_page'] == 'Changelog':
-        show_changelog()
-    elif st.session_state['current_page'] == 'Insights':
-        show_insights()
-
-
-def show_recent():
-    # Code to display recent data
-    st.subheader('Recent Placements')
-    conn = st.connection('s3', type=FilesConnection)
-    df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
-    df5 = df5[-10:]
-    df5 = df5.sort_values(by='Brand').reset_index(drop=True)
-
-    # Create metrics for the latest 5 records
-
-    lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
-    wch_colour_font = (0, 0, 0)
-    fontsize = 20
-    valign = "left"
-    iconname = "fas fa-xmark"
-        
-    container = st.container()
-
-    # Add your placements data here
-    conn = st.connection('s3', type=FilesConnection)
-    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    df4.drop_duplicates(subset="Product Name", inplace=True)
-    df4 = df4.sort_values(by='Date Detected', ascending=True)
-    latest_df4 = df4.tail(5)  # Get the latest 5 records
-    latest_df4 = latest_df4.iloc[::-1]
-
-    
-    st.markdown('''
-    <style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Maintains 3 columns */
-        grid-gap: 20px; /* Space between cards */
-        padding: 10px;
-        width: auto; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
-    }
-
-    .card {
-        height: auto;
-        min-height: 120px;
-        position: relative;
-        width: 100%; /* This makes each card responsive within its grid column */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2px;
-        border-radius: 24px;
-        overflow: hidden;
-        line-height: 1.6;
-        transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
-        margin: 15px; /* Added margin */
-    }
-
-    .content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 20px;
-    padding-bottom: 0px;
-    border-radius: 22px;
-    color: #ffffff;
-    overflow: hidden;
-    background: #ffffff;
-    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .content .heading {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 1;
-    z-index: 1;
-    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .content .para {
-    z-index: 1;
-    opacity: 0.8;
-    font-size: 16px;
-    font-weight: 400;
-    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .card::before {
-    content: "";
-    position: absolute;
-    height: 500%;
-    width: 500%;
-    border-radius: inherit;
-    background: #3775cb;
-    background: linear-gradient(to right, #3775cb, #3775cb);
-    transform-origin: center;
-    animation: moving 9.8s linear infinite paused;
-    transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .card:hover::before {
-    animation-play-state: running;
-    z-index: -1;
-    width: 20%;
-    }
-
-    .card:hover .content .heading,
-    .card:hover .content .para {
-    color: #000000;
-    }
-
-    .card:hover {
-    box-shadow: 0rem 6px 13px rgba(10, 60, 255, 0.1),
-        0rem 24px 24px rgba(10, 60, 255, 0.09),
-        0rem 55px 33px rgba(10, 60, 255, 0.05),
-        0rem 97px 39px rgba(10, 60, 255, 0.01), 0rem 152px 43px rgba(10, 60, 255, 0);
-    scale: 1.00;
-    color: #000000;
-    }
-
-    @keyframes moving {
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-    }
-    </style>
-    ''', unsafe_allow_html=True)
-
-
-    # Sample data iteration - replace 'newest_records' with your actual DataFrame
-    # Define the number of columns
-    # Provide a layout option for the user to switch
-    num_columns = 2
-
-    # Generate rows with the appropriate number of columns
-    rows = [st.columns(num_columns) for _ in range((len(latest_df4) + num_columns - 1) // num_columns)]
-
-    # Initialize a counter for DataFrame row indices
-    row_index = 0
-
-    # Fill each cell in the grid with content
-    for row in rows:
-        for col in row:
-            if row_index < len(latest_df4):
-                with col:
-                    row_data = latest_df4.iloc[row_index]
-                    brand = row_data['Brand']
-                    count = df5[df5['Brand'] == brand]['Count'].values[0]
-                    metric_label = row_data['Action']
-                    metric_value = row_data['Product Name']
-                    metric_delta = str(count)
-                    date_detected = row_data['Date Detected']  # Assuming 'Date Detected' is the column name in df4
-
-
-                    if metric_label == 'Added':
-                        title = "New Product Added"
-                        emoji = "🆕"
-                    elif metric_label == 'Removed':
-                        title = "Product Removed"
-                        emoji = "❌"
-                    else:
-                        title = "Certification Spotted"
-
-                    # Embed data into HTML
-                    html_content = f"""
-                    <div class="card">
-                        <div class="content">
-                            <p class="heading">{metric_value}</p>
-                            <p class="para">
-                                {title} {emoji}
-                                <br>
-                                Brand: {brand}<br>
-                                Product Type: {metric_value}<br>
-                                Certification Date: {date_detected}<br>
-                            </p>
-                        </div>
-                    </div>
-                    """
-                    st.markdown(html_content, unsafe_allow_html=True)
-
-                    row_index += 1   
-
-    # Example: st.write(data_recent)
-
-def show_raw_data():
-    # Code to display raw data
-    st.subheader('Raw Placement Data')
-    conn2 = st.connection('s3', type=FilesConnection)
-
-    # Read data from CSV
-    raw_data_placements = conn2.read("scoops-finder/combined_products.csv", input_format="csv", ttl=600)
-
-    # Convert 'Date Detected' to datetime and sort descending
-    raw_data_placements['Date Detected'] = pd.to_datetime(raw_data_placements['Date Detected'])
-    raw_data_placements.sort_values('Date Detected', ascending=False, inplace=True)
-
-    # Create a list of unique brands for the selectbox, with an 'All Brands' option
-    unique_brands = ['All Brands'] + sorted(raw_data_placements['Brand'].unique().tolist())
-
-    # Sidebar to select brand
-    selected_brand = st.selectbox('Select a brand to display', unique_brands)
-
-    # Filter data based on selected brand, unless 'All Brands' is selected
-    if selected_brand != 'All Brands':
-        filtered_data = raw_data_placements[raw_data_placements['Brand'] == selected_brand].reset_index(drop=True)
-    else:
-        filtered_data = raw_data_placements.reset_index(drop=True)
-
-    # Display the filtered data
-    st.write(filtered_data)
-
-
-def show_changelog():
-    # Code to display changelog
-
-    conn5 = st.connection('s3', type=FilesConnection)
-    placement_tracking5 = conn5.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    # Establishing connection and reading the data
-    conn = st.connection('s3', type=FilesConnection)
-    placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-
-    conn = st.connection('s3', type=FilesConnection)
-    placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
-
-    # Reshape the DataFrame
-    pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
-    #pivoted_df = pivoted_df.sort_values('Date', ascending=False)
-    pivoted_df = pivoted_df.iloc[::-1]
-    # Display the transposed DataFrame
-
-
-    # Streamlit UI for brand filtering
-    st.title('Brand Counts Over Time')
-    all_brands = list(pivoted_df.columns)
-    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands)
-    # Filter data based on selected brands
-    filtered_data = pivoted_df[selected_brands]
-    # Display the bar chart
-    st.dataframe(filtered_data, use_container_width=True)
-
-def show_insights():
-    # Code to display insights
-    st.subheader('Insights')
-    # Assuming 'st.connection' and 'FilesConnection' are valid in your environment
-    conn = st.connection('s3', type=FilesConnection)
-    placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
-
-    # Reshape the DataFrame
-    pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
-    #pivoted_df = pivoted_df.sort_values('Date', ascending=False)
-    pivoted_df = pivoted_df.iloc[::-1]
-    # Display the transposed DataFrame
-
-
-    # Streamlit UI for brand filtering
-    st.title('Brand Counts Over Time')
-    all_brands = list(pivoted_df.columns)
-    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands)
-
-    # Filter data based on selected brands
-    filtered_data = pivoted_df[selected_brands]
-
-    # Display the line chart
-    st.line_chart(filtered_data, height=500)
-
-    st.title('Brand Counts Over Time')
-    all_brands = list(pivoted_df.columns)
-    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands, key='quarter_range_selector6')
-
-    # Filter data based on selected brands
-    filtered_data = pivoted_df[selected_brands]
-
-    # Display the bar chart
-    st.bar_chart(filtered_data, height=500)
-
-def page3():
+def display_certifications_imaging():
     st.header('Certifications 📝')
 
     # Define buttons for navigation
@@ -1439,6 +1091,350 @@ def show_insights_cert():
 
     st.altair_chart(bar_chart, use_container_width=True)
 
+
+
+def display_certifications_fashion():
+    st.header("Fashion Certifications")
+    st.write("Explore certifications needed in the fashion industry.")
+    # Add industry-specific details or requirements.
+
+def display_certifications_automotive():
+    st.header("Automotive Certifications")
+    st.write("Critical certifications for automotive professionals.")
+    # Include relevant data or courses available.
+
+
+def main():
+    if 'logged_in' not in st.session_state:
+        st.session_state['logged_in'] = False
+
+    if st.session_state['logged_in']:
+        if 'page' not in st.session_state:
+            st.session_state['page'] = 'home'
+        
+        sidebar()
+
+        # Redirect based on the selected page
+        if st.session_state['page'] == 'home':
+            display_dashboard()
+        elif st.session_state['page'] == 'certifications':
+            display_certifications_page()  # Renamed for clarity
+        elif st.session_state['page'] == 'placements':
+            display_placements_page()  # Renamed for clarity
+    else:
+        display_login_form()
+
+
+def page1():
+    st.title("Page 1")
+    st.write("Welcome to Page 1")
+    sidebar()
+
+def page2():
+    st.header('Placements 💡')
+    # Define buttons for navigation
+    if 'current_page' not in st.session_state:
+        st.session_state['current_page'] = 'Recent'
+
+    # Create four columns for the interactive tiles
+    col1, col2, col3, col4 = st.columns(4)
+
+    # Define interactive tiles that update the session state upon clicking
+    if col1.button('Recent 🆕', key='1', use_container_width=True):
+        st.session_state['current_page'] = 'Recent'
+    if col2.button('Raw Data 📝', key='2', use_container_width=True):
+        st.session_state['current_page'] = 'Raw Data'
+    if col3.button('Changelog 🔄', key='3', use_container_width=True):
+        st.session_state['current_page'] = 'Changelog'
+    if col4.button('Insights 🔍', key='4', use_container_width=True):
+        st.session_state['current_page'] = 'Insights'
+
+    # Conditional rendering based on selected page
+    if st.session_state['current_page'] == 'Recent':
+        show_recent()
+    elif st.session_state['current_page'] == 'Raw Data':
+        show_raw_data()
+    elif st.session_state['current_page'] == 'Changelog':
+        show_changelog()
+    elif st.session_state['current_page'] == 'Insights':
+        show_insights()
+
+
+def show_recent():
+    # Code to display recent data
+    st.subheader('Recent Placements')
+    conn = st.connection('s3', type=FilesConnection)
+    df5 = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+    df5 = df5[-10:]
+    df5 = df5.sort_values(by='Brand').reset_index(drop=True)
+
+    # Create metrics for the latest 5 records
+
+    lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
+    wch_colour_font = (0, 0, 0)
+    fontsize = 20
+    valign = "left"
+    iconname = "fas fa-xmark"
+        
+    container = st.container()
+
+    # Add your placements data here
+    conn = st.connection('s3', type=FilesConnection)
+    df4 = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    df4.drop_duplicates(subset="Product Name", inplace=True)
+    df4 = df4.sort_values(by='Date Detected', ascending=True)
+    latest_df4 = df4.tail(5)  # Get the latest 5 records
+    latest_df4 = latest_df4.iloc[::-1]
+
+    
+    st.markdown('''
+    <style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Maintains 3 columns */
+        grid-gap: 20px; /* Space between cards */
+        padding: 10px;
+        width: auto; /* Adjust based on the actual space available or use 100% if it should be fully responsive */
+    }
+
+    .card {
+        height: auto;
+        min-height: 120px;
+        position: relative;
+        width: 100%; /* This makes each card responsive within its grid column */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        border-radius: 24px;
+        overflow: hidden;
+        line-height: 1.6;
+        transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+        margin: 15px; /* Added margin */
+    }
+
+    .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 20px;
+    padding-bottom: 0px;
+    border-radius: 22px;
+    color: #ffffff;
+    overflow: hidden;
+    background: #ffffff;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .content .heading {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1;
+    z-index: 1;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .content .para {
+    z-index: 1;
+    opacity: 0.8;
+    font-size: 16px;
+    font-weight: 400;
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card::before {
+    content: "";
+    position: absolute;
+    height: 500%;
+    width: 500%;
+    border-radius: inherit;
+    background: #3775cb;
+    background: linear-gradient(to right, #3775cb, #3775cb);
+    transform-origin: center;
+    animation: moving 9.8s linear infinite paused;
+    transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card:hover::before {
+    animation-play-state: running;
+    z-index: -1;
+    width: 20%;
+    }
+
+    .card:hover .content .heading,
+    .card:hover .content .para {
+    color: #000000;
+    }
+
+    .card:hover {
+    box-shadow: 0rem 6px 13px rgba(10, 60, 255, 0.1),
+        0rem 24px 24px rgba(10, 60, 255, 0.09),
+        0rem 55px 33px rgba(10, 60, 255, 0.05),
+        0rem 97px 39px rgba(10, 60, 255, 0.01), 0rem 152px 43px rgba(10, 60, 255, 0);
+    scale: 1.00;
+    color: #000000;
+    }
+
+    @keyframes moving {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+    }
+    </style>
+    ''', unsafe_allow_html=True)
+
+
+    # Sample data iteration - replace 'newest_records' with your actual DataFrame
+    # Define the number of columns
+    # Provide a layout option for the user to switch
+    num_columns = 2
+
+    # Generate rows with the appropriate number of columns
+    rows = [st.columns(num_columns) for _ in range((len(latest_df4) + num_columns - 1) // num_columns)]
+
+    # Initialize a counter for DataFrame row indices
+    row_index = 0
+
+    # Fill each cell in the grid with content
+    for row in rows:
+        for col in row:
+            if row_index < len(latest_df4):
+                with col:
+                    row_data = latest_df4.iloc[row_index]
+                    brand = row_data['Brand']
+                    count = df5[df5['Brand'] == brand]['Count'].values[0]
+                    metric_label = row_data['Action']
+                    metric_value = row_data['Product Name']
+                    metric_delta = str(count)
+                    date_detected = row_data['Date Detected']  # Assuming 'Date Detected' is the column name in df4
+
+
+                    if metric_label == 'Added':
+                        title = "New Product Added"
+                        emoji = "🆕"
+                    elif metric_label == 'Removed':
+                        title = "Product Removed"
+                        emoji = "❌"
+                    else:
+                        title = "Certification Spotted"
+
+                    # Embed data into HTML
+                    html_content = f"""
+                    <div class="card">
+                        <div class="content">
+                            <p class="heading">{metric_value}</p>
+                            <p class="para">
+                                {title} {emoji}
+                                <br>
+                                Brand: {brand}<br>
+                                Product Type: {metric_value}<br>
+                                Certification Date: {date_detected}<br>
+                            </p>
+                        </div>
+                    </div>
+                    """
+                    st.markdown(html_content, unsafe_allow_html=True)
+
+                    row_index += 1   
+
+    # Example: st.write(data_recent)
+
+def show_raw_data():
+    # Code to display raw data
+    st.subheader('Raw Placement Data')
+    conn2 = st.connection('s3', type=FilesConnection)
+
+    # Read data from CSV
+    raw_data_placements = conn2.read("scoops-finder/combined_products.csv", input_format="csv", ttl=600)
+
+    # Convert 'Date Detected' to datetime and sort descending
+    raw_data_placements['Date Detected'] = pd.to_datetime(raw_data_placements['Date Detected'])
+    raw_data_placements.sort_values('Date Detected', ascending=False, inplace=True)
+
+    # Create a list of unique brands for the selectbox, with an 'All Brands' option
+    unique_brands = ['All Brands'] + sorted(raw_data_placements['Brand'].unique().tolist())
+
+    # Sidebar to select brand
+    selected_brand = st.selectbox('Select a brand to display', unique_brands)
+
+    # Filter data based on selected brand, unless 'All Brands' is selected
+    if selected_brand != 'All Brands':
+        filtered_data = raw_data_placements[raw_data_placements['Brand'] == selected_brand].reset_index(drop=True)
+    else:
+        filtered_data = raw_data_placements.reset_index(drop=True)
+
+    # Display the filtered data
+    st.write(filtered_data)
+
+
+def show_changelog():
+    # Code to display changelog
+
+    conn5 = st.connection('s3', type=FilesConnection)
+    placement_tracking5 = conn5.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+    # Establishing connection and reading the data
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
+
+    conn = st.connection('s3', type=FilesConnection)
+    placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+
+    # Reshape the DataFrame
+    pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
+    #pivoted_df = pivoted_df.sort_values('Date', ascending=False)
+    pivoted_df = pivoted_df.iloc[::-1]
+    # Display the transposed DataFrame
+
+
+    # Streamlit UI for brand filtering
+    st.title('Brand Counts Over Time')
+    all_brands = list(pivoted_df.columns)
+    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands)
+    # Filter data based on selected brands
+    filtered_data = pivoted_df[selected_brands]
+    # Display the bar chart
+    st.dataframe(filtered_data, use_container_width=True)
+
+def show_insights():
+    # Code to display insights
+    st.subheader('Insights')
+    # Assuming 'st.connection' and 'FilesConnection' are valid in your environment
+    conn = st.connection('s3', type=FilesConnection)
+    placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
+
+    # Reshape the DataFrame
+    pivoted_df = placement_changelog.pivot_table(index='Date', columns='Brand', values='Count', fill_value=0)
+    #pivoted_df = pivoted_df.sort_values('Date', ascending=False)
+    pivoted_df = pivoted_df.iloc[::-1]
+    # Display the transposed DataFrame
+
+
+    # Streamlit UI for brand filtering
+    st.title('Brand Counts Over Time')
+    all_brands = list(pivoted_df.columns)
+    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands)
+
+    # Filter data based on selected brands
+    filtered_data = pivoted_df[selected_brands]
+
+    # Display the line chart
+    st.line_chart(filtered_data, height=500)
+
+    st.title('Brand Counts Over Time')
+    all_brands = list(pivoted_df.columns)
+    selected_brands = st.multiselect('Select Brands', all_brands, default=all_brands, key='quarter_range_selector6')
+
+    # Filter data based on selected brands
+    filtered_data = pivoted_df[selected_brands]
+
+    # Display the bar chart
+    st.bar_chart(filtered_data, height=500)
 
 
 if __name__ == "__main__":
