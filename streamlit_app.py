@@ -154,16 +154,16 @@ def sidebar():
 
 
 def login(username, password):
-    users = st.secrets["users"]
+    # Load user dictionary from the secrets
+    user_passwords = st.secrets["users"]["users"]
     # Convert the input password to its hashed version
     input_hashed_password = hashlib.sha256(password.encode()).hexdigest()
     
-    # Check each user in the secrets.toml file
-    for user in users:
-        if username == user["username"] and input_hashed_password == user["hashed_password"]:
-            return True
-    
+    # Check if the username exists and if the hashed password matches
+    if username in user_passwords and user_passwords[username] == input_hashed_password:
+        return True
     return False
+    
 
 def display_login_form():
     # Create three columns
