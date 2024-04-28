@@ -55,7 +55,7 @@ def sidebar():
     # Define product categories and their corresponding buttons
     product_categories = {
         'Imaging Equipment': ['Home', 'Certifications', 'Placements'],
-        'Computers': ['Home', 'Placements'],
+        'Computers': ['Home', 'Certifications'],
         'Televisions': ['Home', 'Certifications']
     }
 
