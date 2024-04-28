@@ -1243,8 +1243,6 @@ def show_recent_cert_computers():
     newest_records = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
     newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
     newest_records = newest_records.head(10)
-    st.write(newest_records)
-
     rows = [st.columns(num_columns) for _ in range((len(newest_records) + num_columns - 1) // num_columns)]
 
     # Initialize a counter for DataFrame row indices
