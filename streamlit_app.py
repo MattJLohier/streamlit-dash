@@ -152,18 +152,18 @@ def sidebar():
     st.sidebar.progress(int(progress))
     st.sidebar.markdown(f"**Refresh in: {hours_left} hours**")
 
-def login(username, password):
-    # Assume st.secrets["hashed_password"] is a dictionary like {'admin': 'hash1', 'user1': 'hash2'}
-    user_passwords = st.secrets["hashed_password"]
 
-    # Check if the username exists in the dictionary and the hashed password matches
-    if username in user_passwords:
-        hashed_password = user_passwords[username]
-        if hashlib.sha256(password.encode()).hexdigest() == hashed_password:
+def login(username, password):
+    users = st.secrets["users"]
+    # Convert the input password to its hashed version
+    input_hashed_password = hashlib.sha256(password.encode()).hexdigest()
+    
+    # Check each user in the secrets.toml file
+    for user in users:
+        if username == user["username"] and input_hashed_password == user["hashed_password"]:
             return True
     
     return False
-
 
 def display_login_form():
     # Create three columns
