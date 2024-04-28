@@ -1240,7 +1240,7 @@ def show_recent_cert_computers():
     # Define the number of columns
     num_columns = 2
     conn = st.connection('s3', type=FilesConnection)
-    newest_record = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
+    newest_records = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
     newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
     newest_records = newest_records.head(10)
     st.write(newest_records)
