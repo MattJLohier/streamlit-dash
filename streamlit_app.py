@@ -467,7 +467,7 @@ def show_changelog():
     # Filter data based on selected brands
     filtered_data = pivoted_df[selected_brands]
     # Display the bar chart
-    st.dataframe(pivoted_df, use_container_width=True)
+    st.dataframe(filtered_data, use_container_width=True)
 
 def show_insights():
     # Code to display insights
