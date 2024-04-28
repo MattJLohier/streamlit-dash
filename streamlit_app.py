@@ -54,9 +54,9 @@ def sidebar():
 
     # Define product categories and their corresponding buttons
     product_categories = {
-        'Electronics': ['Home', 'Certifications'],
-        'Fashion': ['Home', 'Placements'],
-        'Automotive': ['Certifications']
+        'Imaging Equipment': ['Home', 'Certifications', 'Placements'],
+        'Computers': ['Home', 'Placements'],
+        'Televisions': ['Home', 'Certifications']
     }
 
     # Allow the user to select a product type
