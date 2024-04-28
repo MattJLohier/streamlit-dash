@@ -655,7 +655,7 @@ def show_raw_data_cert():
 
 def show_changelog_cert():
     # Code to display changelog
-    st.subheader('Changelogs')
+    st.header('Changelogs')
     # Example: st.write(data_changelog)
     st.subheader('Energy Star ⚡')
     # Example: st.write(data_changelog)
@@ -731,7 +731,7 @@ def show_changelog_cert():
 
 def show_insights_cert():
     # Code to display insights
-    st.subheader('Insights')
+    st.header('Insights')
     # Example: st.write(data_insights)
     conn = st.connection('s3', type=FilesConnection)
     df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
