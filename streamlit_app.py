@@ -440,8 +440,15 @@ def show_raw_data():
 
 def show_changelog():
     # Code to display changelog
+
+    conn = st.connection('s3', type=FilesConnection)
     placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
-    st.write("Initial DataFrame:", placement_tracking)  # Display initial DataFrame
+    st.write(placement_tracking)
+
+
+    # Establishing connection and reading the data
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking = conn.read("scoops-finder/tracking.csv", input_format="csv", ttl=600)
 
     conn = st.connection('s3', type=FilesConnection)
     placement_changelog = conn.read("scoops-finder/brand_counts.csv", input_format="csv", ttl=600)
