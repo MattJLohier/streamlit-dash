@@ -51,7 +51,30 @@ def display_dashboard():
 def sidebar():
     st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)
     st.sidebar.markdown("---")
+
+    # Define product categories and their corresponding buttons
+    product_categories = {
+        'Electronics': ['Home', 'Certifications'],
+        'Fashion': ['Home', 'Placements'],
+        'Automotive': ['Certifications']
+    }
+
+    # Allow the user to select a product type
+    selected_category = st.sidebar.selectbox("Select Your Product Type", list(product_categories.keys()))
+
+    # Get buttons for the selected product category
+    buttons = product_categories[selected_category]
+
     button_container = st.sidebar.container()
+
+    # Button display logic based on selected product category
+    with button_container:
+        if 'Home' in buttons and st.button("Home", key="home_button"):
+            st.session_state['page'] = 'home'
+        if 'Certifications' in buttons and st.button("Certifications", key="certifications_button"):
+            st.session_state['page'] = 'certifications'
+        if 'Placements' in buttons and st.button("Placements", key="placements_button"):
+            st.session_state['page'] = 'placements'
     
     # Inject CSS to make container's children (buttons) 100% width
     st.sidebar.markdown("""
@@ -96,14 +119,6 @@ def sidebar():
     }
     </style>
     """, unsafe_allow_html=True)
-    
-    with button_container:
-        if st.button("Home", key="home_button"):
-            st.session_state['page'] = 'home'
-        if st.button("Certifications", key="certifications_button"):
-            st.session_state['page'] = 'certifications'
-        if st.button("Placements", key="placements_button"):
-            st.session_state['page'] = 'placements'
 
     # Custom CSS to change the progress bar color
     progress_bar_color_style = """
