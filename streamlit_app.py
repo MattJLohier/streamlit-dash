@@ -417,6 +417,27 @@ def show_raw_data():
     raw_data_placements = conn2.read("scoops-finder/combined_products.csv", input_format="csv", ttl=600)
     st.write(raw_data_placements)
 
+    st.subheader('Raw Placement Data')
+
+    # Establish connection to data source
+    conn2 = st.connection('s3', type=FilesConnection)
+
+    # Read data from CSV
+    raw_data_placements = conn2.read("scoops-finder/combined_products.csv", input_format="csv", ttl=600)
+
+    # Convert 'Date Detected' to datetime and sort descending
+    raw_data_placements['Date Detected'] = pd.to_datetime(raw_data_placements['Date Detected'])
+    raw_data_placements.sort_values('Date Detected', ascending=False, inplace=True)
+
+    # Group by 'Brand' and create popovers for each brand
+    for brand, group in raw_data_placements.groupby('Brand'):
+        # Use a button to toggle visibility of each brand's products
+        if st.button(brand, key=brand):  # ensure unique keys by using brand name
+            # Display the sorted products for this brand
+            st.write(group)
+
+
+
 
 def show_changelog():
     # Code to display changelog
