@@ -216,7 +216,7 @@ def display_placements_page():
         st.write("No specific certifications are available for this category.")
 
 def display_certifications_imaging():
-    st.header('Certifications 📝')
+    st.title("Imaging Certifications 🖨️")
 
     # Define buttons for navigation
     if 'current_page' not in st.session_state:
