@@ -1091,17 +1091,32 @@ def show_insights_cert():
 
     st.altair_chart(bar_chart, use_container_width=True)
 
-
-
-def display_certifications_fashion():
+def display_certifications_computers():
     st.header("Fashion Certifications")
     st.write("Explore certifications needed in the fashion industry.")
     # Add industry-specific details or requirements.
 
-def display_certifications_automotive():
+def display_certifications_televisions():
     st.header("Automotive Certifications")
     st.write("Critical certifications for automotive professionals.")
     # Include relevant data or courses available.
+
+
+def display_placements_imaging():
+    st.header("Automotive Certifications")
+    st.write("Critical certifications for automotive professionals.")
+    # Include relevant data or courses available.
+
+def display_placements_computers():
+    st.header("Automotive Certifications")
+    st.write("Critical certifications for automotive professionals.")
+    # Include relevant data or courses available.
+
+def display_placements_televisions():
+    st.header("Automotive Certifications")
+    st.write("Critical certifications for automotive professionals.")
+    # Include relevant data or courses available.
+
 
 
 def main():
