@@ -154,14 +154,18 @@ def sidebar():
 
 
 def login(username, password):
-    # Load user dictionary from the secrets
-    user_passwords = st.secrets["users"]["users"]
-    # Convert the input password to its hashed version
-    input_hashed_password = hashlib.sha256(password.encode()).hexdigest()
-    
-    # Check if the username exists and if the hashed password matches
-    if username in user_passwords and user_passwords[username] == input_hashed_password:
-        return True
+    try:
+        # Retrieve the dictionary of users and hashed passwords
+        user_passwords = st.secrets["users"]
+        # Convert the input password to its hashed version
+        input_hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        
+        # Check if the username exists in the dictionary and if the hashed password matches
+        if username in user_passwords and user_passwords[username] == input_hashed_password:
+            return True
+    except KeyError as e:
+        st.error(f"KeyError: {e} - Check your secrets.toml configuration.")
+        return False
     return False
     
 
