@@ -200,9 +200,7 @@ def display_certifications_page():
         st.write("No specific certifications are available for this category.")
 
 
-def display_placements_page():
-    st.title("Placements")
-    
+def display_placements_page():    
     # Check the selected product type
     product_type = st.session_state['selected_product_type']
 
@@ -1179,7 +1177,8 @@ def page1():
     sidebar()
 
 def display_placements_imaging():
-    st.header('Placements 💡')
+    st.title("Imaging Placements 🖨️")
+    st.markdown('---')
     # Define buttons for navigation
     if 'current_page' not in st.session_state:
         st.session_state['current_page'] = 'Recent'
