@@ -516,7 +516,7 @@ def show_recent_cert():
 
 
 def show_raw_data_cert():
-    st.subheader('Raw Certification Data')
+    st.header('Raw Certification Data')
     st.subheader('Energy Star ⚡')
     conn = st.connection('s3', type=FilesConnection)
     df_raw_certs2 = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
