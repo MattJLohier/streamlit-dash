@@ -1283,8 +1283,9 @@ def show_raw_data_cert_computers():
     st.write("Coming Soon")
     # Add industry-specific details or requirements.
     conn = st.connection('s3', type=FilesConnection)
-    df = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
-    st.write(df)
+    newest_records = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
+    newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
+    st.write(newest_records)
 
 def show_changelog_cert_computers():
     st.write("Coming Soon")
