@@ -349,7 +349,7 @@ def show_recent_cert():
     st.write(df2_modified)
     filtered_df = filtered_df.rename(columns={'Model': 'Product Name', 'Date Available': 'Certification Date'})
     filtered_df = filtered_df.drop(columns=['Color/Mono', 'Date Qualified', 'Target Markets', 'Print Speed'])
-    filtered_df = filtered_df[['Product Name', 'Brand', 'Certification Date', 'Category']]
+    filtered_df = filtered_df[['Product Name', 'Brand', 'Certification Date', 'Product Type']]
     # Rename and remove columns for df2_modified
     df2_modified = df2_modified.rename(columns={'Manufacturer': 'Brand', 'Product': 'Product Name', 'Date of Last Certification': 'Certification Date', 'Category': 'Product Type'})
     df2_modified = df2_modified.drop(columns=['CID', 'Model Number'])
