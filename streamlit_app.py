@@ -1267,14 +1267,14 @@ def show_recent_cert_computers():
     newest_records1 = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
 
     conn = st.connection('s3', type=FilesConnection)
-    newest_records2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    newest_records2 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
     product_types = ["Notebook", "Desktop", "Integrated Desktop Computer", "Tablet", "Signage Display", "Workstation", "Thin Client"]
     # Filter the DataFrame to include only the rows with the specified product types
     newest_records2 = newest_records2[newest_records2["Product Type"].isin(product_types)]
 
 
     conn = st.connection('s3', type=FilesConnection)
-    newest_records3 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+    newest_records3 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
     newest_records3 = newest_records3[newest_records3["Product Category"] == "Computers & Accessories"]
 
     # Rename columns to standardize across DataFrames
