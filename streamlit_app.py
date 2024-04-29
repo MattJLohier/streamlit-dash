@@ -1509,10 +1509,10 @@ def show_raw_data_cert_televisions():
             newest_records = newest_records[newest_records['markets'].apply(lambda x: selected_country in map(str.strip, x.split(',')))]
 
         # Filter by Color/Mono
-        color_capabilities = ['any'] + list(newest_records['touch_screen'].unique())
-        selected_color_capability = st.selectbox('Touch Screen', color_capabilities, index=0 if 'any' in color_capabilities else 1)
+        color_capabilities = ['any'] + list(newest_records['display_type'].unique())
+        selected_color_capability = st.selectbox('Display Type', color_capabilities, index=0 if 'any' in color_capabilities else 1)
         if selected_color_capability != 'any':
-            newest_records = newest_records[newest_records['touch_screen'] == selected_color_capability]
+            newest_records = newest_records[newest_records['display_type'] == selected_color_capability]
 
     st.write(newest_records)
 
