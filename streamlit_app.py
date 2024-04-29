@@ -1652,7 +1652,7 @@ def show_recent_cert_televisions():
         'brand_name': 'Brand',
         'model_name': 'Product',
         'date_available_on_market': 'Date Certified',
-        'type': 'Product Type'
+        'product_type': 'Product Type'
     }, inplace=True)
 
     newest_records2.rename(columns={
