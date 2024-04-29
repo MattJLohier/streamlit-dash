@@ -1817,13 +1817,11 @@ def show_insights_cert_televisions():
 
 
 def display_placements_computers():
-    st.header("Automotive Certifications")
-    st.write("Critical certifications for automotive professionals.")
+    st.write("N/A")
     # Include relevant data or courses available.
 
 def display_placements_televisions():
-    st.header("Automotive Certifications")
-    st.write("Critical certifications for automotive professionals.")
+    st.write("N/A")
     # Include relevant data or courses available.
 
 
