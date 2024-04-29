@@ -1328,8 +1328,6 @@ def show_raw_data_cert_computers():
         if selected_color_capability != 'any':
             newest_records = newest_records[newest_records['touch_screen'] == selected_color_capability]
 
-
-
     st.write(newest_records)
 
     st.subheader('EPEAT 🌎')
@@ -1338,6 +1336,52 @@ def show_raw_data_cert_computers():
     epeat_data = epeat_data.query('`Product Category` == "Computers & Displays"')
     epeat_data = epeat_data.sort_values('Registered On', ascending=False)
     epeat_data = epeat_data.query('`Product Type` != "Monitors"')
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories3 = ['any'] + list(epeat_data['Product Type'].unique())
+        selected_category1 = st.selectbox('Select a product category', categories3, index=0 if 'any' in categories3 else 1)
+        if selected_category1 != 'any':
+            epeat_data = epeat_data[epeat_data['Product Type'] == selected_category1]
+            
+
+        brands = ['any'] + list(epeat_data['Manufacturer'].unique())
+        selected_brand1 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand1 != 'any':
+            epeat_data = epeat_data[epeat_data['Manufacturer'] == selected_brand1]
+
+        remanufactured_options = ['any', 'Active', 'NA']
+        selected_remanufactured1 = st.selectbox('Status', remanufactured_options, index=0)
+        if selected_remanufactured1 == 'Active':
+            epeat_data = epeat_data[epeat_data['Status'] == "Active"]
+        elif selected_remanufactured1 == 'NA':
+            epeat_data = epeat_data[epeat_data['Status'] == False]
+
+    with col2:
+        # Filter by Market
+        markets = ['any'] + list(epeat_data['Registered In'].unique())
+        # Defaulting to 'United States' if it exists in the options
+        default_market_index = markets.index('United States') if 'United States' in markets else 0
+        selected_market = st.selectbox('Select a market', markets, index=default_market_index)
+        if selected_market != 'any':
+            epeat_data = epeat_data[epeat_data['Registered In'] == selected_market]
+
+
+        # Filter by EPEAT Tier
+        color_capabilities1 = ['any'] + list(epeat_data['EPEAT Tier'].unique())
+        selected_color_capability1 = st.selectbox('Select an EPEAT Tier', color_capabilities1, index=0 if 'any' in color_capabilities1 else 1)
+        if selected_color_capability1 != 'any':
+            epeat_data = epeat_data[epeat_data['EPEAT Tier'] == selected_color_capability1]
+
+        # Filter by Registration Date
+        sort_options = ['Newest', 'Oldest']
+        selected_sort = st.selectbox('Sort by Registration Date', sort_options, index=0)  # Default to Newest
+        if selected_sort == 'Newest':
+            epeat_data = epeat_data.sort_values(by='Registered On', ascending=False)
+        elif selected_sort == 'Oldest':
+            epeat_data = epeat_data.sort_values(by='Registered On', ascending=True)
+
     st.write(epeat_data)
 
     st.subheader('WiFi Alliance 📶')
