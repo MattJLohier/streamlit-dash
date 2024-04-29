@@ -1293,7 +1293,7 @@ def show_raw_data_cert_computers():
 
 
     conn = st.connection('s3', type=FilesConnection)
-    wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    wifi_data = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
     #epeat_data = newest_records.sort_values('Date Of Last Certification', ascending=False)
     st.write(wifi_data)
 
