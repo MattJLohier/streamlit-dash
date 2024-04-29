@@ -1286,12 +1286,13 @@ def show_recent_cert_computers():
 def show_raw_data_cert_computers():
     st.write("Coming Soon")
     # Add industry-specific details or requirements.
+    st.subheader('Energy Star ⚡')
     conn = st.connection('s3', type=FilesConnection)
     newest_records = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
     newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
     st.write(newest_records)
 
-
+    st.subheader('EPEAT 📶')
     conn = st.connection('s3', type=FilesConnection)
     epeat_data = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
     epeat_data = epeat_data.query('`Product Category` == "Computers & Displays"')
@@ -1299,6 +1300,7 @@ def show_raw_data_cert_computers():
     epeat_data = epeat_data.query('`Product Type` != "Monitors"')
     st.write(epeat_data)
 
+    st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
     wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
     wifi_data = wifi_data.query('`Category` == "Computers & Accessories"')
