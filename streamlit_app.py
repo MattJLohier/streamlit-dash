@@ -1296,6 +1296,7 @@ def show_raw_data_cert_computers():
     epeat_data = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
     epeat_data = epeat_data.query('`Product Category` == "Computers & Displays"')
     epeat_data = epeat_data.sort_values('Registered On', ascending=False)
+    epeat_data = epeat_data.query('`Product Type` != "Monitors"')
     st.write(epeat_data)
 
     conn = st.connection('s3', type=FilesConnection)
