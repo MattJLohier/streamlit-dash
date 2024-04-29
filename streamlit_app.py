@@ -1294,7 +1294,7 @@ def show_raw_data_cert_computers():
 
     conn = st.connection('s3', type=FilesConnection)
     epeat_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    #epeat_data = newest_records.sort_values('Registered On', ascending=False)
+    epeat_data = newest_records.sort_values('Date Of Last Certification', ascending=False)
     st.write(epeat_data)
 
 def show_changelog_cert_computers():
