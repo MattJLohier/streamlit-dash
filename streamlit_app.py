@@ -1389,9 +1389,31 @@ def show_raw_data_cert_computers():
     wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
     wifi_data = wifi_data.query('`Category` == "Computers & Accessories"')
     wifi_data = wifi_data.sort_values('Date of Last Certification', ascending=False)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories1 = ['any'] + list(wifi_data['Category'].unique())
+        selected_category2 = st.selectbox('Select a product category', categories1, index=0 if 'any' in categories1 else 1)
+        if selected_category2 != 'any':
+            wifi_data = wifi_data[wifi_data['Category'] == selected_category2]
+
+        # Filter by brand
+        brands = ['any'] + list(wifi_data['Brand'].unique())
+        selected_brand2 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand2 != 'any':
+            wifi_data = wifi_data[wifi_data['Brand'] == selected_brand2]
+
+    with col2:
+        # Filter by Registration Date
+        sort_options = ['Newest', 'Oldest']
+        selected_sort2 = st.selectbox('Sort by Date', sort_options, index=0)  # Default to Newest
+        if selected_sort2 == 'Newest':
+            wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=False)
+        elif selected_sort2 == 'Oldest':
+            wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=True)
+
     st.write(wifi_data)
-
-
 
 def show_changelog_cert_computers():
     st.write("Coming Soon")
