@@ -1316,6 +1316,11 @@ def show_recent_cert_computers():
 
     # Initialize a counter for DataFrame row indices
     row_index = 0
+    emoji_dict = {
+            "Energy Star": "⚡",
+            "WiFi Alliance": "📶",
+            "EPEAT": "🌎"
+        }    
 
     # Fill each cell in the grid with content
     for row in rows:
@@ -1328,7 +1333,7 @@ def show_recent_cert_computers():
                     brand = row_data['Brand']
                     product_type = row_data['Product Type']
                     source = row_data['Source']
-
+                    emoji = emoji_dict.get(source, "📝")
                     # Embed data into HTML
                     html_content = f"""
                     <div class="card">
@@ -1338,7 +1343,7 @@ def show_recent_cert_computers():
                                 Brand: {brand}<br>
                                 Product Type: {product_type}<br>
                                 Certification Date: {certification_date}<br>
-                                Source: {source}
+                                Source: {source} {emoji}
                             </p>
                         </div>
                     </div>
