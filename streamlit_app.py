@@ -46,7 +46,7 @@ def display_dashboard():
     - Electric Cookware 🍳
     - Displays 🖥️
     - Audio/Video 🎙️
-    - Enterprise Servers
+    - Enterprise Servers 🌐
     """)
     st.markdown("---")
     st.caption('Created by Matt Lohier') 
