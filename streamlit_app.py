@@ -372,7 +372,7 @@ def show_recent_cert():
     # If not, convert it to string before truncating
     
     # Truncate the date to keep only the first 10 characters
-    combined_df['Certification Date'] = combined_df['Certification Date'].str[:20]
+    combined_df['Certification Date'] = combined_df['Certification Date'].str[:10]
     # Convert the truncated date to datetime format
     combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'], errors='coerce')
     # Sort the combined dataframe by "Certification Date" in descending order
@@ -383,7 +383,7 @@ def show_recent_cert():
     combined_df.drop_duplicates(inplace=True)
     combined_df['Certification Date'] = combined_df['Certification Date'].astype(str).str[:10]
     # Show only the newest 5 records
-    newest_records = combined_df.head(10)
+    newest_records = combined_df.head(20)
     
     st.header('Recent Certifications')
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
