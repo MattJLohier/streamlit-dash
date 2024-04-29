@@ -1289,6 +1289,11 @@ def show_raw_data_cert_computers():
     conn = st.connection('s3', type=FilesConnection)
     newest_records = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
     newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
+
+    sort_options = {'date_qualified': 'Date Qualified', 'date_available_on_market': 'Date Available on Market'}
+    selected_sort = st.selectbox('Sort by', options=list(sort_options.keys()), format_func=lambda x: sort_options[x], index=1)
+    newest_records = newest_records.sort_values(by=selected_sort, ascending=False)
+
     st.write(newest_records)
 
     st.subheader('EPEAT 🌎')
