@@ -1310,9 +1310,9 @@ def show_recent_cert_computers():
     # Display the combined DataFrame
     print(combined_df.head())   
 
-    newest_records = newest_records.sort_values('Date Certified', ascending=False)
-    newest_records = newest_records.head(10)
-    rows = [st.columns(num_columns) for _ in range((len(newest_records) + num_columns - 1) // num_columns)]
+    combined_df = combined_df.sort_values('Date Certified', ascending=False)
+    combined_df = combined_df.head(10)
+    rows = [st.columns(num_columns) for _ in range((len(combined_df) + num_columns - 1) // num_columns)]
 
     # Initialize a counter for DataFrame row indices
     row_index = 0
@@ -1320,9 +1320,9 @@ def show_recent_cert_computers():
     # Fill each cell in the grid with content
     for row in rows:
         for col in row:
-            if row_index < len(newest_records):
+            if row_index < len(combined_df):
                 with col:
-                    row_data = newest_records.iloc[row_index]
+                    row_data = combined_df.iloc[row_index]
                     product_name = row_data['model_name']
                     certification_date = row_data['date_available_on_market']
                     brand = row_data['brand_name']
