@@ -1312,6 +1312,10 @@ def show_raw_data_cert_computers():
         if selected_brand != 'any':
             newest_records = newest_records[newest_records['brand_name'] == selected_brand]
 
+        sort_options = {'date_qualified': 'Date Qualified', 'date_available_on_market': 'Date Available on Market'}
+        selected_sort = st.selectbox('Sort by', options=list(sort_options.keys()), format_func=lambda x: sort_options[x], index=1)
+        newest_records = newest_records.sort_values(by=selected_sort, ascending=False)
+
     with col2:
         # Filter by Markets
         selected_country = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
@@ -1324,9 +1328,7 @@ def show_raw_data_cert_computers():
         if selected_color_capability != 'any':
             newest_records = newest_records[newest_records['touch_screen'] == selected_color_capability]
 
-        sort_options = {'date_qualified': 'Date Qualified', 'date_available_on_market': 'Date Available on Market'}
-        selected_sort = st.selectbox('Sort by', options=list(sort_options.keys()), format_func=lambda x: sort_options[x], index=1)
-        newest_records = newest_records.sort_values(by=selected_sort, ascending=False)
+
 
     st.write(newest_records)
 
