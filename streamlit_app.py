@@ -1290,9 +1290,43 @@ def show_raw_data_cert_computers():
     newest_records = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
     newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
 
-    sort_options = {'date_qualified': 'Date Qualified', 'date_available_on_market': 'Date Available on Market'}
-    selected_sort = st.selectbox('Sort by', options=list(sort_options.keys()), format_func=lambda x: sort_options[x], index=1)
-    newest_records = newest_records.sort_values(by=selected_sort, ascending=False)
+        def extract_unique_countries(market_col):
+        unique_countries = set()
+        # Split each row's market string by comma and strip spaces
+        market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
+        return ['any'] + sorted(unique_countries)
+
+    unique_countries = extract_unique_countries(df_sorted['markets'])
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories = ['any'] + list(newest_records['type'].unique())
+        selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
+        if selected_category != 'any':
+            newest_records = newest_records[newest_records['type'] == selected_category]
+
+        # Filter by brand
+        brands = ['any'] + list(newest_records['brand_name'].unique())
+        selected_brand = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand != 'any':
+            newest_records = newest_records[newest_records['brand_name'] == selected_brand]
+
+    with col2:
+        # Filter by Markets
+        selected_country = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
+        if selected_country != 'any':
+            newest_records = newest_records[newest_records['markets'].apply(lambda x: selected_country in map(str.strip, x.split(',')))]
+
+        # Filter by Color/Mono
+        color_capabilities = ['any'] + list(newest_records['touch_screen'].unique())
+        selected_color_capability = st.selectbox('Select a color capability', color_capabilities, index=0 if 'any' in color_capabilities else 1)
+        if selected_color_capability != 'any':
+            newest_records = newest_records[newest_records['touch_screen'] == selected_color_capability]
+
+        sort_options = {'date_qualified': 'Date Qualified', 'date_available_on_market': 'Date Available on Market'}
+        selected_sort = st.selectbox('Sort by', options=list(sort_options.keys()), format_func=lambda x: sort_options[x], index=1)
+        newest_records = newest_records.sort_values(by=selected_sort, ascending=False)
 
     st.write(newest_records)
 
