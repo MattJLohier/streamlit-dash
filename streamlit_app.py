@@ -1298,7 +1298,6 @@ def show_insights_cert_computers():
 
 def display_certifications_televisions():
     st.title("Television Certifications 📺")
-        st.title("Computers Certifications 💻")
     st.markdown("---")
     # Define buttons for navigation
     if 'current_page' not in st.session_state:
