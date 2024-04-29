@@ -1645,7 +1645,7 @@ def show_recent_cert_televisions():
 
     conn = st.connection('s3', type=FilesConnection)
     newest_records2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    newest_records2 = newest_records3[newest_records3["Category"] == "Televisions & Set Top Boxes"]
+    newest_records2 = newest_records3[newest_records2["Category"] == "Televisions & Set Top Boxes"]
 
     # Rename columns to standardize across DataFrames
     newest_records1.rename(columns={
