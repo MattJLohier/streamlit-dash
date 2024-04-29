@@ -1487,10 +1487,10 @@ def show_raw_data_cert_televisions():
     col1, col2 = st.columns(2)
     with col1:
         # Filter by product category
-        categories = ['any'] + list(newest_records['type'].unique())
+        categories = ['any'] + list(newest_records['product_type'].unique())
         selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
         if selected_category != 'any':
-            newest_records = newest_records[newest_records['type'] == selected_category]
+            newest_records = newest_records[newest_records['product_type'] == selected_category]
 
         # Filter by brand
         brands = ['any'] + list(newest_records['brand_name'].unique())
@@ -1519,7 +1519,7 @@ def show_raw_data_cert_televisions():
     st.subheader('EPEAT 🌎')
     conn = st.connection('s3', type=FilesConnection)
     epeat_data = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
-    epeat_data = epeat_data.query('`Product Category` == "Computers & Displays"')
+    #epeat_data = epeat_data.query('`Product Category` == "Computers & Displays"')
     epeat_data = epeat_data.sort_values('Registered On', ascending=False)
     epeat_data = epeat_data.query('`Product Type` != "Monitors"')
 
