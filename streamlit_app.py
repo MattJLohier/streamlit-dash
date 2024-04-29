@@ -1142,7 +1142,6 @@ def display_certifications_computers():
         show_insights_cert_computers()    
 
 def show_recent_cert_computers():
-    st.write("Coming Soon")
     lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">'
     wch_colour_font = (0, 0, 0)
     fontsize = 14
