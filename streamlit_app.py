@@ -36,16 +36,18 @@ def display_dashboard():
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
     st.markdown("---")
     st.subheader("Directory")
-    st.write("Imaging Equipment 🖨️")
-    st.write("Computers 💻")
-    st.write("Televisions 📺")
-    st.write("Telephones ☎️")
-    st.write("Fridges 🧊")
-    st.write("Dishwashers 🧼")
-    st.write("Electric Cookware 🍳")
-    st.write("Displays 🖥️")
-    st.write("Audio/Video 🎙️")
-    st.write("Enterprise Servers")
+    st.markdown("""
+    - Imaging Equipment 🖨️
+    - Computers 💻
+    - Televisions 📺
+    - Telephones ☎️
+    - Fridges 🧊
+    - Dishwashers 🧼
+    - Electric Cookware 🍳
+    - Displays 🖥️
+    - Audio/Video 🎙️
+    - Enterprise Servers
+    """)
     st.markdown("---")
     st.caption('Created by Matt Lohier') 
     with st.container():
