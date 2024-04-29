@@ -54,9 +54,9 @@ def sidebar():
 
     # Define product categories and their corresponding buttons
     product_categories = {
-        'Imaging Equipment': ['Home', 'Certifications', 'Placements'],
-        'Computers': ['Home', 'Certifications'],
-        'Televisions': ['Home', 'Certifications']
+        'Imaging Equipment 🖨️': ['Home', 'Certifications', 'Placements'],
+        'Computers 💻': ['Home', 'Certifications'],
+        'Televisions 📺': ['Home', 'Certifications']
     }
 
     # Allow the user to select a product type
@@ -195,11 +195,11 @@ def display_certifications_page():
     # Check the selected product type
     product_type = st.session_state['selected_product_type']
 
-    if product_type == 'Imaging Equipment':
+    if product_type == 'Imaging Equipment 🖨️':
         display_certifications_imaging()
-    elif product_type == 'Computers':
+    elif product_type == 'Computers 💻':
         display_certifications_computers()
-    elif product_type == 'Televisions':
+    elif product_type == 'Televisions 📺':
         display_certifications_televisions()
     else:
         st.write("No specific certifications are available for this category.")
