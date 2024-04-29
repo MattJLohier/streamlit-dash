@@ -1323,10 +1323,11 @@ def show_recent_cert_computers():
             if row_index < len(combined_df):
                 with col:
                     row_data = combined_df.iloc[row_index]
-                    product_name = row_data['model_name']
-                    certification_date = row_data['date_available_on_market']
-                    brand = row_data['brand_name']
-                    product_type = row_data['type']
+                    product_name = row_data['Product']
+                    certification_date = row_data['Date Certified']
+                    brand = row_data['Brand']
+                    product_type = row_data['Product Type']
+                    source = row_data['Souce']
 
                     # Embed data into HTML
                     html_content = f"""
@@ -1337,7 +1338,7 @@ def show_recent_cert_computers():
                                 Brand: {brand}<br>
                                 Product Type: {product_type}<br>
                                 Certification Date: {certification_date}<br>
-                                Source: Energy Star
+                                Source: {certification_date}
                             </p>
                         </div>
                     </div>
