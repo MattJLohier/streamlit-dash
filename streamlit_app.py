@@ -1324,7 +1324,7 @@ def show_raw_data_cert_computers():
 
         # Filter by Color/Mono
         color_capabilities = ['any'] + list(newest_records['touch_screen'].unique())
-        selected_color_capability = st.selectbox('Select a color capability', color_capabilities, index=0 if 'any' in color_capabilities else 1)
+        selected_color_capability = st.selectbox('Touch Screen', color_capabilities, index=0 if 'any' in color_capabilities else 1)
         if selected_color_capability != 'any':
             newest_records = newest_records[newest_records['touch_screen'] == selected_color_capability]
 
