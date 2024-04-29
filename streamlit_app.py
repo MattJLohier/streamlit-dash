@@ -1327,7 +1327,7 @@ def show_recent_cert_computers():
                     certification_date = row_data['Date Certified']
                     brand = row_data['Brand']
                     product_type = row_data['Product Type']
-                    source = row_data['Souce']
+                    source = row_data['Source']
 
                     # Embed data into HTML
                     html_content = f"""
@@ -1338,7 +1338,7 @@ def show_recent_cert_computers():
                                 Brand: {brand}<br>
                                 Product Type: {product_type}<br>
                                 Certification Date: {certification_date}<br>
-                                Source: {certification_date}
+                                Source: {source}
                             </p>
                         </div>
                     </div>
