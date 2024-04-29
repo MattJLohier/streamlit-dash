@@ -665,7 +665,7 @@ def show_raw_data_cert():
     st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
     df_raw_certs5 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    df_raw_certs5_df = df_raw_certs5[df_raw_certs5['Category'] == 'Computers & Accessories']
+    df_raw_certs5 = df_raw_certs5[df_raw_certs5['Category'] == 'Computers & Accessories']
 
     col1, col2 = st.columns(2)
     with col1:
