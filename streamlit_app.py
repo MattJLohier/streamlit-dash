@@ -1311,9 +1311,8 @@ def show_recent_cert_computers():
     print(combined_df.head())   
 
     combined_df = combined_df.sort_values('Date Certified', ascending=False)
-    combined_df = combined_df.head(10)
+    combined_df = combined_df.head(20)
     rows = [st.columns(num_columns) for _ in range((len(combined_df) + num_columns - 1) // num_columns)]
-
     # Initialize a counter for DataFrame row indices
     row_index = 0
     emoji_dict = {
