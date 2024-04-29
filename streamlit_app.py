@@ -1467,8 +1467,143 @@ def display_certifications_televisions():
 
 def show_recent_cert_televisions():
     st.write("Coming Soon")
+
+
 def show_raw_data_cert_televisions():
-    st.write("Coming Soon")
+    # Add industry-specific details or requirements.
+    st.subheader('Energy Star ⚡')
+    conn = st.connection('s3', type=FilesConnection)
+    newest_records = conn.read("scoops-finder/televisions-data.csv", input_format="csv", ttl=600)
+    newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
+
+    def extract_unique_countries(market_col):
+        unique_countries = set()
+        # Split each row's market string by comma and strip spaces
+        market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
+        return ['any'] + sorted(unique_countries)
+
+    unique_countries = extract_unique_countries(newest_records['markets'])
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories = ['any'] + list(newest_records['type'].unique())
+        selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
+        if selected_category != 'any':
+            newest_records = newest_records[newest_records['type'] == selected_category]
+
+        # Filter by brand
+        brands = ['any'] + list(newest_records['brand_name'].unique())
+        selected_brand = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand != 'any':
+            newest_records = newest_records[newest_records['brand_name'] == selected_brand]
+
+        sort_options = {'date_qualified': 'Date Qualified', 'date_available_on_market': 'Date Available on Market'}
+        selected_sort = st.selectbox('Sort by', options=list(sort_options.keys()), format_func=lambda x: sort_options[x], index=1)
+        newest_records = newest_records.sort_values(by=selected_sort, ascending=False)
+
+    with col2:
+        # Filter by Markets
+        selected_country = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
+        if selected_country != 'any':
+            newest_records = newest_records[newest_records['markets'].apply(lambda x: selected_country in map(str.strip, x.split(',')))]
+
+        # Filter by Color/Mono
+        color_capabilities = ['any'] + list(newest_records['touch_screen'].unique())
+        selected_color_capability = st.selectbox('Touch Screen', color_capabilities, index=0 if 'any' in color_capabilities else 1)
+        if selected_color_capability != 'any':
+            newest_records = newest_records[newest_records['touch_screen'] == selected_color_capability]
+
+    st.write(newest_records)
+
+    st.subheader('EPEAT 🌎')
+    conn = st.connection('s3', type=FilesConnection)
+    epeat_data = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+    epeat_data = epeat_data.query('`Product Category` == "Computers & Displays"')
+    epeat_data = epeat_data.sort_values('Registered On', ascending=False)
+    epeat_data = epeat_data.query('`Product Type` != "Monitors"')
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories3 = ['any'] + list(epeat_data['Product Type'].unique())
+        selected_category1 = st.selectbox('Select a product category', categories3, index=0 if 'any' in categories3 else 1)
+        if selected_category1 != 'any':
+            epeat_data = epeat_data[epeat_data['Product Type'] == selected_category1]
+            
+
+        brands = ['any'] + list(epeat_data['Manufacturer'].unique())
+        selected_brand1 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand1 != 'any':
+            epeat_data = epeat_data[epeat_data['Manufacturer'] == selected_brand1]
+
+        remanufactured_options = ['any', 'Active', 'NA']
+        selected_remanufactured1 = st.selectbox('Status', remanufactured_options, index=0)
+        if selected_remanufactured1 == 'Active':
+            epeat_data = epeat_data[epeat_data['Status'] == "Active"]
+        elif selected_remanufactured1 == 'NA':
+            epeat_data = epeat_data[epeat_data['Status'] == False]
+
+    with col2:
+        # Filter by Market
+        markets = ['any'] + list(epeat_data['Registered In'].unique())
+        # Defaulting to 'United States' if it exists in the options
+        default_market_index = markets.index('United States') if 'United States' in markets else 0
+        selected_market = st.selectbox('Select a market', markets, index=default_market_index)
+        if selected_market != 'any':
+            epeat_data = epeat_data[epeat_data['Registered In'] == selected_market]
+
+
+        # Filter by EPEAT Tier
+        color_capabilities1 = ['any'] + list(epeat_data['EPEAT Tier'].unique())
+        selected_color_capability1 = st.selectbox('Select an EPEAT Tier', color_capabilities1, index=0 if 'any' in color_capabilities1 else 1)
+        if selected_color_capability1 != 'any':
+            epeat_data = epeat_data[epeat_data['EPEAT Tier'] == selected_color_capability1]
+
+        # Filter by Registration Date
+        sort_options = ['Newest', 'Oldest']
+        selected_sort = st.selectbox('Sort by Registration Date', sort_options, index=0)  # Default to Newest
+        if selected_sort == 'Newest':
+            epeat_data = epeat_data.sort_values(by='Registered On', ascending=False)
+        elif selected_sort == 'Oldest':
+            epeat_data = epeat_data.sort_values(by='Registered On', ascending=True)
+
+    st.write(epeat_data)
+
+    st.subheader('WiFi Alliance 📶')
+    conn = st.connection('s3', type=FilesConnection)
+    wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    wifi_data = wifi_data.query('`Category` == "Computers & Accessories"')
+    wifi_data = wifi_data.sort_values('Date of Last Certification', ascending=False)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories1 = ['any'] + list(wifi_data['Category'].unique())
+        selected_category2 = st.selectbox('Select a product category', categories1, index=0 if 'any' in categories1 else 1)
+        if selected_category2 != 'any':
+            wifi_data = wifi_data[wifi_data['Category'] == selected_category2]
+
+        # Filter by brand
+        brands = ['any'] + list(wifi_data['Brand'].unique())
+        selected_brand2 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand2 != 'any':
+            wifi_data = wifi_data[wifi_data['Brand'] == selected_brand2]
+
+    with col2:
+        # Filter by Registration Date
+        sort_options = ['Newest', 'Oldest']
+        selected_sort2 = st.selectbox('Sort by Date', sort_options, index=0)  # Default to Newest
+        if selected_sort2 == 'Newest':
+            wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=False)
+        elif selected_sort2 == 'Oldest':
+            wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=True)
+
+    st.write(wifi_data)
+
+
+
+
 def show_changelog_cert_televisions():
     st.write("Coming Soon")
 def show_insights_cert_televisions():
