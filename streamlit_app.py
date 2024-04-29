@@ -1296,7 +1296,7 @@ def show_raw_data_cert_computers():
         market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
         return ['any'] + sorted(unique_countries)
 
-    unique_countries = extract_unique_countries(df_sorted['markets'])
+    unique_countries = extract_unique_countries(newest_records['markets'])
 
     col1, col2 = st.columns(2)
     with col1:
