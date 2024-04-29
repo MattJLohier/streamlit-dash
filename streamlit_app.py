@@ -1275,7 +1275,7 @@ def show_recent_cert_computers():
 
     conn = st.connection('s3', type=FilesConnection)
     newest_records3 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    newest_records3 = newest_records3[newest_records3["Product Category"] == "Computers & Accessories"]
+    newest_records3 = newest_records3[newest_records3["Category"] == "Computers & Accessories"]
 
     # Rename columns to standardize across DataFrames
     newest_records1.rename(columns={
