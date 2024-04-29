@@ -1641,7 +1641,7 @@ def show_recent_cert_televisions():
     # Define the number of columns
     num_columns = 2
     conn = st.connection('s3', type=FilesConnection)
-    newest_records1 = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
+    newest_records1 = conn.read("scoops-finder/televisions-data.csv", input_format="csv", ttl=600)
 
     conn = st.connection('s3', type=FilesConnection)
     newest_records2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
