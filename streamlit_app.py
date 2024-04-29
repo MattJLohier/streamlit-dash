@@ -1290,7 +1290,7 @@ def show_raw_data_cert_computers():
     newest_records = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
     newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
 
-        def extract_unique_countries(market_col):
+    def extract_unique_countries(market_col):
         unique_countries = set()
         # Split each row's market string by comma and strip spaces
         market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
