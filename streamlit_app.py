@@ -1519,7 +1519,7 @@ def show_raw_data_cert_televisions():
     st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
     wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    #wifi_data = wifi_data.query('`Category` == "Computers & Accessories"')
+    wifi_data = wifi_data.query('`Category` == "Televisions & Set Top Boxes"')
     wifi_data = wifi_data.sort_values('Date of Last Certification', ascending=False)
 
     col1, col2 = st.columns(2)
