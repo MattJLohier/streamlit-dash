@@ -1264,9 +1264,48 @@ def show_recent_cert_computers():
     # Define the number of columns
     num_columns = 2
     conn = st.connection('s3', type=FilesConnection)
-    newest_records = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
+    newest_records1 = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
 
-    newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
+    conn = st.connection('s3', type=FilesConnection)
+    newest_records2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+
+    conn = st.connection('s3', type=FilesConnection)
+    newest_records3 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+
+    # Rename columns to standardize across DataFrames
+    newest_records1.rename(columns={
+        'brand_name': 'Brand',
+        'model_name': 'Product',
+        'date_available_on_market': 'Date Certified',
+        'type': 'Product Type'
+    }, inplace=True)
+
+    newest_records2.rename(columns={
+        'Manufacturer': 'Brand',
+        'Product Name': 'Product',
+        'Registered On': 'Date Certified',
+        'Product Type': 'Product Type'
+    }, inplace=True)
+
+    newest_records3.rename(columns={
+        'Brand': 'Brand',
+        'Product': 'Product',
+        'Date of Last Certification': 'Date Certified',
+        'Category': 'Product Type'
+    }, inplace=True)
+
+    # Add a source column to each DataFrame
+    newest_records1['Source'] = 'Energy Star'
+    newest_records2['Source'] = 'EPEAT'
+    newest_records3['Source'] = 'WiFi Alliance'
+
+    # Combine the DataFrames
+    combined_df = pd.concat([newest_records1, newest_records2, newest_records3], ignore_index=True)
+
+    # Display the combined DataFrame
+    print(combined_df.head())   
+
+    newest_records = newest_records.sort_values('Date Certified', ascending=False)
     newest_records = newest_records.head(10)
     rows = [st.columns(num_columns) for _ in range((len(newest_records) + num_columns - 1) // num_columns)]
 
