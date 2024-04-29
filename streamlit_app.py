@@ -59,7 +59,11 @@ def sidebar():
         'Televisions 📺': ['Home', 'Certifications'],
         'Telephones ☎️': ['Home', 'Certifications'],
         'Fridges 🧊': ['Home', 'Certifications'],
-        'Dispays 🖥️': ['Home', 'Certifications']
+        'Dishwashers 🧼': ['Home', 'Certifications'],
+        'Electric Cookware 🍳': ['Home', 'Certifications'],
+        'Dispays 🖥️': ['Home', 'Certifications'],
+        'Audio/Video 🎙️': ['Home', 'Certifications'],
+        'Enterprise Servers 🌐': ['Home', 'Certifications']
     }
 
     # Allow the user to select a product type
