@@ -33,8 +33,21 @@ def display_dashboard():
     st.markdown("<h1 style='text-align: left;'><span style='color: #317bd4;'>Scooper</span> Dashboard</h1>", unsafe_allow_html=True)
     st.markdown('**Welcome to Scooper Dashboard**')
     st.info('Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape new product certifications and placements from official manufacturer websites.') 
-    st.info('Created by Matt Lohier') 
     st.caption('Scooper currently scrapes certifications from EnergyStar, WiFi Alliance, and the EPEAT registry, and checks for new products on the official sites of HP, Canon, Kyocera, Konica Minolta, Lexmark, Ricoh, Sharp, Toshiba, Xerox, and Fujifilm')
+    st.markdown("---")
+    st.subheader("Directory")
+    st.write("Imaging Equipment 🖨️")
+    st.write("Computers 💻")
+    st.write("Televisions 📺")
+    st.write("Telephones ☎️")
+    st.write("Fridges 🧊")
+    st.write("Dishwashers 🧼")
+    st.write("Electric Cookware 🍳")
+    st.write("Displays 🖥️")
+    st.write("Audio/Video 🎙️")
+    st.write("Enterprise Servers")
+    st.markdown("---")
+    st.caption('Created by Matt Lohier') 
     with st.container():
         st.write("")  # Optional: Use st.empty() if you prefer no filler text at all
         linkedin_url = "https://www.linkedin.com/in/matt-lohier/"  # Change this URL to your specific LinkedIn profile or page
@@ -47,17 +60,7 @@ def display_dashboard():
             <img src='https://i.postimg.cc/9MbrTWL9/portfolio.png' style='width:32px; height:32px;'>
         </a>
         """, unsafe_allow_html=True)
-    st.subheader("Directory")
-    st.write("Imaging Equipment 🖨️")
-    st.write("Computers 💻")
-    st.write("Televisions 📺")
-    st.write("Telephones ☎️")
-    st.write("Fridges 🧊")
-    st.write("Dishwashers 🧼")
-    st.write("Electric Cookware 🍳")
-    st.write("Displays 🖥️")
-    st.write("Audio/Video 🎙️")
-    st.write("Enterprise Servers")
+
 
 def sidebar():
     st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)
