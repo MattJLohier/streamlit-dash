@@ -209,11 +209,11 @@ def display_placements_page():
     # Check the selected product type
     product_type = st.session_state['selected_product_type']
 
-    if product_type == 'Imaging Equipment':
+    if product_type == 'Imaging Equipment 🖨️':
         display_placements_imaging()
-    elif product_type == 'Computers':
+    elif product_type == 'Computers 💻':
         display_placements_computers()
-    elif product_type == 'Televisions':
+    elif product_type == 'Televisions 📺':
         display_placements_televisions()
     else:
         st.write("No specific certifications are available for this category.")
@@ -1284,7 +1284,6 @@ def show_recent_cert_computers():
                     row_index += 1
     
 def show_raw_data_cert_computers():
-    st.write("Coming Soon")
     # Add industry-specific details or requirements.
     st.subheader('Energy Star ⚡')
     conn = st.connection('s3', type=FilesConnection)
@@ -1292,7 +1291,7 @@ def show_raw_data_cert_computers():
     newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
     st.write(newest_records)
 
-    st.subheader('EPEAT 📶')
+    st.subheader('EPEAT 🌎')
     conn = st.connection('s3', type=FilesConnection)
     epeat_data = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
     epeat_data = epeat_data.query('`Product Category` == "Computers & Displays"')
