@@ -1297,9 +1297,47 @@ def show_insights_cert_computers():
 
 
 def display_certifications_televisions():
-    st.header("Automotive Certifications")
-    st.write("Critical certifications for automotive professionals.")
+    st.title("Television Certifications 📺")
+        st.title("Computers Certifications 💻")
+    st.markdown("---")
+    # Define buttons for navigation
+    if 'current_page' not in st.session_state:
+        st.session_state['current_page'] = 'Recent'
+
+    # Create four columns for the interactive tiles
+    col1, col2, col3, col4 = st.columns(4)
+
+    # Define interactive tiles that update the session state upon clicking
+    if col1.button('Recent 🆕', key='1', use_container_width=True):
+        st.session_state['current_page'] = 'Recent'
+    if col2.button('Raw Data 📝', key='2', use_container_width=True):
+        st.session_state['current_page'] = 'Raw Data'
+    if col3.button('Changelog 🔄', key='3', use_container_width=True):
+        st.session_state['current_page'] = 'Changelog'
+    if col4.button('Insights 🔍', key='4', use_container_width=True):
+        st.session_state['current_page'] = 'Insights'
+
+    # Conditional rendering based on selected page
+    if st.session_state['current_page'] == 'Recent':
+        show_recent_cert_televisions()
+    elif st.session_state['current_page'] == 'Raw Data':
+        show_raw_data_cert_televisions()
+    elif st.session_state['current_page'] == 'Changelog':
+        show_changelog_cert_televisions()
+    elif st.session_state['current_page'] == 'Insights':
+        show_insights_cert_televisions()    
     # Include relevant data or courses available.
+
+
+def show_recent_cert_televisions():
+    st.write("Coming Soon")
+def show_raw_data_cert_televisions():
+    st.write("Coming Soon")
+def show_changelog_cert_televisions():
+    st.write("Coming Soon")
+def show_insights_cert_televisions():
+    st.write("Coming Soon")
+
 
 def display_placements_computers():
     st.header("Automotive Certifications")
