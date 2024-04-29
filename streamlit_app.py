@@ -578,6 +578,18 @@ def show_raw_data_cert():
     st.subheader('EPEAT 🌎')
     conn = st.connection('s3', type=FilesConnection)
     df_raw_certs4 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+
+    allowed_types = [
+        "Multifunction Device", 
+        "Printer", 
+        "Copier", 
+        "Professional Imaging Product", 
+        "Digital Duplicator"
+    ]
+
+    # Filter the DataFrame based on the allowed types
+    df_raw_certs4 = df_raw_certs4[df_raw_certs4['Product Type'].isin(allowed_types)]
+
     # Organizing filters into a 2x2 grid
     col1, col2 = st.columns(2)
     with col1:
