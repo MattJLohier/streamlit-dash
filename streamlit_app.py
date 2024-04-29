@@ -1301,7 +1301,8 @@ def show_raw_data_cert_computers():
 
     conn = st.connection('s3', type=FilesConnection)
     wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    #epeat_data = newest_records.sort_values('Date Of Last Certification', ascending=False)
+    wifi_data = wifi_data.query('`Category` == "Computers & Accessories"')
+    wifi_data = epeatwifi_data_data.sort_values('Date of Last Certification', ascending=False)
     st.write(wifi_data)
 
 
