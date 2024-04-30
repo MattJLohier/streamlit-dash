@@ -1851,6 +1851,37 @@ def show_raw_data_cert_televisions():
         if selected_color_capability != 'any':
             newest_records = newest_records[newest_records['display_type'] == selected_color_capability]
 
+
+
+    newest_records = newest_records.rename(columns={
+        'pd_id': 'Energy Star ID',
+        'date_available_on_market': 'Date Available on Market',
+        'date_qualified': 'Date Qualified',
+        'brand_name': 'Brand',
+        'model_name': 'Model Name',
+        'model_number': 'Model Number',
+        'type': 'Product Type',
+        'upc': 'UPC',
+        'application': 'Application',
+        'display_type': 'Display Type',
+        'backlit_technology_type': 'Backlit Technology Type',
+        'diagonal_viewable_screen_size_inches': 'CPU Core Count',
+        'screen_area_square_inches': 'Processor Base Clock Speed (ghz)',
+        'native_horizontal_resolution_pixels': 'Operating System Name',
+        'native_vertical_resolution_pixels': 'System RAM',
+        'resolution_format': "Product DIMM Count",
+        'high_contrast_ratio_hcr_display': 'physical_data_ports_available',
+        'low_power_wireless_technologies_supported': 'Bluetooth Capability',
+        'features': 'Features',
+        'automatic_brightness_control': 'Automatic Brightness Control',
+        'additional_model_information': 'Additional Model Information',
+        'markets': 'Markets',
+        'energy_star_model_identifier': 'Energy Star Model Identifier'
+    }).loc[:, [
+        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
+        'Processor Base Clock Speed (ghz)', 'Operating System Name', 'System RAM', 'Product DIMM Count', 'Ethernet Capability', 'Bluetooth Capability', 'Markets',
+        'Energy Star Model Identifier', 'UPC'
+    ]] 
     st.write(newest_records)
 
     st.subheader('WiFi Alliance 📶')
