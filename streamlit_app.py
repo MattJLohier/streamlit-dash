@@ -598,7 +598,7 @@ def show_raw_data_cert():
         df_sorted = df_sorted.sort_values(by=selected_sort, ascending=False)
 
     # Display the filtered dataframe
-    sorted_df = df.rename(columns={
+    sorted_df = sorted_df.rename(columns={
         'pd_id': 'Energy Star ID',
         'date_available_on_market': 'Date Available on Market',
         'date_qualified': 'Date Qualified',
