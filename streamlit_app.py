@@ -1475,7 +1475,7 @@ def show_raw_data_cert_computers():
         'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type',
         'UPC', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
         'Processor Base Clock Speed (ghz)', 'Operating System Name', 'System RAM', 'Product DIMM Count', 'Ethernet Capability', 'Bluetooth Capability', 'Markets',
-        'Energy Star Model Identifier', 'upc': 'UPC'
+        'Energy Star Model Identifier', 'UPC'
     ]]     
     
     newest_records['Date Available on Market'] = newest_records['Date Available on Market'].str[:10]
