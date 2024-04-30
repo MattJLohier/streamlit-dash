@@ -1448,6 +1448,40 @@ def show_raw_data_cert_computers():
         if selected_color_capability != 'any':
             newest_records = newest_records[newest_records['touch_screen'] == selected_color_capability]
 
+
+
+        # Display the filtered dataframe
+    newest_records = newest_records.rename(columns={
+        'pd_id': 'Energy Star ID',
+        'date_available_on_market': 'Date Available on Market',
+        'date_qualified': 'Date Qualified',
+        'brand_name': 'Brand',
+        'model_name': 'Model Name',
+        'model_number': 'Model Number'
+        'type': 'Product Type',
+        'upc': 'UPC',
+        'touch_screen': 'Touch Screen',
+        'category_2_processor_brand': 'Processor Brand',
+        'category_2_processor_name': 'Processor Model',
+        'category_2_physical_cpu_cores_count': 'CPU Core Count',
+        'category_2_base_processor_speed_per_core_ghz': 'Processor Base Clock Speed (ghz)',
+        'category_2_operating_system_name': 'Operating System Name',
+        'category_2_system_memory_gb': 'System RAM',
+        'product_dimm_count': "Product DIMM Count"
+        'ethernet_capability': 'Ethernet Capability',
+        'bluetooth_capability': 'Bluetooth Capability',
+        'markets': 'Markets',
+        'energy_star_model_identifier': 'Energy Star Model Identifier'
+    }).loc[:, [
+        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type',
+        'UPC', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
+        'Processor Base Clock Speed (ghz)', 'Operating System Name', 'System RAM', 'Product DIMM Count', 'Ethernet Capability', 'Bluetooth Capability', 'Markets',
+        'Energy Star Model Identifier'
+    ]]     
+    
+    newest_records['Date Available on Market'] = newest_records['Date Available on Market'].str[:10]
+    newest_records['Date Qualified'] = newest_records['Date Qualified'].str[:10]
+
     st.write(newest_records)
 
     st.subheader('EPEAT 🌎')
