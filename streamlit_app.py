@@ -1459,6 +1459,7 @@ def show_raw_data_cert_computers():
         'model_name': 'Model Name',
         'model_number': 'Model Number',
         'type': 'Product Type',
+        'upc': 'UPC',
         'touch_screen': 'Touch Screen',
         'category_2_processor_brand': 'Processor Brand',
         'category_2_processor_name': 'Processor Model',
@@ -1472,8 +1473,7 @@ def show_raw_data_cert_computers():
         'markets': 'Markets',
         'energy_star_model_identifier': 'Energy Star Model Identifier'
     }).loc[:, [
-        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type',
-        'UPC', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
+        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
         'Processor Base Clock Speed (ghz)', 'Operating System Name', 'System RAM', 'Product DIMM Count', 'Ethernet Capability', 'Bluetooth Capability', 'Markets',
         'Energy Star Model Identifier', 'UPC'
     ]]     
