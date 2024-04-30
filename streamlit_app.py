@@ -68,8 +68,8 @@ def display_dashboard():
 
 def sidebar():
     st.sidebar.image("https://i.postimg.cc/XJdg0y7b/scooper-logo.png", use_column_width=True)
-    st.sidebar.markdown("---")
-
+    #st.sidebar.markdown("---")
+    st.divider()
     # Define product categories and their corresponding buttons
     product_categories = {
         'Imaging Equipment 🖨️': ['Home', 'Certifications', 'Placements'],
