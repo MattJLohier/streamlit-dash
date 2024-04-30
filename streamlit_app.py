@@ -1535,6 +1535,13 @@ def show_raw_data_cert_computers():
         elif selected_sort == 'Oldest':
             epeat_data = epeat_data.sort_values(by='Registered On', ascending=True)
 
+
+    epeat_data = epeat_data.rename(columns={
+        'Id': 'EPEAT Identifier',
+    }).loc[:, [
+        'EPEAT Identifier', 'Registered On', 'Product Name', 'Manufacturer', 'Product Category', 'Product Type', 'Status',
+        'Registered In', 'Climate+', 'Total Score', 'EPEAT Tier', 'Manufacturer Part Number', 'Universal Product Code', 'Manufacturer Part Number'
+    ]]     
     st.write(epeat_data)
 
     st.subheader('WiFi Alliance 📶')
