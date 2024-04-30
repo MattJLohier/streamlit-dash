@@ -1281,7 +1281,7 @@ def show_recent_cert_computers():
     num_columns = 2
     conn = st.connection('s3', type=FilesConnection)
     newest_records1 = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
-    newest_records1['Product'] = newest_records1['Product'].str.replace(r"\(ENERGY STAR\)", "", regex=True)
+    newest_records1['model_name'] = newest_records1['model_name'].str.replace(r"\(ENERGY STAR\)", "", regex=True)
 
     conn = st.connection('s3', type=FilesConnection)
     newest_records2 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
