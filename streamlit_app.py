@@ -622,8 +622,8 @@ def show_raw_data_cert():
         'Energy Star Model Identifier'
     ]]     
     
-    sorted_df['Date Available on Market'] = sorted_df['Date Available on Market'].str[:10]
-    sorted_df['Date Qualified'] = sorted_df['Date Qualified'].str[:10]
+    df_sorted['Date Available on Market'] = sorted_df['Date Available on Market'].str[:10]
+    df_sorted['Date Qualified'] = sorted_df['Date Qualified'].str[:10]
     st.write(df_sorted)
 
     st.subheader('EPEAT 🌎')
