@@ -1467,7 +1467,7 @@ def show_raw_data_cert_computers():
         'category_2_base_processor_speed_per_core_ghz': 'Processor Base Clock Speed (ghz)',
         'category_2_operating_system_name': 'Operating System Name',
         'category_2_system_memory_gb': 'System RAM',
-        'product_dimm_count': "Product DIMM Count"
+        'product_dimm_count': "Product DIMM Count",
         'ethernet_capability': 'Ethernet Capability',
         'bluetooth_capability': 'Bluetooth Capability',
         'markets': 'Markets',
