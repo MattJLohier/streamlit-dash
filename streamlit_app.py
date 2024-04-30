@@ -37,8 +37,10 @@ def display_dashboard():
     st.markdown("---")
     st.subheader("Directory")
     st.markdown("""
-    - ##### Imaging Equipment 🖨️ #####
-    - Computers 💻
+    ##### Imaging Equipment 🖨️ #####
+    - Printers, Multifunction Devices, Scanners, Digital Duplicators 
+    ##### Computers 💻 #####
+    - Laptops, Notebooks, Desktops, Tablets, Workstations
     - Televisions 📺
     - Telephones ☎️
     - Fridges 🧊
