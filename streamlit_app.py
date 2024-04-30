@@ -1327,6 +1327,16 @@ def show_recent_cert_computers():
     # Display the combined DataFrame
     st.write(newest_records2)
 
+    # Creating a filter for Product Type
+    product_types = combined_df['Product Type'].unique().tolist()
+    product_types.insert(0, 'Any')  # Adding 'Any' option to the beginning of the list
+    selected_type = st.selectbox('Filter by Product Type', product_types, index=0)  # Default is 'Any'
+
+    if selected_type != 'Any':
+        filtered_df = combined_df[combined_df['Product Type'] == selected_type]
+    else:
+        filtered_df = combined_df
+
     combined_df = combined_df.sort_values('Date Certified', ascending=False)
     combined_df = combined_df.head(20)
     rows = [st.columns(num_columns) for _ in range((len(combined_df) + num_columns - 1) // num_columns)]
