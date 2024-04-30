@@ -1457,7 +1457,7 @@ def show_raw_data_cert_computers():
         'date_qualified': 'Date Qualified',
         'brand_name': 'Brand',
         'model_name': 'Model Name',
-        'model_number': 'Model Number'
+        'model_number': 'Model Number',
         'type': 'Product Type',
         'upc': 'UPC',
         'touch_screen': 'Touch Screen',
