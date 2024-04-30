@@ -687,7 +687,12 @@ def show_raw_data_cert():
         elif selected_sort == 'Oldest':
             df_raw_certs4 = df_raw_certs4.sort_values(by='Registered On', ascending=True)
 
-
+    df_raw_certs4 = df_raw_certs4.rename(columns={
+        'Id': 'EPEAT Identifier',
+    }).loc[:, [
+        'EPEAT Identifier', 'Registered On', 'Product Name', 'Manufacturer', 'Product Category', 'Product Type', 'Status',
+        'Registered In', 'Climate+', 'Total Score', 'EPEAT Tier', 'Manufacturer Part Number', 'Universal Product Code'
+    ]]     
     st.write(df_raw_certs4)
 
 
