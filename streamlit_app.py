@@ -1879,6 +1879,10 @@ def show_raw_data_cert_televisions():
         'Screen Area (Square in)', 'Native Horizontal Resolution Pixels', 'Native Vertical Resolution Pixels', 'Resolution Format', 'High Contrast Ratio HCR Display', 'Low Power Wireless Technologies Supported', 'Features', 'Automatic Brightness Control', 'Additional Model Information', 'Markets',
         'Energy Star Model Identifier', 'UPC'
     ]] 
+    
+    newest_records['Date Available on Market'] = newest_records['Date Available on Market'].str[:10]
+    newest_records['Date Qualified'] = newest_records['Date Qualified'].str[:10]    
+    
     st.write(newest_records)
 
     st.subheader('WiFi Alliance 📶')
