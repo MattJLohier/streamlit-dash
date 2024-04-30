@@ -37,7 +37,7 @@ def display_dashboard():
     st.markdown("---")
     st.subheader("Directory")
     st.markdown("""
-    - #### Imaging Equipment 🖨️ ####
+    - ##### Imaging Equipment 🖨️ #####
     - Computers 💻
     - Televisions 📺
     - Telephones ☎️
