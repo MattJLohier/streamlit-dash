@@ -1323,7 +1323,7 @@ def show_recent_cert_computers():
     # Combine the DataFrames
     combined_df = pd.concat([newest_records1, newest_records2, newest_records3], ignore_index=True)
     # Display the combined DataFrame
-    print(combined_df.head())   
+    st.write(combined_df)
 
     combined_df = combined_df.sort_values('Date Certified', ascending=False)
     combined_df = combined_df.head(20)
