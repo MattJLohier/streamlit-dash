@@ -1327,6 +1327,16 @@ def show_recent_cert_computers():
     # Display the combined DataFrame
     st.write(newest_records2)
 
+    # Filter setup
+    product_types = combined_df['Product Type'].unique().tolist()
+    product_types.insert(0, 'any')  # Add 'any' option to display all records
+    selected_type = st.selectbox("Select a Product Type", product_types)
+
+    # Filter data based on selection
+    if selected_type != 'any':
+        filtered_df = combined_df[combined_df['Product Type'] == selected_type]
+    else:
+        filtered_df = combined_df
 
     combined_df = combined_df.sort_values('Date Certified', ascending=False)
     combined_df = combined_df.head(20)
@@ -1339,16 +1349,7 @@ def show_recent_cert_computers():
             "EPEAT": "🌎"
         }    
 
-    # Filter setup
-    product_types = combined_df['Product Type'].unique().tolist()
-    product_types.insert(0, 'any')  # Add 'any' option to display all records
-    selected_type = st.selectbox("Select a Product Type", product_types)
-
-    # Filter data based on selection
-    if selected_type != 'any':
-        filtered_df = combined_df[combined_df['Product Type'] == selected_type]
-    else:
-        filtered_df = combined_df
+    
 
     # Fill each cell in the grid with content
     for row in rows:
