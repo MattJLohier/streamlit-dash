@@ -598,29 +598,7 @@ def show_raw_data_cert():
         df_sorted = df_sorted.sort_values(by=selected_sort, ascending=False)
 
     # Display the filtered dataframe
-    df_sorted = df_sorted.rename(columns={
-        'pd_id': 'Energy Star ID',
-        'date_available_on_market': 'Date Available on Market',
-        'date_qualified': 'Date Qualified',
-        'brand_name': 'Brand',
-        'model_name': 'Model Name',
-        'product_type': 'Product Type',
-        'upc': 'UPC',
-        'remanufactured_product': 'Remanufactured Product',
-        'color_capability': 'Color Capability',
-        'monochrome_product_speed_ipm_or_ppm': 'Mono Product Speed (ipm/ppm)',
-        'automatic_duplex_output_cable': 'Auto Duplex',
-        'typical_electricity_consumption_tec_kwh_wk': 'Typical Electricity Consumption (TEC) (kwh/wk)',
-        'power_in_sleep_w': 'Power in Sleep (W)',
-        'power_in_standby_w': 'Power in Standby (W)',
-        'markets': 'Markets',
-        'energy_star_model_identifier': 'Energy Star Model Identifier'
-    }).loc[:, [
-        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Product Type',
-        'UPC', 'Remanufactured Product', 'Color Capability', 'Mono Product Speed (ipm/ppm)', 'Auto Duplex',
-        'Typical Electricity Consumption (TEC) (kwh/wk)', 'Power in Sleep (W)', 'Power in Standby (W)', 'Markets',
-        'Energy Star Model Identifier'
-    ]] 
+
     st.write(df_sorted)
 
     st.subheader('EPEAT 🌎')
