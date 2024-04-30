@@ -1880,7 +1880,7 @@ def show_raw_data_cert_televisions():
         elif selected_sort2 == 'Oldest':
             wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=True)
 
-    st.write(wifi_data)
+    st.write(newest_records)
 
 
 
