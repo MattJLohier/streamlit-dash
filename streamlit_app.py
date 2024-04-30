@@ -1875,7 +1875,7 @@ def show_raw_data_cert_televisions():
         'markets': 'Markets',
         'energy_star_model_identifier': 'Energy Star Model Identifier'
     }).loc[:, [
-        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Application', 'Display Type', 'Backlit Technology Type', 'Diagonal Viewable Screen Size (in)', 'Resolution Format',
+        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Application',  'Resolution Format', 'Display Type', 'Backlit Technology Type', 'Diagonal Viewable Screen Size (in)',
         'Screen Area (Square in)', 'Native Horizontal Resolution Pixels', 'Native Vertical Resolution Pixels', 'High Contrast Ratio HCR Display', 'Low Power Wireless Technologies Supported', 'Features', 'Automatic Brightness Control', 'Additional Model Information', 'Markets',
         'Energy Star Model Identifier', 'UPC'
     ]] 
