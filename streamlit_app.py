@@ -1850,7 +1850,6 @@ def show_raw_data_cert_televisions():
         selected_color_capability = st.selectbox('Display Type', color_capabilities, index=0 if 'any' in color_capabilities else 1)
         if selected_color_capability != 'any':
             newest_records = newest_records[newest_records['display_type'] == selected_color_capability]
-    st.write(newest_records)
     newest_records = newest_records.rename(columns={
         'pd_id': 'Energy Star ID',
         'date_available_on_market': 'Date Available on Market',
@@ -1858,11 +1857,11 @@ def show_raw_data_cert_televisions():
         'brand_name': 'Brand',
         'model_name': 'Model Name',
         'model_number': 'Model Number',
-        'type': 'Product Type',
+        'product_type': 'Product Type',
         'upc': 'UPC',
         'application': 'Application',
         'display_type': 'Display Type',
-        'backlit_technology_type': 'Backlit Technology Type',
+        'backlight_technology_type': 'Backlit Technology Type',
         'diagonal_viewable_screen_size_inches': 'Diagonal Viewable Screen Size (in)',
         'screen_area_square_inches': 'Screen Area (Square in)',
         'native_horizontal_resolution_pixels': 'Native Horizontal Resolution Pixels',
@@ -1877,7 +1876,7 @@ def show_raw_data_cert_televisions():
         'energy_star_model_identifier': 'Energy Star Model Identifier'
     }).loc[:, [
         'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Application', 'Display Type', 'Backlit Technology Type', 'Diagonal Viewable Screen Size (in)',
-        'Screen Area (Square in)', 'Native Horizontal Resolution Pixels', 'Native Vertical Resolution Pixels', 'Resolution Forma t', 'High Contrast Ratio HCR Display', 'Low Power Wireless Technologies Supported', 'Features', 'Automatic Brightness Control', 'Additional Model Information', 'Markets',
+        'Screen Area (Square in)', 'Native Horizontal Resolution Pixels', 'Native Vertical Resolution Pixels', 'Resolution Format', 'High Contrast Ratio HCR Display', 'Low Power Wireless Technologies Supported', 'Features', 'Automatic Brightness Control', 'Additional Model Information', 'Markets',
         'Energy Star Model Identifier', 'UPC'
     ]] 
     st.write(newest_records)
