@@ -1865,21 +1865,21 @@ def show_raw_data_cert_televisions():
         'application': 'Application',
         'display_type': 'Display Type',
         'backlit_technology_type': 'Backlit Technology Type',
-        'diagonal_viewable_screen_size_inches': 'CPU Core Count',
-        'screen_area_square_inches': 'Processor Base Clock Speed (ghz)',
-        'native_horizontal_resolution_pixels': 'Operating System Name',
-        'native_vertical_resolution_pixels': 'System RAM',
-        'resolution_format': "Product DIMM Count",
-        'high_contrast_ratio_hcr_display': 'physical_data_ports_available',
-        'low_power_wireless_technologies_supported': 'Bluetooth Capability',
+        'diagonal_viewable_screen_size_inches': 'Diagonal Viewable Screen Size (in)',
+        'screen_area_square_inches': 'Screen Area (Square in)',
+        'native_horizontal_resolution_pixels': 'Native Horizontal Resolution Pixels',
+        'native_vertical_resolution_pixels': 'Native Vertical Resolution Pixels',
+        'resolution_format': "Resolution Format",
+        'high_contrast_ratio_hcr_display': 'High Contrast Ratio HCR Display',
+        'low_power_wireless_technologies_supported': 'Low Power Wireless Technologies Supported',
         'features': 'Features',
         'automatic_brightness_control': 'Automatic Brightness Control',
         'additional_model_information': 'Additional Model Information',
         'markets': 'Markets',
         'energy_star_model_identifier': 'Energy Star Model Identifier'
     }).loc[:, [
-        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
-        'Processor Base Clock Speed (ghz)', 'Operating System Name', 'System RAM', 'Product DIMM Count', 'Ethernet Capability', 'Bluetooth Capability', 'Markets',
+        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Application', 'Display Type', 'Backlit Technology Type', 'Diagonal Viewable Screen Size (in)',
+        'Screen Area (Square in)', 'Native Horizontal Resolution Pixels', 'Native Vertical Resolution Pixels', 'Resolution Format', 'High Contrast Ratio HCR Display', 'Low Power Wireless Technologies Supported', 'Features', 'Automatic Brightness Control', 'Additional Model Information', 'Markets',
         'Energy Star Model Identifier', 'UPC'
     ]] 
     st.write(newest_records)
