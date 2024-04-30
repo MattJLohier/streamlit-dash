@@ -1540,7 +1540,7 @@ def show_raw_data_cert_computers():
         'Id': 'EPEAT Identifier',
     }).loc[:, [
         'EPEAT Identifier', 'Registered On', 'Product Name', 'Manufacturer', 'Product Category', 'Product Type', 'Status',
-        'Registered In', 'Climate+', 'Total Score', 'EPEAT Tier', 'Manufacturer Part Number', 'Universal Product Code', 'Manufacturer Part Number'
+        'Registered In', 'Climate+', 'Total Score', 'EPEAT Tier', 'Manufacturer Part Number', 'Universal Product Code'
     ]]     
     st.write(epeat_data)
 
