@@ -41,14 +41,15 @@ def display_dashboard():
     - Printers, Multifunction Devices, Scanners, Digital Duplicators 
     ##### Computers 💻 #####
     - Laptops, Notebooks, Desktops, Tablets, Workstations
-    - Televisions 📺
-    - Telephones ☎️
-    - Fridges 🧊
-    - Dishwashers 🧼
-    - Electric Cookware 🍳
-    - Displays 🖥️
-    - Audio/Video 🎙️
-    - Enterprise Servers 🌐
+    ##### Televisions 📺 #####
+    - Televisions & Set Top Boxes
+    ##### Telephones ☎️ #####
+    ##### Fridges 🧊 #####
+    ##### Dishwashers 🧼 #####
+    ##### Electric Cookware 🍳 #####
+    ##### Displays 🖥️ #####
+    ##### Audio/Video 🎙️ #####
+    ##### Enterprise Servers 🌐 #####
     """)
     st.markdown("---")
     st.caption('Created by Matt Lohier') 
