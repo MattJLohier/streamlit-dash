@@ -33,7 +33,7 @@ def display_dashboard():
     st.markdown("<h1 style='text-align: left;'><span style='color: #317bd4;'>Scooper</span> Dashboard</h1>", unsafe_allow_html=True)
     st.markdown('**Welcome to Scooper Dashboard**')
     st.info('Scooper is a Python tool hosted on AWS (Lambda/S3/EC2) that uses Selenium and Pandas to scrape new product certifications and placements from official manufacturer websites.') 
-    st.markdown("---")
+    #st.markdown("---")
     st.subheader("Directory")
     st.markdown("""
     ##### Imaging Equipment 🖨️ #####
