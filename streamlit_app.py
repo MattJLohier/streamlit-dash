@@ -64,6 +64,7 @@ def display_dashboard():
             <img src='https://i.postimg.cc/9MbrTWL9/portfolio.png' style='width:32px; height:32px;'>
         </a>
         """, unsafe_allow_html=True)
+        st.markdown('---')
 
 
 def sidebar():
