@@ -1287,13 +1287,9 @@ def show_recent_cert_computers():
     product_types = ["Notebook", "Desktop", "Integrated Desktop Computer", "Tablet", "Signage Display", "Workstation", "Thin Client"]
     # Filter the DataFrame to include only the rows with the specified product types
     newest_records2 = newest_records2[newest_records2["Product Type"].isin(product_types)]
+    newest_records2 = newest_records2[newest_records2["Registered In"] == "United States"]
 
-    # Dynamically select the 'Registered In' country with a default to 'United States'
-    default_country = 'United States'
-    country_list = newest_records2['Registered In'].unique().tolist()
-    selected_country = st.selectbox('Select a country:', options=country_list, index=country_list.index(default_country) if default_country in country_list else 0)
-    newest_records2 = newest_records2[newest_records2['Registered In'] == selected_country]
-
+    
     conn = st.connection('s3', type=FilesConnection)
     newest_records3 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
     newest_records3 = newest_records3[newest_records3["Category"] == "Computers & Accessories"]
