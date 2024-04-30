@@ -1850,7 +1850,7 @@ def show_raw_data_cert_televisions():
         selected_color_capability = st.selectbox('Display Type', color_capabilities, index=0 if 'any' in color_capabilities else 1)
         if selected_color_capability != 'any':
             newest_records = newest_records[newest_records['display_type'] == selected_color_capability]
-
+    st.write(newest_records)
     newest_records = newest_records.rename(columns={
         'pd_id': 'Energy Star ID',
         'date_available_on_market': 'Date Available on Market',
