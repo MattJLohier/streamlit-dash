@@ -786,7 +786,7 @@ def show_changelog_cert():
     #df_epeat_changelog['Registered On'] = df_epeat_changelog['Registered On'].str[:10]
 
     # Rename the "Date" column to "Date Detected"
-    df_epeat_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
+    df_epeat_changelog.rename(columns={'Registered On': 'Date Detected'}, inplace=True)
     df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
     st.write(df_epeat_changelog)
 
