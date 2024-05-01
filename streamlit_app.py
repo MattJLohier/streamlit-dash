@@ -748,7 +748,7 @@ def show_raw_data_cert():
     # Search Box
     search_query = st.text_input("Enter a search term:")
 
-    dfs = {'Bluetooth': bt_data_df, 'Apple': unique_brands_df}
+    dfs = {'Bluetooth': bt_data_df, 'Apple': mfi_data_df}
 
     if search_query:
         search_query = search_query.lower()
