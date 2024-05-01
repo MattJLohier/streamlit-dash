@@ -1579,8 +1579,9 @@ def show_raw_data_cert_computers():
 def show_changelog_cert_computers():
     st.write("Coming Soon")
     conn = st.connection('s3', type=FilesConnection)
-    bt_data = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
-    st.write(bt_data)
+    bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
+    bt_data_df = pd.json_normalize(bt_data_raw)
+    st.dataframe(bt_data_df)
 
 def show_insights_cert_computers():
     st.write("Coming Soon")
