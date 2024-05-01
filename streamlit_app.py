@@ -1589,8 +1589,17 @@ def show_changelog_cert_computers():
     st.dataframe(mfi_data_df)
 
     mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
-    content_data = mfi_data_changelog.get("links", [])
-    mfi_data_changelog_df = pd.json_normalize(content_data)
+
+    # Initialize an empty DataFrame to hold the data
+    mfi_data_changelog_df = pd.DataFrame()
+
+    # Loop through each item in the list and process only dictionary items
+    for data in mfi_data_changelog:
+        if isinstance(data, dict):
+            # Normalize and append data to the DataFrame
+            mfi_data_changelog_df = mfi_data_changelog_df.append(pd.json_normalize(data), ignore_index=True)
+
+    # Display the dataframe using Streamlit
     st.dataframe(mfi_data_changelog_df)
 
 def show_insights_cert_computers():
