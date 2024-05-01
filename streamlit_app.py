@@ -829,6 +829,7 @@ def show_changelog_cert():
     df_epeat_changelog['Date Detected'] = df_epeat_changelog['Date Detected'].str[:10]
     df_epeat_changelog['Registered On'] = df_epeat_changelog['Registered On'].str[:10]
     df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
+    df_epeat_changelog = df_epeat_changelog[df_epeat_changelog['Product Category'].isin(['Imaging Equipment'])]
     st.dataframe(df_epeat_changelog, use_container_width=True)
 
     st.subheader('WiFi Alliance 📶')
