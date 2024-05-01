@@ -742,13 +742,12 @@ def show_raw_data_cert():
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
     st.dataframe(mfi_data_df, use_container_width=True)
 
-    # Streamlit UI
+    dfs = {'Bluetooth': bt_data_df, 'Apple': mfi_data_df}
+
     st.title("Search Across DataFrames")
 
     # Search Box
     search_query = st.text_input("Enter a search term:")
-
-    dfs = {'Bluetooth': bt_data_df, 'Apple': mfi_data_df}
 
     if search_query:
         search_query = search_query.lower()
