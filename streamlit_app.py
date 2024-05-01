@@ -1730,7 +1730,7 @@ def show_changelog_cert_computers():
     df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
     df_epeat_changelog = df_epeat_changelog[df_epeat_changelog['Product Type'].isin(['Desktop', 'Notebook', 'Tablet/Slate'])]
 
-    st.write(df_epeat_changelog, use_container_width=True)
+    st.dataframe(df_epeat_changelog, use_container_width=True)
 
     st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
@@ -1745,7 +1745,7 @@ def show_changelog_cert_computers():
     df_wifi_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
     df_wifi_changelog = df_wifi_changelog.sort_values(by='Date Detected', ascending=False)
 
-    st.write(df_wifi_changelog, use_container_width=True)
+    st.dataframe(df_wifi_changelog, use_container_width=True)
 
     st.markdown(
     """
