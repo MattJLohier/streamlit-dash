@@ -533,7 +533,6 @@ def show_recent_cert():
 
 def show_raw_data_cert():
     st.header('Raw Certification Data')
-    st.subheader('Energy Star ⚡')
 
     conn = st.connection('s3', type=FilesConnection)
     df_raw_certs2 = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
@@ -546,6 +545,66 @@ def show_raw_data_cert():
         return ['any'] + sorted(unique_countries)
 
     unique_countries = extract_unique_countries(df_sorted['markets'])
+
+    conn = st.connection('s3', type=FilesConnection)
+    df_raw_certs4 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+
+    allowed_types = [
+        "Multifunction Device", 
+        "Printer", 
+        "Copier", 
+        "Professional Imaging Product", 
+        "Digital Duplicator"
+    ]
+
+    # Filter the DataFrame based on the allowed types
+    df_raw_certs4 = df_raw_certs4[df_raw_certs4['Product Type'].isin(allowed_types)]
+
+
+    conn = st.connection('s3', type=FilesConnection)
+    df_raw_certs5 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    df_raw_certs5 = df_raw_certs5[df_raw_certs5['Category'] == 'Computers & Accessories']
+
+    conn = st.connection('s3', type=FilesConnection)
+    bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
+    bt_data_df = pd.json_normalize(bt_data_raw)
+
+    companies_to_include = [
+        "Sharp Corporation", "Toshiba", "Brother Industries, Ltd", "Seiko Epson Corporation", "Canon Marketing Japan Inc.", "HP Inc.", "Ricoh Company Ltd", "XEROX", "Kyocera Corporation"
+    ]
+
+    # Filter the DataFrame
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
+
+    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
+    content_data = mfi_data_raw.get("content", [])
+    mfi_data_df = pd.json_normalize(content_data)
+    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
+
+    dfs = {'Energy Star': df_sorted, 'EPEAT': df_raw_certs4, 'WiFi': df_raw_certs5, 'Bluetooth': bt_data_df, 'Apple': mfi_data_df}
+
+    st.title("Search Across DataFrames")
+
+    # Search Box
+    search_query = st.text_input("Enter a search term:")
+
+    if search_query:
+        search_query = search_query.lower()
+        
+        # Search logic
+        results = {}
+        for df_name, df in dfs.items():
+            matched_rows = df.apply(lambda row: row.astype(str).str.lower().str.contains(search_query).any(), axis=1)
+            matched_df = df[matched_rows]
+            if not matched_df.empty:
+                results[df_name] = matched_df
+        
+        if results:
+            for df_name, result_df in results.items():
+                st.subheader(f"Results from {df_name}:")
+                st.dataframe(result_df)
+        else:
+            st.write("No results found")
 
     # Organizing filters into a 2x2 grid
     col1, col2 = st.columns(2)
@@ -613,22 +672,10 @@ def show_raw_data_cert():
     
     df_sorted['Date Available on Market'] = df_sorted['Date Available on Market'].str[:10]
     df_sorted['Date Qualified'] = df_sorted['Date Qualified'].str[:10]
+    
+    st.subheader('Energy Star ⚡')
     st.write(df_sorted)
 
-    st.subheader('EPEAT 🌎')
-    conn = st.connection('s3', type=FilesConnection)
-    df_raw_certs4 = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
-
-    allowed_types = [
-        "Multifunction Device", 
-        "Printer", 
-        "Copier", 
-        "Professional Imaging Product", 
-        "Digital Duplicator"
-    ]
-
-    # Filter the DataFrame based on the allowed types
-    df_raw_certs4 = df_raw_certs4[df_raw_certs4['Product Type'].isin(allowed_types)]
 
     # Organizing filters into a 2x2 grid
     col1, col2 = st.columns(2)
@@ -682,13 +729,8 @@ def show_raw_data_cert():
         'EPEAT Identifier', 'Registered On', 'Product Name', 'Manufacturer', 'Product Category', 'Product Type', 'Status',
         'Registered In', 'Climate+', 'Total Score', 'EPEAT Tier', 'Manufacturer Part Number', 'Universal Product Code'
     ]]     
+    st.subheader('EPEAT 🌎')
     st.write(df_raw_certs4)
-
-
-    st.subheader('WiFi Alliance 📶')
-    conn = st.connection('s3', type=FilesConnection)
-    df_raw_certs5 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    df_raw_certs5 = df_raw_certs5[df_raw_certs5['Category'] == 'Computers & Accessories']
 
     col1, col2 = st.columns(2)
     with col1:
@@ -713,7 +755,9 @@ def show_raw_data_cert():
         elif selected_sort2 == 'Oldest':
             df_raw_certs5 = df_raw_certs5.sort_values(by='Date of Last Certification', ascending=True)
 
+    st.subheader('WiFi Alliance 📶')
     st.write(df_raw_certs5)
+
     st.markdown(
     """
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -722,51 +766,9 @@ def show_raw_data_cert():
     )
 
     st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
-
-    conn = st.connection('s3', type=FilesConnection)
-    bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
-    bt_data_df = pd.json_normalize(bt_data_raw)
-
-    companies_to_include = [
-        "Sharp Corporation", "Toshiba", "Brother Industries, Ltd", "Seiko Epson Corporation", "Canon Marketing Japan Inc.", "HP Inc.", "Ricoh Company Ltd", "XEROX", "Kyocera Corporation"
-    ]
-
-    # Filter the DataFrame
-    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
     st.dataframe(bt_data_df)
-
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
-    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
-    content_data = mfi_data_raw.get("content", [])
-    mfi_data_df = pd.json_normalize(content_data)
-    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
     st.dataframe(mfi_data_df, use_container_width=True)
-
-    dfs = {'Bluetooth': bt_data_df, 'Apple': mfi_data_df}
-
-    st.title("Search Across DataFrames")
-
-    # Search Box
-    search_query = st.text_input("Enter a search term:")
-
-    if search_query:
-        search_query = search_query.lower()
-        
-        # Search logic
-        results = {}
-        for df_name, df in dfs.items():
-            matched_rows = df.apply(lambda row: row.astype(str).str.lower().str.contains(search_query).any(), axis=1)
-            matched_df = df[matched_rows]
-            if not matched_df.empty:
-                results[df_name] = matched_df
-        
-        if results:
-            for df_name, result_df in results.items():
-                st.subheader(f"Results from {df_name}:")
-                st.dataframe(result_df)
-        else:
-            st.write("No results found")
-
 
 
 def show_changelog_cert():
