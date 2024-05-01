@@ -776,7 +776,7 @@ def show_changelog_cert():
     df_epeat_changelog = placement_tracking2
 
     columns_to_keep2 = ["Registered On", "Product Name", "Manufacturer", "Climate+", "Product Category", 
-                    "Product Type", "Status", "Registered In", "Total Score", "EPEAT Tier", "Registered On"]
+                    "Product Type", "Status", "Registered In", "Total Score", "EPEAT Tier", "Date"]
 
 
     st.write(df_epeat_changelog)
