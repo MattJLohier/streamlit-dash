@@ -811,7 +811,7 @@ def show_changelog_cert():
     df_clean['Date Available on Market'] = df_clean['Date Available on Market'].str[:10]
     df_clean['Date Qualified'] = df_clean['Date Qualified'].str[:10]
     df_clean = df_clean.sort_values(by='Date Detected', ascending=False)
-    st.write(df_clean)
+    st.dataframe(df_clean, use_container_width=True)
 
     st.subheader('EPEAT 🌎')
     conn = st.connection('s3', type=FilesConnection)
@@ -829,7 +829,7 @@ def show_changelog_cert():
     df_epeat_changelog['Date Detected'] = df_epeat_changelog['Date Detected'].str[:10]
     df_epeat_changelog['Registered On'] = df_epeat_changelog['Registered On'].str[:10]
     df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
-    st.write(df_epeat_changelog)
+    st.dataframe(df_epeat_changelog, use_container_width=True)
 
     st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
@@ -844,7 +844,7 @@ def show_changelog_cert():
     df_wifi_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
     df_wifi_changelog = df_wifi_changelog.sort_values(by='Date Detected', ascending=False)
 
-    st.write(df_wifi_changelog)
+    st.dataframe(df_wifi_changelog, use_container_width=True)
 
 
 def show_insights_cert():
