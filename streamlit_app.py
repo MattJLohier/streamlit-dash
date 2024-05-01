@@ -1565,6 +1565,23 @@ def show_changelog_cert_computers():
     conn = st.connection('s3', type=FilesConnection)
     bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
     bt_data_df = pd.json_normalize(bt_data_raw)
+
+    companies_to_include = [
+        "Xiaomi Inc.", "JVCKENWOOD Corporation", "Dell Computer Corporation",
+        "Panasonic Holdings Corporation", "LG Electronics Inc.",
+        "Samsung Electronics Co., Ltd.", "NEC Personal Computers, Ltd.",
+        "Lenovo (Singapore) Pte Ltd.", "Acer Inc.", "Sharp Corporation",
+        "Toshiba Corporation", "Huawei Technologies Co., Ltd.",
+        "Microsoft Corporation", "Google LLC", "ASUStek Computer Inc.",
+        "Fujitsu Client Computing Limited", "Apple Inc."
+    ]
+
+    # Filter the DataFrame
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
+
+    # Display the filtered DataFrame
+    
+
     st.dataframe(bt_data_df)
     
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
