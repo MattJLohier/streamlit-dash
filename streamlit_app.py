@@ -1676,13 +1676,6 @@ def show_changelog_cert_computers():
     placement_changelog1 = conn.read("scoops-finder/computers-changelog.csv", input_format="csv", ttl=600)
     df_clean = placement_changelog1.drop_duplicates(subset=['pd_id'])  # Drop duplicates based on 'pd_id'
     
-    # Define the columns you want to keep
-    columns_to_keep = [
-        'Date', 'model_name', 'brand_name', 'product_type', 'color_capability', 
-        'monochrome_product_speed_ipm_or_mppm', 'date_available_on_market', 
-        'date_qualified', 'markets'
-    ]
-    
     # Select only the specified columns
     df_clean = df_clean[columns_to_keep]
 
