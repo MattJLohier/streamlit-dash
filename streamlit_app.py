@@ -11,7 +11,7 @@ import requests
 import matplotlib.pyplot as plt
 from streamlit_echarts import st_echarts
 import pytz
-import json
+
 
 # URL of the image you want to use as the page icon
 icon_url = "https://i.postimg.cc/Y0XLcpg7/scooper-s.png"
@@ -1591,14 +1591,8 @@ def show_changelog_cert_computers():
     st.dataframe(mfi_data_df)
 
     mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
-    json_data = json.loads(json_string)
-
-    # Extract the 'content' key and normalize the JSON data
-    content_data1 = json_data['content']
-    mfi_data_changelog_df = pd.json_normalize(content_data1)
-
-    # Display the DataFrame using Streamlit
-    st.dataframe(mfi_data_changelog_df)
+    content_data1 = mfi_data_raw.get("link", [])
+    mfi_data_changelog_df = pd.json_normalize(content_data)
     st.dataframe(mfi_data_changelog_df)
 
 def show_insights_cert_computers():
