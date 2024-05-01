@@ -1676,7 +1676,6 @@ def show_changelog_cert_computers():
     placement_changelog1 = conn.read("scoops-finder/computers-changelog.csv", input_format="csv", ttl=600)
     df_clean = placement_changelog1.drop_duplicates(subset=['pd_id'])  # Drop duplicates based on 'pd_id'
 
-    st.write(df_clean)
     # Keep only the first 10 characters of the "Date" column
     df_clean['Date Detected'] = df_clean['Date Detected'].str[:10]
     
