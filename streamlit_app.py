@@ -1679,7 +1679,7 @@ def show_changelog_cert_computers():
     st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
 
     conn = st.connection('s3', type=FilesConnection)
-    bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
+    bt_data_raw = conn.read("scoops-finder/changelog-bluetooth.json", input_format="json", ttl=600)
     bt_data_df = pd.json_normalize(bt_data_raw)
 
     companies_to_include = [
@@ -1714,7 +1714,6 @@ def show_changelog_cert_computers():
     st.dataframe(unique_brands_df)
 
     mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
-
     # Extract only dictionary items from the list
     content_data1 = [item for item in mfi_data_changelog if isinstance(item, dict)]
     mfi_data_changelog_df = pd.json_normalize(content_data1)
