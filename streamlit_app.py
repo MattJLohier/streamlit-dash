@@ -1693,7 +1693,7 @@ def show_changelog_cert_computers():
     ]
 
     # Filter the DataFrame
-    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
+    #bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
 
     # Display the filtered DataFrame
     
