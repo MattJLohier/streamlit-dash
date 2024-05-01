@@ -1667,8 +1667,82 @@ def show_raw_data_cert_computers():
 
 
 def show_changelog_cert_computers():
-    st.write("Coming Soon")
     
+    st.header('Changelogs')
+    # Example: st.write(data_changelog)
+    st.subheader('Energy Star ⚡')
+    # Example: st.write(data_changelog)
+    conn = st.connection('s3', type=FilesConnection)
+    placement_changelog1 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
+    df_clean = placement_changelog1.drop_duplicates(subset=['pd_id'])  # Drop duplicates based on 'pd_id'
+    
+    # Define the columns you want to keep
+    columns_to_keep = [
+        'Date', 'model_name', 'brand_name', 'product_type', 'color_capability', 
+        'monochrome_product_speed_ipm_or_mppm', 'date_available_on_market', 
+        'date_qualified', 'markets'
+    ]
+    
+    # Select only the specified columns
+    df_clean = df_clean[columns_to_keep]
+
+    # Keep only the first 10 characters of the "Date" column
+    df_clean['Date'] = df_clean['Date'].str[:10]
+
+    # Rename the columns
+    df_clean.rename(columns={
+        'Date': 'Date Detected',
+        'model_name': 'Model Name',
+        'brand_name': 'Brand',
+        'product_type': 'Product Type',
+        'color_capability': 'Color/BW',
+        'monochrome_product_speed_ipm_or_mppm': 'Print Speed',
+        'date_available_on_market': 'Date Available on Market',
+        'date_qualified': 'Date Qualified',
+        'markets': 'Markets'
+    }, inplace=True)
+    
+
+    df_clean['Date Available on Market'] = df_clean['Date Available on Market'].str[:10]
+    df_clean['Date Qualified'] = df_clean['Date Qualified'].str[:10]
+    df_clean = df_clean.sort_values(by='Date Detected', ascending=False)
+    st.write(df_clean)
+
+    st.subheader('EPEAT 🌎')
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking2 = conn.read("scoops-finder/changelog-epeat.csv", input_format="csv", ttl=600)
+    df_epeat_changelog = placement_tracking2
+
+    columns_to_keep2 = ["Registered On", "Product Name", "Manufacturer", "Climate+", "Product Category", 
+                    "Product Type", "Status", "Registered In", "Total Score", "EPEAT Tier", "Date Detected"]
+
+    # Modify the dataframe to keep only the specified columns
+    df_epeat_changelog = df_epeat_changelog[columns_to_keep2]
+    
+    # Rename the "Date" column to "Date Detected"
+    df_epeat_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
+    df_epeat_changelog['Date Detected'] = df_epeat_changelog['Date Detected'].str[:10]
+    df_epeat_changelog['Registered On'] = df_epeat_changelog['Registered On'].str[:10]
+    df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
+    st.write(df_epeat_changelog)
+
+    st.subheader('WiFi Alliance 📶')
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking3 = conn.read("scoops-finder/changelog-wifi.csv", input_format="csv", ttl=600)
+
+    df_wifi_changelog = placement_tracking3
+
+    columns_to_keep3 = ["Date", "Product", "Brand", "Model Number", "Category"]
+
+    df_wifi_changelog = df_wifi_changelog[columns_to_keep3]
+    df_wifi_changelog['Date'] = df_wifi_changelog['Date'].str[:10]
+    df_wifi_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
+    df_wifi_changelog = df_wifi_changelog.sort_values(by='Date Detected', ascending=False)
+
+    st.write(df_wifi_changelog)
+
+
+
     st.markdown(
     """
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -1701,23 +1775,14 @@ def show_changelog_cert_computers():
     st.dataframe(bt_data_df)
     
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
-    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
-    content_data = mfi_data_raw.get("content", [])
-    mfi_data_df = pd.json_normalize(content_data)
-    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Lenovo', 'Microsoft', 'DELL', 'HP', 'TOSHIBA'])]
-    st.dataframe(mfi_data_df, use_container_width=True)
-
     unique_brands_df = pd.DataFrame(mfi_data_df['brand'].unique(), columns=['brand'])
-
-    # Display the DataFrame with unique values
     st.write("DataFrame with Unique Values from 'brand' Column:")
     st.dataframe(unique_brands_df)
-
     mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
     # Extract only dictionary items from the list
     content_data1 = [item for item in mfi_data_changelog if isinstance(item, dict)]
     mfi_data_changelog_df = pd.json_normalize(content_data1)
-    st.dataframe(mfi_data_changelog_df)
+    st.dataframe(mfi_data_changelog_df, use_container_width=True)
 
 
 def show_insights_cert_computers():
