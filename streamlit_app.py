@@ -1586,7 +1586,7 @@ def show_changelog_cert_computers():
     unsafe_allow_html=True
     )
     
-    st.markdown("## Bluetooth <i class='fab fa-bluetooth'></i> 🌎", unsafe_allow_html=True)
+    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i> 🌎", unsafe_allow_html=True)
 
     conn = st.connection('s3', type=FilesConnection)
     bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
