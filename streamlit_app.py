@@ -1591,9 +1591,12 @@ def show_changelog_cert_computers():
     st.dataframe(mfi_data_df)
 
     mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
-    content_data1 = mfi_data_changelog.get("links", [])
+
+    # Extract only dictionary items from the list
+    content_data1 = [item for item in mfi_data_changelog if isinstance(item, dict)]
     mfi_data_changelog_df = pd.json_normalize(content_data1)
     st.dataframe(mfi_data_changelog_df)
+
 
 def show_insights_cert_computers():
     st.write("Coming Soon")
