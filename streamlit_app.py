@@ -1592,7 +1592,8 @@ def show_changelog_cert_computers():
     bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
     bt_data_df = pd.json_normalize(bt_data_raw)
     st.dataframe(bt_data_df)
-
+    
+    st.markdown("## Bluetooth <i class='fab fa-apple'</i>", unsafe_allow_html=True)
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
     mfi_data_df = pd.json_normalize(content_data)
