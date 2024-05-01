@@ -1589,7 +1589,7 @@ def show_changelog_cert_computers():
     content_data = mfi_data_raw.get("content", [])
     mfi_data_df = pd.json_normalize(content_data)
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Lenovo', 'Microsoft', 'DELL', 'HP', 'TOSHIBA'])]
-    st.dataframe(mfi_data_df)
+    st.dataframe(mfi_data_df, use_container_width=True)
 
     unique_brands_df = pd.DataFrame(mfi_data_df['brand'].unique(), columns=['brand'])
 
