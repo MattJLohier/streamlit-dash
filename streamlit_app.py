@@ -1784,9 +1784,6 @@ def show_changelog_cert_computers():
     # Extract only dictionary items from the list
     content_data1 = [item for item in mfi_data_changelog if isinstance(item, dict)]
     mfi_data_changelog_df = pd.json_normalize(content_data1)
-
-    st.dataframe(mfi_data_changelog_df, use_container_width=True)
-
     mfi_data_changelog_df = mfi_data_changelog_df.rename(columns={
         'Date Detected': 'Date Detected',
         'upcEan': 'UPC',
@@ -1795,7 +1792,7 @@ def show_changelog_cert_computers():
         'accessoryName': 'Accessory Name',
         'accessoryCategory': 'Accessory Category',
     }).loc[:, [
-        'Date Detected', 'UPC', 'Models', 'Brand', 'Brand', 'Accessory Name', 'Accessory Category'
+        'Date Detected', 'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
     ]]
 
     st.dataframe(mfi_data_changelog_df, use_container_width=True)
