@@ -1680,7 +1680,7 @@ def show_changelog_cert_computers():
     # Keep only the first 10 characters of the "Date" column
     df_clean['Date Detected'] = df_clean['Date Detected'].str[:10]
     
-    df_clean = newest_records.rename(columns={
+    df_clean = df_clean.rename(columns={
         'Date Detected': 'Date Detected',
         'pd_id': 'Energy Star ID',
         'date_available_on_market': 'Date Available on Market',
