@@ -1673,7 +1673,7 @@ def show_changelog_cert_computers():
     st.subheader('Energy Star ⚡')
     # Example: st.write(data_changelog)
     conn = st.connection('s3', type=FilesConnection)
-    placement_changelog1 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
+    placement_changelog1 = conn.read("scoops-finder/computers-changelog.csv", input_format="csv", ttl=600)
     df_clean = placement_changelog1.drop_duplicates(subset=['pd_id'])  # Drop duplicates based on 'pd_id'
     
     # Define the columns you want to keep
@@ -1688,20 +1688,34 @@ def show_changelog_cert_computers():
 
     # Keep only the first 10 characters of the "Date" column
     df_clean['Date'] = df_clean['Date'].str[:10]
-
-    # Rename the columns
-    df_clean.rename(columns={
+    
+    df_clean = newest_records.rename(columns={
         'Date': 'Date Detected',
-        'model_name': 'Model Name',
-        'brand_name': 'Brand',
-        'product_type': 'Product Type',
-        'color_capability': 'Color/BW',
-        'monochrome_product_speed_ipm_or_mppm': 'Print Speed',
+        'pd_id': 'Energy Star ID',
         'date_available_on_market': 'Date Available on Market',
         'date_qualified': 'Date Qualified',
-        'markets': 'Markets'
-    }, inplace=True)
-    
+        'brand_name': 'Brand',
+        'model_name': 'Model Name',
+        'model_number': 'Model Number',
+        'type': 'Product Type',
+        'upc': 'UPC',
+        'touch_screen': 'Touch Screen',
+        'category_2_processor_brand': 'Processor Brand',
+        'category_2_processor_name': 'Processor Model',
+        'category_2_physical_cpu_cores_count': 'CPU Core Count',
+        'category_2_base_processor_speed_per_core_ghz': 'Processor Base Clock Speed (ghz)',
+        'category_2_operating_system_name': 'Operating System Name',
+        'category_2_system_memory_gb': 'System RAM',
+        'product_dimm_count': "Product DIMM Count",
+        'ethernet_capability': 'Ethernet Capability',
+        'bluetooh_capability': 'Bluetooth Capability',
+        'markets': 'Markets',
+        'energy_star_model_identifier': 'Energy Star Model Identifier'
+    }).loc[:, [
+        'Date', 'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
+        'Processor Base Clock Speed (ghz)', 'Operating System Name', 'System RAM', 'Product DIMM Count', 'Ethernet Capability', 'Bluetooth Capability', 'Markets',
+        'Energy Star Model Identifier', 'UPC'
+    ]]
 
     df_clean['Date Available on Market'] = df_clean['Date Available on Market'].str[:10]
     df_clean['Date Qualified'] = df_clean['Date Qualified'].str[:10]
