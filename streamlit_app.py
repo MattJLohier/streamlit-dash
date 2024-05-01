@@ -1701,7 +1701,7 @@ def show_changelog_cert_computers():
     st.dataframe(bt_data_df)
     
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
-    mfi_data_raw = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
+    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
     mfi_data_df = pd.json_normalize(content_data)
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Lenovo', 'Microsoft', 'DELL', 'HP', 'TOSHIBA'])]
@@ -1713,7 +1713,7 @@ def show_changelog_cert_computers():
     st.write("DataFrame with Unique Values from 'brand' Column:")
     st.dataframe(unique_brands_df)
 
-    mfi_data_changelog = conn.read("scoops-finder/changelog-bluetooth.json", input_format="json", ttl=600)
+    mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
 
     # Extract only dictionary items from the list
     content_data1 = [item for item in mfi_data_changelog if isinstance(item, dict)]
@@ -2105,6 +2105,7 @@ def show_raw_data_cert_televisions():
     st.dataframe(bt_data_df)
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     st.dataframe(mfi_data_df, use_container_width=True)
+
     
 
 
