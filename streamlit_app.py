@@ -1785,6 +1785,7 @@ def show_changelog_cert_computers():
     content_data1 = [item for item in mfi_data_changelog if isinstance(item, dict)]
     mfi_data_changelog_df = pd.json_normalize(content_data1)
 
+    st.dataframe(mfi_data_changelog_df, use_container_width=True)
 
     mfi_data_changelog_df = mfi_data_changelog_df.rename(columns={
         'Date Detected': 'Date Detected',
