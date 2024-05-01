@@ -1728,6 +1728,8 @@ def show_changelog_cert_computers():
     df_epeat_changelog['Date Detected'] = df_epeat_changelog['Date Detected'].str[:10]
     df_epeat_changelog['Registered On'] = df_epeat_changelog['Registered On'].str[:10]
     df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
+    df_epeat_changelog = df_epeat_changelog[df_epeat_changelog['Product Type'].isin(['Desktop', 'Notebook', 'Tablet/Slate'])]
+
     st.write(df_epeat_changelog)
 
     st.subheader('WiFi Alliance 📶')
