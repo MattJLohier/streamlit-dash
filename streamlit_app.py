@@ -713,7 +713,12 @@ def show_raw_data_cert():
             df_raw_certs5 = df_raw_certs5.sort_values(by='Date of Last Certification', ascending=True)
 
     st.write(df_raw_certs5)
-    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+    st.markdown(
+    """
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    """,
+    unsafe_allow_html=True
+    )
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
