@@ -778,12 +778,9 @@ def show_changelog_cert():
     columns_to_keep2 = ["Registered On", "Product Name", "Manufacturer", "Climate+", "Product Category", 
                     "Product Type", "Status", "Registered In", "Total Score", "EPEAT Tier", "Date Detected"]
 
-
-    st.write(df_epeat_changelog)
     # Modify the dataframe to keep only the specified columns
     df_epeat_changelog = df_epeat_changelog[columns_to_keep2]
     
-    st.write(df_epeat_changelog)
     # Rename the "Date" column to "Date Detected"
     df_epeat_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
     df_epeat_changelog['Date Detected'] = df_epeat_changelog['Date Detected'].str[:10]
