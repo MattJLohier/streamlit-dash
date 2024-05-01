@@ -1567,7 +1567,7 @@ def show_changelog_cert_computers():
     bt_data_df = pd.json_normalize(bt_data_raw)
 
     companies_to_include = [
-        "Xiaomi Inc.", "JVCKENWOOD Corporation", "Dell Computer Corporation",
+        "Xiaomi Inc.", "Dell Computer Corporation",
         "Panasonic Holdings Corporation", "LG Electronics Inc.",
         "Samsung Electronics Co., Ltd.", "NEC Personal Computers, Ltd.",
         "Lenovo (Singapore) Pte Ltd.", "Acer Inc.", "Sharp Corporation",
