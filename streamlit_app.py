@@ -714,6 +714,20 @@ def show_raw_data_cert():
 
     st.write(df_raw_certs5)
 
+    st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
+    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
+    content_data = mfi_data_raw.get("content", [])
+    mfi_data_df = pd.json_normalize(content_data)
+    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
+    st.dataframe(mfi_data_df, use_container_width=True)
+
+    unique_brands_df = pd.DataFrame(mfi_data_df['brand'].unique(), columns=['brand'])
+
+    # Display the DataFrame with unique values
+    st.write("DataFrame with Unique Values from 'brand' Column:")
+    st.dataframe(unique_brands_df)
+
+
 def show_changelog_cert():
     # Code to display changelog
     st.header('Changelogs')
