@@ -279,36 +279,6 @@ def show_recent_cert():
     conn = st.connection('s3', type=FilesConnection)
     df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
 
-    
-    # DataFrames to search
-    dfs = {'Bluetooth': bt_data_df, 'Apple': unique_brands_df}
-
-    # Streamlit UI
-    st.title("Search Across DataFrames")
-
-    # Search Box
-    search_query = st.text_input("Enter a search term:")
-
-    if search_query:
-        search_query = search_query.lower()
-        
-        # Search logic
-        results = {}
-        for df_name, df in dfs.items():
-            matched_rows = df.apply(lambda row: row.astype(str).str.lower().str.contains(search_query).any(), axis=1)
-            matched_df = df[matched_rows]
-            if not matched_df.empty:
-                results[df_name] = matched_df
-        
-        if results:
-            for df_name, result_df in results.items():
-                st.subheader(f"Results from {df_name}:")
-                st.dataframe(result_df)
-        else:
-            st.write("No results found")
-
-
-
     # Specify the columns to keep
     columns_to_keep = ['brand_name', 'model_name', 'product_type',
                     'color_capability', 'date_available_on_market', 'date_qualified',
@@ -773,6 +743,33 @@ def show_raw_data_cert():
 
     unique_brands_df = pd.DataFrame(mfi_data_df['brand'].unique(), columns=['brand'])
 
+
+    # DataFrames to search
+    dfs = {'Bluetooth': bt_data_df, 'Apple': unique_brands_df}
+
+    # Streamlit UI
+    st.title("Search Across DataFrames")
+
+    # Search Box
+    search_query = st.text_input("Enter a search term:")
+
+    if search_query:
+        search_query = search_query.lower()
+        
+        # Search logic
+        results = {}
+        for df_name, df in dfs.items():
+            matched_rows = df.apply(lambda row: row.astype(str).str.lower().str.contains(search_query).any(), axis=1)
+            matched_df = df[matched_rows]
+            if not matched_df.empty:
+                results[df_name] = matched_df
+        
+        if results:
+            for df_name, result_df in results.items():
+                st.subheader(f"Results from {df_name}:")
+                st.dataframe(result_df)
+        else:
+            st.write("No results found")
 
 
         
