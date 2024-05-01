@@ -546,27 +546,6 @@ def show_raw_data_cert():
     # Search Box
     search_query = st.text_input("Enter a search term:")
 
-    if search_query:
-        search_query = search_query.lower()
-        
-        # Search logic
-        results = {}
-        for df_name, df in dfs.items():
-            matched_rows = df.apply(lambda row: row.astype(str).str.lower().str.contains(search_query).any(), axis=1)
-            matched_df = df[matched_rows]
-            if not matched_df.empty:
-                results[df_name] = matched_df
-        
-        if results:
-            for df_name, result_df in results.items():
-                st.subheader(f"Results from {df_name}:")
-                st.dataframe(result_df)
-        else:
-            st.write("No results found")
-
-
-
-
     conn = st.connection('s3', type=FilesConnection)
     df_raw_certs2 = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
     df_sorted = df_raw_certs2.sort_values(by="date_available_on_market", ascending=False)
@@ -774,16 +753,26 @@ def show_raw_data_cert():
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
     st.dataframe(mfi_data_df, use_container_width=True)
 
-
+    if search_query:
+        search_query = search_query.lower()
+        
+        # Search logic
+        results = {}
+        for df_name, df in dfs.items():
+            matched_rows = df.apply(lambda row: row.astype(str).str.lower().str.contains(search_query).any(), axis=1)
+            matched_df = df[matched_rows]
+            if not matched_df.empty:
+                results[df_name] = matched_df
+        
+        if results:
+            for df_name, result_df in results.items():
+                st.subheader(f"Results from {df_name}:")
+                st.dataframe(result_df)
+        else:
+            st.write("No results found")
 
     # Streamlit UI
     st.title("Search Across DataFrames")
-
-
-
-        
-
-
 
 
 def show_changelog_cert():
