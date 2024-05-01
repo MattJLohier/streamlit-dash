@@ -1270,6 +1270,25 @@ def show_recent_cert_computers():
     transform-origin: center;
     }
 
+    .card:hover::before {
+    animation-play-state: running;
+    z-index: -1;
+    width: 20%;
+    }
+    .card:hover .content .heading,
+    .card:hover .content .para {
+    color: #000000;
+    }
+
+    .card:hover {
+    box-shadow: 0rem 6px 13px rgba(10, 60, 255, 0.1),
+        0rem 24px 24px rgba(10, 60, 255, 0.09),
+        0rem 55px 33px rgba(10, 60, 255, 0.05),
+        0rem 97px 39px rgba(10, 60, 255, 0.01), 0rem 152px 43px rgba(10, 60, 255, 0);
+    scale: 1.00;
+    color: #000000;
+    }
+
     </style>
     ''', unsafe_allow_html=True)
 
