@@ -1590,14 +1590,17 @@ def show_changelog_cert_computers():
 
     mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
 
-    # Initialize an empty DataFrame to hold the data
-    mfi_data_changelog_df = pd.DataFrame()
+    # Initialize a list to hold all DataFrames
+    df_list = []
 
     # Loop through each item in the list and process only dictionary items
     for data in mfi_data_changelog:
         if isinstance(data, dict):
-            # Normalize and append data to the DataFrame
-            mfi_data_changelog_df = mfi_data_changelog_df.append(pd.json_normalize(data), ignore_index=True)
+            # Normalize the data and add it to the list
+            df_list.append(pd.json_normalize(data))
+
+    # Concatenate all the DataFrames in the list
+    mfi_data_changelog_df = pd.concat(df_list, ignore_index=True)
 
     # Display the dataframe using Streamlit
     st.dataframe(mfi_data_changelog_df)
