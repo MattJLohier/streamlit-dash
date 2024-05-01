@@ -1589,6 +1589,7 @@ def show_changelog_cert_computers():
 
     # Display the dataframe using Streamlit
     st.dataframe(mfi_data_changelog_df)
+    st.write(mfi_data_changelog_df)
 
 def show_insights_cert_computers():
     st.write("Coming Soon")
