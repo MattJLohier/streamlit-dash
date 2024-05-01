@@ -719,6 +719,16 @@ def show_raw_data_cert():
     """,
     unsafe_allow_html=True
     )
+
+    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+
+    conn = st.connection('s3', type=FilesConnection)
+    bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
+    bt_data_df = pd.json_normalize(bt_data_raw)
+
+  
+    st.dataframe(bt_data_df)
+
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
