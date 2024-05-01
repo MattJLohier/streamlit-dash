@@ -461,8 +461,6 @@ def show_recent_cert():
     background: #3775cb;
     background: linear-gradient(to right, #3775cb, #3775cb);
     transform-origin: center;
-    animation: moving 9.8s linear infinite paused;
-    transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .card:hover::before {
@@ -470,7 +468,6 @@ def show_recent_cert():
     z-index: -1;
     width: 20%;
     }
-
     .card:hover .content .heading,
     .card:hover .content .para {
     color: #000000;
@@ -481,19 +478,9 @@ def show_recent_cert():
         0rem 24px 24px rgba(10, 60, 255, 0.09),
         0rem 55px 33px rgba(10, 60, 255, 0.05),
         0rem 97px 39px rgba(10, 60, 255, 0.01), 0rem 152px 43px rgba(10, 60, 255, 0);
-    scale: 1.00;
     color: #000000;
     }
 
-    @keyframes moving {
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-    }
     </style>
     ''', unsafe_allow_html=True)
 
@@ -1714,8 +1701,6 @@ def show_recent_cert_televisions():
     background: #3775cb;
     background: linear-gradient(to right, #3775cb, #3775cb);
     transform-origin: center;
-    animation: moving 9.8s linear infinite paused;
-    transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .card:hover::before {
@@ -1723,7 +1708,6 @@ def show_recent_cert_televisions():
     z-index: -1;
     width: 20%;
     }
-
     .card:hover .content .heading,
     .card:hover .content .para {
     color: #000000;
@@ -1734,19 +1718,9 @@ def show_recent_cert_televisions():
         0rem 24px 24px rgba(10, 60, 255, 0.09),
         0rem 55px 33px rgba(10, 60, 255, 0.05),
         0rem 97px 39px rgba(10, 60, 255, 0.01), 0rem 152px 43px rgba(10, 60, 255, 0);
-    scale: 1.00;
     color: #000000;
     }
 
-    @keyframes moving {
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-    }
     </style>
     ''', unsafe_allow_html=True)
 
@@ -2111,8 +2085,6 @@ def show_recent():
     background: #3775cb;
     background: linear-gradient(to right, #3775cb, #3775cb);
     transform-origin: center;
-    animation: moving 9.8s linear infinite paused;
-    transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .card:hover::before {
@@ -2120,7 +2092,6 @@ def show_recent():
     z-index: -1;
     width: 20%;
     }
-
     .card:hover .content .heading,
     .card:hover .content .para {
     color: #000000;
@@ -2131,19 +2102,9 @@ def show_recent():
         0rem 24px 24px rgba(10, 60, 255, 0.09),
         0rem 55px 33px rgba(10, 60, 255, 0.05),
         0rem 97px 39px rgba(10, 60, 255, 0.01), 0rem 152px 43px rgba(10, 60, 255, 0);
-    scale: 1.00;
     color: #000000;
     }
 
-    @keyframes moving {
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-    }
     </style>
     ''', unsafe_allow_html=True)
 
