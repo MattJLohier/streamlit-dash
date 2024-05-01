@@ -1589,7 +1589,7 @@ def show_changelog_cert_computers():
     st.dataframe(mfi_data_df)
 
     mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
-    content_data = mfi_data_changelog.get("content", [])
+    content_data = mfi_data_changelog.get("links", [])
     mfi_data_changelog_df = pd.json_normalize(content_data)
     st.dataframe(mfi_data_changelog_df)
 
