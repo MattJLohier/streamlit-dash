@@ -744,7 +744,7 @@ def show_changelog_cert():
         'monochrome_product_speed_ipm_or_mppm', 'date_available_on_market', 
         'date_qualified', 'markets'
     ]
-
+    
     # Select only the specified columns
     df_clean = df_clean[columns_to_keep]
 
@@ -781,7 +781,7 @@ def show_changelog_cert():
     # Modify the dataframe to keep only the specified columns
     df_epeat_changelog = df_epeat_changelog[columns_to_keep2]
     
-    df_epeat_changelog['Date'] = df_epeat_changelog['Date'].str[:10]
+    #df_epeat_changelog['Date'] = df_epeat_changelog['Date'].str[:10]
 
     # Rename the "Date" column to "Date Detected"
     df_epeat_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
