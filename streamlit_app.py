@@ -1583,6 +1583,10 @@ def show_changelog_cert_computers():
     bt_data_df = pd.json_normalize(bt_data_raw)
     st.dataframe(bt_data_df)
 
+    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
+    mfi_data_df = pd.json_normalize(bt_data_raw)
+    st.dataframe(mfi_data_df)
+
 def show_insights_cert_computers():
     st.write("Coming Soon")
 
