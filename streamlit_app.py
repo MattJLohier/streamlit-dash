@@ -1262,8 +1262,8 @@ def show_recent_cert_computers():
     .card::before {
     content: "";
     position: absolute;
-    height: 0%;
-    width: 0%;
+    height: 500%;
+    width: 500%;
     border-radius: inherit;
     background: #3775cb;
     background: linear-gradient(to right, #3775cb, #3775cb);
