@@ -754,22 +754,7 @@ def show_raw_data_cert():
     st.dataframe(mfi_data_df, use_container_width=True)
 
     if search_query:
-        search_query = search_query.lower()
-        
-        # Search logic
-        results = {}
-        for df_name, df in dfs.items():
-            matched_rows = df.apply(lambda row: row.astype(str).str.lower().str.contains(search_query).any(), axis=1)
-            matched_df = df[matched_rows]
-            if not matched_df.empty:
-                results[df_name] = matched_df
-        
-        if results:
-            for df_name, result_df in results.items():
-                st.subheader(f"Results from {df_name}:")
-                st.dataframe(result_df)
-        else:
-            st.write("No results found")
+            combined_df = combined_df.apply(lambda row: row.astype(str).str.contains(search_query, case=False).any(), axis=1)
 
     # Streamlit UI
     st.title("Search Across DataFrames")
