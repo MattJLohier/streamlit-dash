@@ -1436,11 +1436,23 @@ def show_recent_cert_computers():
                     row_index += 1
     
 def show_raw_data_cert_computers():
-    # Add industry-specific details or requirements.
-    st.subheader('Energy Star ⚡')
+
+    st.header('Raw Certification Data')
     conn = st.connection('s3', type=FilesConnection)
     newest_records = conn.read("scoops-finder/computers-data.csv", input_format="csv", ttl=600)
     newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
+
+    conn = st.connection('s3', type=FilesConnection)
+    epeat_data = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
+    epeat_data = epeat_data.query('`Product Category` == "Computers & Displays"')
+    epeat_data = epeat_data.sort_values('Registered On', ascending=False)
+    epeat_data = epeat_data.query('`Product Type` != "Monitors"')
+
+    
+    conn = st.connection('s3', type=FilesConnection)
+    wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    wifi_data = wifi_data.query('`Category` == "Computers & Accessories"')
+    wifi_data = wifi_data.sort_values('Date of Last Certification', ascending=False)
 
     def extract_unique_countries(market_col):
         unique_countries = set()
@@ -1448,6 +1460,51 @@ def show_raw_data_cert_computers():
         market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
         return ['any'] + sorted(unique_countries)
 
+    unique_countries = extract_unique_countries(df_sorted['markets'])
+
+
+    conn = st.connection('s3', type=FilesConnection)
+    bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
+    bt_data_df = pd.json_normalize(bt_data_raw)
+
+    companies_to_include = [
+        "Sharp Corporation", "Toshiba", "Brother Industries, Ltd", "Seiko Epson Corporation", "Canon Marketing Japan Inc.", "HP Inc.", "Ricoh Company Ltd", "XEROX", "Kyocera Corporation"
+    ]
+
+    # Filter the DataFrame
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
+
+    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
+    content_data = mfi_data_raw.get("content", [])
+    mfi_data_df = pd.json_normalize(content_data)
+    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
+
+    dfs = {'Energy Star': df_sorted, 'EPEAT Registry': df_raw_certs4, 'WiFi Alliance': df_raw_certs5, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
+
+    st.subheader("Search Across DataFrames")
+
+    # Search Box
+    search_query = st.text_input("Enter a search term:")
+
+    if search_query:
+        search_query = search_query.lower()
+        
+        # Search logic
+        results = {}
+        for df_name, df in dfs.items():
+            matched_rows = df.apply(lambda row: row.astype(str).str.lower().str.contains(search_query).any(), axis=1)
+            matched_df = df[matched_rows]
+            if not matched_df.empty:
+                results[df_name] = matched_df
+        
+        if results:
+            for df_name, result_df in results.items():
+                st.subheader(f"Results from {df_name}:")
+                st.dataframe(result_df)
+        else:
+            st.write("No results found")
+
+    
     unique_countries = extract_unique_countries(newest_records['markets'])
 
     col1, col2 = st.columns(2)
@@ -1480,9 +1537,7 @@ def show_raw_data_cert_computers():
         if selected_color_capability != 'any':
             newest_records = newest_records[newest_records['touch_screen'] == selected_color_capability]
 
-
-
-        # Display the filtered dataframe
+    # Display the filtered dataframe
     newest_records = newest_records.rename(columns={
         'pd_id': 'Energy Star ID',
         'date_available_on_market': 'Date Available on Market',
@@ -1508,19 +1563,13 @@ def show_raw_data_cert_computers():
         'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
         'Processor Base Clock Speed (ghz)', 'Operating System Name', 'System RAM', 'Product DIMM Count', 'Ethernet Capability', 'Bluetooth Capability', 'Markets',
         'Energy Star Model Identifier', 'UPC'
-    ]]     
+    ]]
     
     newest_records['Date Available on Market'] = newest_records['Date Available on Market'].str[:10]
     newest_records['Date Qualified'] = newest_records['Date Qualified'].str[:10]
-
+    
+    st.subheader('Energy Star ⚡')
     st.write(newest_records)
-
-    st.subheader('EPEAT 🌎')
-    conn = st.connection('s3', type=FilesConnection)
-    epeat_data = conn.read("scoops-finder/baseline4.csv", input_format="csv", ttl=600)
-    epeat_data = epeat_data.query('`Product Category` == "Computers & Displays"')
-    epeat_data = epeat_data.sort_values('Registered On', ascending=False)
-    epeat_data = epeat_data.query('`Product Type` != "Monitors"')
 
     col1, col2 = st.columns(2)
     with col1:
@@ -1574,13 +1623,8 @@ def show_raw_data_cert_computers():
         'EPEAT Identifier', 'Registered On', 'Product Name', 'Manufacturer', 'Product Category', 'Product Type', 'Status',
         'Registered In', 'Climate+', 'Total Score', 'EPEAT Tier', 'Manufacturer Part Number', 'Universal Product Code'
     ]]     
+    st.subheader('EPEAT 🌎')
     st.write(epeat_data)
-
-    st.subheader('WiFi Alliance 📶')
-    conn = st.connection('s3', type=FilesConnection)
-    wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    wifi_data = wifi_data.query('`Category` == "Computers & Accessories"')
-    wifi_data = wifi_data.sort_values('Date of Last Certification', ascending=False)
 
     col1, col2 = st.columns(2)
     with col1:
@@ -1604,8 +1648,56 @@ def show_raw_data_cert_computers():
             wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=False)
         elif selected_sort2 == 'Oldest':
             wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=True)
-
+    st.subheader('WiFi Alliance 📶')
     st.write(wifi_data)
+
+
+    st.markdown(
+    """
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    """,
+    unsafe_allow_html=True
+    )
+
+    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+    st.dataframe(bt_data_df)
+    st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
+    st.dataframe(mfi_data_df, use_container_width=True)
+
+
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories = ['any'] + list(newest_records['type'].unique())
+        selected_category = st.selectbox('Select a product category', categories, index=0 if 'any' in categories else 1)
+        if selected_category != 'any':
+            newest_records = newest_records[newest_records['type'] == selected_category]
+
+        # Filter by brand
+        brands = ['any'] + list(newest_records['brand_name'].unique())
+        selected_brand = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand != 'any':
+            newest_records = newest_records[newest_records['brand_name'] == selected_brand]
+
+        sort_options = {'date_qualified': 'Date Qualified', 'date_available_on_market': 'Date Available on Market'}
+        selected_sort = st.selectbox('Sort by', options=list(sort_options.keys()), format_func=lambda x: sort_options[x], index=1)
+        newest_records = newest_records.sort_values(by=selected_sort, ascending=False)
+
+    with col2:
+        # Filter by Markets
+        selected_country = st.selectbox('Select a market', unique_countries, index=0 if 'any' in unique_countries else 1)
+        if selected_country != 'any':
+            newest_records = newest_records[newest_records['markets'].apply(lambda x: selected_country in map(str.strip, x.split(',')))]
+
+        # Filter by Color/Mono
+        color_capabilities = ['any'] + list(newest_records['touch_screen'].unique())
+        selected_color_capability = st.selectbox('Touch Screen', color_capabilities, index=0 if 'any' in color_capabilities else 1)
+        if selected_color_capability != 'any':
+            newest_records = newest_records[newest_records['touch_screen'] == selected_color_capability]
+
+    st.write(newest_records)
+
 
 def show_changelog_cert_computers():
     st.write("Coming Soon")
