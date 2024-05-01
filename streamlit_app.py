@@ -726,7 +726,12 @@ def show_raw_data_cert():
     bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
     bt_data_df = pd.json_normalize(bt_data_raw)
 
-  
+    companies_to_include = [
+        "Sharp Corporation", "Toshiba Corporation"
+    ]
+
+    # Filter the DataFrame
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
     st.dataframe(bt_data_df)
 
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
