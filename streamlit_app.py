@@ -713,7 +713,7 @@ def show_raw_data_cert():
             df_raw_certs5 = df_raw_certs5.sort_values(by='Date of Last Certification', ascending=True)
 
     st.write(df_raw_certs5)
-
+    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
@@ -722,11 +722,6 @@ def show_raw_data_cert():
     st.dataframe(mfi_data_df, use_container_width=True)
 
     unique_brands_df = pd.DataFrame(mfi_data_df['brand'].unique(), columns=['brand'])
-
-    # Display the DataFrame with unique values
-    st.write("DataFrame with Unique Values from 'brand' Column:")
-    st.dataframe(unique_brands_df)
-
 
 def show_changelog_cert():
     # Code to display changelog
