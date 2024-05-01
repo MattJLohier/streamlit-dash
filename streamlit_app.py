@@ -1794,7 +1794,7 @@ def show_changelog_cert_computers():
     }).loc[:, [
         'Date Detected', 'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
     ]]
-
+    df_epeat_changelog['Date Detected'] = df_epeat_changelog['Date Detected'].str[:10]
     st.dataframe(mfi_data_changelog_df, use_container_width=True)
 
 
