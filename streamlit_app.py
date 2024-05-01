@@ -783,7 +783,7 @@ def show_changelog_cert():
     # Modify the dataframe to keep only the specified columns
     df_epeat_changelog = df_epeat_changelog[columns_to_keep2]
     
-    df_epeat_changelog['Registered On'] = df_epeat_changelog['Registered On'].str[:10]
+    #df_epeat_changelog['Registered On'] = df_epeat_changelog['Registered On'].str[:10]
 
     # Rename the "Date" column to "Date Detected"
     df_epeat_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
