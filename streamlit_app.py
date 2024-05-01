@@ -1938,11 +1938,17 @@ def show_recent_cert_televisions():
 
 
 def show_raw_data_cert_televisions():
+    
     # Add industry-specific details or requirements.
     st.subheader('Energy Star ⚡')
     conn = st.connection('s3', type=FilesConnection)
     newest_records = conn.read("scoops-finder/televisions-data.csv", input_format="csv", ttl=600)
     newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
+
+    conn = st.connection('s3', type=FilesConnection)
+    wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    wifi_data = wifi_data.query('`Category` == "Televisions & Set Top Boxes"')
+    wifi_data = wifi_data.sort_values('Date of Last Certification', ascending=False)
 
     def extract_unique_countries(market_col):
         unique_countries = set()
@@ -1950,6 +1956,51 @@ def show_raw_data_cert_televisions():
         market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
         return ['any'] + sorted(unique_countries)
 
+    unique_countries = extract_unique_countries(newest_records['markets'])
+
+
+    conn = st.connection('s3', type=FilesConnection)
+    bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
+    bt_data_df = pd.json_normalize(bt_data_raw)
+
+    companies_to_include = [
+        "Sharp Corporation", "Toshiba", "Brother Industries, Ltd", "Seiko Epson Corporation", "Canon Marketing Japan Inc.", "HP Inc.", "Ricoh Company Ltd", "XEROX", "Kyocera Corporation"
+    ]
+
+    # Filter the DataFrame
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
+
+    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
+    content_data = mfi_data_raw.get("content", [])
+    mfi_data_df = pd.json_normalize(content_data)
+    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
+
+    dfs = {'Energy Star': newest_records, 'EPEAT Registry': epeat_data, 'WiFi Alliance': wifi_data, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
+
+    st.subheader("Search Across DataFrames")
+
+    # Search Box
+    search_query = st.text_input("Enter a search term:")
+
+    if search_query:
+        search_query = search_query.lower()
+        
+        # Search logic
+        results = {}
+        for df_name, df in dfs.items():
+            matched_rows = df.apply(lambda row: row.astype(str).str.lower().str.contains(search_query).any(), axis=1)
+            matched_df = df[matched_rows]
+            if not matched_df.empty:
+                results[df_name] = matched_df
+        
+        if results:
+            for df_name, result_df in results.items():
+                st.subheader(f"Results from {df_name}:")
+                st.dataframe(result_df)
+        else:
+            st.write("No results found")
+
+    
     unique_countries = extract_unique_countries(newest_records['markets'])
 
     col1, col2 = st.columns(2)
@@ -2014,13 +2065,8 @@ def show_raw_data_cert_televisions():
     newest_records['Date Available on Market'] = newest_records['Date Available on Market'].str[:10]
     newest_records['Date Qualified'] = newest_records['Date Qualified'].str[:10]    
     
+    st.subheader('Energy Star ⚡')
     st.write(newest_records)
-
-    st.subheader('WiFi Alliance 📶')
-    conn = st.connection('s3', type=FilesConnection)
-    wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
-    wifi_data = wifi_data.query('`Category` == "Televisions & Set Top Boxes"')
-    wifi_data = wifi_data.sort_values('Date of Last Certification', ascending=False)
 
     col1, col2 = st.columns(2)
     with col1:
@@ -2045,9 +2091,24 @@ def show_raw_data_cert_televisions():
         elif selected_sort2 == 'Oldest':
             wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=True)
 
+    st.subheader('WiFi Alliance 📶')
     st.write(wifi_data)
 
+    st.markdown(
+    """
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    """,
+    unsafe_allow_html=True
+    )
 
+    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+    st.dataframe(bt_data_df)
+    st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
+    st.dataframe(mfi_data_df, use_container_width=True)
+
+
+    st.subheader('WiFi Alliance 📶')
+    
 
 
 def show_changelog_cert_televisions():
