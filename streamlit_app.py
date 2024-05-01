@@ -1747,8 +1747,6 @@ def show_changelog_cert_computers():
 
     st.write(df_wifi_changelog, use_container_width=True)
 
-
-
     st.markdown(
     """
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
