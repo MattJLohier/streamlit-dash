@@ -775,9 +775,11 @@ def show_changelog_cert():
     placement_tracking2 = conn.read("scoops-finder/changelog-epeat.csv", input_format="csv", ttl=600)
     df_epeat_changelog = placement_tracking2
 
-    columns_to_keep2 = ["Date Qualified", "Product Name", "Manufacturer", "Climate+", "Product Category", 
+    columns_to_keep2 = ["Date", "Product Name", "Manufacturer", "Climate+", "Product Category", 
                     "Product Type", "Status", "Registered In", "Total Score", "EPEAT Tier", "Registered On"]
 
+
+    st.write(df_epeat_changelog)
     # Modify the dataframe to keep only the specified columns
     df_epeat_changelog = df_epeat_changelog[columns_to_keep2]
     
