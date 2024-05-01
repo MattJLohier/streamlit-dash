@@ -1678,10 +1678,10 @@ def show_changelog_cert_computers():
 
     st.write(df_clean)
     # Keep only the first 10 characters of the "Date" column
-    df_clean['Date'] = df_clean['Date'].str[:10]
+    df_clean['Date Detected'] = df_clean['Date Detected'].str[:10]
     
     df_clean = newest_records.rename(columns={
-        'Date': 'Date Detected',
+        'Date Detected': 'Date Detected',
         'pd_id': 'Energy Star ID',
         'date_available_on_market': 'Date Available on Market',
         'date_qualified': 'Date Qualified',
@@ -1703,7 +1703,7 @@ def show_changelog_cert_computers():
         'markets': 'Markets',
         'energy_star_model_identifier': 'Energy Star Model Identifier'
     }).loc[:, [
-        'Date', 'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
+        'Date Detected', 'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
         'Processor Base Clock Speed (ghz)', 'Operating System Name', 'System RAM', 'Product DIMM Count', 'Ethernet Capability', 'Bluetooth Capability', 'Markets',
         'Energy Star Model Identifier', 'UPC'
     ]]
