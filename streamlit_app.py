@@ -1578,6 +1578,7 @@ def show_raw_data_cert_computers():
 
 def show_changelog_cert_computers():
     st.write("Coming Soon")
+    st.subheader('<i class="fab fa-bluetooth"></i> Bluetooth 🌎', unsafe_allow_html=True)
     conn = st.connection('s3', type=FilesConnection)
     bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
     bt_data_df = pd.json_normalize(bt_data_raw)
