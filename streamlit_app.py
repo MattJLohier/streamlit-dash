@@ -1775,9 +1775,6 @@ def show_changelog_cert_computers():
     st.dataframe(bt_data_df)
     
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
-    unique_brands_df = pd.DataFrame(mfi_data_df['brand'].unique(), columns=['brand'])
-    st.write("DataFrame with Unique Values from 'brand' Column:")
-    st.dataframe(unique_brands_df)
     mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
     # Extract only dictionary items from the list
     content_data1 = [item for item in mfi_data_changelog if isinstance(item, dict)]
