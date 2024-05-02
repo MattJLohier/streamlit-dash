@@ -2214,7 +2214,7 @@ def show_insights_cert_computers():
     selected_source = st.multiselect(
         'Select Sources',
         options=['Energy Star', 'WiFi Alliance', 'EPEAT', 'TCO'],
-        default=['Energy Star', 'EPEAT', 'TCO'],
+        default=['Energy Star', 'WiFi Alliance', 'EPEAT', 'TCO'],
         key='source_selector5'
     )
 
