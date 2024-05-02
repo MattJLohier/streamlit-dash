@@ -2541,6 +2541,16 @@ def show_changelog_cert_televisions():
 
     # Filter the DataFrame
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
+    bt_data_df = bt_data_df.rename(columns={
+        'Date Detected': 'Date Detected',
+        'ListingId': 'Listing ID',
+        'Name': 'Product Name',
+        'CompanyName': 'Brand',
+        'ListingDate': 'Certification Date',
+        'ProductListings': 'Product Listings',
+    }).loc[:, [
+        'Date Detected', 'Listing ID', 'Certification Date', 'Brand', 'Product Name', 'Product Listings'
+    ]]
     st.dataframe(bt_data_df, use_container_width=True)
     
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
