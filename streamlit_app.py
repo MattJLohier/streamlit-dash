@@ -590,6 +590,11 @@ def show_raw_data_cert():
         'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
     ]]
 
+
+    conn = st.connection('s3', type=FilesConnection)
+    tco_certs = conn.read("scoops-finder/tco_data.json", input_format="json", ttl=600)
+
+
     dfs = {'Energy Star': df_sorted, 'EPEAT Registry': df_raw_certs4, 'WiFi Alliance': df_raw_certs5, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
 
     st.subheader("Search Across DataFrames")
@@ -631,7 +636,6 @@ def show_raw_data_cert():
         if selected_brand != 'any':
             df_sorted = df_sorted[df_sorted['brand_name'] == selected_brand]
 
-        #remanufactured_options = ['any', 'Yes', 'No']
         remanufactured_options = ['any'] + list(df_sorted['remanufactured_product'].unique())
         selected_remanufactured = st.selectbox('Remanufactured Product', remanufactured_options, index=0)
         if selected_remanufactured == 'Yes':
@@ -779,6 +783,7 @@ def show_raw_data_cert():
     st.dataframe(bt_data_df)
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     st.dataframe(mfi_data_df, use_container_width=True)
+    st.dataframe(tco_certs)
 
 
 def show_changelog_cert():
