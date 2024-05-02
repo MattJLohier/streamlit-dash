@@ -1817,9 +1817,9 @@ def show_raw_data_cert_computers():
     with col1:
         # Filter by brand
         brands = ['any'] + list(bt_data_df['Brand'].unique())
-        selected_brand2 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
-        if selected_brand2 != 'any':
-            bt_data_df = bt_data_df[bt_data_df['Brand'] == selected_brand2]
+        selected_brand9 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand9 != 'any':
+            bt_data_df = bt_data_df[bt_data_df['Brand'] == selected_brand9]
 
     with col2:
         # Filter by Registration Date
