@@ -2554,8 +2554,283 @@ def show_changelog_cert_televisions():
 
 
 def show_insights_cert_televisions():
-    st.write("Coming Soon")
+    
+    # Add industry-specific details or requirements.
+    st.subheader('Energy Star ⚡')
+    conn = st.connection('s3', type=FilesConnection)
+    newest_records = conn.read("scoops-finder/televisions-data.csv", input_format="csv", ttl=600)
+    newest_records = newest_records.sort_values('date_available_on_market', ascending=False)
 
+    conn = st.connection('s3', type=FilesConnection)
+    wifi_data = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    wifi_data = wifi_data.query('`Category` == "Televisions & Set Top Boxes"')
+    wifi_data = wifi_data.sort_values('Date of Last Certification', ascending=False)
+
+    def extract_unique_countries(market_col):
+        unique_countries = set()
+        # Split each row's market string by comma and strip spaces
+        market_col.apply(lambda x: unique_countries.update(map(str.strip, x.split(','))))
+        return ['any'] + sorted(unique_countries)
+
+    unique_countries = extract_unique_countries(newest_records['markets'])
+
+
+    conn = st.connection('s3', type=FilesConnection)
+    bt_data_raw = conn.read("scoops-finder/bluetooth.json", input_format="json", ttl=600)
+    bt_data_df = pd.json_normalize(bt_data_raw)
+
+    companies_to_include = [
+        "Sharp Corporation", "Hisense Company Limited", "AmTRAN Technology Co., Ltd", "TCL Communication Ltd.", "LG Electronics Inc.", "Samsung Electronics Co., Ltd."
+    ]
+
+    # Filter the DataFrame
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
+    bt_data_df["ListingDate"] = bt_data_df["ListingDate"].str[:10]
+
+
+    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
+    content_data = mfi_data_raw.get("content", [])
+    mfi_data_df = pd.json_normalize(content_data)
+    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Sony', 'LG', 'TCL', 'Hisense', 'JVCKENWOOD Corporation', 'SHARP'])]
+    mfi_data_df = mfi_data_df.rename(columns={
+        'upcEan': 'UPC',
+        'models': 'Models',
+        'brand': 'Brand',
+        'accessoryName': 'Accessory Name',
+        'accessoryCategory': 'Accessory Category',
+    }).loc[:, [
+        'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
+    ]]
+
+    # Define the number of columns
+    num_columns = 2
+    conn = st.connection('s3', type=FilesConnection)
+    newest_records1 = conn.read("scoops-finder/televisions-data.csv", input_format="csv", ttl=600)
+
+    conn = st.connection('s3', type=FilesConnection)
+    newest_records2 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
+    newest_records2 = newest_records2[newest_records2["Category"] == "Televisions & Set Top Boxes"]
+
+    # Rename columns to standardize across DataFrames
+    newest_records1.rename(columns={
+        'brand_name': 'Brand',
+        'model_name': 'Product',
+        'date_available_on_market': 'Date Certified',
+        'product_type': 'Product Type'
+    }, inplace=True)
+
+    newest_records2.rename(columns={
+        'Brand': 'Brand',
+        'Product': 'Product',
+        'Date of Last Certification': 'Date Certified',
+        'Category': 'Product Type'
+    }, inplace=True)
+
+    # Add a source column to each DataFrame
+    newest_records1['Source'] = 'Energy Star'
+    newest_records2['Source'] = 'WiFi Alliance'
+
+    # Combine the DataFrames
+    combined_df = pd.concat([newest_records1, newest_records2], ignore_index=True)
+    # Display the combined DataFrame
+    combined_df = combined_df.sort_values('Date Certified', ascending=False)
+    combined_df['Date Certified'] = combined_df['Date Certified'].str[:10]
+
+
+    st.title('Certification Analysis By Brand Over Time')
+    # Assuming combined_df is loaded correctly
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
+    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
+
+    # Sort quarters and create quarter strings
+    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values()
+    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'{q.year}-Q{q.quarter}')
+    unique_quarters_str = [f'{q.year}-Q{q.quarter}' for q in unique_quarters]  # Sorted and formatted quarter strings
+
+    # Set up the slider for Quarter selection
+    latest_quarter = unique_quarters_str[-1]  # Ensure to set to the latest quarter
+    earliest_quarter = unique_quarters_str[0]  # Ensure to set to the earliest quarter
+
+
+    # Set default value of slider to include the entire range of available quarters
+    quarter_range = st.select_slider(
+        'Select Quarter Range',
+        options=unique_quarters_str,
+        value=(earliest_quarter, latest_quarter),
+        key='quarter_range_selector2'
+    )
+
+    # Filters for the charts
+    selected_source = st.multiselect(
+        'Select Sources',
+        options=combined_df['Source'].unique(),
+        default=combined_df['Source'].unique(),
+        key='source_selector2'
+    )
+
+    selected_brand = st.multiselect(
+        'Select Brands',
+        options=combined_df['Brand'].unique(),
+        default=combined_df['Brand'].unique(),
+        key='brand_selector2'
+    )
+
+    # Apply filters based on Source, Brand, and quarter range
+    filtered_data = combined_df[
+        (combined_df['Source'].isin(selected_source)) &
+        (combined_df['Brand'].isin(selected_brand)) &
+        (combined_df['Quarter String'] >= quarter_range[0]) &
+        (combined_df['Quarter String'] <= quarter_range[1])
+    ]
+
+    # Group by Source, Brand, and Quarter and count the occurrences
+    grouped_data = filtered_data.groupby(['Source', 'Brand', 'Quarter String']).size().reset_index(name='Counts')
+
+    # Interactive line chart
+    line_chart = alt.Chart(grouped_data).mark_line(point=True).encode(
+        x=alt.X('Quarter String:O', sort=unique_quarters_str, title='Quarter'),
+        y=alt.Y('Counts:Q', title='Number of Certifications'),
+        color='Brand:N',
+        detail='Source:N',
+        tooltip=['Source', 'Brand', 'Quarter String', 'Counts']
+    ).interactive()
+
+    st.altair_chart(line_chart, use_container_width=True)
+
+    st.title('Certification Analysis By Brand Over Time')
+
+    # Assuming combined_df is loaded correctly
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
+    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
+    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'{q.year}-Q{q.quarter}')
+    unique_quarters_str = [f'{q.year}-Q{q.quarter}' for q in combined_df['Quarter'].drop_duplicates().sort_values()]
+
+    # Slider for selecting quarter range
+    latest_quarter = unique_quarters_str[-1]
+    earliest_quarter = unique_quarters_str[0]
+    quarter_range = st.select_slider(
+        'Select Quarter Range',
+        options=unique_quarters_str,
+        value=(earliest_quarter, latest_quarter),
+        key='quarter_range_selector5'
+    )
+
+    # Filters for the charts
+    selected_source = st.multiselect(
+        'Select Sources',
+        options=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
+        default=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
+        key='source_selector5'
+    )
+
+    selected_brand = st.multiselect(
+        'Select Brands',
+        options=combined_df['Brand'].unique(),
+        default=combined_df['Brand'].unique(),
+        key='brand_selector5'
+    )
+
+    # Apply filters
+    filtered_data = combined_df[
+        (combined_df['Source'].isin(selected_source)) &
+        (combined_df['Brand'].isin(selected_brand)) &
+        (combined_df['Quarter String'] >= quarter_range[0]) &
+        (combined_df['Quarter String'] <= quarter_range[1])
+    ]
+
+    # Group and prepare data for visualization
+    grouped_data = filtered_data.groupby(['Source', 'Brand', 'Quarter String']).size().reset_index(name='Counts')
+
+    # Define custom dash styles
+    dash_styles = {
+        "EPEAT Registry": [10, 5],
+        "Energy Star": [5, 1],
+        "WiFi Alliance": [1, 5]
+    }
+
+    # Chart with custom stroke dashes for each source
+    line_chart = alt.Chart(grouped_data).mark_line(point=True).encode(
+        x=alt.X('Quarter String:O', sort=unique_quarters_str, title='Quarter'),
+        y=alt.Y('Counts:Q', title='Number of Certifications'),
+        color='Brand:N',
+        detail='Source:N',
+        strokeDash=alt.StrokeDash(
+            'Source:N', 
+            scale=alt.Scale(domain=list(dash_styles.keys()), range=list(dash_styles.values())),
+            legend=None
+        ),
+        tooltip=['Source', 'Brand', 'Quarter String', 'Counts']
+    ).interactive()
+
+    st.altair_chart(line_chart, use_container_width=True)
+
+    st.title('Certification Analysis By Source Over Time')
+
+   # Assuming combined_df is loaded correctly
+    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
+    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
+
+    # Sort quarters and create quarter strings
+    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values()
+    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'{q.year}-Q{q.quarter}')
+    unique_quarters_str = [f'{q.year}-Q{q.quarter}' for q in unique_quarters]  # Sorted and formatted quarter strings
+
+    # Set up the slider for Quarter selection
+    latest_quarter = unique_quarters_str[-1]  # Ensure to set to the latest quarter
+    earliest_quarter = unique_quarters_str[0]  # Ensure to set to the earliest quarter
+
+    # Set default value of slider to include the entire range of available quarters
+    quarter_range = st.select_slider(
+        'Select Quarter Range',
+        options=unique_quarters_str,
+        value=(earliest_quarter, latest_quarter),
+        key='quarter_range_selector'
+    )
+
+    # Filters for the charts
+    selected_source = st.multiselect(
+        'Select Sources',
+        options=combined_df['Source'].unique(),
+        default=combined_df['Source'].unique(),
+        key='source_selector'
+    )
+
+    selected_brand = st.multiselect(
+        'Select Brands',
+        options=combined_df['Brand'].unique(),
+        default=combined_df['Brand'].unique(),
+        key='brand_selector'
+    )
+
+    # Apply filters based on Source and quarter range
+    filtered_data = combined_df[
+        (combined_df['Source'].isin(selected_source)) &
+        (combined_df['Quarter String'] >= quarter_range[0]) &
+        (combined_df['Quarter String'] <= quarter_range[1])
+    ]
+
+    # Group by Source and Quarter and count the occurrences
+    grouped_data = filtered_data.groupby(['Source', 'Quarter String']).size().reset_index(name='Counts')
+
+    # Interactive line chart
+    line_chart = alt.Chart(grouped_data).mark_line(point=True).encode(
+        x=alt.X('Quarter String:O', sort=unique_quarters_str, title='Quarter'),
+        y=alt.Y('Counts:Q', title='Number of Certifications'),
+        color='Source:N',
+        tooltip=['Source', 'Quarter String', 'Counts']
+    ).interactive()
+
+    st.altair_chart(line_chart, use_container_width=True)
+
+
+    bar_chart2 = alt.Chart(grouped_data).mark_bar().encode(
+    x=alt.X('Quarter String:O', sort=unique_quarters_str, title='Quarter'),
+    y=alt.Y('Counts:Q', title='Number of Certifications'),
+    color='Source:N',
+    tooltip=['Source', 'Quarter String', 'Counts']
+    ).interactive()
+
+    st.altair_chart(bar_chart2, use_container_width=True)
 
 def display_placements_computers():
     st.write("N/A")
