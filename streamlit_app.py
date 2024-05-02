@@ -1469,7 +1469,7 @@ def show_raw_data_cert_computers():
     bt_data_df = pd.json_normalize(bt_data_raw)
 
     companies_to_include = [
-        "Sharp Corporation", "Toshiba", "Brother Industries, Ltd", "Seiko Epson Corporation", "Canon Marketing Japan Inc.", "HP Inc.", "Ricoh Company Ltd", "XEROX", "Kyocera Corporation"
+        "Sharp Corporation", "Toshiba", "Acer", "Apple", "Google", "Lenovo", "DELL",
     ]
 
     # Filter the DataFrame
@@ -1480,7 +1480,7 @@ def show_raw_data_cert_computers():
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
     mfi_data_df = pd.json_normalize(content_data)
-    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
+    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Apple', 'Google', 'Lenovo', 'HP', 'TOSHIBA', 'SHARP', "DELL"])]
     
     dfs = {'Energy Star': newest_records, 'EPEAT Registry': epeat_data, 'WiFi Alliance': wifi_data, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
 
