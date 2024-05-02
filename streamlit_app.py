@@ -1717,7 +1717,7 @@ def show_raw_data_cert_computers():
     """,
     unsafe_allow_html=True
     )
-    st.markdown("## TCO Certification <i class='fas fa-leaf' style='color:green'></i>", unsafe_allow_html=True)
+    st.markdown("### TCO Certification <i class='fas fa-leaf' style='color:green'></i>", unsafe_allow_html=True)
     st.dataframe(tco_certs)
 
 
@@ -1728,9 +1728,9 @@ def show_raw_data_cert_computers():
     unsafe_allow_html=True
     )
 
-    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+    st.markdown("### Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
     st.dataframe(bt_data_df)
-    st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
+    st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     st.dataframe(mfi_data_df, use_container_width=True)
 
 
