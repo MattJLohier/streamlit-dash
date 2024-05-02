@@ -2659,6 +2659,16 @@ def show_insights_cert_televisions():
     combined_df = combined_df.sort_values('Date Certified', ascending=False)
     combined_df['Date Certified'] = combined_df['Date Certified'].str[:10]
 
+    brands_to_keep = [
+        "LG", "Samsung", "Funai ElectricCo,. LTD.", "Sharp Corporation", 
+        "Samsung Electronics", "Sony Corperation", "HISENSE VISUAL TECHNOLOGY CO LTD",
+        "Insignia", "Sony Group Corporation", "LG Electronics",
+        "Panasonic Holdings Corporation", "Toshiba"
+    ]
+
+    # Filtering the DataFrame
+    combined_df = df[df["Brand"].isin(brands_to_keep)]
+     
 
     st.title('Certification Analysis By Brand Over Time')
     # Assuming combined_df is loaded correctly
