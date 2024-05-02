@@ -1382,6 +1382,41 @@ def show_recent_cert_computers():
     newest_records3 = conn.read("scoops-finder/baseline3.csv", input_format="csv", ttl=600)
     newest_records3 = newest_records3[newest_records3["Category"] == "Computers & Accessories"]
 
+    conn = st.connection('s3', type=FilesConnection)
+    newest_records4 = conn.read("scoops-finder/tco_data.json", input_format="json", ttl=600)
+    newest_records4 = pd.DataFrame(newest_records4)
+    # Display the filtered dataframe
+    newest_records4 = newest_records4.rename(columns={
+        'id': 'TCO ID',
+        'idkey': 'ID Key',
+        'brand': 'Brand',
+        'name': 'Product',
+        'category': 'Product Type',
+        'tec': 'TEC Value',
+        'cert_no': 'Certification Number',
+        'cert_id': 'Certification ID',
+        'cert_date': 'Date Certified',
+        'edge': 'Edge',
+        'recycled_plastic': 'Recycled Plastic',
+        'cert_expiry_date': 'Certification Expiry Date',
+        'enhanced_acoustic_limiting': 'Enhanced Acoustic Limiting',
+        'full_function_erg_stand': 'Full Function Erg Stand',
+        'halogen_free': 'Halogen Free',
+        'public_comment': "Public Comment",
+        'recycled_plastic_edge': 'Recycled Plastic Edge',
+        'size': 'Size',
+        'size_office': 'Size Office',
+        'size_video': 'Size Video',
+        'sound_power_level': 'Sound Power Level',
+        'latest_version': 'Version',
+        'resolution_height': 'Resolution Height',
+        'resolution_width': 'Resolution Width',
+        'total_weight': 'Total Weight',
+    }).loc[:, [
+        'Date Certified', 'Product Type', 'Brand', 'Product'
+    ]]
+    newest_records4 = newest_records4[newest_records4["Product Type"].isin(["Notebooks", "Desktops", "All-inOnePCs", "Tablets"])].sort_values(by="Certification Date", ascending=False)
+
     # Rename columns to standardize across DataFrames
     newest_records1.rename(columns={
         'brand_name': 'Brand',
@@ -1408,9 +1443,10 @@ def show_recent_cert_computers():
     newest_records1['Source'] = 'Energy Star'
     newest_records2['Source'] = 'EPEAT'
     newest_records3['Source'] = 'WiFi Alliance'
+    newest_records4['Source'] = 'TCO'
 
     # Combine the DataFrames
-    combined_df = pd.concat([newest_records1, newest_records2, newest_records3], ignore_index=True)
+    combined_df = pd.concat([newest_records1, newest_records2, newest_records3, newest_records4], ignore_index=True)
     # Display the combined DataFrame
     combined_df['Date Certified'] = combined_df['Date Certified'].str[:10]
 
