@@ -580,6 +580,17 @@ def show_raw_data_cert():
     content_data = mfi_data_raw.get("content", [])
     mfi_data_df = pd.json_normalize(content_data)
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
+    mfi_data_changelog_df = mfi_data_changelog_df.rename(columns={
+        'Date Detected': 'Date Detected',
+        'upcEan': 'UPC',
+        'models': 'Models',
+        'brand': 'Brand',
+        'accessoryName': 'Accessory Name',
+        'accessoryCategory': 'Accessory Category',
+    }).loc[:, [
+        'Date Detected', 'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
+    ]]
+    mfi_data_changelog_df['Date Detected'] = mfi_data_changelog_df['Date Detected'].str[:10]
 
     dfs = {'Energy Star': df_sorted, 'EPEAT Registry': df_raw_certs4, 'WiFi Alliance': df_raw_certs5, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
 
@@ -844,7 +855,7 @@ def show_changelog_cert():
     df_wifi_changelog['Date'] = df_wifi_changelog['Date'].str[:10]
     df_wifi_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
     df_wifi_changelog = df_wifi_changelog.sort_values(by='Date Detected', ascending=False)
-
+    
     st.dataframe(df_wifi_changelog, use_container_width=True)
 
 
