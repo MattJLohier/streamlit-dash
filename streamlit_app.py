@@ -2496,26 +2496,6 @@ def show_changelog_cert_televisions():
     df_clean = df_clean.sort_values(by='Date Available on Market', ascending=False)
     st.write(df_clean, use_container_width=True)
 
-    st.subheader('EPEAT 🌎')
-    conn = st.connection('s3', type=FilesConnection)
-    placement_tracking2 = conn.read("scoops-finder/changelog-epeat.csv", input_format="csv", ttl=600)
-    df_epeat_changelog = placement_tracking2
-
-    columns_to_keep2 = ["Date Detected", "Registered On", "Product Name", "Manufacturer", "Climate+", "Product Category", 
-                    "Product Type", "Status", "Registered In", "Total Score", "EPEAT Tier"]
-
-    # Modify the dataframe to keep only the specified columns
-    df_epeat_changelog = df_epeat_changelog[columns_to_keep2]
-    
-    # Rename the "Date" column to "Date Detected"
-    df_epeat_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
-    df_epeat_changelog['Date Detected'] = df_epeat_changelog['Date Detected'].str[:10]
-    df_epeat_changelog['Registered On'] = df_epeat_changelog['Registered On'].str[:10]
-    df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
-    df_epeat_changelog = df_epeat_changelog[df_epeat_changelog['Product Type'].isin(['Desktop', 'Notebook', 'Tablet/Slate'])]
-
-    st.dataframe(df_epeat_changelog, use_container_width=True)
-
     st.subheader('WiFi Alliance 📶')
     conn = st.connection('s3', type=FilesConnection)
     placement_tracking3 = conn.read("scoops-finder/changelog-wifi.csv", input_format="csv", ttl=600)
