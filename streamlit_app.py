@@ -1824,7 +1824,7 @@ def show_raw_data_cert_computers():
     with col2:
         # Filter by Registration Date
         sort_options = ['Newest', 'Oldest']
-        selected_sort9 = st.selectbox('Sort by Date', sort_options, index=0)  # Default to Newest
+        selected_sort9 = st.selectbox('Sort by Date', sort_options, index=0, key='bluetooth_sort')  # Default to Newest
         if selected_sort9 == 'Newest':
             bt_data_df = bt_data_df.sort_values(by='Certification Date', ascending=False)
         elif selected_sort9 == 'Oldest':
