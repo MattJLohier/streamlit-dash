@@ -784,7 +784,9 @@ def show_raw_data_cert():
     }).loc[:, [
         'Listing ID', 'Certification Date', 'Brand', 'Product Name', 'Product Listings'
     ]]
+    bt_data_df['Certification Date'] = bt_data_df['Certification Date'].str[:10]   
     st.dataframe(bt_data_df, use_container_width=True)
+    
     st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     st.dataframe(mfi_data_df, use_container_width=True)
 
