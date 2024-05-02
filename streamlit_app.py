@@ -1464,6 +1464,9 @@ def show_raw_data_cert_computers():
     wifi_data = wifi_data.query('`Category` == "Computers & Accessories"')
     wifi_data = wifi_data.sort_values('Date of Last Certification', ascending=False)
 
+    conn = st.connection('s3', type=FilesConnection)
+    tco_certs = conn.read("scoops-finder/tco_data.json", input_format="json", ttl=600)
+
     def extract_unique_countries(market_col):
         unique_countries = set()
         # Split each row's market string by comma and strip spaces
@@ -1669,6 +1672,9 @@ def show_raw_data_cert_computers():
             wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=True)
     st.subheader('WiFi Alliance 📶')
     st.write(wifi_data)
+
+
+    st.dataframe(tco_certs)
 
 
     st.markdown(
