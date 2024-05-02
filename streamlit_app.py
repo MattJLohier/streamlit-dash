@@ -2256,11 +2256,11 @@ def show_raw_data_cert_televisions():
     bt_data_df = pd.json_normalize(bt_data_raw)
 
     companies_to_include = [
-        "Sharp Corporation", "Toshiba", "Brother Industries, Ltd", "Seiko Epson Corporation", "Canon Marketing Japan Inc.", "HP Inc.", "Ricoh Company Ltd", "XEROX", "Kyocera Corporation"
+        "Sharp Corporation", "Hisense Company Limited", "AmTRAN Technology Co., Ltd", "TCL Communication Ltd.", "LG Electronics Inc.", "Samsung Electronics Co., Ltd."
     ]
 
     # Filter the DataFrame
-    #bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
 
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
