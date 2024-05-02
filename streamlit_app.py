@@ -1992,7 +1992,6 @@ def show_changelog_cert_computers():
 
     # Filter the DataFrame
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
-    st.dataframe(bt_data_df)
     bt_data_df = bt_data_df.rename(columns={
         'Date Detected': 'Date Detected',
         'ListingId': 'Listing ID',
@@ -2003,7 +2002,8 @@ def show_changelog_cert_computers():
     }).loc[:, [
         'Date Detected', 'Listing ID', 'Certification Date', 'Brand', 'Product Name', 'Product Listings'
     ]]
-    
+    bt_data_df['Date Detected'] = bt_data_df['Date Detected'].str[:10]
+    bt_data_df['Certification Date'] = bt_data_df['Certification Date'].str[:10]
     st.dataframe(bt_data_df, use_container_width=True)
     
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
