@@ -581,7 +581,7 @@ def show_raw_data_cert():
     mfi_data_df = pd.json_normalize(content_data)
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
     mfi_data_df = mfi_data_df.rename(columns={
-        'Date Detected': 'Date Detected',
+        'Date': 'Date Detected',
         'upcEan': 'UPC',
         'models': 'Models',
         'brand': 'Brand',
