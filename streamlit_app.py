@@ -774,9 +774,9 @@ def show_raw_data_cert():
     unsafe_allow_html=True
     )
 
-    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+    st.markdown("### Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
     st.dataframe(bt_data_df)
-    st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
+    st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     st.dataframe(mfi_data_df, use_container_width=True)
 
 
@@ -1823,7 +1823,7 @@ def show_changelog_cert_computers():
     unsafe_allow_html=True
     )
     
-    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+    st.markdown("### Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
 
     conn = st.connection('s3', type=FilesConnection)
     bt_data_raw = conn.read("scoops-finder/changelog-bluetooth.json", input_format="json", ttl=600)
@@ -2242,9 +2242,9 @@ def show_raw_data_cert_televisions():
     unsafe_allow_html=True
     )
 
-    st.markdown("## Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+    st.markdown("### Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
     st.dataframe(bt_data_df)
-    st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
+    st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     st.dataframe(mfi_data_df, use_container_width=True)
 
     
