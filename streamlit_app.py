@@ -3012,9 +3012,9 @@ def show_insights_cert_televisions():
         "Panasonic Holdings Corporation", "Toshiba"
     ]
 
+
     # Filtering the DataFrame
-    #combined_df = combined_df[combined_df["Brand"].isin(brands_to_keep)]
-     
+    combined_df = combined_df[combined_df["Brand"].isin(brands_to_keep)]
 
     st.title('Certification Analysis By Brand Over Time')
     # Assuming combined_df is loaded correctly
