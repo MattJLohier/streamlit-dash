@@ -2751,8 +2751,8 @@ def show_insights_cert_televisions():
     # Filters for the charts
     selected_source = st.multiselect(
         'Select Sources',
-        options=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
-        default=['EPEAT Registry', 'Energy Star', 'WiFi Alliance'],
+        options=['Energy Star', 'WiFi Alliance'],
+        default=['Energy Star', 'WiFi Alliance'],
         key='source_selector5'
     )
 
