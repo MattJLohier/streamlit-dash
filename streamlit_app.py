@@ -805,7 +805,8 @@ def show_raw_data_cert():
     
     
     st.dataframe(bt_data_df, use_container_width=True)
-    
+
+    st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         # Filter by brand
@@ -817,7 +818,6 @@ def show_raw_data_cert():
     with col2:
         st.empty()   
     st.dataframe(mfi_data_df, use_container_width=True)
-    st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     st.dataframe(mfi_data_df, use_container_width=True)
 
 
