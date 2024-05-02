@@ -580,7 +580,7 @@ def show_raw_data_cert():
     content_data = mfi_data_raw.get("content", [])
     mfi_data_df = pd.json_normalize(content_data)
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
-    mfi_data_changelog_df = mfi_data_changelog_df.rename(columns={
+    mfi_data_df = mfi_data_df.rename(columns={
         'Date Detected': 'Date Detected',
         'upcEan': 'UPC',
         'models': 'Models',
@@ -590,7 +590,7 @@ def show_raw_data_cert():
     }).loc[:, [
         'Date Detected', 'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
     ]]
-    mfi_data_changelog_df['Date Detected'] = mfi_data_changelog_df['Date Detected'].str[:10]
+    mfi_data_df['Date Detected'] = mfi_data_df['Date Detected'].str[:10]
 
     dfs = {'Energy Star': df_sorted, 'EPEAT Registry': df_raw_certs4, 'WiFi Alliance': df_raw_certs5, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
 
