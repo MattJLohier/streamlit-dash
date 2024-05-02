@@ -818,7 +818,6 @@ def show_raw_data_cert():
     with col2:
         st.empty()   
     st.dataframe(mfi_data_df, use_container_width=True)
-    st.dataframe(mfi_data_df, use_container_width=True)
 
 
 def show_changelog_cert():
