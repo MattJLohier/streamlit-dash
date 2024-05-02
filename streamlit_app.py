@@ -1467,6 +1467,40 @@ def show_raw_data_cert_computers():
     conn = st.connection('s3', type=FilesConnection)
     tco_certs = conn.read("scoops-finder/tco_data.json", input_format="json", ttl=600)
 
+    # Display the filtered dataframe
+    tco_certs = tco_certs.rename(columns={
+        'id': 'TCO ID',
+        'idkey': 'ID Key',
+        'brand': 'Brand',
+        'name': 'Product Name',
+        'category': 'Product Category',
+        'tec': 'TEC Value',
+        'cert_no': 'Certification Number',
+        'cert_id': 'Certification ID',
+        'cert_date': 'Certification Date',
+        'edge': 'Edge',
+        'recycled_plastic': 'Recycled Plastic',
+        'cert_expiry_date': 'Certification Expiry Date',
+        'enhanced_acoustic_limiting': 'Enhanced Acoustic Limiting',
+        'full_function_erg_stand': 'Full Function Erg Stand',
+        'halogen_free': 'Halogen Free',
+        'public_comment': "Public Comment",
+        'recycled_plastic_edge': 'Recycled Plastic Edge',
+        'size': 'Size',
+        'size_office': 'Size Office',
+        'size_video': 'Size Video',
+        'sound_power_level': 'Sound Power Level',
+        'latest_version': 'Version',
+        'resolution_height': 'Resolution Height',
+        'resolution_width': 'Resolution Width',
+        'total_weight': 'Total Weight',
+    }).loc[:, [
+        'TCO ID', 'Certification Date', 'Certification Expiry Date', 'Product Category', 'Brand', 'Product Name', 'Recycled Plastic', 'Size', 'Resolution Height', 'Resolution Width', 'Total Weight', 'Certification Number',
+        'Certification ID', 'TEC Value', 'ID Key'
+    ]]
+
+
+
     def extract_unique_countries(market_col):
         unique_countries = set()
         # Split each row's market string by comma and strip spaces
