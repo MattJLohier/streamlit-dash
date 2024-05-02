@@ -1922,9 +1922,9 @@ def show_changelog_cert_computers():
         'markets': 'Markets',
         'energy_star_model_identifier': 'Energy Star Model Identifier'
     }).loc[:, [
-        'Date Detected', 'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
+        'Date Detected', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Touch Screen', 'Processor Brand', 'Processor Model', 'CPU Core Count',
         'Processor Base Clock Speed (ghz)', 'Operating System Name', 'System RAM', 'Product DIMM Count', 'Ethernet Capability', 'Bluetooth Capability', 'Markets',
-        'Energy Star Model Identifier', 'UPC'
+        'Energy Star Model Identifier', 'UPC', 'Energy Star ID'
     ]]
 
     df_clean['Date Available on Market'] = df_clean['Date Available on Market'].str[:10]
