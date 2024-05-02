@@ -2112,7 +2112,7 @@ def show_insights_cert_computers():
     # Display the combined DataFrame
     combined_df['Date Certified'] = combined_df['Date Certified'].str[:10]
 
-    combined_df['brand'] = combined_df['brand'].replace({
+    combined_df['Brand'] = combined_df['Brand'].replace({
     "ASUSTeK Computer Inc.": "ASUS",
     "Acer Inc.": "Acer",
     "Samsung Electronics Co.,Ltd.": "Samsung",
