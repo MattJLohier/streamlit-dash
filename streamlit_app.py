@@ -587,7 +587,7 @@ def show_raw_data_cert():
         'accessoryName': 'Accessory Name',
         'accessoryCategory': 'Accessory Category',
     }).loc[:, [
-        'Date Detected', 'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
+        'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
     ]]
     mfi_data_df['Date Detected'] = mfi_data_df['Date Detected'].str[:10]
 
