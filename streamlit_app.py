@@ -2260,7 +2260,7 @@ def show_raw_data_cert_televisions():
     ]
 
     # Filter the DataFrame
-    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
+    #bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
 
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
@@ -2394,6 +2394,35 @@ def show_raw_data_cert_televisions():
     )
 
     st.markdown("### Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+    bt_data_df = bt_data_df.rename(columns={
+        'ListingId': 'Listing ID',
+        'Name': 'Product Name',
+        'CompanyName': 'Brand',
+        'ListingDate': 'Certification Date',
+        'ProductListings': 'Product Listings',
+    }).loc[:, [
+        'Listing ID', 'Certification Date', 'Brand', 'Product Name', 'Product Listings'
+    ]]
+
+
+
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by brand
+        brands = ['any'] + list(bt_data_df['Brand'].unique())
+        selected_brand9 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand9 != 'any':
+            bt_data_df = bt_data_df[bt_data_df['Brand'] == selected_brand9]
+
+    with col2:
+        # Filter by Registration Date
+        sort_options = ['Newest', 'Oldest']
+        selected_sort9 = st.selectbox('Sort by Date', sort_options, index=0, key='bluetooth_sort')  # Default to Newest
+        if selected_sort9 == 'Newest':
+            bt_data_df = bt_data_df.sort_values(by='Certification Date', ascending=False)
+        elif selected_sort9 == 'Oldest':
+            bt_data_df = bt_data_df.sort_values(by='Certification Date', ascending=True)
     st.dataframe(bt_data_df)
     st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     st.dataframe(mfi_data_df, use_container_width=True)
