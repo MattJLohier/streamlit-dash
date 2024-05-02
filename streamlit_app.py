@@ -2487,13 +2487,13 @@ def show_changelog_cert_televisions():
         'markets': 'Markets',
         'energy_star_model_identifier': 'Energy Star Model Identifier'
     }).loc[:, [
-        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Application',  'Resolution Format', 'Display Type', 'Backlit Technology Type', 'Diagonal Viewable Screen Size (in)',
+        'Energy Star ID', 'Date Detected', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Application',  'Resolution Format', 'Display Type', 'Backlit Technology Type', 'Diagonal Viewable Screen Size (in)',
         'Screen Area (Square in)', 'Native Horizontal Resolution Pixels', 'Native Vertical Resolution Pixels', 'High Contrast Ratio HCR Display', 'Low Power Wireless Technologies Supported', 'Features', 'Automatic Brightness Control', 'Additional Model Information', 'Markets',
         'Energy Star Model Identifier', 'UPC'
     ]] 
 
     df_clean['Date Available on Market'] = df_clean['Date Available on Market'].str[:10]
-    df_clean['Date Qualified'] = df_clean['Date Qualified'].str[:10]
+    df_clean['Date Detected'] = df_clean['Date Detected'].str[:10]
     df_clean = df_clean.sort_values(by='Date Available on Market', ascending=False)
     st.write(df_clean, use_container_width=True)
 
