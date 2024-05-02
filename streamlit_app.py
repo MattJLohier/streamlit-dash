@@ -2427,17 +2427,7 @@ def show_raw_data_cert_televisions():
             bt_data_df = bt_data_df.sort_values(by='Certification Date', ascending=True)
     st.dataframe(bt_data_df, use_container_width=True)
     st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
-    col1, col2 = st.columns(2)
-    with col1:
-        # Filter by brand
-        brands = ['any'] + list(mfi_data_df['Brand'].unique())
-        selected_brand9 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
-        if selected_brand9 != 'any':
-            mfi_data_df = mfi_data_df[mfi_data_df['Brand'] == selected_brand9]
-
-    with col2:
-        st.empty()   
-    st.dataframe(mfi_data_df, use_container_width=True)
+    
     st.dataframe(mfi_data_df, use_container_width=True)
 
     
