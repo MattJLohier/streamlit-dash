@@ -2112,11 +2112,20 @@ def show_insights_cert_computers():
     # Display the combined DataFrame
     combined_df['Date Certified'] = combined_df['Date Certified'].str[:10]
 
+    combined_df['brand'] = combined_df['brand'].replace({
+    "ASUSTeK Computer Inc.": "ASUS",
+    "Acer Inc.": "Acer",
+    "Samsung Electronics Co.,Ltd.": "Samsung",
+    "Samsung Electronics": "Samsung",
+    "FUJITSU": "Fujitsu",
+    "Fujitsu Ltd.": "Fujitsu",
+    "Fujitsu Limited": "Fujitsu"
+})
+
     brands_to_keep = [
-        "LG", "Samsung", "Funai ElectricCo,. LTD.", "Sharp Corporation", 
-        "Samsung Electronics", "Sony Corperation", "HISENSE VISUAL TECHNOLOGY CO LTD",
-        "Insignia", "Sony Group Corporation", "LG Electronics",
-        "Panasonic Holdings Corporation", "Toshiba"
+        "Dell Technologies", "HP Inc.", "Lenovo", "Apple", 
+        "ASUS", "Acer", "Microsoft",
+        "MSI", "Samsung", "Fujitsu"
     ]
 
     # Filtering the DataFrame
