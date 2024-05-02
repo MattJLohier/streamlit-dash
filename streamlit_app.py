@@ -1679,7 +1679,7 @@ def show_raw_data_cert_computers():
     """,
     unsafe_allow_html=True
     )
-    st.markdown("## TCO Certification <i class='fas fa-leaf' style='color:blue'></i>", unsafe_allow_html=True)
+    st.markdown("## TCO Certification <i class='fas fa-leaf' style='color:green'></i>", unsafe_allow_html=True)
     st.dataframe(tco_certs)
 
 
