@@ -2832,6 +2832,73 @@ def show_insights_cert_televisions():
 
     st.altair_chart(bar_chart2, use_container_width=True)
 
+
+    st.title('Certification by Brand This Quarter')
+
+    # Assuming combined_df is loaded correctly
+    combined_df['Date Certified'] = pd.to_datetime(combined_df['Date Certified'])
+    combined_df['Quarter'] = combined_df['Date Certified'].dt.to_period('Q')
+
+    # Sort quarters and create quarter strings
+    unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values(ascending=True)  # Sort ascending
+    combined_df['Quarter String'] = combined_df['Quarter'].apply(lambda q: f'Q{q.quarter} {q.year}')
+    unique_quarters_str = [f'Q{q.quarter} {q.year}' for q in unique_quarters]  # Sorted and formatted quarter strings
+
+    # Filters for the charts
+    selected_source = st.multiselect(
+        'Select Sources',
+        options=combined_df['Source'].unique(),
+        default=combined_df['Source'].unique(),
+        key='source_selector4'
+    )
+
+    selected_brand = st.multiselect(
+        'Select Brands',
+        options=combined_df['Brand'].unique(),
+        default=combined_df['Brand'].unique(),
+        key='brand_selector4'
+    )
+
+    # Slider for selecting a quarter
+    selected_quarter = st.select_slider(
+        'Select a Quarter',
+        options=unique_quarters_str,
+        value=unique_quarters_str[-1]  # Default to the latest quarter, which is now the last item in the sorted list
+    )
+
+    # Filter data for the selected quarter and by selected filters
+    filtered_data = combined_df[
+        (combined_df['Source'].isin(selected_source)) &
+        (combined_df['Brand'].isin(selected_brand)) &
+        (combined_df['Quarter String'] == selected_quarter)
+    ]
+
+    # Group by Brand and Source, and count the occurrences for the selected quarter
+    grouped_data = filtered_data.groupby(['Brand', 'Source']).size().reset_index(name='Counts')
+
+    # Bar chart for selected quarter data by brand, colored by source
+    bar_chart = alt.Chart(grouped_data).mark_bar().encode(
+        x=alt.X('Brand:N', title='Brand'),
+        y=alt.Y('Counts:Q', title='Number of Certifications'),
+        color=alt.Color('Source:N', legend=alt.Legend(title="Source")),
+        tooltip=['Brand', 'Source', 'Counts']
+    ).properties(
+        height=500  # Set the height of the chart here
+    ).interactive()
+
+    st.altair_chart(bar_chart, use_container_width=True)
+
+
+
+
+
+
+
+
+
+
+
+
 def display_placements_computers():
     st.write("N/A")
     # Include relevant data or courses available.
