@@ -1852,7 +1852,7 @@ def show_raw_data_cert_computers():
             mfi_data_df = mfi_data_df[mfi_data_df['Brand'] == selected_brand9]
 
     with col2:
-        
+        st.empty()   
     st.dataframe(mfi_data_df, use_container_width=True)
 
 
