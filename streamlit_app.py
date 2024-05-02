@@ -1458,7 +1458,8 @@ def show_recent_cert_computers():
     emoji_dict = {
             "Energy Star": "⚡",
             "WiFi Alliance": "📶",
-            "EPEAT": "🌎"
+            "EPEAT": "🌎",
+            "TCO": "♻️"
         }    
 
 
