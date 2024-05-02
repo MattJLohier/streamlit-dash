@@ -2535,7 +2535,6 @@ def show_changelog_cert_televisions():
     conn = st.connection('s3', type=FilesConnection)
     bt_data_raw = conn.read("scoops-finder/changelog-bluetooth.json", input_format="json", ttl=600)
     bt_data_df = pd.json_normalize(bt_data_raw)
-    st.dataframe(bt_data_df)
     companies_to_include = [
         "Sharp Corporation", "Hisense Company Limited", "AmTRAN Technology Co., Ltd", "TCL Communication Ltd.", "LG Electronics Inc.", "Samsung Electronics Co., Ltd."
     ]
