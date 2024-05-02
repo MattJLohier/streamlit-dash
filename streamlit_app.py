@@ -2639,8 +2639,8 @@ def show_insights_cert_televisions():
 
     st.title('Certification Analysis By Brand Over Time')
     # Assuming combined_df is loaded correctly
-    combined_df['Certification Date'] = pd.to_datetime(combined_df['Certification Date'])
-    combined_df['Quarter'] = combined_df['Certification Date'].dt.to_period('Q')
+    combined_df['Date Certified'] = pd.to_datetime(combined_df['Date Certified'])
+    combined_df['Quarter'] = combined_df['Date Certified'].dt.to_period('Q')
 
     # Sort quarters and create quarter strings
     unique_quarters = combined_df['Quarter'].drop_duplicates().sort_values()
