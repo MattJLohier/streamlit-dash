@@ -1756,7 +1756,6 @@ def show_raw_data_cert_computers():
     st.write(wifi_data)
 
 
-    tco_certs = pd.DataFrame(tco_certs)
 
 
     st.markdown(
