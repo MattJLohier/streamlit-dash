@@ -1415,7 +1415,7 @@ def show_recent_cert_computers():
     }).loc[:, [
         'Date Certified', 'Product Type', 'Brand', 'Product'
     ]]
-    newest_records4 = newest_records4[newest_records4["Product Type"].isin(["Notebooks", "Desktops", "All-inOnePCs", "Tablets"])].sort_values(by="Certification Date", ascending=False)
+    newest_records4 = newest_records4[newest_records4["Product Type"].isin(["Notebooks", "Desktops", "All-inOnePCs", "Tablets"])].sort_values(by="Date Certified", ascending=False)
 
     # Rename columns to standardize across DataFrames
     newest_records1.rename(columns={
