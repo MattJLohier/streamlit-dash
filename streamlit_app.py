@@ -1773,7 +1773,7 @@ def show_changelog_cert_computers():
 
     # Filter the DataFrame
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
-    bt_data_df['ListingDate'] = bt_data_df['ListingDate'].iloc[:10]
+    bt_data_df['ListingDate'] = bt_data_df['ListingDate'].loc[:10]
     st.dataframe(bt_data_df, use_container_width=True)
     
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
