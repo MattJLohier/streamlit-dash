@@ -1843,6 +1843,15 @@ def show_raw_data_cert_computers():
         'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
     ]]
 
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by brand
+        brands = ['any'] + list(mfi_data_df['Brand'].unique())
+        selected_brand9 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand9 != 'any':
+            mfi_data_df = mfi_data_df[mfi_data_df['Brand'] == selected_brand9]
+
+    with col2:
     st.dataframe(mfi_data_df, use_container_width=True)
 
 
