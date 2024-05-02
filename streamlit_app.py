@@ -2416,8 +2416,6 @@ def show_raw_data_cert_televisions():
     ]]
 
 
-
-
     col1, col2 = st.columns(2)
     with col1:
         # Filter by brand
@@ -2452,7 +2450,129 @@ def show_raw_data_cert_televisions():
 
 
 def show_changelog_cert_televisions():
-    st.write("Coming Soon")
+    st.header('Changelogs')
+    # Example: st.write(data_changelog)
+    st.subheader('Energy Star ⚡')
+    # Example: st.write(data_changelog)
+    conn = st.connection('s3', type=FilesConnection)
+    placement_changelog1 = conn.read("scoops-finder/televisions-changelog.csv", input_format="csv", ttl=600)
+    df_clean = placement_changelog1.drop_duplicates(subset=['pd_id'])  # Drop duplicates based on 'pd_id'
+
+    # Keep only the first 10 characters of the "Date" column
+    df_clean['Date Detected'] = df_clean['Date Detected'].str[:10]
+    
+    df_clean = df_clean.rename(columns={
+        'pd_id': 'Energy Star ID',
+        'date_available_on_market': 'Date Available on Market',
+        'date_qualified': 'Date Qualified',
+        'brand_name': 'Brand',
+        'model_name': 'Model Name',
+        'model_number': 'Model Number',
+        'product_type': 'Product Type',
+        'upc': 'UPC',
+        'application': 'Application',
+        'display_type': 'Display Type',
+        'backlight_technology_type': 'Backlit Technology Type',
+        'diagonal_viewable_screen_size_inches': 'Diagonal Viewable Screen Size (in)',
+        'screen_area_square_inches': 'Screen Area (Square in)',
+        'native_horizontal_resolution_pixels': 'Native Horizontal Resolution Pixels',
+        'native_vertical_resolution_pixels': 'Native Vertical Resolution Pixels',
+        'resolution_format': "Resolution Format",
+        'high_contrast_ratio_hcr_display': 'High Contrast Ratio HCR Display',
+        'low_power_wireless_technologies_supported': 'Low Power Wireless Technologies Supported',
+        'features': 'Features',
+        'automatic_brightness_control': 'Automatic Brightness Control',
+        'additional_model_information': 'Additional Model Information',
+        'markets': 'Markets',
+        'energy_star_model_identifier': 'Energy Star Model Identifier'
+    }).loc[:, [
+        'Energy Star ID', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Application',  'Resolution Format', 'Display Type', 'Backlit Technology Type', 'Diagonal Viewable Screen Size (in)',
+        'Screen Area (Square in)', 'Native Horizontal Resolution Pixels', 'Native Vertical Resolution Pixels', 'High Contrast Ratio HCR Display', 'Low Power Wireless Technologies Supported', 'Features', 'Automatic Brightness Control', 'Additional Model Information', 'Markets',
+        'Energy Star Model Identifier', 'UPC'
+    ]] 
+
+    df_clean['Date Available on Market'] = df_clean['Date Available on Market'].str[:10]
+    df_clean['Date Qualified'] = df_clean['Date Qualified'].str[:10]
+    df_clean = df_clean.sort_values(by='Date Detected', ascending=False)
+    st.write(df_clean, use_container_width=True)
+
+    st.subheader('EPEAT 🌎')
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking2 = conn.read("scoops-finder/changelog-epeat.csv", input_format="csv", ttl=600)
+    df_epeat_changelog = placement_tracking2
+
+    columns_to_keep2 = ["Date Detected", "Registered On", "Product Name", "Manufacturer", "Climate+", "Product Category", 
+                    "Product Type", "Status", "Registered In", "Total Score", "EPEAT Tier"]
+
+    # Modify the dataframe to keep only the specified columns
+    df_epeat_changelog = df_epeat_changelog[columns_to_keep2]
+    
+    # Rename the "Date" column to "Date Detected"
+    df_epeat_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
+    df_epeat_changelog['Date Detected'] = df_epeat_changelog['Date Detected'].str[:10]
+    df_epeat_changelog['Registered On'] = df_epeat_changelog['Registered On'].str[:10]
+    df_epeat_changelog = df_epeat_changelog.sort_values(by='Date Detected', ascending=False)
+    df_epeat_changelog = df_epeat_changelog[df_epeat_changelog['Product Type'].isin(['Desktop', 'Notebook', 'Tablet/Slate'])]
+
+    st.dataframe(df_epeat_changelog, use_container_width=True)
+
+    st.subheader('WiFi Alliance 📶')
+    conn = st.connection('s3', type=FilesConnection)
+    placement_tracking3 = conn.read("scoops-finder/changelog-wifi.csv", input_format="csv", ttl=600)
+
+    df_wifi_changelog = placement_tracking3
+
+    columns_to_keep3 = ["Date", "Product", "Brand", "Model Number", "Category"]
+
+    df_wifi_changelog = df_wifi_changelog[columns_to_keep3]
+    df_wifi_changelog['Date'] = df_wifi_changelog['Date'].str[:10]
+    df_wifi_changelog.rename(columns={'Date': 'Date Detected'}, inplace=True)
+    df_wifi_changelog = df_wifi_changelog.sort_values(by='Date Detected', ascending=False)
+
+    st.dataframe(df_wifi_changelog, use_container_width=True)
+
+    st.markdown(
+    """
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    """,
+    unsafe_allow_html=True
+    )
+    
+    st.markdown("### Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+
+    conn = st.connection('s3', type=FilesConnection)
+    bt_data_raw = conn.read("scoops-finder/changelog-bluetooth.json", input_format="json", ttl=600)
+    bt_data_df = pd.json_normalize(bt_data_raw)
+
+    companies_to_include = [
+        "Sharp Corporation", "Hisense Company Limited", "AmTRAN Technology Co., Ltd", "TCL Communication Ltd.", "LG Electronics Inc.", "Samsung Electronics Co., Ltd."
+    ]
+
+    # Filter the DataFrame
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
+    st.dataframe(bt_data_df, use_container_width=True)
+    
+    st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
+    mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
+    # Extract only dictionary items from the list
+    content_data1 = [item for item in mfi_data_changelog if isinstance(item, dict)]
+    mfi_data_changelog_df = pd.json_normalize(content_data1)
+    mfi_data_changelog_df = mfi_data_changelog_df.rename(columns={
+        'Date Detected': 'Date Detected',
+        'upcEan': 'UPC',
+        'models': 'Models',
+        'brand': 'Brand',
+        'accessoryName': 'Accessory Name',
+        'accessoryCategory': 'Accessory Category',
+    }).loc[:, [
+        'Date Detected', 'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
+    ]]
+    mfi_data_changelog_df['Date Detected'] = mfi_data_changelog_df['Date Detected'].str[:10]
+    st.dataframe(mfi_data_changelog_df, use_container_width=True)
+
+
+
+
 def show_insights_cert_televisions():
     st.write("Coming Soon")
 
