@@ -1729,6 +1729,16 @@ def show_raw_data_cert_computers():
     )
 
     st.markdown("### Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
+    bt_data_df = bt_data_df.rename(columns={
+        'ListingId': 'Listing ID',
+        'Name': 'Product Name',
+        'CompanyName': 'Brand',
+        'ListingDate': 'Certification Date',
+        'ProductListings': 'Product Listings',
+    }).loc[:, [
+        'Listing ID', 'Certification Date', 'Brand', 'Product Name', 'Product Listings'
+    ]]
+
     st.dataframe(bt_data_df)
     st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
 
