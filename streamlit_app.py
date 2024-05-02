@@ -1498,7 +1498,7 @@ def show_raw_data_cert_computers():
         'TCO ID', 'Certification Date', 'Certification Expiry Date', 'Product Category', 'Brand', 'Product Name', 'Recycled Plastic', 'Size', 'Resolution Height', 'Resolution Width', 'Total Weight', 'Certification Number',
         'Certification ID', 'TEC Value', 'ID Key'
     ]]
-    filtered_df = tco_certs[tco_certs["Product Category"].isin(["Notebooks", "Desktops", "All-inOnePCs", "Tablets"])].sort_values(by="Certification Date", ascending=False)
+    tco_certs = tco_certs[tco_certs["Product Category"].isin(["Notebooks", "Desktops", "All-inOnePCs", "Tablets"])].sort_values(by="Certification Date", ascending=False)
 
 
     def extract_unique_countries(market_col):
