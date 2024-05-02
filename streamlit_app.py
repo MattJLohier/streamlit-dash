@@ -1473,13 +1473,15 @@ def show_raw_data_cert_computers():
     ]
 
     # Filter the DataFrame
-    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
+    bt_data_df['ListingDate'] = bt_data_df['ListingDate'].str[:10]
+    
 
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
     mfi_data_df = pd.json_normalize(content_data)
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
-
+    
     dfs = {'Energy Star': newest_records, 'EPEAT Registry': epeat_data, 'WiFi Alliance': wifi_data, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
 
     st.subheader("Search Across DataFrames")
@@ -1773,7 +1775,6 @@ def show_changelog_cert_computers():
 
     # Filter the DataFrame
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
-    bt_data_df['ListingDate'] = bt_data_df['ListingDate'].astype(str).str[:10]
     st.dataframe(bt_data_df, use_container_width=True)
     
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
