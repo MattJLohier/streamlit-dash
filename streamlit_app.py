@@ -1466,7 +1466,6 @@ def show_raw_data_cert_computers():
 
     conn = st.connection('s3', type=FilesConnection)
     tco_certs = conn.read("scoops-finder/tco_data.json", input_format="json", ttl=600)
-    tco_certs = pd.DataFrame(tco_certs)
     # Display the filtered dataframe
     tco_certs = tco_certs.rename(columns={
         'id': 'TCO ID',
@@ -1706,6 +1705,10 @@ def show_raw_data_cert_computers():
             wifi_data = wifi_data.sort_values(by='Date of Last Certification', ascending=True)
     st.subheader('WiFi Alliance 📶')
     st.write(wifi_data)
+
+
+    tco_certs = pd.DataFrame(tco_certs)
+
 
     st.markdown(
     """
