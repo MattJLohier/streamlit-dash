@@ -1482,6 +1482,15 @@ def show_raw_data_cert_computers():
     mfi_data_df = pd.json_normalize(content_data)
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Apple', 'Google', 'Lenovo', 'HP', 'TOSHIBA', 'SHARP', "DELL"])]
     
+    keywords = ["Printer", "Ink", "OfficeJet Pro", "DeskJet", "Speaker"]
+
+    # Create a regex pattern that matches any of the keywords
+    pattern = '|'.join(keywords)
+
+    # Drop rows where accessoryName contains any of the keywords
+    mfi_data_df = mfi_data_df[~mfi_data_df['accessoryName'].str.contains(pattern, case=False, na=False)]
+
+
     dfs = {'Energy Star': newest_records, 'EPEAT Registry': epeat_data, 'WiFi Alliance': wifi_data, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
 
     st.subheader("Search Across DataFrames")
