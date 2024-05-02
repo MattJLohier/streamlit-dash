@@ -1992,7 +1992,7 @@ def show_changelog_cert_computers():
 
     # Filter the DataFrame
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
-    
+    st.dataset(bt_data_df)
     bt_data_df = bt_data_df.rename(columns={
         'Date Detected': 'Date Detected',
         'ListingId': 'Listing ID',
