@@ -2497,9 +2497,9 @@ def show_changelog_cert_televisions():
         'markets': 'Markets',
         'energy_star_model_identifier': 'Energy Star Model Identifier'
     }).loc[:, [
-        'Energy Star ID', 'Date Detected', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Application',  'Resolution Format', 'Display Type', 'Backlit Technology Type', 'Diagonal Viewable Screen Size (in)',
+        'Date Detected', 'Date Available on Market', 'Date Qualified', 'Brand', 'Model Name', 'Model Number', 'Product Type', 'Application',  'Resolution Format', 'Display Type', 'Backlit Technology Type', 'Diagonal Viewable Screen Size (in)',
         'Screen Area (Square in)', 'Native Horizontal Resolution Pixels', 'Native Vertical Resolution Pixels', 'High Contrast Ratio HCR Display', 'Low Power Wireless Technologies Supported', 'Features', 'Automatic Brightness Control', 'Additional Model Information', 'Markets',
-        'Energy Star Model Identifier', 'UPC'
+        'Energy Star Model Identifier', 'UPC', 'Energy Star ID'
     ]] 
 
     df_clean['Date Available on Market'] = df_clean['Date Available on Market'].str[:10]
