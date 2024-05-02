@@ -2000,7 +2000,7 @@ def show_changelog_cert_computers():
         'ListingDate': 'Certification Date',
         'ProductListings': 'Product Listings',
     }).loc[:, [
-        'Listing ID', 'Certification Date', 'Brand', 'Product Name', 'Product Listings'
+        'Date Detected', 'Listing ID', 'Certification Date', 'Brand', 'Product Name', 'Product Listings'
     ]]
     
     st.dataframe(bt_data_df, use_container_width=True)
