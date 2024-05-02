@@ -77,7 +77,7 @@ def sidebar():
         'Computers 💻': ['Home', 'Certifications'],
         'Displays 🖥️': ['Home', 'Certifications'],
         'Audio/Video 🎙️': ['Home', 'Certifications'],
-        'Enterprise Servers 🌐': ['Home', 'Certifications']
+        'Enterprise Servers 🌐': ['Home', 'Certifications'],
         'Televisions 📺': ['Home', 'Certifications'],
         'Telephones ☎️': ['Home', 'Certifications'],
         'Fridges 🧊': ['Home', 'Certifications'],
