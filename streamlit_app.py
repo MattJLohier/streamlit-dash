@@ -2261,7 +2261,7 @@ def show_raw_data_cert_televisions():
 
     # Filter the DataFrame
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
-    bt_data_df["Certification Date"] = bt_data_df["Certification Date"].str[:10]
+    #bt_data_df["Certification Date"] = bt_data_df["Certification Date"].str[:10]
 
 
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
