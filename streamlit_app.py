@@ -1469,18 +1469,18 @@ def show_raw_data_cert_computers():
     bt_data_df = pd.json_normalize(bt_data_raw)
 
     companies_to_include = [
-        "Sharp Corporation", "Toshiba", "Acer", "Apple", "Google", "Lenovo", "DELL",
+        "Sharp Corporation", "Toshiba Corporation", "Acer", "Apple Inc.", "Google LLC", "Lenovo (Singapore)", "Dell Computer Corporation", "Asustek Computer Inc.", "Acer Inc.", "Micro-Star International CO., LTD."
     ]
 
     # Filter the DataFrame
-    #bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
+    bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
     bt_data_df['ListingDate'] = bt_data_df['ListingDate'].str[:10]
     
 
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
     mfi_data_df = pd.json_normalize(content_data)
-    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Apple', 'Google', 'Lenovo', 'HP', 'TOSHIBA', 'SHARP', "DELL"])]
+   #mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Apple', 'Google', 'Lenovo', 'HP', 'TOSHIBA', 'SHARP', "DELL"])]
     
     keywords = ["Printer", "Ink", "OfficeJet Pro", "DeskJet", "Speaker", "Sprocket", "Headset", "Tango", "Boombox"]
     # Create a regex pattern that matches any of the keywords
