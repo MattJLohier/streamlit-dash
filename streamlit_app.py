@@ -577,7 +577,7 @@ def show_raw_data_cert():
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
 
     mfi_data_raw = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
-    content_data = mfi_data_raw.get("content", [])
+    content_data = mfi_data_raw.get("links", [])
     mfi_data_df = pd.json_normalize(content_data)
     mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
     st.dataframe(mfi_data_df)
