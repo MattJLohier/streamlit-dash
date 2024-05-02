@@ -2551,6 +2551,7 @@ def show_changelog_cert_televisions():
     }).loc[:, [
         'Date Detected', 'Listing ID', 'Certification Date', 'Brand', 'Product Name', 'Product Listings'
     ]]
+    bt_data_df['Date Detected'] = bt_data_df['Date Detected'].str[:10]
     st.dataframe(bt_data_df, use_container_width=True)
     
     st.markdown("## Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
