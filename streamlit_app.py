@@ -75,14 +75,14 @@ def sidebar():
     product_categories = {
         'Imaging Equipment 🖨️': ['Home', 'Certifications', 'Placements'],
         'Computers 💻': ['Home', 'Certifications'],
+        'Displays 🖥️': ['Home', 'Certifications'],
+        'Audio/Video 🎙️': ['Home', 'Certifications'],
+        'Enterprise Servers 🌐': ['Home', 'Certifications']
         'Televisions 📺': ['Home', 'Certifications'],
         'Telephones ☎️': ['Home', 'Certifications'],
         'Fridges 🧊': ['Home', 'Certifications'],
         'Dishwashers 🧼': ['Home', 'Certifications'],
         'Electric Cookware 🍳': ['Home', 'Certifications'],
-        'Displays 🖥️': ['Home', 'Certifications'],
-        'Audio/Video 🎙️': ['Home', 'Certifications'],
-        'Enterprise Servers 🌐': ['Home', 'Certifications']
     }
 
     # Allow the user to select a product type
