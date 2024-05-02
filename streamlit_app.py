@@ -1994,6 +1994,7 @@ def show_changelog_cert_computers():
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]
     
     bt_data_df = bt_data_df.rename(columns={
+        'Date Detected': 'Date Detected'
         'ListingId': 'Listing ID',
         'Name': 'Product Name',
         'CompanyName': 'Brand',
