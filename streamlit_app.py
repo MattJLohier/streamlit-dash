@@ -1765,6 +1765,30 @@ def show_raw_data_cert_computers():
     unsafe_allow_html=True
     )
     st.markdown("### TCO Certification <i class='fas fa-leaf' style='color:green'></i>", unsafe_allow_html=True)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by product category
+        categories1 = ['any'] + list(tco_certs['Product Category'].unique())
+        selected_category2 = st.selectbox('Select a product category', categories1, index=0 if 'any' in categories1 else 1)
+        if selected_category2 != 'any':
+            tco_certs = tco_certs[tco_certs['Product Category'] == selected_category2]
+
+        # Filter by brand
+        brands = ['any'] + list(tco_certs['Brand'].unique())
+        selected_brand2 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand2 != 'any':
+            tco_certs = tco_certs[tco_certs['Brand'] == selected_brand2]
+
+    with col2:
+        # Filter by Registration Date
+        sort_options = ['Certification Date', 'Certification Expiry Date']
+        selected_sort2 = st.selectbox('Sort by Date', sort_options, index=0)  # Default to Newest
+        if selected_sort2 == 'Certification Date':
+            tco_certs = tco_certs.sort_values(by='Certification Date', ascending=False)
+        elif selected_sort2 == 'Certification Expiry Date':
+            tco_certs = tco_certs.sort_values(by='Certification Expiry Date', ascending=False)
+
     st.dataframe(tco_certs)
 
 
