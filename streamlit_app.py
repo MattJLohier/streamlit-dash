@@ -2213,8 +2213,8 @@ def show_insights_cert_computers():
     # Filters for the charts
     selected_source = st.multiselect(
         'Select Sources',
-        options=['Energy Star', 'WiFi Alliance'],
-        default=['Energy Star', 'WiFi Alliance'],
+        options=['Energy Star', 'WiFi Alliance', 'EPEAT', 'TCO'],
+        default=['Energy Star', 'EPEAT', 'TCO'],
         key='source_selector5'
     )
 
