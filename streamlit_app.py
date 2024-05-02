@@ -576,12 +576,12 @@ def show_raw_data_cert():
     # Filter the DataFrame
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
 
-    mfi_data_changelog = conn.read("scoops-finder/changelog-mfi.json", input_format="json", ttl=600)
-    # Extract only dictionary items from the list
-    content_data1 = [item for item in mfi_data_changelog if isinstance(item, dict)]
-    mfi_data_changelog_df = pd.json_normalize(content_data1)
+    mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
+    content_data = mfi_data_raw.get("content", [])
+    mfi_data_df = pd.json_normalize(content_data)
+    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Canon', 'Brother', 'EPSON', 'HP', 'TOSHIBA', 'SHARP'])]
     mfi_data_df = mfi_data_df.rename(columns={
-        'Date Detected': 'Date Detected',
+        'Date': 'Date Detected',
         'upcEan': 'UPC',
         'models': 'Models',
         'brand': 'Brand',
