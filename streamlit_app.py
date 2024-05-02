@@ -1810,6 +1810,26 @@ def show_raw_data_cert_computers():
         'Listing ID', 'Certification Date', 'Brand', 'Product Name', 'Product Listings'
     ]]
 
+
+
+
+    col1, col2 = st.columns(2)
+    with col1:
+        # Filter by brand
+        brands = ['any'] + list(bt_data_df['Brand'].unique())
+        selected_brand2 = st.selectbox('Select a brand', brands, index=0 if 'any' in brands else 1)
+        if selected_brand2 != 'any':
+            bt_data_df = bt_data_df[bt_data_df['Brand'] == selected_brand2]
+
+    with col2:
+        # Filter by Registration Date
+        sort_options = ['Newest', 'Oldest']
+        selected_sort2 = st.selectbox('Sort by Date', sort_options, index=0)  # Default to Newest
+        if selected_sort2 == 'Newest':
+            bt_data_df = bt_data_df.sort_values(by='Certification Date', ascending=False)
+        elif selected_sort2 == 'Oldest':
+            bt_data_df = bt_data_df.sort_values(by='Certification Date', ascending=True)
+
     st.dataframe(bt_data_df, use_container_width=True)
     st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
 
