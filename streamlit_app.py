@@ -589,7 +589,6 @@ def show_raw_data_cert():
     }).loc[:, [
         'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
     ]]
-    mfi_data_df['Date Detected'] = mfi_data_df['Date Detected'].str[:10]
 
     dfs = {'Energy Star': df_sorted, 'EPEAT Registry': df_raw_certs4, 'WiFi Alliance': df_raw_certs5, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
 
