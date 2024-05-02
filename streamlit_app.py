@@ -777,6 +777,15 @@ def show_raw_data_cert():
     st.markdown("### Bluetooth <i class='fab fa-bluetooth' style='color:blue'></i>", unsafe_allow_html=True)
     st.dataframe(bt_data_df)
     st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
+    mfi_data_df = mfi_data_df.rename(columns={
+        'upcEan': 'UPC',
+        'models': 'Models',
+        'brand': 'Brand',
+        'accessoryName': 'Accessory Name',
+        'accessoryCategory': 'Accessory Category',
+    }).loc[:, [
+        'UPC', 'Models', 'Brand', 'Accessory Name', 'Accessory Category'
+    ]]
     st.dataframe(mfi_data_df, use_container_width=True)
 
 
