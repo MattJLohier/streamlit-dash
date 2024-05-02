@@ -2261,11 +2261,13 @@ def show_raw_data_cert_televisions():
 
     # Filter the DataFrame
     bt_data_df = bt_data_df[bt_data_df['CompanyName'].isin(companies_to_include)]    
+    bt_data_df["Certification Date"] = bt_data_df["Certification Date"].str[:10]
+
 
     mfi_data_raw = conn.read("scoops-finder/mfi.json", input_format="json", ttl=600)
     content_data = mfi_data_raw.get("content", [])
     mfi_data_df = pd.json_normalize(content_data)
-    #mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['LG Display Co., Ltd.', 'LG Electronics Inc.', 'TCL Communication Ltd.', 'Hisense Company Limited', 'JVCKENWOOD Corporation', 'SHARP'])]
+    mfi_data_df = mfi_data_df[mfi_data_df['brand'].isin(['Sony', 'LG', 'TCL', 'Hisense', 'JVCKENWOOD Corporation', 'SHARP'])]
 
     dfs = {'Energy Star': newest_records, 'WiFi Alliance': wifi_data, 'Bluetooth': bt_data_df, 'Apple MFI': mfi_data_df}
 
@@ -2423,7 +2425,7 @@ def show_raw_data_cert_televisions():
             bt_data_df = bt_data_df.sort_values(by='Certification Date', ascending=False)
         elif selected_sort9 == 'Oldest':
             bt_data_df = bt_data_df.sort_values(by='Certification Date', ascending=True)
-    st.dataframe(bt_data_df)
+    st.dataframe(bt_data_df, use_container_width=True)
     st.markdown("### Apple MFi <i class='fab fa-apple'></i>", unsafe_allow_html=True)
     st.dataframe(mfi_data_df, use_container_width=True)
 
