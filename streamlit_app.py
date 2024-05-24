@@ -902,7 +902,7 @@ def show_insights_cert():
     st.header('Insights')
     # Example: st.write(data_insights)
     conn = st.connection('s3', type=FilesConnection)
-    df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
+    df = conn.read("scoops-finder/imaging-data.csv", input_format="csv", ttl=600)
 
     # Specify the columns to keep
     columns_to_keep = ['brand_name', 'model_name', 'product_type',
