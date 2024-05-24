@@ -827,7 +827,7 @@ def show_changelog_cert():
     st.subheader('Energy Star ⚡')
     # Example: st.write(data_changelog)
     conn = st.connection('s3', type=FilesConnection)
-    placement_changelog1 = conn.read("scoops-finder/changelog-estar.csv", input_format="csv", ttl=600)
+    placement_changelog1 = conn.read("scoops-finder/imaging-changelog.csv", input_format="csv", ttl=600)
     df_clean = placement_changelog1.drop_duplicates(subset=['pd_id'])  # Drop duplicates based on 'pd_id'
     
     # Define the columns you want to keep
