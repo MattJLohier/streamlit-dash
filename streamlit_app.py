@@ -277,7 +277,7 @@ def display_certifications_imaging():
 
 def show_recent_cert():
     conn = st.connection('s3', type=FilesConnection)
-    df = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
+    df = conn.read("scoops-finder/imaging-data.csv", input_format="csv", ttl=600)
 
     # Specify the columns to keep
     columns_to_keep = ['brand_name', 'model_name', 'product_type',
