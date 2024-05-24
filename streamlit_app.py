@@ -535,7 +535,7 @@ def show_raw_data_cert():
     st.header('Raw Certification Data')
 
     conn = st.connection('s3', type=FilesConnection)
-    df_raw_certs2 = conn.read("scoops-finder/baseline2.csv", input_format="csv", ttl=600)
+    df_raw_certs2 = conn.read("scoops-finder/imaging-data.csv", input_format="csv", ttl=600)
     df_sorted = df_raw_certs2.sort_values(by="date_available_on_market", ascending=False)
 
     def extract_unique_countries(market_col):
