@@ -832,7 +832,7 @@ def show_changelog_cert():
     
     # Define the columns you want to keep
     columns_to_keep = [
-        'Date', 'model_name', 'brand_name', 'product_type', 'color_capability', 
+        'Date Detected', 'model_name', 'brand_name', 'product_type', 'color_capability', 
         'monochrome_product_speed_ipm_or_mppm', 'date_available_on_market', 
         'date_qualified', 'markets'
     ]
@@ -841,11 +841,11 @@ def show_changelog_cert():
     df_clean = df_clean[columns_to_keep]
 
     # Keep only the first 10 characters of the "Date" column
-    df_clean['Date'] = df_clean['Date'].str[:10]
+    df_clean['Date Detected'] = df_clean['Date Detected'].str[:10]
 
     # Rename the columns
     df_clean.rename(columns={
-        'Date': 'Date Detected',
+        'Date Detected': 'Date Detected',
         'model_name': 'Model Name',
         'brand_name': 'Brand',
         'product_type': 'Product Type',
